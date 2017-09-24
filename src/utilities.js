@@ -1,12 +1,13 @@
 const interpolate = require('interpolate');
 const qs = require('querystring');
 const request = require('request-promise');
+const debug = require('debug')('utilities');
 
-const createRequest = async (uri, options, props) => {
+const createRequest = async(uri, options, props) => {
   try {
     const url = `${interpolate(uri, options)}?${qs.stringify(props)}`;
-    console.log(url);
     const method = options.method || 'GET';
+    debug(`${method} ${url}`);
     const headers = {};
     const timeout = 30000;
     const json = options.body || true;
@@ -20,4 +21,8 @@ const createRequest = async (uri, options, props) => {
   }
 };
 
-module.exports = { createRequest };
+const sanitizeObject = obj => {
+  return JSON.parse(JSON.stringify(obj));
+};
+
+module.exports = { createRequest, sanitizeObject };

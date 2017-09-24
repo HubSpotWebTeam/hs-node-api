@@ -4,21 +4,37 @@
   "description": "Hubspot API Wrapper",
   "main": "./distribution/index.js",
   "scripts": {
-    "test": "babel-node --presets node6 test/",
-    "build": "babel src --presets babel-preset-es2015 --out-dir distribution",
-    "prepublish": "npm run build"
+    "api-tests": "babel-node --presets node6 test/",
+    "build": "WEBPACK_ENV=build webpack",
+    "prepublish": "npm run build && npm run compile-docs",
+    "compile-docs": "jsdoc -R README.md -c ./jsconf.json -t ./node_modules/ink-docstrap/template -r ./src -d build/"
   },
   "author": "Stephen McElhinney",
   "license": "ISC",
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "babel-preset-es2015": "^6.24.0"
+    "babel-preset-es2015": "^6.24.0",
+    "jsdoc": "^3.5.5"
   },
   "dependencies": {
+    "babel-loader": "^7.1.2",
+    "babel-plugin-add-module-exports": "^0.2.1",
     "babel-preset-node6": "^11.0.0",
+    "debug": "^3.0.1",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb": "^15.0.1",
+    "eslint-plugin-import": "^2.3.0",
+    "eslint-plugin-jsx-a11y": "^5.0.3",
+    "eslint-plugin-react": "^7.0.1",
+    "fs": "0.0.1-security",
+    "ink-docstrap": "^1.3.0",
     "interpolate": "^0.1.0",
+    "moment": "^2.18.1",
+    "net": "^1.0.2",
     "querystring": "^0.2.0",
     "request": "^2.82.0",
-    "request-promise": "^4.2.1"
+    "request-promise": "^4.2.1",
+    "tls": "0.0.1",
+    "webpack": "^3.6.0"
   }
 }

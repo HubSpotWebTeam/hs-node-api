@@ -29,9 +29,14 @@ module.exports = function contacts(baseOptions) {
   };
 
   // NOTE: Not recommended to use this, only for offline contacts.
-  const createContact = async(obj) => {
+  const createOrUpdateContact = async(obj) => {
     try {
       const method = 'POST';
+      const { email } = obj;
+      if (!email) {
+        throw new Error('Property "email" is required for creating contacts with this method.');
+      }
+
       const body = {
         properties: Object.keys(obj).map(key => {
           return {
@@ -40,19 +45,36 @@ module.exports = function contacts(baseOptions) {
           };
         })
       };
-      const contact = await createRequest(constants.api.contacts.createContact, { method, body }, baseOptions);
-      return Promise.resolve(contact);
+      const contact = await createRequest(constants.api.contacts.createContact, { method, body, email },
+        baseOptions);
+      return Promise.resolve({ msg: `Successfully updated contact details for ${email}` });
     } catch (e) {
       return Promise.reject(e);
     }
   };
 
-  const updateContact = async(options) => {
-    // FIXME: Implement this
-  };
-
   const batchUpdateContacts = async(options) => {
     // FIXME: Implement this
+    try {
+      const method = 'POST';
+      const body = options.map(contact => {
+        const contactType = /@/i.test(contact.id) ? 'email' : 'vid';
+        const properties = Object.keys(contact.updates).map(i => ({
+          property: i,
+          value: contact.updates[i]
+        }));
+        return {
+          [`${contactType}`]: contact.id,
+          properties
+        }
+      });
+      await createRequest(constants.api.contacts.batchUpdateContacts, { method, body },
+        baseOptions);
+      return Promise.resolve({ msg: `Successfully updated contact properties` });
+    } catch (e) {
+      return Promise.reject(e);
+    }
+
   };
 
   const deleteContact = async(options) => {
@@ -81,8 +103,7 @@ module.exports = function contacts(baseOptions) {
   return {
     getById,
     getByEmail,
-    createContact,
-    updateContact,
+    createOrUpdateContact,
     batchUpdateContacts,
     deleteContact,
     getContacts,

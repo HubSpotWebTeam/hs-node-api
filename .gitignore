@@ -1,2 +1,4 @@
 distribution/
 node_modules/
+build/
+lib/
