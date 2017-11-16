@@ -1,14 +1,13 @@
 // NOTE: FULLY_IMPLEMENTED
 // NOTE: REQUIRES_TESTS
 
-import { createRequest } from '../utilities';
+import utilities, { createRequest } from '../utilities';
 import constants from '../constants';
-import utilities from '../utilities';
 
 const defaults = {};
 let _baseOptions;
 
-const events = async({
+const events = async ({
   startDate,
   endDate,
   limit,
@@ -37,8 +36,8 @@ const events = async({
   } catch (e) {
     return Promise.reject(e.message);
   }
-}
-const getTask = async(taskId) => {
+};
+const getTask = async (taskId) => {
   try {
     const mergedProps = Object.assign({}, defaults, baseOptions);
     const task = await createRequest(constants.api.calendar.taskById, { taskId }, mergedProps);
@@ -48,7 +47,7 @@ const getTask = async(taskId) => {
   }
 };
 
-const deleteTask = async(taskId) => {
+const deleteTask = async (taskId) => {
   try {
     const mergedProps = Object.assign({}, defaults, baseOptions);
     const method = 'DELETE';
@@ -60,7 +59,7 @@ const deleteTask = async(taskId) => {
   }
 };
 
-const updateTask = async(taskId, {
+const updateTask = async (taskId, {
   eventDate,
   eventType,
   category,
@@ -92,10 +91,10 @@ const updateTask = async(taskId, {
   } catch (e) {
     return Promise.reject(e.message);
   }
-}
+};
 
 
-const createTask = async({
+const createTask = async ({
   eventDate,
   eventType,
   category,
@@ -139,44 +138,38 @@ const createTask = async({
   } catch (e) {
     return Promise.reject(e.message);
   }
-}
-
-
-const contentEvents = ({ startDate, endDate, limit, contentCategory, campaignGuid, includeNoCampaigns }) => {
-  return events({
-    startDate,
-    endDate,
-    limit,
-    contentCategory,
-    campaignGuid,
-    includeNoCampaigns,
-    type: 'CONTENT'
-  });
 };
 
-const socialEvents = ({ startDate, endDate, limit, contentCategory, campaignGuid, includeNoCampaigns }) => {
-  return events({
-    startDate,
-    endDate,
-    limit,
-    contentCategory,
-    campaignGuid,
-    includeNoCampaigns,
-    type: 'SOCIAL'
-  });
-};
 
-const taskEvents = ({ startDate, endDate, limit, contentCategory, campaignGuid, includeNoCampaigns }) => {
-  return events({
-    startDate,
-    endDate,
-    limit,
-    contentCategory,
-    campaignGuid,
-    includeNoCampaigns,
-    type: 'PUBLISHING_TASK'
-  });
-};
+const contentEvents = ({ startDate, endDate, limit, contentCategory, campaignGuid, includeNoCampaigns }) => events({
+  startDate,
+  endDate,
+  limit,
+  contentCategory,
+  campaignGuid,
+  includeNoCampaigns,
+  type: 'CONTENT'
+});
+
+const socialEvents = ({ startDate, endDate, limit, contentCategory, campaignGuid, includeNoCampaigns }) => events({
+  startDate,
+  endDate,
+  limit,
+  contentCategory,
+  campaignGuid,
+  includeNoCampaigns,
+  type: 'SOCIAL'
+});
+
+const taskEvents = ({ startDate, endDate, limit, contentCategory, campaignGuid, includeNoCampaigns }) => events({
+  startDate,
+  endDate,
+  limit,
+  contentCategory,
+  campaignGuid,
+  includeNoCampaigns,
+  type: 'PUBLISHING_TASK'
+});
 
 module.exports = function calendar(baseOptions) {
   _baseOptions = baseOptions;
@@ -312,5 +305,4 @@ module.exports = function calendar(baseOptions) {
     */
     deleteTask
   };
-
-}
+};

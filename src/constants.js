@@ -1,5 +1,8 @@
 module.exports = {
   api: {
+    blog: {
+      getPosts: 'https://api.hubapi.com/content/api/v2/blog-posts'
+    },
     calendar: {
       events: 'https://api.hubapi.com/calendar/v1/events',
       createTask: 'https://api.hubapi.com/calendar/v1/events/task',
@@ -18,4 +21,4 @@ module.exports = {
       byDomain: 'https://api.hubapi.com/companies/v2/domains/{domain}/companies'
     }
   }
-}
+};
