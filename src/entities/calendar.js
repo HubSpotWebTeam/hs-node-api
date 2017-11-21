@@ -7,6 +7,20 @@ import constants from '../constants';
 const defaults = {};
 let _baseOptions;
 
+/**
+* Retrieve all event types
+* @async
+* @memberof hs/calendar
+* @method events
+* @param {object} eventProperties An object containing event properties to search for
+* @example
+* const hs = new HubspotClient(props);
+* const events = hs.calendar.events(eventProperties)
+* @property {number} eventProperties.startDate
+* @property {number} eventProperties.endDate
+* @property {number} [eventProperties.limit]
+* @returns {Promise}
+*/
 const events = async ({
   startDate,
   endDate,
@@ -37,9 +51,21 @@ const events = async ({
     return Promise.reject(e.message);
   }
 };
+
+/**
+* Get Task By ID
+* @async
+* @memberof hs/calendar
+* @method getTask
+* @param {number} taskId ID of task to retrieve
+* @example
+* const hs = new HubspotClient(props);
+* const events = hs.calendar.getTask(taskId)
+* @returns {Promise}
+*/
 const getTask = async (taskId) => {
   try {
-    const mergedProps = Object.assign({}, defaults, baseOptions);
+    const mergedProps = Object.assign({}, defaults, _baseOptions);
     const task = await createRequest(constants.api.calendar.taskById, { taskId }, mergedProps);
     return Promise.resolve(task);
   } catch (e) {
@@ -47,18 +73,49 @@ const getTask = async (taskId) => {
   }
 };
 
+/**
+* Delete Task By ID
+* @async
+* @memberof hs/calendar
+* @method deleteTask
+* @param {number} taskId ID of task to delete
+* @example
+* const hs = new HubspotClient(props);
+* const events = hs.calendar.deleteTask(taskId)
+* @returns {Promise}
+*/
 const deleteTask = async (taskId) => {
   try {
-    const mergedProps = Object.assign({}, defaults, baseOptions);
+    const mergedProps = Object.assign({}, defaults, _baseOptions);
     const method = 'DELETE';
-    const task = await createRequest(constants.api.calendar.taskById, { method, taskId }, mergedProps);
-    console.log(task);
+    await createRequest(constants.api.calendar.taskById, { method, taskId }, mergedProps);
     return Promise.resolve({ msg: `Task ${taskId} removed` });
   } catch (e) {
     return Promise.reject(e.message);
   }
 };
 
+/**
+* Update existing task
+* @async
+* @memberof hs/calendar
+* @method updateTask
+* @param {number} taskId ID of task to update
+* @param {object} taskProperties An object containing task properties to update
+* @example
+* const hs = new HubspotClient(props);
+* const events = hs.calendar.updateTask(taskProperties)
+* @property {number} [taskProperties.eventDate]
+* @property {number} [taskProperties.eventType]
+* @property {number} [taskProperties.category]
+* @property {number} [taskProperties.state]
+* @property {number} [taskProperties.campaignGuid]
+* @property {number} [taskProperties.topicIds]
+* @property {number} [taskProperties.name]
+* @property {number} [taskProperties.description]
+* @property {number} [taskProperties.ownerId]
+* @returns {Promise}
+*/
 const updateTask = async (taskId, {
   eventDate,
   eventType,
@@ -71,7 +128,7 @@ const updateTask = async (taskId, {
   ownerId
 }) => {
   try {
-    const mergedProps = Object.assign({}, defaults, baseOptions);
+    const mergedProps = Object.assign({}, defaults, _baseOptions);
     const method = 'PUT';
     let body = {
       eventDate,
@@ -93,7 +150,28 @@ const updateTask = async (taskId, {
   }
 };
 
-
+/**
+* Create new task
+* @async
+* @memberof hs/calendar
+* @method createTask
+* @param {object} taskProperties An object containing task properties to create
+* @example
+* const hs = new HubspotClient(props);
+* const events = hs.calendar.createTask(taskProperties)
+* @property {number} taskProperties.eventDate
+* @property {number} [taskProperties.eventType=PUBLISHING_TASK]
+* @property {number} taskProperties.category
+* @property {number} [taskProperties.state=TODO]
+* @property {number} [taskProperties.campaignGuid]
+* @property {number} [taskProperties.contentGroupId] - Required if category=BLOG_POST
+* @property {number} [taskProperties.topicIds]
+* @property {number} [taskProperties.templatePath]
+* @property {number} [taskProperties.name]
+* @property {number} [taskProperties.description]
+* @property {number} [taskProperties.ownerId]
+* @returns {Promise}
+*/
 const createTask = async ({
   eventDate,
   eventType,
@@ -108,7 +186,7 @@ const createTask = async ({
   ownerId
 }) => {
   try {
-    const mergedProps = Object.assign({}, defaults, baseOptions);
+    const mergedProps = Object.assign({}, defaults, _baseOptions);
     const method = 'POST';
     let body = {
       eventDate,
@@ -140,7 +218,20 @@ const createTask = async ({
   }
 };
 
-
+/**
+* Retrieve all events of type 'content'
+* @async
+* @memberof hs/calendar
+* @method contentEvents
+* @param {object} eventProperties An object containing event properties to search for
+* @example
+* const hs = new HubspotClient(props);
+* const events = hs.calendar.contentEvents(eventProperties)
+* @property {number} eventProperties.startDate
+* @property {number} eventProperties.endDate
+* @property {number} [eventProperties.limit]
+* @returns {Promise}
+*/
 const contentEvents = ({ startDate, endDate, limit, contentCategory, campaignGuid, includeNoCampaigns }) => events({
   startDate,
   endDate,
@@ -151,6 +242,20 @@ const contentEvents = ({ startDate, endDate, limit, contentCategory, campaignGui
   type: 'CONTENT'
 });
 
+/**
+* Retrieve all events of type 'social'
+* @async
+* @memberof hs/calendar
+* @method socialEvents
+* @param {object} eventProperties An object containing event properties to search for
+* @example
+* const hs = new HubspotClient(props);
+* const events = hs.calendar.socialEvents(eventProperties)
+* @property {number} eventProperties.startDate
+* @property {number} eventProperties.endDate
+* @property {number} [eventProperties.limit]
+* @returns {Promise}
+*/
 const socialEvents = ({ startDate, endDate, limit, contentCategory, campaignGuid, includeNoCampaigns }) => events({
   startDate,
   endDate,
@@ -161,6 +266,20 @@ const socialEvents = ({ startDate, endDate, limit, contentCategory, campaignGuid
   type: 'SOCIAL'
 });
 
+/**
+* Retrieve all events of type 'task'
+* @async
+* @memberof hs/calendar
+* @method taskEvents
+* @param {object} eventProperties An object containing event properties to search for
+* @example
+* const hs = new HubspotClient(props);
+* const events = hs.calendar.taskEvents(eventProperties)
+* @property {number} eventProperties.startDate
+* @property {number} eventProperties.endDate
+* @property {number} [eventProperties.limit]
+* @returns {Promise}
+*/
 const taskEvents = ({ startDate, endDate, limit, contentCategory, campaignGuid, includeNoCampaigns }) => events({
   startDate,
   endDate,
@@ -175,134 +294,13 @@ export default function calendar(baseOptions) {
   _baseOptions = baseOptions;
 
   return {
-    /**
-    * Retrieve all event types
-    * @async
-    * @memberof hs/calendar
-    * @method events
-    * @param {object} eventProperties An object containing event properties to search for
-    * @example
-    * const hs = new HubspotClient(props);
-    * const events = hs.calendar.events(eventProperties)
-    * @property {number} eventProperties.startDate
-    * @property {number} eventProperties.endDate
-    * @property {number} [eventProperties.limit]
-    * @returns {Promise}
-    */
     events,
-    /**
-    * Retrieve all events of type 'content'
-    * @async
-    * @memberof hs/calendar
-    * @method contentEvents
-    * @param {object} eventProperties An object containing event properties to search for
-    * @example
-    * const hs = new HubspotClient(props);
-    * const events = hs.calendar.contentEvents(eventProperties)
-    * @property {number} eventProperties.startDate
-    * @property {number} eventProperties.endDate
-    * @property {number} [eventProperties.limit]
-    * @returns {Promise}
-    */
     contentEvents,
-    /**
-    * Retrieve all events of type 'social'
-    * @async
-    * @memberof hs/calendar
-    * @method socialEvents
-    * @param {object} eventProperties An object containing event properties to search for
-    * @example
-    * const hs = new HubspotClient(props);
-    * const events = hs.calendar.socialEvents(eventProperties)
-    * @property {number} eventProperties.startDate
-    * @property {number} eventProperties.endDate
-    * @property {number} [eventProperties.limit]
-    * @returns {Promise}
-    */
     socialEvents,
-    /**
-    * Retrieve all events of type 'task'
-    * @async
-    * @memberof hs/calendar
-    * @method taskEvents
-    * @param {object} eventProperties An object containing event properties to search for
-    * @example
-    * const hs = new HubspotClient(props);
-    * const events = hs.calendar.taskEvents(eventProperties)
-    * @property {number} eventProperties.startDate
-    * @property {number} eventProperties.endDate
-    * @property {number} [eventProperties.limit]
-    * @returns {Promise}
-    */
     taskEvents,
-    /**
-    * Create new task
-    * @async
-    * @memberof hs/calendar
-    * @method createTask
-    * @param {object} taskProperties An object containing task properties to create
-    * @example
-    * const hs = new HubspotClient(props);
-    * const events = hs.calendar.createTask(taskProperties)
-    * @property {number} taskProperties.eventDate
-    * @property {number} [taskProperties.eventType=PUBLISHING_TASK]
-    * @property {number} taskProperties.category
-    * @property {number} [taskProperties.state=TODO]
-    * @property {number} [taskProperties.campaignGuid]
-    * @property {number} [taskProperties.contentGroupId] - Required if category=BLOG_POST
-    * @property {number} [taskProperties.topicIds]
-    * @property {number} [taskProperties.templatePath]
-    * @property {number} [taskProperties.name]
-    * @property {number} [taskProperties.description]
-    * @property {number} [taskProperties.ownerId]
-    * @returns {Promise}
-    */
     createTask,
-    /**
-    * Get Task By ID
-    * @async
-    * @memberof hs/calendar
-    * @method getTask
-    * @param {number} taskId ID of task to retrieve
-    * @example
-    * const hs = new HubspotClient(props);
-    * const events = hs.calendar.getTask(taskId)
-    * @returns {Promise}
-    */
     getTask,
-    /**
-    * Update existing task
-    * @async
-    * @memberof hs/calendar
-    * @method updateTask
-    * @param {number} taskId ID of task to update
-    * @param {object} taskProperties An object containing task properties to update
-    * @example
-    * const hs = new HubspotClient(props);
-    * const events = hs.calendar.updateTask(taskProperties)
-    * @property {number} [taskProperties.eventDate]
-    * @property {number} [taskProperties.eventType]
-    * @property {number} [taskProperties.category]
-    * @property {number} [taskProperties.state]
-    * @property {number} [taskProperties.campaignGuid]
-    * @property {number} [taskProperties.topicIds]
-    * @property {number} [taskProperties.name]
-    * @property {number} [taskProperties.description]
-    * @property {number} [taskProperties.ownerId]
-    * @returns {Promise}
-    */
     updateTask,
-    /**
-    * Delete Task By ID
-    * @async
-    * @memberof hs/calendar
-    * @method deleteTask
-    * @param {number} taskId ID of task to delete
-    * @example
-    * const hs = new HubspotClient(props);
-    * const events = hs.calendar.deleteTask(taskId)
-    * @returns {Promise}
-    */
     deleteTask
   };
 }

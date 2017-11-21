@@ -1,9 +1,8 @@
 // NOTE: FULLY_IMPLEMENTED
 // NOTE: REQUIRES_TESTS
 
-import createRequest from '../utilities';
+import { createRequest, sanitizeObject } from '../utilities';
 import constants from '../constants';
-import utilities from '../utilities';
 
 const defaults = {};
 let _baseOptions;
@@ -19,8 +18,7 @@ const create = async (properties) => {
     };
     const response = await createRequest(constants.api.company.create, { method, body },
       _baseOptions);
-
-    return Promise.resolve(company);
+    return Promise.resolve(response);
   } catch (e) {
     return Promise.reject(e.message);
   }
@@ -43,7 +41,7 @@ const update = async (companyId, properties) => {
     const response = await createRequest(constants.api.company.byId, { method, body, companyId },
       _baseOptions);
 
-    return Promise.resolve(company);
+    return Promise.resolve(response);
   } catch (e) {
     return Promise.reject(e.message);
   }
@@ -75,9 +73,9 @@ const batchUpdate = async (options) => {
 const deleteCompany = async (companyId) => {
   try {
     const method = 'DELETE';
-    await createRequest(constants.api.company.byId, { method, companyId },
+    const response = await createRequest(constants.api.company.byId, { method, companyId },
       _baseOptions);
-    return Promise.resolve({ msg: `Successfully deleted company with id ${companyId}` });
+    return Promise.resolve(response);
   } catch (e) {
     return Promise.reject(e.message);
   }
@@ -89,7 +87,7 @@ const getAll = async (props) => {
     const passedProps = props || {};
     const { limit, offset, properties, propertiesWithHistory } = passedProps;
     let mergedProps = Object.assign({}, defaults, _baseOptions, { limit, offset, properties, propertiesWithHistory });
-    mergedProps = utilities.sanitizeObject(mergedProps);
+    mergedProps = sanitizeObject(mergedProps);
     // console.log(mergedProps);
     // return Promise.resolve();
 
@@ -106,7 +104,7 @@ const getRecentlyModified = async (props) => {
     const passedProps = props || {};
     const { offset, count } = passedProps;
     let mergedProps = Object.assign({}, defaults, _baseOptions, { offset, count });
-    mergedProps = utilities.sanitizeObject(mergedProps);
+    mergedProps = sanitizeObject(mergedProps);
     const companies = await createRequest(constants.api.company.byId, { method, companyId: 'recent/modified' },
       mergedProps);
     return Promise.resolve(companies);
@@ -121,7 +119,7 @@ const getRecentlyCreated = async (props) => {
     const passedProps = props || {};
     const { offset, count } = passedProps;
     let mergedProps = Object.assign({}, defaults, _baseOptions, { offset, count });
-    mergedProps = utilities.sanitizeObject(mergedProps);
+    mergedProps = sanitizeObject(mergedProps);
     const companies = await createRequest(constants.api.company.byId, { method, companyId: 'recent/created' },
       mergedProps);
     return Promise.resolve(companies);
@@ -155,9 +153,9 @@ const byDomain = async (domain, props) => {
         companyId: offset
       }
     };
-    body = utilities.sanitizeObject(body);
+    body = sanitizeObject(body);
     let mergedProps = Object.assign({}, defaults, _baseOptions);
-    mergedProps = utilities.sanitizeObject(mergedProps);
+    mergedProps = sanitizeObject(mergedProps);
     // return Promise.resolve(JSON.stringify(body));
     const companies = await createRequest(constants.api.company.byDomain, { method, domain, body }, mergedProps);
     return Promise.resolve(companies);
@@ -178,7 +176,7 @@ export default function calendar(baseOptions) {
      * @param {object} companyProperties An object containing company properties in key/value format. At least 1 property is required
      * @example
      * const hs = new HubspotClient(props);
-     * const response = hs.calendar.create(companyProperties)
+     * const response = hs.company.create(companyProperties)
      * @returns {Promise}
      */
     create,
@@ -191,7 +189,7 @@ export default function calendar(baseOptions) {
      * @param {object} companyProperties An object containing company properties in key/value format. At least 1 property is required
      * @example
      * const hs = new HubspotClient(props);
-     * const response = hs.calendar.update(companyId, companyProperties)
+     * const response = hs.company.update(companyId, companyProperties)
      * @returns {Promise}
      */
     update,
@@ -211,7 +209,7 @@ export default function calendar(baseOptions) {
      *    id: 5678,
      *    updates: { name: 'Blah blah', ownerId: 12341231 }
      * }];
-     * const response = hs.calendar.batchUpdate(updates)
+     * const response = hs.company.batchUpdate(updates)
      * @returns {Promise}
      */
     batchUpdate,
@@ -223,7 +221,7 @@ export default function calendar(baseOptions) {
      * @param {number} companyId Id of company to delete
      * @example
      * const hs = new HubspotClient(props);
-     * const response = hs.calendar.delete(companyId);
+     * const response = hs.company.delete(companyId);
      * @returns {Promise}
      */
     delete: deleteCompany,

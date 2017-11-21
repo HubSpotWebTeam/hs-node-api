@@ -35,10 +35,10 @@ class HubSpotClient {
     Object.assign(this, { props });
   }
   /**
-   * Get an object representing calendar API
-   * @namespace hs/calendar
-   * @type {object}
-   */
+  * Get an object representing calendar API
+  * @namespace hs/calendar
+  * @type {object}
+  */
   get calendar() {
     return calendarApi(this.props);
   }
