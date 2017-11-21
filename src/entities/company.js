@@ -1,7 +1,7 @@
 // NOTE: FULLY_IMPLEMENTED
 // NOTE: REQUIRES_TESTS
 
-import { createRequest, sanitizeObject } from '../utilities';
+import createRequest, { sanitizeObject } from '../utilities';
 import constants from '../constants';
 
 const defaults = {};
