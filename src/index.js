@@ -31,22 +31,22 @@ class HubSpotClient {
     if (!validProps) {
       throw new Error('One of accessToken/hapikey required in constructor');
     }
-    Object.assign(this, {props});
+    Object.assign(this, { props });
   }
   /**
   * Get an object representing calendar API
   * @namespace hs/calendar
   * @type {object}
   */
-  get calendar () {
+  get calendar() {
     return calendarApi(this.props);
   }
   /** @namespace hs/contacts */
-  get contacts () {
+  get contacts() {
     return contactsApi(this.props);
   }
   /** @namespace hs/company */
-  get company () {
+  get company() {
     return companyApi(this.props);
   }
 }

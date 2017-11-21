@@ -18,4 +18,4 @@ module.exports = {
       byDomain: 'https://api.hubapi.com/companies/v2/domains/{domain}/companies'
     }
   }
-}
+};

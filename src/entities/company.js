@@ -1,34 +1,30 @@
 // NOTE: FULLY_IMPLEMENTED
 // NOTE: REQUIRES_TESTS
 
-import { createRequest } from '../utilities';
+import { createRequest, sanitizeObject } from '../utilities';
 import constants from '../constants';
-import utilities from '../utilities';
 
 const defaults = {};
 let _baseOptions;
 
-const create = async(properties) => {
+const create = async (properties) => {
   try {
     const method = 'POST';
     const body = {
-      properties: Object.keys(properties).map(key => {
-        return {
-          name: key,
-          value: properties[key]
-        };
-      })
+      properties: Object.keys(properties).map(key => ({
+        name: key,
+        value: properties[key]
+      }))
     };
     const response = await createRequest(constants.api.company.create, { method, body },
       _baseOptions);
-
-    return Promise.resolve(company);
+    return Promise.resolve(response);
   } catch (e) {
     return Promise.reject(e.message);
   }
 };
 
-const update = async(companyId, properties) => {
+const update = async (companyId, properties) => {
   try {
     if (!companyId) {
       throw new Error('Field "companyId" is required.');
@@ -36,24 +32,22 @@ const update = async(companyId, properties) => {
 
     const method = 'PUT';
     const body = {
-      properties: Object.keys(properties).map(key => {
-        return {
-          name: key,
-          value: properties[key]
-        };
-      })
+      properties: Object.keys(properties).map(key => ({
+        name: key,
+        value: properties[key]
+      }))
     };
 
     const response = await createRequest(constants.api.company.byId, { method, body, companyId },
       _baseOptions);
 
-    return Promise.resolve(company);
+    return Promise.resolve(response);
   } catch (e) {
     return Promise.reject(e.message);
   }
 };
 
-const batchUpdate = async(options) => {
+const batchUpdate = async (options) => {
   // FIXME: Implement this
   try {
     const method = 'POST';
@@ -65,36 +59,35 @@ const batchUpdate = async(options) => {
       return {
         objectId: company.id,
         properties
-      }
+      };
     });
 
     await createRequest(constants.api.company.batchUpdate, { method, body },
       _baseOptions);
-    return Promise.resolve({ msg: `Successfully updated company properties` });
+    return Promise.resolve({ msg: 'Successfully updated company properties' });
   } catch (e) {
     return Promise.reject(e);
   }
-
 };
 
-const deleteCompany = async(companyId) => {
+const deleteCompany = async (companyId) => {
   try {
     const method = 'DELETE';
-    await createRequest(constants.api.company.byId, { method, companyId },
+    const response = await createRequest(constants.api.company.byId, { method, companyId },
       _baseOptions);
-    return Promise.resolve({ msg: `Successfully deleted company with id ${companyId}` });
+    return Promise.resolve(response);
   } catch (e) {
     return Promise.reject(e.message);
   }
-}
+};
 
-const getAll = async(props) => {
+const getAll = async (props) => {
   try {
     const method = 'GET';
     const passedProps = props || {};
     const { limit, offset, properties, propertiesWithHistory } = passedProps;
     let mergedProps = Object.assign({}, defaults, _baseOptions, { limit, offset, properties, propertiesWithHistory });
-    mergedProps = utilities.sanitizeObject(mergedProps);
+    mergedProps = sanitizeObject(mergedProps);
     // console.log(mergedProps);
     // return Promise.resolve();
 
@@ -103,39 +96,39 @@ const getAll = async(props) => {
   } catch (e) {
     return Promise.reject(e.message);
   }
-}
+};
 
-const getRecentlyModified = async(props) => {
+const getRecentlyModified = async (props) => {
   try {
     const method = 'GET';
     const passedProps = props || {};
     const { offset, count } = passedProps;
     let mergedProps = Object.assign({}, defaults, _baseOptions, { offset, count });
-    mergedProps = utilities.sanitizeObject(mergedProps);
+    mergedProps = sanitizeObject(mergedProps);
     const companies = await createRequest(constants.api.company.byId, { method, companyId: 'recent/modified' },
       mergedProps);
     return Promise.resolve(companies);
   } catch (e) {
     return Promise.reject(e.message);
   }
-}
+};
 
-const getRecentlyCreated = async(props) => {
+const getRecentlyCreated = async (props) => {
   try {
     const method = 'GET';
     const passedProps = props || {};
     const { offset, count } = passedProps;
     let mergedProps = Object.assign({}, defaults, _baseOptions, { offset, count });
-    mergedProps = utilities.sanitizeObject(mergedProps);
+    mergedProps = sanitizeObject(mergedProps);
     const companies = await createRequest(constants.api.company.byId, { method, companyId: 'recent/created' },
       mergedProps);
     return Promise.resolve(companies);
   } catch (e) {
     return Promise.reject(e.message);
   }
-}
+};
 
-const byDomain = async(domain, props) => {
+const byDomain = async (domain, props) => {
   try {
     const method = 'POST';
     const passedProps = props || {};
@@ -149,7 +142,7 @@ const byDomain = async(domain, props) => {
       ];
     }
     if (!offset) {
-      offset = 0
+      offset = 0;
     }
 
     let body = {
@@ -160,16 +153,16 @@ const byDomain = async(domain, props) => {
         companyId: offset
       }
     };
-    body = utilities.sanitizeObject(body);
+    body = sanitizeObject(body);
     let mergedProps = Object.assign({}, defaults, _baseOptions);
-    mergedProps = utilities.sanitizeObject(mergedProps);
+    mergedProps = sanitizeObject(mergedProps);
     // return Promise.resolve(JSON.stringify(body));
     const companies = await createRequest(constants.api.company.byDomain, { method, domain, body }, mergedProps);
     return Promise.resolve(companies);
   } catch (e) {
     return Promise.reject(e.message);
   }
-}
+};
 
 module.exports = function calendar(baseOptions) {
   _baseOptions = baseOptions;
@@ -183,7 +176,7 @@ module.exports = function calendar(baseOptions) {
      * @param {object} companyProperties An object containing company properties in key/value format. At least 1 property is required
      * @example
      * const hs = new HubspotClient(props);
-     * const response = hs.calendar.create(companyProperties)
+     * const response = hs.company.create(companyProperties)
      * @returns {Promise}
      */
     create,
@@ -196,7 +189,7 @@ module.exports = function calendar(baseOptions) {
      * @param {object} companyProperties An object containing company properties in key/value format. At least 1 property is required
      * @example
      * const hs = new HubspotClient(props);
-     * const response = hs.calendar.update(companyId, companyProperties)
+     * const response = hs.company.update(companyId, companyProperties)
      * @returns {Promise}
      */
     update,
@@ -216,7 +209,7 @@ module.exports = function calendar(baseOptions) {
      *    id: 5678,
      *    updates: { name: 'Blah blah', ownerId: 12341231 }
      * }];
-     * const response = hs.calendar.batchUpdate(updates)
+     * const response = hs.company.batchUpdate(updates)
      * @returns {Promise}
      */
     batchUpdate,
@@ -228,10 +221,10 @@ module.exports = function calendar(baseOptions) {
      * @param {number} companyId Id of company to delete
      * @example
      * const hs = new HubspotClient(props);
-     * const response = hs.calendar.delete(companyId);
+     * const response = hs.company.delete(companyId);
      * @returns {Promise}
      */
-    'delete': deleteCompany,
+    delete: deleteCompany,
     /**
      * Retrieve all companies (max 250 at a time)
      * @async
@@ -293,5 +286,4 @@ module.exports = function calendar(baseOptions) {
      */
     byDomain
   };
-
-}
+};
