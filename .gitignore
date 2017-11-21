@@ -2,3 +2,5 @@ distribution/
 node_modules/
 build/
 lib/
+package-lock.json
+yarn.lock

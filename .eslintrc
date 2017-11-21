@@ -19,7 +19,8 @@
     "react/forbid-prop-types": "off",
     "complexity": "off",
     "comma-spacing": "off",
-    "array-bracket-spacing": "off"
+    "array-bracket-spacing": "off",
+    "max-len": 0
   },
   "globals": {
     "$": true,

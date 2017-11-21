@@ -1,4 +1,9 @@
 {
-  "presets": ["es2015"],
-  "plugins": ["babel-plugin-add-module-exports"]
+  "comments": false,
+  "compact": true,
+  "presets": ["env"],
+  "plugins": [
+    "babel-plugin-transform-class-properties",
+    "babel-plugin-add-module-exports"
+  ]
 }

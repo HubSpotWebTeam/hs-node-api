@@ -5,7 +5,14 @@ const debug = require('debug')('utilities');
 
 const createRequest = async (uri, options, props) => {
   try {
-    const url = `${interpolate(uri, options)}?${qs.stringify(props)}`;
+    const properties = Object.keys(props).reduce((acc, curr) => {
+      if (props[curr]) {
+        acc[curr] = props[curr];
+      }
+      return acc;
+    }, {});
+    debug(properties);
+    const url = `${interpolate(uri, options)}?${qs.stringify(properties)}`;
     const method = options.method || 'GET';
     debug(`${method} ${url}`);
     const headers = {};

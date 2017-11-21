@@ -1,9 +1,8 @@
 // NOTE: FULLY_IMPLEMENTED
 // NOTE: REQUIRES_TESTS
 
-import { createRequest } from '../utilities';
+import utilities, { createRequest } from '../utilities';
 import constants from '../constants';
-import utilities from '../utilities';
 
 const defaults = {};
 let _baseOptions;
@@ -66,7 +65,7 @@ const events = async ({
 */
 const getTask = async (taskId) => {
   try {
-    const mergedProps = Object.assign({}, defaults, baseOptions);
+    const mergedProps = Object.assign({}, defaults, _baseOptions);
     const task = await createRequest(constants.api.calendar.taskById, { taskId }, mergedProps);
     return Promise.resolve(task);
   } catch (e) {
@@ -87,10 +86,9 @@ const getTask = async (taskId) => {
 */
 const deleteTask = async (taskId) => {
   try {
-    const mergedProps = Object.assign({}, defaults, baseOptions);
+    const mergedProps = Object.assign({}, defaults, _baseOptions);
     const method = 'DELETE';
-    const task = await createRequest(constants.api.calendar.taskById, { method, taskId }, mergedProps);
-    console.log(task);
+    await createRequest(constants.api.calendar.taskById, { method, taskId }, mergedProps);
     return Promise.resolve({ msg: `Task ${taskId} removed` });
   } catch (e) {
     return Promise.reject(e.message);
@@ -130,7 +128,7 @@ const updateTask = async (taskId, {
   ownerId
 }) => {
   try {
-    const mergedProps = Object.assign({}, defaults, baseOptions);
+    const mergedProps = Object.assign({}, defaults, _baseOptions);
     const method = 'PUT';
     let body = {
       eventDate,
@@ -188,7 +186,7 @@ const createTask = async ({
   ownerId
 }) => {
   try {
-    const mergedProps = Object.assign({}, defaults, baseOptions);
+    const mergedProps = Object.assign({}, defaults, _baseOptions);
     const method = 'POST';
     let body = {
       eventDate,

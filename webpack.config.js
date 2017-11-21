@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
+
 const libraryName = 'hs-api';
 const outputFile = `${libraryName}.js`;
 
@@ -17,6 +18,8 @@ const config = {
     loaders: [{
       test: /(\.jsx|\.js)$/,
       loader: 'babel-loader',
+      options: {
+        presets: ['env'] },
       exclude: /(node_modules|bower_components)/
     }]
   },
