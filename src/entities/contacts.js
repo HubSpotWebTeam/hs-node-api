@@ -1,4 +1,4 @@
-import { createRequest } from '../utilities';
+import createRequest from '../utilities';
 import constants from '../constants';
 
 const defaults = {
@@ -6,7 +6,7 @@ const defaults = {
   formSubmissionMode: 'none'
 };
 
-module.exports = function contacts(baseOptions) {
+export default function contacts(baseOptions) {
   // FIXME: Merge email and id , add utk
   const getById = async (vid, options = {}) => {
     try {
@@ -144,4 +144,4 @@ module.exports = function contacts(baseOptions) {
     getContacts,
     search
   };
-};
+}

@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   api: {
     blog: {
       getPosts: 'https://api.hubapi.com/content/api/v2/blog-posts'

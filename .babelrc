@@ -1,7 +1,9 @@
 {
   "comments": false,
   "compact": true,
-  "presets": ["env"],
+  "presets": ["env", {
+    "modules": false
+  }],
   "plugins": [
     "babel-plugin-transform-class-properties",
     "babel-plugin-add-module-exports"

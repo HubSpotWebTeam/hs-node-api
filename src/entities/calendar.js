@@ -1,7 +1,7 @@
 // NOTE: FULLY_IMPLEMENTED
 // NOTE: REQUIRES_TESTS
 
-import utilities, { createRequest } from '../utilities';
+import createRequest from '../utilities';
 import constants from '../constants';
 
 const defaults = {};
@@ -171,7 +171,7 @@ const taskEvents = ({ startDate, endDate, limit, contentCategory, campaignGuid, 
   type: 'PUBLISHING_TASK'
 });
 
-module.exports = function calendar(baseOptions) {
+export default function calendar(baseOptions) {
   _baseOptions = baseOptions;
 
   return {
@@ -305,4 +305,4 @@ module.exports = function calendar(baseOptions) {
     */
     deleteTask
   };
-};
+}

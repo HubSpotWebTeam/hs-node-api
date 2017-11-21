@@ -1,9 +1,8 @@
-const interpolate = require('interpolate');
-const qs = require('querystring');
-const request = require('request-promise');
-const debug = require('debug')('utilities');
+import interpolate from 'interpolate';
+import qs from 'querystring';
+import request from 'request-promise';
 
-const createRequest = async (uri, options, props) => {
+export default async function createRequest(uri, options, props) {
   try {
     const properties = Object.keys(props).reduce((acc, curr) => {
       if (props[curr]) {
@@ -11,10 +10,12 @@ const createRequest = async (uri, options, props) => {
       }
       return acc;
     }, {});
-    debug(properties);
+    // Prevent this from being appended to URL.
+    delete properties.accessToken;
+
     const url = `${interpolate(uri, options)}?${qs.stringify(properties)}`;
     const method = options.method || 'GET';
-    debug(`${method} ${url}`);
+    console.log(`${method} ${url}`);
     const headers = {};
     const timeout = 30000;
     const json = options.body || true;
@@ -26,8 +27,6 @@ const createRequest = async (uri, options, props) => {
   } catch (e) {
     return Promise.reject(e);
   }
-};
+}
 
-const sanitizeObject = obj => JSON.parse(JSON.stringify(obj));
-
-module.exports = { createRequest, sanitizeObject };
+export const sanitizeObject = obj => JSON.parse(JSON.stringify(obj));

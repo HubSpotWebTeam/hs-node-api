@@ -4,3 +4,6 @@ build/
 lib/
 package-lock.json
 yarn.lock
+docs/
+dist/
+.env

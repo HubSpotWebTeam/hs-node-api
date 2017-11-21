@@ -56,4 +56,4 @@ class HubSpotClient {
   }
 }
 
-module.exports = HubSpotClient;
+export default HubSpotClient;

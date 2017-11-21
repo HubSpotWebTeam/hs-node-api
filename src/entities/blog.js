@@ -1,4 +1,4 @@
-import utilities, { createRequest } from '../utilities';
+import createRequest from '../utilities';
 import constants from '../constants';
 
 const defaults = {};
@@ -20,10 +20,10 @@ const getPosts = async (opts = {}) => {
   }
 };
 
-module.exports = function blog(baseOptions) {
+export default function blog(baseOptions) {
   _baseOptions = baseOptions;
 
   return {
     getPosts
   };
-};
+}
