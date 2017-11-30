@@ -1,5 +1,8 @@
 module.exports = {
   api: {
+    email: {
+      getSubscriptions: 'https://api.hubapi.com/email/public/v1/subscriptions'
+    },
     blog: {
       getPosts: 'https://api.hubapi.com/content/api/v2/blog-posts'
     },

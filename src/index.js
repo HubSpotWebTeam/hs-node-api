@@ -2,6 +2,7 @@ import contactsApi from './entities/contacts';
 import companyApi from './entities/company';
 import calendarApi from './entities/calendar';
 import blogPostsApi from './entities/blog';
+import emailApi from './entities/email';
 
 /** HubSpotClient class */
 class HubSpotClient {
@@ -53,6 +54,10 @@ class HubSpotClient {
   /** @namespace hs/blog */
   get blog() {
     return blogPostsApi(this.props);
+  }
+  /** @namespace hs/email */
+  get email() {
+    return emailApi(this.props);
   }
 }
 
