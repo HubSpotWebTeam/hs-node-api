@@ -2,7 +2,7 @@ import contactsApi from './entities/contacts';
 import companyApi from './entities/company';
 import calendarApi from './entities/calendar';
 import blogPostsApi from './entities/blog';
-import emailApi from './entities/email';
+import workflowsApi from './entities/workflows';
 
 /** HubSpotClient class */
 class HubSpotClient {
@@ -55,10 +55,10 @@ class HubSpotClient {
   get blog() {
     return blogPostsApi(this.props);
   }
-  /** @namespace hs/email */
-  get email() {
-    return emailApi(this.props);
+  /** @namespace hs/workflows */
+  get workflows() {
+    return workflowsApi(this.props);
   }
 }
 
-module.exports = HubSpotClient;
+export default HubSpotClient;

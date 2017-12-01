@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   api: {
     email: {
       getSubscriptions: 'https://api.hubapi.com/email/public/v1/subscriptions'
@@ -22,6 +22,10 @@ module.exports = {
       batchUpdate: 'https://api.hubapi.com/companies/v1/batch-async/update',
       byId: 'https://api.hubapi.com/companies/v2/companies/{companyId}',
       byDomain: 'https://api.hubapi.com/companies/v2/domains/{domain}/companies'
+    },
+    workflows: {
+      create: 'https://api.hubapi.com/automation/v3/workflows',
+      get: 'https://api.hubapi.com/automation/v3/workflows/{id}'
     }
   }
 };

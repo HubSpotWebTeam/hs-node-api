@@ -1,11 +1,10 @@
-module.exports = function calendar(props) {
-  const listContentEvents = ({startDate, endDate, limit}) => {
-    console.log(id)
-    console.log(props)
+export default function calendar(props) {
+  const listContentEvents = ({ startDate, endDate, limit }) => {
+    console.log(id);
+    console.log(props);
   };
 
   return {
     listContentEvents
   };
-
 }

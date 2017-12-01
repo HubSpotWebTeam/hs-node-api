@@ -1,7 +1,7 @@
 // NOTE: FULLY_IMPLEMENTED
 // NOTE: REQUIRES_TESTS
 
-import { createRequest, sanitizeObject } from '../utilities';
+import createRequest, { sanitizeObject } from '../utilities';
 import constants from '../constants';
 
 const defaults = {};
@@ -166,7 +166,7 @@ const byDomain = async (domain, props) => {
   }
 };
 
-module.exports = function calendar(baseOptions) {
+export default function calendar(baseOptions) {
   _baseOptions = baseOptions;
 
   return {
@@ -288,4 +288,4 @@ module.exports = function calendar(baseOptions) {
      */
     byDomain
   };
-};
+}

@@ -1,4 +1,4 @@
-import utilities, { createRequest } from '../utilities';
+import createRequest from '../utilities';
 import constants from '../constants';
 
 const defaults = {};
@@ -11,8 +11,6 @@ const getPosts = async (opts = {}) => {
       name__icontains: name
     });
 
-    console.log(mergedProps);
-
     const blogPosts = await createRequest(constants.api.blog.getPosts, {}, mergedProps);
     return Promise.resolve(blogPosts);
   } catch (e) {
@@ -20,10 +18,10 @@ const getPosts = async (opts = {}) => {
   }
 };
 
-module.exports = function blog(baseOptions) {
+export default function blog(baseOptions) {
   _baseOptions = baseOptions;
 
   return {
     getPosts
   };
-};
+}
