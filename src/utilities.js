@@ -29,4 +29,21 @@ export default async function createRequest(uri, options, props) {
   }
 }
 
+export const queryStringParamInterpolator = (objs) => {
+  const response = Object.keys(objs).map(key => {
+    if (key && objs[key]) {
+      const innerResp = Object.keys(objs[key]).reduce((acc, curr) => {
+        acc[`${key}__${curr}`] = objs[key][curr];
+        return acc;
+      }, {});
+      return innerResp;
+    }
+    return undefined;
+  }).reduce((acc, curr) => {
+    Object.assign(acc, curr);
+    return acc;
+  }, {});
+  return response;
+};
+
 export const sanitizeObject = obj => JSON.parse(JSON.stringify(obj));
