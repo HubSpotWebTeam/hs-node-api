@@ -22,21 +22,22 @@ const getAll = async (opts = {}) => {
   }
 };
 
-const createOrUpdateAuthor = async ({
-  id,
-  email,
-  fullName,
-  userId,
-  username,
-  bio,
-  website,
-  twitter,
-  linkedin,
-  facebook,
-  googlePlus,
-  avatar
-}) => {
+const createOrUpdateAuthor = async (opts = {}) => {
   try {
+    const {
+      id,
+      email,
+      fullName,
+      userId,
+      username,
+      bio,
+      website,
+      twitter,
+      linkedin,
+      facebook,
+      googlePlus,
+      avatar
+    } = opts;
     const mergedProps = Object.assign({}, defaults, _baseOptions);
     let method = 'POST';
     const body = {
@@ -114,12 +115,88 @@ const deleteAuthor = async (id) => {
   }
 };
 
-
-const searchAuthors = async ({ order, limit, offset, q, active, blog }) => {
+const searchAuthors = async (opts = {}) => {
   try {
+    const { order, limit, offset, q, active, blog } = opts; //eslint-disable-line
     const mergedProps = Object.assign({}, defaults, _baseOptions, { order, limit, offset, q, active, blog });
     const authors = await createRequest(constants.api.blog.searchAuthors, {}, mergedProps);
     return Promise.resolve(authors);
+  } catch (e) {
+    return Promise.reject(e.message);
+  }
+};
+
+const getComments = async (opts = {}) => {
+  try {
+    const { limit, offset, portalId, state, contentId, reverse, query } = opts;
+    const mergedProps = Object.assign({}, defaults, _baseOptions, { limit, offset, portalId, state, contentId, reverse, query });
+    const comments = await createRequest(constants.api.blog.comments, {}, mergedProps);
+    return Promise.resolve(comments);
+  } catch (e) {
+    return Promise.reject(e.message);
+  }
+};
+
+const createComment = async (opts = {}) => {
+  try {
+    const {
+      comment,
+      contentId,
+      collectionId,
+      contentAuthorEmail,
+      contentAuthorName,
+      contentPermalink,
+      contentTitle,
+      userEmail,
+      userName,
+      userUrl
+    } = opts;
+    const method = 'POST';
+    const body = {
+      comment,
+      contentId,
+      collectionId,
+      contentAuthorEmail,
+      contentAuthorName,
+      contentPermalink,
+      contentTitle,
+      userEmail,
+      userName,
+      userUrl
+    };
+    const mergedProps = Object.assign({}, defaults, _baseOptions);
+    const comments = await createRequest(constants.api.blog.comments, { method, body }, mergedProps);
+    return Promise.resolve(comments);
+  } catch (e) {
+    return Promise.reject(e.message);
+  }
+};
+
+const getComment = async (id) => {
+  try {
+    const mergedProps = Object.assign({}, defaults, _baseOptions);
+    const comment = await createRequest(constants.api.blog.commentById, { id }, mergedProps);
+    return Promise.resolve(comment);
+  } catch (e) {
+    return Promise.reject(e.message);
+  }
+};
+
+const deleteComment = async (id) => {
+  try {
+    const mergedProps = Object.assign({}, defaults, _baseOptions);
+    await createRequest(constants.api.blog.commentById, { id, method: 'DELETE' }, mergedProps);
+    return Promise.resolve({ deleted: true });
+  } catch (e) {
+    return Promise.reject(e.message);
+  }
+};
+
+const restoreDeletedComment = async (id) => {
+  try {
+    const mergedProps = Object.assign({}, defaults, _baseOptions);
+    await createRequest(constants.api.blog.restoreDeletedComment, { id, method: 'POST' }, mergedProps);
+    return Promise.resolve({ restored: true });
   } catch (e) {
     return Promise.reject(e.message);
   }
@@ -152,7 +229,6 @@ const getVersion = async (blog_id, revision_id) => {
   }
 };
 
-
 const getPosts = async (opts = {}) => {
   try {
     const { name } = opts;
@@ -168,18 +244,35 @@ const getPosts = async (opts = {}) => {
   }
 };
 
+const getPostById = async (id) => {
+  try {
+    const mergedProps = Object.assign({}, defaults, _baseOptions);
+    const blogPosts = await createRequest(constants.api.blog.getPostById, { id }, mergedProps);
+    return Promise.resolve(blogPosts);
+  } catch (e) {
+    return Promise.reject(e.message);
+  }
+};
+
+
 export default function blog(baseOptions) {
   _baseOptions = baseOptions;
 
   return {
+    createComment,
+    restoreDeletedComment,
     createOrUpdateAuthor,
     deleteAuthor,
+    deleteComment,
     getAuthor,
     getAuthors,
     getById,
+    getPostById,
     getAll,
     getVersion,
     getPosts,
+    getComments,
+    getComment,
     searchAuthors
   };
 }
