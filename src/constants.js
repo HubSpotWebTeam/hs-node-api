@@ -1,6 +1,8 @@
 export default {
   api: {
     blog: {
+      getAuthors: 'https://api.hubapi.com/blogs/v3/blog-authors',
+      searchAuthors: 'https://api.hubapi.com/blogs/v3/blog-authors/search',
       getAll: 'https://api.hubapi.com/content/api/v2/blogs',
       getById: 'https://api.hubapi.com/content/api/v2/blogs/{blog_id}',
       getVersions: 'https://api.hubapi.com/content/api/v2/blogs/{blog_id}/versions',
