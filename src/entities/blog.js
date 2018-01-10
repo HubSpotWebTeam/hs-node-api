@@ -23,6 +23,16 @@ const getBlogs = async (opts = {}) => {
   }
 };
 
+const getBlog = async (blog_id) => {
+  try {
+    const mergedProps = Object.assign({}, defaults, _baseOptions);
+    const blogInfo = await createRequest(constants.api.blog.getBlog, { blog_id }, mergedProps);
+    return Promise.resolve(blogInfo);
+  } catch (e) {
+    return Promise.reject(e.message);
+  }
+};
+
 
 const getPosts = async (opts = {}) => {
   try {
@@ -43,6 +53,7 @@ export default function blog(baseOptions) {
   _baseOptions = baseOptions;
 
   return {
+    getBlog,
     getBlogs,
     getPosts
   };

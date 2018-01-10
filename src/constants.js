@@ -2,6 +2,7 @@ export default {
   api: {
     blog: {
       getBlogs: 'https://api.hubapi.com/content/api/v2/blogs',
+      getBlog: 'https://api.hubapi.com/content/api/v2/blogs/{blog_id}',
       getPosts: 'https://api.hubapi.com/content/api/v2/blog-posts'
     },
     calendar: {
