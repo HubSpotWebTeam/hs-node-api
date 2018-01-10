@@ -5,7 +5,7 @@ import constants from '../constants';
 const defaults = {};
 let _baseOptions;
 
-const getBlogs = async (opts = {}) => {
+const getAll = async (opts = {}) => {
   try {
     const { name, limit, offset, created, deleted_at } = opts;
     const additionalOpts = {
@@ -16,30 +16,30 @@ const getBlogs = async (opts = {}) => {
     Object.assign(additionalOpts, queryStringParamInterpolator({ name, created, deleted_at }));
 
     const mergedProps = Object.assign({}, defaults, _baseOptions, additionalOpts);
-    const blogPosts = await createRequest(constants.api.blog.getBlogs, {}, mergedProps);
+    const blogPosts = await createRequest(constants.api.blog.getAll, {}, mergedProps);
     return Promise.resolve(blogPosts);
   } catch (e) {
     return Promise.reject(e.message);
   }
 };
 
-const getBlog = async (blog_id) => {
+const getById = async (blog_id) => {
   try {
     const mergedProps = Object.assign({}, defaults, _baseOptions);
-    const blogInfo = await createRequest(constants.api.blog.getBlog, { blog_id }, mergedProps);
+    const blogInfo = await createRequest(constants.api.blog.getById, { blog_id }, mergedProps);
     return Promise.resolve(blogInfo);
   } catch (e) {
     return Promise.reject(e.message);
   }
 };
 
-const getBlogVersion = async (blog_id, revision_id) => {
+const getVersion = async (blog_id, revision_id) => {
   try {
     const mergedProps = Object.assign({}, defaults, _baseOptions);
-    let url = constants.api.blog.getBlogRevisions;
+    let url = constants.api.blog.getVersions;
     const options = { blog_id };
     if (revision_id) {
-      url = constants.api.blog.getBlogRevision;
+      url = constants.api.blog.getVersion;
       Object.assign(options, { revision_id });
     }
     const blogInfo = await createRequest(url, options, mergedProps);
@@ -69,9 +69,9 @@ export default function blog(baseOptions) {
   _baseOptions = baseOptions;
 
   return {
-    getBlog,
-    getBlogs,
-    getBlogVersion,
+    getById,
+    getAll,
+    getVersion,
     getPosts
   };
 }

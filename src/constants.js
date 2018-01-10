@@ -1,10 +1,10 @@
 export default {
   api: {
     blog: {
-      getBlogs: 'https://api.hubapi.com/content/api/v2/blogs',
-      getBlog: 'https://api.hubapi.com/content/api/v2/blogs/{blog_id}',
-      getBlogRevisions: 'https://api.hubapi.com/content/api/v2/blogs/{blog_id}/versions',
-      getBlogRevision: 'https://api.hubapi.com/content/api/v2/blogs/{blog_id}/versions/{revision_id}',
+      getAll: 'https://api.hubapi.com/content/api/v2/blogs',
+      getById: 'https://api.hubapi.com/content/api/v2/blogs/{blog_id}',
+      getVersions: 'https://api.hubapi.com/content/api/v2/blogs/{blog_id}/versions',
+      getVersion: 'https://api.hubapi.com/content/api/v2/blogs/{blog_id}/versions/{revision_id}',
       getPosts: 'https://api.hubapi.com/content/api/v2/blog-posts'
     },
     calendar: {
