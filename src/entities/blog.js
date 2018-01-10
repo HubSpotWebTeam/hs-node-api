@@ -1,6 +1,7 @@
 import createRequest, { queryStringParamInterpolator } from '../utilities';
 import constants from '../constants';
 
+const allowablePublishActions = ['schedule-publish', 'cancel-publish'];
 const defaults = {};
 let _baseOptions;
 
@@ -231,13 +232,44 @@ const getVersion = async (blog_id, revision_id) => {
 
 const getPosts = async (opts = {}) => {
   try {
-    const { name } = opts;
+    const {
+      limit,
+      offset,
+      archived,
+      blog_author_id,
+      campaign,
+      content_group_id,
+      slug,
+      state,
+      order_by,
+      created,
+      deleted_at,
+      name,
+      updated
+    } = opts;
+
     const additionalOpts = {
-      name__icontains: name
+      limit,
+      offset,
+      archived,
+      blog_author_id,
+      campaign,
+      content_group_id,
+      slug,
+      state,
+      order_by
     };
 
+    // Extract additional dynamic querystring params and values.
+    Object.assign(additionalOpts, queryStringParamInterpolator({
+      created,
+      deleted_at,
+      name,
+      updated
+    }));
+
     const mergedProps = Object.assign({}, defaults, _baseOptions, additionalOpts);
-    const blogPosts = await createRequest(constants.api.blog.getPosts, {}, mergedProps);
+    const blogPosts = await createRequest(constants.api.blog.posts, {}, mergedProps);
     return Promise.resolve(blogPosts);
   } catch (e) {
     return Promise.reject(e.message);
@@ -247,8 +279,251 @@ const getPosts = async (opts = {}) => {
 const getPostById = async (id) => {
   try {
     const mergedProps = Object.assign({}, defaults, _baseOptions);
-    const blogPosts = await createRequest(constants.api.blog.getPostById, { id }, mergedProps);
+    const blogPosts = await createRequest(constants.api.blog.postById, { id }, mergedProps);
     return Promise.resolve(blogPosts);
+  } catch (e) {
+    return Promise.reject(e.message);
+  }
+};
+
+const deletePost = async (id) => {
+  try {
+    const mergedProps = Object.assign({}, defaults, _baseOptions);
+    await createRequest(constants.api.blog.postById, { id, method: 'DELETE' }, mergedProps);
+    return Promise.resolve({ deleted: true });
+  } catch (e) {
+    return Promise.reject(e.message);
+  }
+};
+
+const clonePost = async (opts = {}) => {
+  try {
+    const mergedProps = Object.assign({}, defaults, _baseOptions);
+    const {
+      id,
+      name
+    } = opts;
+    const body = { name };
+    const method = 'POST';
+    await createRequest(constants.api.blog.clonePostById, { id, body, method }, mergedProps);
+    return Promise.resolve({ cloned: true });
+  } catch (e) {
+    return Promise.reject(e.message);
+  }
+};
+
+const publishOrSchedulePost = async (id, action) => {
+  try {
+    const mergedProps = Object.assign({}, defaults, _baseOptions);
+    if (!~allowablePublishActions.indexOf(action)) {
+      throw new Error(`Unrecognized publish action: ${action}`);
+    }
+
+    const body = { action };
+    const method = 'POST';
+    await createRequest(constants.api.blog.publishOrSchedulePost, { id, body, method }, mergedProps);
+    return Promise.resolve({ scheduleChanged: true });
+  } catch (e) {
+    return Promise.reject(e.message);
+  }
+};
+
+const getPostAutosaveBuffer = async (id) => {
+  try {
+    const mergedProps = Object.assign({}, defaults, _baseOptions);
+    const buffer = await createRequest(constants.api.blog.postAutoSaveBuffer, { id }, mergedProps);
+    return Promise.resolve(buffer);
+  } catch (e) {
+    return Promise.reject(e.message);
+  }
+};
+
+const getPostAutosaveBufferStatus = async (id) => {
+  try {
+    const mergedProps = Object.assign({}, defaults, _baseOptions);
+    const bufferStatus = await createRequest(constants.api.blog.postAutoSaveBufferStatus, { id }, mergedProps);
+    return Promise.resolve(bufferStatus);
+  } catch (e) {
+    return Promise.reject(e.message);
+  }
+};
+
+const getPostVersions = async (id) => {
+  try {
+    const mergedProps = Object.assign({}, defaults, _baseOptions);
+    const versions = await createRequest(constants.api.blog.postVersions, { id }, mergedProps);
+    return Promise.resolve(versions);
+  } catch (e) {
+    return Promise.reject(e.message);
+  }
+};
+
+const getPostVersionById = async (id, version_id) => {
+  try {
+    const mergedProps = Object.assign({}, defaults, _baseOptions);
+    const version = await createRequest(constants.api.blog.postVersions, { id, version_id }, mergedProps);
+    return Promise.resolve(version);
+  } catch (e) {
+    return Promise.reject(e.message);
+  }
+};
+
+const restorePostVersionById = async (id, version_id) => {
+  try {
+    const mergedProps = Object.assign({}, defaults, _baseOptions);
+    const body = { version_id };
+    const method = 'POST';
+    const version = await createRequest(constants.api.blog.postVersions, { id, body, method }, mergedProps);
+    return Promise.resolve(version);
+  } catch (e) {
+    return Promise.reject(e.message);
+  }
+};
+
+
+const validatePostAutosaveBufferStatus = async (id) => {
+  try {
+    const mergedProps = Object.assign({}, defaults, _baseOptions);
+    const bufferStatus = await createRequest(constants.api.blog.validatePostAutoSaveBuffer, { id, method: 'POST' }, mergedProps);
+    return Promise.resolve(bufferStatus);
+  } catch (e) {
+    return Promise.reject(e.message);
+  }
+};
+
+const restoredDeletedPost = async (id) => {
+  try {
+    const mergedProps = Object.assign({}, defaults, _baseOptions);
+    const postStatus = await createRequest(constants.api.blog.restorePostById, { id, method: 'POST' }, mergedProps);
+    return Promise.resolve(postStatus);
+  } catch (e) {
+    return Promise.reject(e.message);
+  }
+};
+
+const pushPostAutosaveBufferLive = async (id) => {
+  try {
+    const mergedProps = Object.assign({}, defaults, _baseOptions);
+    const bufferStatus = await createRequest(constants.api.blog.pushPostAutosaveBufferToLive, { id, method: 'POST' }, mergedProps);
+    return Promise.resolve(bufferStatus);
+  } catch (e) {
+    return Promise.reject(e.message);
+  }
+};
+
+
+const updateAutosaveBuffer = async (opts = {}) => {
+  try {
+    const {
+      id,
+      blog_author_id,
+      campaign,
+      campaign_name,
+      content_group_id,
+      featured_image,
+      footer_html,
+      head_html,
+      keywords,
+      meta_description,
+      name,
+      post_body,
+      post_summary,
+      publish_date,
+      publish_immediately,
+      slug,
+      topic_ids,
+      use_featured_image,
+      widgets
+    } = opts;
+    if (!id) {
+      throw new Error('No post ID specified');
+    }
+    const mergedProps = Object.assign({}, defaults, _baseOptions);
+    const body = {
+      blog_author_id,
+      campaign,
+      campaign_name,
+      content_group_id,
+      featured_image,
+      footer_html,
+      head_html,
+      keywords,
+      meta_description,
+      name,
+      post_body,
+      post_summary,
+      publish_date,
+      publish_immediately,
+      slug,
+      topic_ids,
+      use_featured_image,
+      widgets
+    };
+    const method = 'PUT';
+    const buffer = await createRequest(constants.api.blog.postAutoSaveBuffer, { id, method, body }, mergedProps);
+    return Promise.resolve(buffer);
+  } catch (e) {
+    return Promise.reject(e.message);
+  }
+};
+
+const createOrUpdatePost = async (opts = {}) => {
+  try {
+    const mergedProps = Object.assign({}, defaults, _baseOptions);
+    const {
+      id,
+      blog_author_id,
+      campaign,
+      campaign_name,
+      content_group_id,
+      featured_image,
+      footer_html,
+      head_html,
+      keywords,
+      meta_description,
+      name,
+      post_body,
+      post_summary,
+      publish_date,
+      publish_immediately,
+      slug,
+      topic_ids,
+      use_featured_image,
+      widgets
+    } = opts;
+
+    const body = {
+      blog_author_id,
+      campaign,
+      campaign_name,
+      content_group_id,
+      featured_image,
+      footer_html,
+      head_html,
+      keywords,
+      meta_description,
+      name,
+      post_body,
+      post_summary,
+      publish_date,
+      publish_immediately,
+      slug,
+      topic_ids,
+      use_featured_image,
+      widgets
+    };
+
+    let method = 'POST';
+    let url = constants.api.blog.posts;
+    const options = { method, body };
+    if (id) {
+      method = 'PUT';
+      url = constants.api.blog.postById;
+      Object.assign(options, { method, id });
+    }
+
+    const update = await createRequest(url, options, mergedProps);
+    return Promise.resolve(update);
   } catch (e) {
     return Promise.reject(e.message);
   }
@@ -260,19 +535,32 @@ export default function blog(baseOptions) {
 
   return {
     createComment,
+    createOrUpdatePost,
     restoreDeletedComment,
     createOrUpdateAuthor,
+    clonePost,
     deleteAuthor,
     deleteComment,
+    deletePost,
     getAuthor,
     getAuthors,
     getById,
     getPostById,
+    getPostVersions,
+    getPostVersionById,
+    getPostAutosaveBuffer,
+    getPostAutosaveBufferStatus,
+    updateAutosaveBuffer,
+    pushPostAutosaveBufferLive,
     getAll,
     getVersion,
     getPosts,
     getComments,
     getComment,
-    searchAuthors
+    publishOrSchedulePost,
+    restoredDeletedPost,
+    restorePostVersionById,
+    searchAuthors,
+    validatePostAutosaveBufferStatus
   };
 }
