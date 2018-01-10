@@ -3,6 +3,8 @@ export default {
     blog: {
       getBlogs: 'https://api.hubapi.com/content/api/v2/blogs',
       getBlog: 'https://api.hubapi.com/content/api/v2/blogs/{blog_id}',
+      getBlogRevisions: 'https://api.hubapi.com/content/api/v2/blogs/{blog_id}/versions',
+      getBlogRevision: 'https://api.hubapi.com/content/api/v2/blogs/{blog_id}/versions/{revision_id}',
       getPosts: 'https://api.hubapi.com/content/api/v2/blog-posts'
     },
     calendar: {

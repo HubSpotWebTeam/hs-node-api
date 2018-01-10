@@ -33,6 +33,22 @@ const getBlog = async (blog_id) => {
   }
 };
 
+const getBlogVersion = async (blog_id, revision_id) => {
+  try {
+    const mergedProps = Object.assign({}, defaults, _baseOptions);
+    let url = constants.api.blog.getBlogRevisions;
+    const options = { blog_id };
+    if (revision_id) {
+      url = constants.api.blog.getBlogRevision;
+      Object.assign(options, { revision_id });
+    }
+    const blogInfo = await createRequest(url, options, mergedProps);
+    return Promise.resolve(blogInfo);
+  } catch (e) {
+    return Promise.reject(e.message);
+  }
+};
+
 
 const getPosts = async (opts = {}) => {
   try {
@@ -55,6 +71,7 @@ export default function blog(baseOptions) {
   return {
     getBlog,
     getBlogs,
+    getBlogVersion,
     getPosts
   };
 }
