@@ -3,7 +3,7 @@ export default {
     blog: {
       authors: 'https://api.hubapi.com/blogs/v3/blog-authors',
       authorById: 'https://api.hubapi.com/blogs/v3/blog-authors/{id}',
-      searchAuthors: 'https://api.hubapi.com/blogs/v3/blog-authors/search',
+      authorSearch: 'https://api.hubapi.com/blogs/v3/blog-authors/search',
       comments: 'https://api.hubapi.com/comments/v3/comments',
       commentById: 'https://api.hubapi.com/comments/v3/comments/{id}',
       restoreDeletedComment: 'https://api.hubapi.com/comments/v3/comments/{id}/restore',
@@ -22,7 +22,9 @@ export default {
       postVersions: 'https://api.hubapi.com/content/api/v2/blog-posts/{id}/versions',
       restorePostVersion: 'https://api.hubapi.com/content/api/v2/blog-posts/{id}/versions/restore',
       postVersionById: 'https://api.hubapi.com/content/api/v2/blog-posts/{id}/versions/{version_id}',
-      pushPostAutosaveBufferToLive: 'https://api.hubapi.com/content/api/v2/blog-posts/{id}/push-buffer-live'
+      pushPostAutosaveBufferToLive: 'https://api.hubapi.com/content/api/v2/blog-posts/{id}/push-buffer-live',
+      topics: 'https://api.hubapi.com/blogs/v3/topics',
+      topicSearch: 'https://api.hubapi.com/blogs/v3/topics/search'
     },
     calendar: {
       events: 'https://api.hubapi.com/calendar/v1/events',

@@ -120,7 +120,7 @@ const searchAuthors = async (opts = {}) => {
   try {
     const { order, limit, offset, q, active, blog } = opts; //eslint-disable-line
     const mergedProps = Object.assign({}, defaults, _baseOptions, { order, limit, offset, q, active, blog });
-    const authors = await createRequest(constants.api.blog.searchAuthors, {}, mergedProps);
+    const authors = await createRequest(constants.api.blog.authorSearch, {}, mergedProps);
     return Promise.resolve(authors);
   } catch (e) {
     return Promise.reject(e.message);
@@ -172,6 +172,67 @@ const createComment = async (opts = {}) => {
     return Promise.reject(e.message);
   }
 };
+
+const getTopics = async (opts = {}) => {
+  try {
+    const {
+      id,
+      name,
+      created,
+      slug,
+      limit,
+      offset
+    } = opts;
+
+    const additionalOpts = {
+      limit,
+      offset,
+      slug
+    };
+    // Extract additional dynamic querystring params and values.
+    Object.assign(additionalOpts, queryStringParamInterpolator({ id, name, created }));
+
+    const mergedProps = Object.assign({}, defaults, _baseOptions, additionalOpts);
+    const topics = await createRequest(constants.api.blog.topics, {}, mergedProps);
+    return Promise.resolve(topics);
+  } catch (e) {
+    return Promise.reject(e.message);
+  }
+};
+
+const searchTopics = async (opts = {}) => {
+  try {
+    const {
+      id,
+      name,
+      created,
+      slug,
+      limit,
+      offset,
+      q,
+      active,
+      blog //eslint-disable-line
+    } = opts;
+
+    const additionalOpts = {
+      limit,
+      offset,
+      slug,
+      q,
+      active,
+      blog
+    };
+    // Extract additional dynamic querystring params and values.
+    Object.assign(additionalOpts, queryStringParamInterpolator({ id, name, created }));
+
+    const mergedProps = Object.assign({}, defaults, _baseOptions, additionalOpts);
+    const topics = await createRequest(constants.api.blog.topicSearch, {}, mergedProps);
+    return Promise.resolve(topics);
+  } catch (e) {
+    return Promise.reject(e.message);
+  }
+};
+
 
 const getComment = async (id) => {
   try {
@@ -545,6 +606,7 @@ export default function blog(baseOptions) {
     getAuthor,
     getAuthors,
     getById,
+    getTopics,
     getPostById,
     getPostVersions,
     getPostVersionById,
@@ -561,6 +623,7 @@ export default function blog(baseOptions) {
     restoredDeletedPost,
     restorePostVersionById,
     searchAuthors,
+    searchTopics,
     validatePostAutosaveBufferStatus
   };
 }
