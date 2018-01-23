@@ -7,6 +7,8 @@ import constants from '../constants';
 const defaults = {};
 let _baseOptions;
 
+// await hs.company.create({ name: 'Hubspot', no_of_employees: 1000 })
+
 const create = async (properties) => {
   try {
     const method = 'POST';
@@ -176,7 +178,7 @@ export default function calendar(baseOptions) {
      * @param {object} companyProperties An object containing company properties in key/value format. At least 1 property is required
      * @example
      * const hs = new HubspotClient(props);
-     * const response = hs.company.create(companyProperties)
+     * const response = hs.company.create({ name: 'Foobar' })
      * @returns {Promise}
      */
     create,

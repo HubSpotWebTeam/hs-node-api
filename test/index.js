@@ -4,6 +4,8 @@ import HubSpotAPI from '../src';
 dotenv.config();
 const { HAPI_KEY: hapikey } = process.env;
 const hs = new HubSpotAPI({ hapikey });
+// 2396816
+const workflowInfo = hs.workflows.getWorkflow(2396816);
 
 let responses;
 
