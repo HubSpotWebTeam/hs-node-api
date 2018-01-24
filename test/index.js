@@ -4,8 +4,6 @@ import HubSpotAPI from '../src';
 dotenv.config();
 const { HAPI_KEY: hapikey } = process.env;
 const hs = new HubSpotAPI({ hapikey });
-// 2396816
-const workflowInfo = hs.workflows.getWorkflow(2396816);
 
 let responses;
 
@@ -23,11 +21,20 @@ let responses;
 // });
 
 // responses = hs.blog.clonePost({ id: 5352662876, name: 'New blog post' });
-responses = hs.blog.getTopics();
-Promise.resolve(responses).then(res => {
-  // console.log(responses.map(() => 'Done'))
-  // console.log(res.objects.map(obj => obj.id));
-  console.log(res);
-}).catch(e => {
+// responses = [
+//   hs.blog.createOrUpdateTopic({ name: 'Topic 1', description: 'A fuller description' }),
+//   hs.blog.createOrUpdateTopic({ name: 'Topic 2', description: 'A fuller description' }),
+//   hs.blog.createOrUpdateTopic({ name: 'Topic 3', description: 'A fuller description' }),
+//   hs.blog.createOrUpdateTopic({ name: 'Topic 4', description: 'A fuller description' })
+// ];
+//
+
+responses = hs.blog.groupTopics({
+  topicIds: [
+    5537044461, 5537044459, 5537044460, 5536882856
+  ],
+  groupedTopicName: 'Group name'
+});
+Promise.resolve(responses).then(console.log).catch(e => {
   console.log(e);
 });

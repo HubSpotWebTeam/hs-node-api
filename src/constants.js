@@ -1,54 +1,58 @@
+const defaultApiHost = process.env.COS_API_HOST || 'https://api.hubapi.com';
+
 export default {
   api: {
     email: {
-      getSubscriptions: 'https://api.hubapi.com/email/public/v1/subscriptions'
+      getSubscriptions: `${defaultApiHost}/email/public/v1/subscriptions`
     },
     blog: {
-      authors: 'https://api.hubapi.com/blogs/v3/blog-authors',
-      authorById: 'https://api.hubapi.com/blogs/v3/blog-authors/{id}',
-      authorSearch: 'https://api.hubapi.com/blogs/v3/blog-authors/search',
-      comments: 'https://api.hubapi.com/comments/v3/comments',
-      commentById: 'https://api.hubapi.com/comments/v3/comments/{id}',
-      restoreDeletedComment: 'https://api.hubapi.com/comments/v3/comments/{id}/restore',
-      getAll: 'https://api.hubapi.com/content/api/v2/blogs',
-      byId: 'https://api.hubapi.com/content/api/v2/blogs/{blog_id}',
-      getVersions: 'https://api.hubapi.com/content/api/v2/blogs/{blog_id}/versions',
-      getVersion: 'https://api.hubapi.com/content/api/v2/blogs/{blog_id}/versions/{revision_id}',
-      posts: 'https://api.hubapi.com/content/api/v2/blog-posts',
-      postById: 'https://api.hubapi.com/content/api/v2/blog-posts/{id}',
-      clonePostById: 'https://api.hubapi.com/content/api/v2/blog-posts/{id}/clone',
-      restorePostById: 'https://api.hubapi.com/content/api/v2/blog-posts/{id}/restore-deleted',
-      publishOrSchedulePost: 'https://api.hubapi.com/content/api/v2/blog-posts/{id}/publish-action',
-      postAutoSaveBuffer: 'https://api.hubapi.com/content/api/v2/blog-posts/{id}/buffer',
-      validatePostAutoSaveBuffer: 'https://api.hubapi.com/content/api/v2/blog-posts/{id}/validate-buffer',
-      postAutoSaveBufferStatus: 'https://api.hubapi.com/content/api/v2/blog-posts/{id}/has-buffered-changes',
-      postVersions: 'https://api.hubapi.com/content/api/v2/blog-posts/{id}/versions',
-      restorePostVersion: 'https://api.hubapi.com/content/api/v2/blog-posts/{id}/versions/restore',
-      postVersionById: 'https://api.hubapi.com/content/api/v2/blog-posts/{id}/versions/{version_id}',
-      pushPostAutosaveBufferToLive: 'https://api.hubapi.com/content/api/v2/blog-posts/{id}/push-buffer-live',
-      topics: 'https://api.hubapi.com/blogs/v3/topics',
-      topicSearch: 'https://api.hubapi.com/blogs/v3/topics/search'
+      authors: `${defaultApiHost}/blogs/v3/blog-authors`,
+      authorById: `${defaultApiHost}/blogs/v3/blog-authors/{id}`,
+      authorSearch: `${defaultApiHost}/blogs/v3/blog-authors/search`,
+      comments: `${defaultApiHost}/comments/v3/comments`,
+      commentById: `${defaultApiHost}/comments/v3/comments/{id}`,
+      restoreDeletedComment: `${defaultApiHost}/comments/v3/comments/{id}/restore`,
+      getAll: `${defaultApiHost}/content/api/v2/blogs`,
+      byId: `${defaultApiHost}/content/api/v2/blogs/{blog_id}`,
+      getVersions: `${defaultApiHost}/content/api/v2/blogs/{blog_id}/versions`,
+      getVersion: `${defaultApiHost}/content/api/v2/blogs/{blog_id}/versions/{revision_id}`,
+      posts: `${defaultApiHost}/content/api/v2/blog-posts`,
+      postById: `${defaultApiHost}/content/api/v2/blog-posts/{id}`,
+      clonePostById: `${defaultApiHost}/content/api/v2/blog-posts/{id}/clone`,
+      restorePostById: `${defaultApiHost}/content/api/v2/blog-posts/{id}/restore-deleted`,
+      publishOrSchedulePost: `${defaultApiHost}/content/api/v2/blog-posts/{id}/publish-action`,
+      postAutoSaveBuffer: `${defaultApiHost}/content/api/v2/blog-posts/{id}/buffer`,
+      validatePostAutoSaveBuffer: `${defaultApiHost}/content/api/v2/blog-posts/{id}/validate-buffer`,
+      postAutoSaveBufferStatus: `${defaultApiHost}/content/api/v2/blog-posts/{id}/has-buffered-changes`,
+      postVersions: `${defaultApiHost}/content/api/v2/blog-posts/{id}/versions`,
+      restorePostVersion: `${defaultApiHost}/content/api/v2/blog-posts/{id}/versions/restore`,
+      postVersionById: `${defaultApiHost}/content/api/v2/blog-posts/{id}/versions/{version_id}`,
+      pushPostAutosaveBufferToLive: `${defaultApiHost}/content/api/v2/blog-posts/{id}/push-buffer-live`,
+      topics: `${defaultApiHost}/blogs/v3/topics`,
+      groupTopics: `${defaultApiHost}/blogs/v3/topics/group-topics`,
+      topic: `${defaultApiHost}/blogs/v3/topics/{id}`,
+      topicSearch: `${defaultApiHost}/blogs/v3/topics/search`
     },
     calendar: {
-      events: 'https://api.hubapi.com/calendar/v1/events',
-      createTask: 'https://api.hubapi.com/calendar/v1/events/task',
-      taskById: 'https://api.hubapi.com/calendar/v1/events/task/{taskId}'
+      events: `${defaultApiHost}/calendar/v1/events`,
+      createTask: `${defaultApiHost}/calendar/v1/events/task`,
+      taskById: `${defaultApiHost}/calendar/v1/events/task/{taskId}`
     },
     contacts: {
-      byId: 'https://api.hubapi.com/contacts/v1/contact/vid/{vid}/profile',
-      byEmail: 'https://api.hubapi.com/contacts/v1/contact/email/{email}/profile',
-      createContact: 'https://api.hubapi.com/contacts/v1/contact/createOrUpdate/email/{email}/',
-      batchUpdateContacts: 'https://api.hubapi.com/contacts/v1/contact/batch/'
+      byId: `${defaultApiHost}/contacts/v1/contact/vid/{vid}/profile`,
+      byEmail: `${defaultApiHost}/contacts/v1/contact/email/{email}/profile`,
+      createContact: `${defaultApiHost}/contacts/v1/contact/createOrUpdate/email/{email}/`,
+      batchUpdateContacts: `${defaultApiHost}/contacts/v1/contact/batch/`
     },
     company: {
-      create: 'https://api.hubapi.com/companies/v2/companies/',
-      batchUpdate: 'https://api.hubapi.com/companies/v1/batch-async/update',
-      byId: 'https://api.hubapi.com/companies/v2/companies/{companyId}',
-      byDomain: 'https://api.hubapi.com/companies/v2/domains/{domain}/companies'
+      create: `${defaultApiHost}/companies/v2/companies/`,
+      batchUpdate: `${defaultApiHost}/companies/v1/batch-async/update`,
+      byId: `${defaultApiHost}/companies/v2/companies/{companyId}`,
+      byDomain: `${defaultApiHost}/companies/v2/domains/{domain}/companies`
     },
     workflows: {
-      create: 'https://api.hubapi.com/automation/v3/workflows',
-      get: 'https://api.hubapi.com/automation/v3/workflows/{id}'
+      create: `${defaultApiHost}/automation/v3/workflows`,
+      get: `${defaultApiHost}/automation/v3/workflows/{id}`
     }
   }
 };

@@ -200,6 +200,18 @@ const getTopics = async (opts = {}) => {
   }
 };
 
+
+const getTopic = async (id) => {
+  try {
+    const mergedProps = Object.assign({}, defaults, _baseOptions);
+    const topic = await createRequest(constants.api.blog.topic, { id }, mergedProps);
+    return Promise.resolve(topic);
+  } catch (e) {
+    return Promise.reject(e.message);
+  }
+};
+
+
 const searchTopics = async (opts = {}) => {
   try {
     const {
@@ -228,6 +240,35 @@ const searchTopics = async (opts = {}) => {
     const mergedProps = Object.assign({}, defaults, _baseOptions, additionalOpts);
     const topics = await createRequest(constants.api.blog.topicSearch, {}, mergedProps);
     return Promise.resolve(topics);
+  } catch (e) {
+    return Promise.reject(e.message);
+  }
+};
+
+const createOrUpdateTopic = async (opts = {}) => {
+  try {
+    const mergedProps = Object.assign({}, defaults, _baseOptions);
+    const {
+      id,
+      name,
+      description
+    } = opts;
+
+    const body = {
+      name, description
+    };
+
+    let method = 'POST';
+    let url = constants.api.blog.topics;
+    const options = { method, body };
+    if (id) {
+      method = 'PUT';
+      url = constants.api.blog.topic;
+      Object.assign(options, { method, id });
+    }
+
+    const update = await createRequest(url, options, mergedProps);
+    return Promise.resolve(update);
   } catch (e) {
     return Promise.reject(e.message);
   }
@@ -384,6 +425,16 @@ const publishOrSchedulePost = async (id, action) => {
     const method = 'POST';
     await createRequest(constants.api.blog.publishOrSchedulePost, { id, body, method }, mergedProps);
     return Promise.resolve({ scheduleChanged: true });
+  } catch (e) {
+    return Promise.reject(e.message);
+  }
+};
+
+const deleteTopic = async (id) => {
+  try {
+    const mergedProps = Object.assign({}, defaults, _baseOptions);
+    await createRequest(constants.api.blog.topic, { id, method: 'DELETE' }, mergedProps);
+    return Promise.resolve({ deleted: true });
   } catch (e) {
     return Promise.reject(e.message);
   }
@@ -590,22 +641,47 @@ const createOrUpdatePost = async (opts = {}) => {
   }
 };
 
+const groupTopics = async (opts = {}) => {
+  try {
+    const mergedProps = Object.assign({}, defaults, _baseOptions);
+    const {
+      groupedTopicName,
+      topicIds
+    } = opts;
+
+    const body = {
+      groupedTopicName,
+      topicIds
+    };
+
+    const method = 'POST';
+    const update = await createRequest(constants.api.blog.groupTopics, { method, body }, mergedProps);
+    return Promise.resolve(update);
+  } catch (e) {
+    return Promise.reject(e.message);
+  }
+};
+
 
 export default function blog(baseOptions) {
   _baseOptions = baseOptions;
 
   return {
+    groupTopics,
     createComment,
     createOrUpdatePost,
     restoreDeletedComment,
     createOrUpdateAuthor,
+    createOrUpdateTopic,
     clonePost,
     deleteAuthor,
     deleteComment,
     deletePost,
+    deleteTopic,
     getAuthor,
     getAuthors,
     getById,
+    getTopic,
     getTopics,
     getPostById,
     getPostVersions,
