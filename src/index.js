@@ -3,6 +3,9 @@ import companyApi from './entities/company';
 import calendarApi from './entities/calendar';
 import blogPostsApi from './entities/blog';
 import workflowsApi from './entities/workflows';
+// import filesApi from './entities/files';
+import domainsApi from './entities/domains';
+import layoutsApi from './entities/layouts';
 
 /** HubSpotClient class */
 class HubSpotClient {
@@ -58,6 +61,18 @@ class HubSpotClient {
   /** @namespace hs/workflows */
   get workflows() {
     return workflowsApi(this.props);
+  }
+  /** @namespace hs/files */
+  // get files() {
+  //   return filesApi(this.props);
+  // }
+  /** @namespace hs/domains */
+  get domains() {
+    return domainsApi(this.props);
+  }
+  /** @namespace hs/layouts */
+  get layouts() {
+    return layoutsApi(this.props);
   }
 }
 

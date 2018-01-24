@@ -4,7 +4,7 @@ import constants from '../constants';
 const defaults = {};
 let _baseOptions;
 
-const getDomains = async (opts = {}) => {
+const getLayouts = async (opts = {}) => {
   try {
     const { limit, offset, id, domain, is_resolving, created, primary_site_page } = opts;
     const additionalOpts = {
@@ -28,10 +28,10 @@ const getDomains = async (opts = {}) => {
   }
 };
 
-const getDomain = async (id) => {
+const getLayout = async (id) => {
   try {
     if (!id) {
-      throw new Error('getDomain requires an `id` argument');
+      throw new Error('getLayout requires an `id` argument');
     }
     const mergedProps = Object.assign({}, defaults, _baseOptions);
     const domainInfo = await createRequest(constants.api.domains.byId, { id }, mergedProps);
@@ -46,7 +46,7 @@ export default function domainsApi(baseOptions) {
   _baseOptions = baseOptions;
 
   return {
-    getDomains,
-    getDomain
+    getLayouts,
+    getLayout
   };
 }

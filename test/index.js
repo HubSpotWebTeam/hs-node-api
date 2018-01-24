@@ -29,12 +29,13 @@ let responses;
 // ];
 //
 
-responses = hs.blog.groupTopics({
-  topicIds: [
-    5537044461, 5537044459, 5537044460, 5536882856
-  ],
-  groupedTopicName: 'Group name'
-});
+responses = hs.domains.getDomain(4010116936);
+// ({
+//   topicIds: [
+//     5537044461, 5537044459, 5537044460, 5536882856
+//   ],
+//   groupedTopicName: 'Group name'
+// });
 Promise.resolve(responses).then(console.log).catch(e => {
   console.log(e);
 });

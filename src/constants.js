@@ -2,6 +2,14 @@ const defaultApiHost = process.env.COS_API_HOST || 'https://api.hubapi.com';
 
 export default {
   api: {
+    domains: {
+      getAll: `${defaultApiHost}/content/api/v4/domains`,
+      byId: `${defaultApiHost}/content/api/v4/domains/{id}`,
+    },
+    layouts: {
+      getAll: `${defaultApiHost}/content/api/v2/layouts`,
+      byId: `${defaultApiHost}/content/api/v2/layouts/{id}`,
+    },
     email: {
       getSubscriptions: `${defaultApiHost}/email/public/v1/subscriptions`
     },
