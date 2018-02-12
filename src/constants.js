@@ -2,6 +2,9 @@ const defaultApiHost = process.env.COS_API_HOST || 'https://api.hubapi.com';
 
 export default {
   api: {
+    forms: {
+      submitForm: 'https://forms.hubspot.com/uploads/form/v2/{portalId}/{formId}'
+    },
     domains: {
       getAll: `${defaultApiHost}/content/api/v4/domains`,
       byId: `${defaultApiHost}/content/api/v4/domains/{id}`,

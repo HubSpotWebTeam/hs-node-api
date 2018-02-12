@@ -29,7 +29,14 @@ let responses;
 // ];
 //
 
-responses = hs.domains.getDomain(4010116936);
+responses = hs.forms.submitForm('2406023', 'f0a18000-0d25-4800-b92b-baa12243f453', {
+  email: 'test@test.ie',
+  query: 'Boo urns',
+  transcript: 'Testing',
+  firstname: 'Freddie',
+  lastname: 'Flintoff'
+});
+
 // ({
 //   topicIds: [
 //     5537044461, 5537044459, 5537044460, 5536882856
