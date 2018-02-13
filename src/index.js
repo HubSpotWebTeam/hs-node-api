@@ -8,6 +8,8 @@ import domainsApi from './entities/domains';
 import layoutsApi from './entities/layouts';
 import formsApi from './entities/forms';
 import socialApi from './entities/social';
+import emailEventsApi from './entities/email-events';
+import dealsApi from './entities/deals';
 
 /** HubSpotClient class */
 class HubSpotClient {
@@ -83,6 +85,14 @@ class HubSpotClient {
   /** @namespace hs/social */
   get social() {
     return socialApi(this.props);
+  }
+  /** @namespace hs/emailEvents */
+  get emailEvents() {
+    return emailEventsApi(this.props);
+  }
+  /** @namespace hs/emailEvents */
+  get deals() {
+    return dealsApi(this.props);
   }
 }
 

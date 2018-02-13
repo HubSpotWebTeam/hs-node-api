@@ -8,7 +8,7 @@ const hs = new HubSpotAPI({ hapikey });
 let responses;
 
 // responses = hs.blog.createOrUpdateAuthor({
-//   // id: 5511638492,
+//    id: 5511638492,
 //   email: 'smcelhinney@hubspot.com',
 //   fullName: 'Stephen Patrick McElhinney'
 // });
@@ -29,12 +29,8 @@ let responses;
 // ];
 //
 
-responses = hs.social.createBroadcastMessage({
-  channelGuid: 'd85c3e3b-d6fc-3233-8716-7ee202812cd4',
-  status: 'DRAFT',
-  body: 'Test social media message'
-});
-
+// responses = hs.emailEvents.getCampaigns();
+responses = hs.deals.getRecentlyCreated({ count: 100 });
 
 // ({
 //   topicIds: [
@@ -42,6 +38,8 @@ responses = hs.social.createBroadcastMessage({
 //   ],
 //   groupedTopicName: 'Group name'
 // });
-Promise.resolve(responses).then(console.log).catch(e => {
+Promise.resolve(responses).then(r => {
+  console.log(r);
+}).catch(e => {
   console.log(e);
 });

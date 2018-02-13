@@ -2,6 +2,13 @@ const defaultApiHost = process.env.COS_API_HOST || 'https://api.hubapi.com';
 
 export default {
   api: {
+    deals: {
+      recentlyCreated: `${defaultApiHost}/deals/v1/deal/recent/created`
+    },
+    emailEvents: {
+      campaignsWithRecentActivity: `${defaultApiHost}/email/public/v1/campaigns`,
+      campaign: `${defaultApiHost}/email/public/v1/campaigns/{campaignId}`
+    },
     forms: {
       submitForm: 'https://forms.hubspot.com/uploads/form/v2/{portalId}/{formId}'
     },
