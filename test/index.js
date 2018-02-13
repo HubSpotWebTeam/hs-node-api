@@ -29,13 +29,12 @@ let responses;
 // ];
 //
 
-responses = hs.forms.submitForm('2406023', 'f0a18000-0d25-4800-b92b-baa12243f453', {
-  email: 'test@test.ie',
-  query: 'Boo urns',
-  transcript: 'Testing',
-  firstname: 'Freddie',
-  lastname: 'Flintoff'
+responses = hs.social.createBroadcastMessage({
+  channelGuid: 'd85c3e3b-d6fc-3233-8716-7ee202812cd4',
+  status: 'DRAFT',
+  body: 'Test social media message'
 });
+
 
 // ({
 //   topicIds: [

@@ -5,6 +5,10 @@ export default {
     forms: {
       submitForm: 'https://forms.hubspot.com/uploads/form/v2/{portalId}/{formId}'
     },
+    social: {
+      channels: `${defaultApiHost}/broadcast/v1/channels/setting/publish/current`,
+      createBroadcastMessage: `${defaultApiHost}/broadcast/v1/broadcasts`
+    },
     domains: {
       getAll: `${defaultApiHost}/content/api/v4/domains`,
       byId: `${defaultApiHost}/content/api/v4/domains/{id}`,

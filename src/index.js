@@ -7,6 +7,7 @@ import workflowsApi from './entities/workflows';
 import domainsApi from './entities/domains';
 import layoutsApi from './entities/layouts';
 import formsApi from './entities/forms';
+import socialApi from './entities/social';
 
 /** HubSpotClient class */
 class HubSpotClient {
@@ -78,6 +79,10 @@ class HubSpotClient {
   /** @namespace hs/forms */
   get forms() {
     return formsApi(this.props);
+  }
+  /** @namespace hs/social */
+  get social() {
+    return socialApi(this.props);
   }
 }
 
