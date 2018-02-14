@@ -30,7 +30,11 @@ let responses;
 //
 
 // responses = hs.emailEvents.getCampaigns();
-responses = hs.deals.getRecentlyCreated({ count: 100 });
+responses = hs.blog.getPosts({
+  name: {
+    icontains: 'Inbound MaRkEtinG'
+  }
+});
 
 // ({
 //   topicIds: [
@@ -39,7 +43,7 @@ responses = hs.deals.getRecentlyCreated({ count: 100 });
 //   groupedTopicName: 'Group name'
 // });
 Promise.resolve(responses).then(r => {
-  console.log(r);
+  // console.log(r);
 }).catch(e => {
   console.log(e);
 });
