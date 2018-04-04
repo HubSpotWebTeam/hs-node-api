@@ -1,2 +1,4 @@
-src
+src/
+test/
+tools/
 package-lock.json

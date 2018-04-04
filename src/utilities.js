@@ -15,7 +15,6 @@ export default async function createRequest(uri, options, props) {
 
     const url = `${interpolate(uri, options)}?${qs.stringify(properties)}`;
     const method = options.method || 'GET';
-    console.log(`${method} ${url}`);
     const headers = {};
     const timeout = 30000;
     const json = options.body || true;

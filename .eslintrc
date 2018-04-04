@@ -31,6 +31,8 @@
     "jQuery": true,
     "Request": true,
     "Headers": true,
-    "fetch": true
+    "fetch": true,
+    "describe": true,
+    "it": true
   }
 }
