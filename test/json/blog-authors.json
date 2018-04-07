@@ -1,0 +1,29 @@
+{
+  "limit": 1000,
+  "objects": [{
+    "avatar": "https://static.hsappstatic.net/content_shared_assets/static-1.4021/img/blog_author.jpg",
+    "bio": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.",
+    "created": 1468002979537,
+    "deletedAt": 0,
+    "displayName": "Sample HubSpot User",
+    "email": "SampleHubSpotUser@hubspot.com",
+    "facebook": "http://#",
+    "fullName": "Sample HubSpot User",
+    "googlePlus": "",
+    "gravatarUrl": "https://app.hubspot.com/settings/avatar/e2ecd8478af3e1968efb0e07e083aade",
+    "hasSocialProfiles": true,
+    "id": 4263282643,
+    "linkedin": "http://#",
+    "portalId": 2406023,
+    "slug": "sample-hubspot-user",
+    "twitter": "https://twitter.com/#",
+    "twitterUsername": "@",
+    "updated": 1468002979537,
+    "userId": 0,
+    "username": "samplehubspotuser",
+    "website": ""
+  }],
+  "offset": 0,
+  "total": 1,
+  "totalCount": 1
+}

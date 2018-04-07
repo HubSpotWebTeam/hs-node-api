@@ -13,10 +13,22 @@ const getAll = async (opts = {}) => {
       offset
     };
     // Extract additional dynamic querystring params and values.
-    Object.assign(additionalOpts, queryStringParamInterpolator({ name, created, deleted_at }));
+    Object.assign(
+      additionalOpts,
+      queryStringParamInterpolator({ name, created, deleted_at })
+    );
 
-    const mergedProps = Object.assign({}, defaults, _baseOptions, additionalOpts);
-    const blogPosts = await createRequest(constants.api.blog.getAll, {}, mergedProps);
+    const mergedProps = Object.assign(
+      {},
+      defaults,
+      _baseOptions,
+      additionalOpts
+    );
+    const blogPosts = await createRequest(
+      constants.api.blog.getAll,
+      {},
+      mergedProps
+    );
     return Promise.resolve(blogPosts);
   } catch (e) {
     return Promise.reject(e.message);
@@ -79,37 +91,56 @@ const getAuthors = async (opts = {}) => {
       offset
     };
     // Extract additional dynamic querystring params and values.
-    Object.assign(additionalOpts, queryStringParamInterpolator({
-      id,
-      fullName,
-      slug,
-      created,
-      updated
-    }));
+    Object.assign(
+      additionalOpts,
+      queryStringParamInterpolator({
+        id,
+        fullName,
+        slug,
+        created,
+        updated
+      })
+    );
 
-    const mergedProps = Object.assign({}, defaults, _baseOptions, additionalOpts);
-    const authors = await createRequest(constants.api.blog.authors, {}, mergedProps);
+    const mergedProps = Object.assign(
+      {},
+      defaults,
+      _baseOptions,
+      additionalOpts
+    );
+    const authors = await createRequest(
+      constants.api.blog.authors,
+      {},
+      mergedProps
+    );
     return Promise.resolve(authors);
   } catch (e) {
     return Promise.reject(e.message);
   }
 };
 
-const getAuthor = async (id) => {
+const getAuthor = async id => {
   try {
     const mergedProps = Object.assign({}, defaults, _baseOptions);
-    const author = await createRequest(constants.api.blog.authorById, { id }, mergedProps);
+    const author = await createRequest(
+      constants.api.blog.authorById,
+      { id },
+      mergedProps
+    );
     return Promise.resolve(author);
   } catch (e) {
     return Promise.reject(e.message);
   }
 };
 
-const deleteAuthor = async (id) => {
+const deleteAuthor = async id => {
   try {
     const mergedProps = Object.assign({}, defaults, _baseOptions);
-    await createRequest(constants.api.blog.authorById, { id, method: 'DELETE' },
-      mergedProps);
+    await createRequest(
+      constants.api.blog.authorById,
+      { id, method: 'DELETE' },
+      mergedProps
+    );
     return Promise.resolve({ deleted: true });
   } catch (e) {
     return Promise.reject(e.message);
@@ -119,8 +150,19 @@ const deleteAuthor = async (id) => {
 const searchAuthors = async (opts = {}) => {
   try {
     const { order, limit, offset, q, active, blog } = opts; //eslint-disable-line
-    const mergedProps = Object.assign({}, defaults, _baseOptions, { order, limit, offset, q, active, blog });
-    const authors = await createRequest(constants.api.blog.authorSearch, {}, mergedProps);
+    const mergedProps = Object.assign({}, defaults, _baseOptions, {
+      order,
+      limit,
+      offset,
+      q,
+      active,
+      blog
+    });
+    const authors = await createRequest(
+      constants.api.blog.authorSearch,
+      {},
+      mergedProps
+    );
     return Promise.resolve(authors);
   } catch (e) {
     return Promise.reject(e.message);
@@ -130,8 +172,20 @@ const searchAuthors = async (opts = {}) => {
 const getComments = async (opts = {}) => {
   try {
     const { limit, offset, portalId, state, contentId, reverse, query } = opts;
-    const mergedProps = Object.assign({}, defaults, _baseOptions, { limit, offset, portalId, state, contentId, reverse, query });
-    const comments = await createRequest(constants.api.blog.comments, {}, mergedProps);
+    const mergedProps = Object.assign({}, defaults, _baseOptions, {
+      limit,
+      offset,
+      portalId,
+      state,
+      contentId,
+      reverse,
+      query
+    });
+    const comments = await createRequest(
+      constants.api.blog.comments,
+      {},
+      mergedProps
+    );
     return Promise.resolve(comments);
   } catch (e) {
     return Promise.reject(e.message);
@@ -166,7 +220,11 @@ const createComment = async (opts = {}) => {
       userUrl
     };
     const mergedProps = Object.assign({}, defaults, _baseOptions);
-    const comments = await createRequest(constants.api.blog.comments, { method, body }, mergedProps);
+    const comments = await createRequest(
+      constants.api.blog.comments,
+      { method, body },
+      mergedProps
+    );
     return Promise.resolve(comments);
   } catch (e) {
     return Promise.reject(e.message);
@@ -175,14 +233,7 @@ const createComment = async (opts = {}) => {
 
 const getTopics = async (opts = {}) => {
   try {
-    const {
-      id,
-      name,
-      created,
-      slug,
-      limit,
-      offset
-    } = opts;
+    const { id, name, created, slug, limit, offset } = opts;
 
     const additionalOpts = {
       limit,
@@ -190,27 +241,41 @@ const getTopics = async (opts = {}) => {
       slug
     };
     // Extract additional dynamic querystring params and values.
-    Object.assign(additionalOpts, queryStringParamInterpolator({ id, name, created }));
+    Object.assign(
+      additionalOpts,
+      queryStringParamInterpolator({ id, name, created })
+    );
 
-    const mergedProps = Object.assign({}, defaults, _baseOptions, additionalOpts);
-    const topics = await createRequest(constants.api.blog.topics, {}, mergedProps);
+    const mergedProps = Object.assign(
+      {},
+      defaults,
+      _baseOptions,
+      additionalOpts
+    );
+    const topics = await createRequest(
+      constants.api.blog.topics,
+      {},
+      mergedProps
+    );
     return Promise.resolve(topics);
   } catch (e) {
     return Promise.reject(e.message);
   }
 };
 
-
-const getTopic = async (id) => {
+const getTopic = async id => {
   try {
     const mergedProps = Object.assign({}, defaults, _baseOptions);
-    const topic = await createRequest(constants.api.blog.topic, { id }, mergedProps);
+    const topic = await createRequest(
+      constants.api.blog.topic,
+      { id },
+      mergedProps
+    );
     return Promise.resolve(topic);
   } catch (e) {
     return Promise.reject(e.message);
   }
 };
-
 
 const searchTopics = async (opts = {}) => {
   try {
@@ -235,10 +300,22 @@ const searchTopics = async (opts = {}) => {
       blog
     };
     // Extract additional dynamic querystring params and values.
-    Object.assign(additionalOpts, queryStringParamInterpolator({ id, name, created }));
+    Object.assign(
+      additionalOpts,
+      queryStringParamInterpolator({ id, name, created })
+    );
 
-    const mergedProps = Object.assign({}, defaults, _baseOptions, additionalOpts);
-    const topics = await createRequest(constants.api.blog.topicSearch, {}, mergedProps);
+    const mergedProps = Object.assign(
+      {},
+      defaults,
+      _baseOptions,
+      additionalOpts
+    );
+    const topics = await createRequest(
+      constants.api.blog.topicSearch,
+      {},
+      mergedProps
+    );
     return Promise.resolve(topics);
   } catch (e) {
     return Promise.reject(e.message);
@@ -248,14 +325,11 @@ const searchTopics = async (opts = {}) => {
 const createOrUpdateTopic = async (opts = {}) => {
   try {
     const mergedProps = Object.assign({}, defaults, _baseOptions);
-    const {
-      id,
-      name,
-      description
-    } = opts;
+    const { id, name, description } = opts;
 
     const body = {
-      name, description
+      name,
+      description
     };
 
     let method = 'POST';
@@ -274,42 +348,56 @@ const createOrUpdateTopic = async (opts = {}) => {
   }
 };
 
-
-const getComment = async (id) => {
+const getComment = async id => {
   try {
     const mergedProps = Object.assign({}, defaults, _baseOptions);
-    const comment = await createRequest(constants.api.blog.commentById, { id }, mergedProps);
+    const comment = await createRequest(
+      constants.api.blog.commentById,
+      { id },
+      mergedProps
+    );
     return Promise.resolve(comment);
   } catch (e) {
     return Promise.reject(e.message);
   }
 };
 
-const deleteComment = async (id) => {
+const deleteComment = async id => {
   try {
     const mergedProps = Object.assign({}, defaults, _baseOptions);
-    await createRequest(constants.api.blog.commentById, { id, method: 'DELETE' }, mergedProps);
+    await createRequest(
+      constants.api.blog.commentById,
+      { id, method: 'DELETE' },
+      mergedProps
+    );
     return Promise.resolve({ deleted: true });
   } catch (e) {
     return Promise.reject(e.message);
   }
 };
 
-const restoreDeletedComment = async (id) => {
+const restoreDeletedComment = async id => {
   try {
     const mergedProps = Object.assign({}, defaults, _baseOptions);
-    await createRequest(constants.api.blog.restoreDeletedComment, { id, method: 'POST' }, mergedProps);
+    await createRequest(
+      constants.api.blog.restoreDeletedComment,
+      { id, method: 'POST' },
+      mergedProps
+    );
     return Promise.resolve({ restored: true });
   } catch (e) {
     return Promise.reject(e.message);
   }
 };
 
-
-const getById = async (blog_id) => {
+const getById = async blog_id => {
   try {
     const mergedProps = Object.assign({}, defaults, _baseOptions);
-    const blogInfo = await createRequest(constants.api.blog.byId, { blog_id }, mergedProps);
+    const blogInfo = await createRequest(
+      constants.api.blog.byId,
+      { blog_id },
+      mergedProps
+    );
     return Promise.resolve(blogInfo);
   } catch (e) {
     return Promise.reject(e.message);
@@ -363,35 +451,55 @@ const getPosts = async (opts = {}) => {
     };
 
     // Extract additional dynamic querystring params and values.
-    Object.assign(additionalOpts, queryStringParamInterpolator({
-      created,
-      deleted_at,
-      name,
-      updated
-    }));
+    Object.assign(
+      additionalOpts,
+      queryStringParamInterpolator({
+        created,
+        deleted_at,
+        name,
+        updated
+      })
+    );
 
-    const mergedProps = Object.assign({}, defaults, _baseOptions, additionalOpts);
-    const blogPosts = await createRequest(constants.api.blog.posts, {}, mergedProps);
+    const mergedProps = Object.assign(
+      {},
+      defaults,
+      _baseOptions,
+      additionalOpts
+    );
+    const blogPosts = await createRequest(
+      constants.api.blog.posts,
+      {},
+      mergedProps
+    );
     return Promise.resolve(blogPosts);
   } catch (e) {
     return Promise.reject(e.message);
   }
 };
 
-const getPostById = async (id) => {
+const getPostById = async id => {
   try {
     const mergedProps = Object.assign({}, defaults, _baseOptions);
-    const blogPosts = await createRequest(constants.api.blog.postById, { id }, mergedProps);
+    const blogPosts = await createRequest(
+      constants.api.blog.postById,
+      { id },
+      mergedProps
+    );
     return Promise.resolve(blogPosts);
   } catch (e) {
     return Promise.reject(e.message);
   }
 };
 
-const deletePost = async (id) => {
+const deletePost = async id => {
   try {
     const mergedProps = Object.assign({}, defaults, _baseOptions);
-    await createRequest(constants.api.blog.postById, { id, method: 'DELETE' }, mergedProps);
+    await createRequest(
+      constants.api.blog.postById,
+      { id, method: 'DELETE' },
+      mergedProps
+    );
     return Promise.resolve({ deleted: true });
   } catch (e) {
     return Promise.reject(e.message);
@@ -401,13 +509,14 @@ const deletePost = async (id) => {
 const clonePost = async (opts = {}) => {
   try {
     const mergedProps = Object.assign({}, defaults, _baseOptions);
-    const {
-      id,
-      name
-    } = opts;
+    const { id, name } = opts;
     const body = { name };
     const method = 'POST';
-    await createRequest(constants.api.blog.clonePostById, { id, body, method }, mergedProps);
+    await createRequest(
+      constants.api.blog.clonePostById,
+      { id, body, method },
+      mergedProps
+    );
     return Promise.resolve({ cloned: true });
   } catch (e) {
     return Promise.reject(e.message);
@@ -423,47 +532,67 @@ const publishOrSchedulePost = async (id, action) => {
 
     const body = { action };
     const method = 'POST';
-    await createRequest(constants.api.blog.publishOrSchedulePost, { id, body, method }, mergedProps);
+    await createRequest(
+      constants.api.blog.publishOrSchedulePost,
+      { id, body, method },
+      mergedProps
+    );
     return Promise.resolve({ scheduleChanged: true });
   } catch (e) {
     return Promise.reject(e.message);
   }
 };
 
-const deleteTopic = async (id) => {
+const deleteTopic = async id => {
   try {
     const mergedProps = Object.assign({}, defaults, _baseOptions);
-    await createRequest(constants.api.blog.topic, { id, method: 'DELETE' }, mergedProps);
+    await createRequest(
+      constants.api.blog.topic,
+      { id, method: 'DELETE' },
+      mergedProps
+    );
     return Promise.resolve({ deleted: true });
   } catch (e) {
     return Promise.reject(e.message);
   }
 };
 
-const getPostAutosaveBuffer = async (id) => {
+const getPostAutosaveBuffer = async id => {
   try {
     const mergedProps = Object.assign({}, defaults, _baseOptions);
-    const buffer = await createRequest(constants.api.blog.postAutoSaveBuffer, { id }, mergedProps);
+    const buffer = await createRequest(
+      constants.api.blog.postAutoSaveBuffer,
+      { id },
+      mergedProps
+    );
     return Promise.resolve(buffer);
   } catch (e) {
     return Promise.reject(e.message);
   }
 };
 
-const getPostAutosaveBufferStatus = async (id) => {
+const getPostAutosaveBufferStatus = async id => {
   try {
     const mergedProps = Object.assign({}, defaults, _baseOptions);
-    const bufferStatus = await createRequest(constants.api.blog.postAutoSaveBufferStatus, { id }, mergedProps);
+    const bufferStatus = await createRequest(
+      constants.api.blog.postAutoSaveBufferStatus,
+      { id },
+      mergedProps
+    );
     return Promise.resolve(bufferStatus);
   } catch (e) {
     return Promise.reject(e.message);
   }
 };
 
-const getPostVersions = async (id) => {
+const getPostVersions = async id => {
   try {
     const mergedProps = Object.assign({}, defaults, _baseOptions);
-    const versions = await createRequest(constants.api.blog.postVersions, { id }, mergedProps);
+    const versions = await createRequest(
+      constants.api.blog.postVersions,
+      { id },
+      mergedProps
+    );
     return Promise.resolve(versions);
   } catch (e) {
     return Promise.reject(e.message);
@@ -473,7 +602,11 @@ const getPostVersions = async (id) => {
 const getPostVersionById = async (id, version_id) => {
   try {
     const mergedProps = Object.assign({}, defaults, _baseOptions);
-    const version = await createRequest(constants.api.blog.postVersions, { id, version_id }, mergedProps);
+    const version = await createRequest(
+      constants.api.blog.postVersions,
+      { id, version_id },
+      mergedProps
+    );
     return Promise.resolve(version);
   } catch (e) {
     return Promise.reject(e.message);
@@ -485,44 +618,58 @@ const restorePostVersionById = async (id, version_id) => {
     const mergedProps = Object.assign({}, defaults, _baseOptions);
     const body = { version_id };
     const method = 'POST';
-    const version = await createRequest(constants.api.blog.postVersions, { id, body, method }, mergedProps);
+    const version = await createRequest(
+      constants.api.blog.postVersions,
+      { id, body, method },
+      mergedProps
+    );
     return Promise.resolve(version);
   } catch (e) {
     return Promise.reject(e.message);
   }
 };
 
-
-const validatePostAutosaveBufferStatus = async (id) => {
+const validatePostAutosaveBufferStatus = async id => {
   try {
     const mergedProps = Object.assign({}, defaults, _baseOptions);
-    const bufferStatus = await createRequest(constants.api.blog.validatePostAutoSaveBuffer, { id, method: 'POST' }, mergedProps);
+    const bufferStatus = await createRequest(
+      constants.api.blog.validatePostAutoSaveBuffer,
+      { id, method: 'POST' },
+      mergedProps
+    );
     return Promise.resolve(bufferStatus);
   } catch (e) {
     return Promise.reject(e.message);
   }
 };
 
-const restoredDeletedPost = async (id) => {
+const restoredDeletedPost = async id => {
   try {
     const mergedProps = Object.assign({}, defaults, _baseOptions);
-    const postStatus = await createRequest(constants.api.blog.restorePostById, { id, method: 'POST' }, mergedProps);
+    const postStatus = await createRequest(
+      constants.api.blog.restorePostById,
+      { id, method: 'POST' },
+      mergedProps
+    );
     return Promise.resolve(postStatus);
   } catch (e) {
     return Promise.reject(e.message);
   }
 };
 
-const pushPostAutosaveBufferLive = async (id) => {
+const pushPostAutosaveBufferLive = async id => {
   try {
     const mergedProps = Object.assign({}, defaults, _baseOptions);
-    const bufferStatus = await createRequest(constants.api.blog.pushPostAutosaveBufferToLive, { id, method: 'POST' }, mergedProps);
+    const bufferStatus = await createRequest(
+      constants.api.blog.pushPostAutosaveBufferToLive,
+      { id, method: 'POST' },
+      mergedProps
+    );
     return Promise.resolve(bufferStatus);
   } catch (e) {
     return Promise.reject(e.message);
   }
 };
-
 
 const updateAutosaveBuffer = async (opts = {}) => {
   try {
@@ -572,7 +719,11 @@ const updateAutosaveBuffer = async (opts = {}) => {
       widgets
     };
     const method = 'PUT';
-    const buffer = await createRequest(constants.api.blog.postAutoSaveBuffer, { id, method, body }, mergedProps);
+    const buffer = await createRequest(
+      constants.api.blog.postAutoSaveBuffer,
+      { id, method, body },
+      mergedProps
+    );
     return Promise.resolve(buffer);
   } catch (e) {
     return Promise.reject(e.message);
@@ -644,10 +795,7 @@ const createOrUpdatePost = async (opts = {}) => {
 const groupTopics = async (opts = {}) => {
   try {
     const mergedProps = Object.assign({}, defaults, _baseOptions);
-    const {
-      groupedTopicName,
-      topicIds
-    } = opts;
+    const { groupedTopicName, topicIds } = opts;
 
     const body = {
       groupedTopicName,
@@ -655,13 +803,16 @@ const groupTopics = async (opts = {}) => {
     };
 
     const method = 'POST';
-    const update = await createRequest(constants.api.blog.groupTopics, { method, body }, mergedProps);
+    const update = await createRequest(
+      constants.api.blog.groupTopics,
+      { method, body },
+      mergedProps
+    );
     return Promise.resolve(update);
   } catch (e) {
     return Promise.reject(e.message);
   }
 };
-
 
 export default function blog(baseOptions) {
   _baseOptions = baseOptions;

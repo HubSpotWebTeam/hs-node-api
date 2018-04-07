@@ -1,6 +1,8 @@
 import createRequest from '../utilities';
 import constants from '../constants';
 
+const debug = require('debug')('hs-api:tests');
+
 const defaults = {
   propertyMode: 'value_only',
   formSubmissionMode: 'none'
@@ -11,7 +13,11 @@ export default function contacts(baseOptions) {
   const getById = async (vid, options = {}) => {
     try {
       const mergedProps = Object.assign({}, defaults, baseOptions, options);
-      const contact = await createRequest(constants.api.contacts.byId, { vid }, mergedProps);
+      const contact = await createRequest(
+        constants.api.contacts.byId,
+        { vid },
+        mergedProps
+      );
       return Promise.resolve(contact);
     } catch (e) {
       return Promise.reject(e);
@@ -21,7 +27,11 @@ export default function contacts(baseOptions) {
   const getByEmail = async (email, options) => {
     try {
       const mergedProps = Object.assign({}, defaults, baseOptions, options);
-      const contact = await createRequest(constants.api.contacts.byEmail, { email }, mergedProps);
+      const contact = await createRequest(
+        constants.api.contacts.byEmail,
+        { email },
+        mergedProps
+      );
       return Promise.resolve(contact);
     } catch (e) {
       return Promise.reject(e);
@@ -29,12 +39,14 @@ export default function contacts(baseOptions) {
   };
 
   // NOTE: Not recommended to use this, only for offline contacts.
-  const createOrUpdateContact = async (obj) => {
+  const createOrUpdateContact = async obj => {
     try {
       const method = 'POST';
       const { email } = obj;
       if (!email) {
-        throw new Error('Property "email" is required for creating contacts with this method.');
+        throw new Error(
+          'Property "email" is required for creating contacts with this method.'
+        );
       }
 
       const body = {
@@ -43,15 +55,20 @@ export default function contacts(baseOptions) {
           value: obj[key]
         }))
       };
-      const contact = await createRequest(constants.api.contacts.createContact, { method, body, email },
-        baseOptions);
-      return Promise.resolve({ msg: `Successfully updated contact details for ${email}` });
+      const contact = await createRequest(
+        constants.api.contacts.createContact,
+        { method, body, email },
+        baseOptions
+      );
+      return Promise.resolve({
+        msg: `Successfully updated contact details for ${email}`
+      });
     } catch (e) {
       return Promise.reject(e);
     }
   };
 
-  const batchUpdateContacts = async (options) => {
+  const batchUpdateContacts = async options => {
     try {
       const method = 'POST';
       const body = options.map(contact => {
@@ -65,29 +82,38 @@ export default function contacts(baseOptions) {
           properties
         };
       });
-      await createRequest(constants.api.contacts.batchUpdateContacts, { method, body },
-        baseOptions);
-      return Promise.resolve({ msg: 'Successfully updated contact properties' });
+      await createRequest(
+        constants.api.contacts.batchUpdateContacts,
+        { method, body },
+        baseOptions
+      );
+      return Promise.resolve({
+        msg: 'Successfully updated contact properties'
+      });
     } catch (e) {
       return Promise.reject(e);
     }
   };
 
-  const deleteContact = async (options) => {
+  const deleteContact = async options => {
     // FIXME: Implement this
   };
 
-  const getContacts = async (options, criteria) => {
-    // FIXME: Implement this
-    // Used for
-    // Retrieving all contacts
-    // Recently modified
-    // Recently created
-    // Group of contacts by id
-    // Group of contacts by email address
+  const getContacts = async options => {
+    try {
+      const mergedProps = Object.assign({}, defaults, baseOptions, options);
+      const allContacts = await createRequest(
+        constants.api.contacts.getAll,
+        {},
+        mergedProps
+      );
+      return Promise.resolve(allContacts);
+    } catch (e) {
+      return Promise.reject(e);
+    }
   };
 
-  const search = async (options) => {
+  const search = async options => {
     // FIXME: Implement this
   };
 

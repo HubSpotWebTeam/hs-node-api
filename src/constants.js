@@ -10,7 +10,8 @@ export default {
       campaign: `${defaultApiHost}/email/public/v1/campaigns/{campaignId}`
     },
     forms: {
-      submitForm: 'https://forms.hubspot.com/uploads/form/v2/{portalId}/{formId}'
+      submitForm:
+        'https://forms.hubspot.com/uploads/form/v2/{portalId}/{formId}'
     },
     social: {
       channels: `${defaultApiHost}/broadcast/v1/channels/setting/publish/current`,
@@ -18,11 +19,11 @@ export default {
     },
     domains: {
       getAll: `${defaultApiHost}/content/api/v4/domains`,
-      byId: `${defaultApiHost}/content/api/v4/domains/{id}`,
+      byId: `${defaultApiHost}/content/api/v4/domains/{id}`
     },
     layouts: {
       getAll: `${defaultApiHost}/content/api/v2/layouts`,
-      byId: `${defaultApiHost}/content/api/v2/layouts/{id}`,
+      byId: `${defaultApiHost}/content/api/v2/layouts/{id}`
     },
     email: {
       getSubscriptions: `${defaultApiHost}/email/public/v1/subscriptions`
@@ -61,6 +62,7 @@ export default {
       taskById: `${defaultApiHost}/calendar/v1/events/task/{taskId}`
     },
     contacts: {
+      getAll: `${defaultApiHost}/contacts/v1/lists/all/contacts/all`,
       byId: `${defaultApiHost}/contacts/v1/contact/vid/{vid}/profile`,
       byEmail: `${defaultApiHost}/contacts/v1/contact/email/{email}/profile`,
       createContact: `${defaultApiHost}/contacts/v1/contact/createOrUpdate/email/{email}/`,
