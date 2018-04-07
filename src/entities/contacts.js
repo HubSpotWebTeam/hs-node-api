@@ -38,6 +38,20 @@ export default function contacts(baseOptions) {
     }
   };
 
+  const getByUtk = async (utk, options) => {
+    try {
+      const mergedProps = Object.assign({}, defaults, baseOptions, options);
+      const contact = await createRequest(
+        constants.api.contacts.byUtk,
+        { utk },
+        mergedProps
+      );
+      return Promise.resolve(contact);
+    } catch (e) {
+      return Promise.reject(e);
+    }
+  };
+
   // NOTE: Not recommended to use this, only for offline contacts.
   const createOrUpdateContact = async obj => {
     try {
@@ -149,6 +163,7 @@ export default function contacts(baseOptions) {
      * @returns {Promise}
      */
     getByEmail,
+    getByUtk,
     /**
      * Create or update a contact
      * @async

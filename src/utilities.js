@@ -2,6 +2,8 @@ import interpolate from 'interpolate';
 import qs from 'querystring';
 import request from 'request-promise';
 
+const debug = require('debug')('hs-api:utilities');
+
 export default async function createRequest(uri, options, props) {
   try {
     const properties = Object.keys(props).reduce((acc, curr) => {
@@ -15,6 +17,7 @@ export default async function createRequest(uri, options, props) {
 
     const url = `${interpolate(uri, options)}?${qs.stringify(properties)}`;
     const method = options.method || 'GET';
+    debug(`${method}: ${url}`);
     const headers = {};
     const timeout = 30000;
     const json = options.body || true;
@@ -28,20 +31,22 @@ export default async function createRequest(uri, options, props) {
   }
 }
 
-export const queryStringParamInterpolator = (objs) => {
-  const response = Object.keys(objs).map(key => {
-    if (key && objs[key]) {
-      const innerResp = Object.keys(objs[key]).reduce((acc, curr) => {
-        acc[`${key}__${curr}`] = objs[key][curr];
-        return acc;
-      }, {});
-      return innerResp;
-    }
-    return undefined;
-  }).reduce((acc, curr) => {
-    Object.assign(acc, curr);
-    return acc;
-  }, {});
+export const queryStringParamInterpolator = objs => {
+  const response = Object.keys(objs)
+    .map(key => {
+      if (key && objs[key]) {
+        const innerResp = Object.keys(objs[key]).reduce((acc, curr) => {
+          acc[`${key}__${curr}`] = objs[key][curr];
+          return acc;
+        }, {});
+        return innerResp;
+      }
+      return undefined;
+    })
+    .reduce((acc, curr) => {
+      Object.assign(acc, curr);
+      return acc;
+    }, {});
   return response;
 };
 
