@@ -10,17 +10,7 @@ describe('Contacts', async () => {
   it('returns a valid contact response', async () => {
     const responses = await hs.contacts.getContacts();
     const { contacts, 'has-more': hasMore, 'vid-offset': offset } = responses;
-    expect(hasMore).to.be.a('boolean');
-    expect(offset).to.be.a('number');
-    expect(contacts)
-      .to.be.an('array')
-      .and.has.lengthOf.above(0);
-  });
-
-  it('returns a valid contact response', async () => {
-    const responses = await hs.contacts.getContacts();
-    const { contacts, 'has-more': hasMore, 'vid-offset': offset } = responses;
-    expect(hasMore).to.be.a('boolean');
+    expect(hasMore).to.be.a('string');
     expect(offset).to.be.a('number');
     expect(contacts)
       .to.be.an('array')
