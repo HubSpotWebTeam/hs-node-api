@@ -1,152 +1,153 @@
 import createRequest from '../utilities';
 import constants from '../constants';
 
-const debug = require('debug')('hs-api:tests');
+const debug = require('debug')('hs-api:tests'); // eslint-disable-line
 
 const defaults = {
   propertyMode: 'value_only',
   formSubmissionMode: 'none'
 };
+let _baseOptions;
+
+const getById = async (vid, options = {}) => {
+  try {
+    const mergedProps = Object.assign({}, defaults, _baseOptions, options);
+    const contact = await createRequest(
+      constants.api.contacts.byId,
+      { vid },
+      mergedProps
+    );
+    return Promise.resolve(contact);
+  } catch (e) {
+    return Promise.reject(e);
+  }
+};
+
+const getByEmail = async (email, options) => {
+  try {
+    const mergedProps = Object.assign({}, defaults, _baseOptions, options);
+    const contact = await createRequest(
+      constants.api.contacts.byEmail,
+      { email },
+      mergedProps
+    );
+    return Promise.resolve(contact);
+  } catch (e) {
+    return Promise.reject(e);
+  }
+};
+
+const getByUtk = async (utk, options) => {
+  try {
+    const mergedProps = Object.assign({}, defaults, _baseOptions, options);
+    const contact = await createRequest(
+      constants.api.contacts.byUtk,
+      { utk },
+      mergedProps
+    );
+    return Promise.resolve(contact);
+  } catch (e) {
+    return Promise.reject(e);
+  }
+};
+
+// NOTE: Not recommended to use this, only for offline contacts.
+const createOrUpdateContact = async obj => {
+  try {
+    const method = 'POST';
+    const { email } = obj;
+    if (!email) {
+      throw new Error(
+        'Property "email" is required for creating contacts with this method.'
+      );
+    }
+
+    const body = {
+      properties: Object.keys(obj).map(key => ({
+        property: key,
+        value: obj[key]
+      }))
+    };
+    await createRequest(
+      constants.api.contacts.createContact,
+      { method, body, email },
+      _baseOptions
+    );
+    return Promise.resolve({
+      msg: `Successfully updated contact details for ${email}`
+    });
+  } catch (e) {
+    return Promise.reject(e);
+  }
+};
+
+const batchUpdateContacts = async contactsToUpdate => {
+  try {
+    const method = 'POST';
+    const body = contactsToUpdate.map(contact => {
+      const contactType = /@/i.test(contact.id) ? 'email' : 'vid';
+      const properties = Object.keys(contact.updates).map(i => ({
+        property: i,
+        value: contact.updates[i]
+      }));
+      return {
+        [`${contactType}`]: contact.id,
+        properties
+      };
+    });
+    await createRequest(
+      constants.api.contacts.batchUpdateContacts,
+      { method, body },
+      _baseOptions
+    );
+    return Promise.resolve({
+      msg: 'Successfully updated contact properties'
+    });
+  } catch (e) {
+    return Promise.reject(e);
+  }
+};
+
+const deleteContact = async vid => {
+  try {
+    const method = 'DELETE';
+    await createRequest(
+      constants.api.contacts.deleteById,
+      { method, vid },
+      _baseOptions
+    );
+    return Promise.resolve({
+      msg: `Successfully delete contact details for ${vid}`
+    });
+  } catch (e) {
+    return Promise.reject(e);
+  }
+};
+
+const getContacts = async options => {
+  try {
+    const mergedProps = Object.assign({}, defaults, _baseOptions, options);
+    const allContacts = await createRequest(
+      constants.api.contacts.getAll,
+      {},
+      mergedProps
+    );
+    return Promise.resolve(allContacts);
+  } catch (e) {
+    return Promise.reject(e);
+  }
+};
+
+// const search = async options => {
+//   // FIXME: Implement this
+// };
+//
+// const mergeContacts = async (primary, secondary) => {
+//   // FIXME: Implement this
+// };
 
 export default function contacts(baseOptions) {
-  // FIXME: Merge email and id , add utk
-  const getById = async (vid, options = {}) => {
-    try {
-      const mergedProps = Object.assign({}, defaults, baseOptions, options);
-      const contact = await createRequest(
-        constants.api.contacts.byId,
-        { vid },
-        mergedProps
-      );
-      return Promise.resolve(contact);
-    } catch (e) {
-      return Promise.reject(e);
-    }
-  };
-
-  const getByEmail = async (email, options) => {
-    try {
-      const mergedProps = Object.assign({}, defaults, baseOptions, options);
-      const contact = await createRequest(
-        constants.api.contacts.byEmail,
-        { email },
-        mergedProps
-      );
-      return Promise.resolve(contact);
-    } catch (e) {
-      return Promise.reject(e);
-    }
-  };
-
-  const getByUtk = async (utk, options) => {
-    try {
-      const mergedProps = Object.assign({}, defaults, baseOptions, options);
-      const contact = await createRequest(
-        constants.api.contacts.byUtk,
-        { utk },
-        mergedProps
-      );
-      return Promise.resolve(contact);
-    } catch (e) {
-      return Promise.reject(e);
-    }
-  };
-
-  // NOTE: Not recommended to use this, only for offline contacts.
-  const createOrUpdateContact = async obj => {
-    try {
-      const method = 'POST';
-      const { email } = obj;
-      if (!email) {
-        throw new Error(
-          'Property "email" is required for creating contacts with this method.'
-        );
-      }
-
-      const body = {
-        properties: Object.keys(obj).map(key => ({
-          property: key,
-          value: obj[key]
-        }))
-      };
-      await createRequest(
-        constants.api.contacts.createContact,
-        { method, body, email },
-        baseOptions
-      );
-      return Promise.resolve({
-        msg: `Successfully updated contact details for ${email}`
-      });
-    } catch (e) {
-      return Promise.reject(e);
-    }
-  };
-
-  const batchUpdateContacts = async contactsToUpdate => {
-    try {
-      const method = 'POST';
-      const body = contactsToUpdate.map(contact => {
-        const contactType = /@/i.test(contact.id) ? 'email' : 'vid';
-        const properties = Object.keys(contact.updates).map(i => ({
-          property: i,
-          value: contact.updates[i]
-        }));
-        return {
-          [`${contactType}`]: contact.id,
-          properties
-        };
-      });
-      await createRequest(
-        constants.api.contacts.batchUpdateContacts,
-        { method, body },
-        baseOptions
-      );
-      return Promise.resolve({
-        msg: 'Successfully updated contact properties'
-      });
-    } catch (e) {
-      return Promise.reject(e);
-    }
-  };
-
-  const deleteContact = async vid => {
-    try {
-      const method = 'DELETE';
-      await createRequest(
-        constants.api.contacts.deleteById,
-        { method, vid },
-        baseOptions
-      );
-      return Promise.resolve({
-        msg: `Successfully delete contact details for ${vid}`
-      });
-    } catch (e) {
-      return Promise.reject(e);
-    }
-  };
-
-  const getContacts = async options => {
-    try {
-      const mergedProps = Object.assign({}, defaults, baseOptions, options);
-      const allContacts = await createRequest(
-        constants.api.contacts.getAll,
-        {},
-        mergedProps
-      );
-      return Promise.resolve(allContacts);
-    } catch (e) {
-      return Promise.reject(e);
-    }
-  };
-
-  const search = async options => {
-    // FIXME: Implement this
-  };
-
-  const mergeContacts = async (primary, secondary) => {
-    // FIXME: Implement this
-  };
-
+  _baseOptions = baseOptions;
   // API
   return {
     /**
@@ -268,8 +269,8 @@ export default function contacts(baseOptions) {
      * const response = hs.contacts.getContacts({ limit: 25 });
      * @returns {Promise}
      */
-    getContacts,
-    search, // Unimplemented
-    mergeContacts // Unimplemented
+    getContacts
+    // search, // Unimplemented
+    // mergeContacts // Unimplemented
   };
 }

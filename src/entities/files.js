@@ -23,12 +23,16 @@ const uploadFile = async (opts = {}) => {
       folder_id
     };
 
-    const mergedProps = Object.assign({}, defaults, _baseOptions, { overwrite, hidden });
+    const mergedProps = Object.assign({}, defaults, _baseOptions, {
+      overwrite,
+      hidden
+    });
 
-    const url = constants.api.files.upload;
-    const options = { method, body };
-
-    const author = await createRequest(url, options, mergedProps);
+    const author = await createRequest(
+      constants.api.files.upload,
+      { method, body },
+      mergedProps
+    );
     return Promise.resolve(author);
   } catch (e) {
     return Promise.reject(e.message);

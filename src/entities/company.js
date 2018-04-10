@@ -9,7 +9,7 @@ let _baseOptions;
 
 // await hs.company.create({ name: 'Hubspot', no_of_employees: 1000 })
 
-const create = async (properties) => {
+const create = async properties => {
   try {
     const method = 'POST';
     const body = {
@@ -18,8 +18,11 @@ const create = async (properties) => {
         value: properties[key]
       }))
     };
-    const response = await createRequest(constants.api.company.create, { method, body },
-      _baseOptions);
+    const response = await createRequest(
+      constants.api.company.create,
+      { method, body },
+      _baseOptions
+    );
     return Promise.resolve(response);
   } catch (e) {
     return Promise.reject(e.message);
@@ -40,8 +43,11 @@ const update = async (companyId, properties) => {
       }))
     };
 
-    const response = await createRequest(constants.api.company.byId, { method, body, companyId },
-      _baseOptions);
+    const response = await createRequest(
+      constants.api.company.byId,
+      { method, body, companyId },
+      _baseOptions
+    );
 
     return Promise.resolve(response);
   } catch (e) {
@@ -49,7 +55,7 @@ const update = async (companyId, properties) => {
   }
 };
 
-const batchUpdate = async (options) => {
+const batchUpdate = async options => {
   // FIXME: Implement this
   try {
     const method = 'POST';
@@ -64,66 +70,93 @@ const batchUpdate = async (options) => {
       };
     });
 
-    await createRequest(constants.api.company.batchUpdate, { method, body },
-      _baseOptions);
+    await createRequest(
+      constants.api.company.batchUpdate,
+      { method, body },
+      _baseOptions
+    );
     return Promise.resolve({ msg: 'Successfully updated company properties' });
   } catch (e) {
     return Promise.reject(e);
   }
 };
 
-const deleteCompany = async (companyId) => {
+const deleteCompany = async companyId => {
   try {
     const method = 'DELETE';
-    const response = await createRequest(constants.api.company.byId, { method, companyId },
-      _baseOptions);
+    const response = await createRequest(
+      constants.api.company.byId,
+      { method, companyId },
+      _baseOptions
+    );
     return Promise.resolve(response);
   } catch (e) {
     return Promise.reject(e.message);
   }
 };
 
-const getAll = async (props) => {
+const getAll = async props => {
   try {
     const method = 'GET';
     const passedProps = props || {};
     const { limit, offset, properties, propertiesWithHistory } = passedProps;
-    let mergedProps = Object.assign({}, defaults, _baseOptions, { limit, offset, properties, propertiesWithHistory });
+    let mergedProps = Object.assign({}, defaults, _baseOptions, {
+      limit,
+      offset,
+      properties,
+      propertiesWithHistory
+    });
     mergedProps = sanitizeObject(mergedProps);
     // console.log(mergedProps);
     // return Promise.resolve();
 
-    const companies = await createRequest(constants.api.company.byId, { method, companyId: 'paged' }, mergedProps);
+    const companies = await createRequest(
+      constants.api.company.byId,
+      { method, companyId: 'paged' },
+      mergedProps
+    );
     return Promise.resolve(companies);
   } catch (e) {
     return Promise.reject(e.message);
   }
 };
 
-const getRecentlyModified = async (props) => {
+const getRecentlyModified = async props => {
   try {
     const method = 'GET';
     const passedProps = props || {};
     const { offset, count } = passedProps;
-    let mergedProps = Object.assign({}, defaults, _baseOptions, { offset, count });
+    let mergedProps = Object.assign({}, defaults, _baseOptions, {
+      offset,
+      count
+    });
     mergedProps = sanitizeObject(mergedProps);
-    const companies = await createRequest(constants.api.company.byId, { method, companyId: 'recent/modified' },
-      mergedProps);
+    const companies = await createRequest(
+      constants.api.company.byId,
+      { method, companyId: 'recent/modified' },
+      mergedProps
+    );
     return Promise.resolve(companies);
   } catch (e) {
     return Promise.reject(e.message);
   }
 };
 
-const getRecentlyCreated = async (props) => {
+const getRecentlyCreated = async props => {
   try {
     const method = 'GET';
     const passedProps = props || {};
     const { offset, count } = passedProps;
-    let mergedProps = Object.assign({}, defaults, _baseOptions, { offset, count });
+    let mergedProps = Object.assign({}, defaults, _baseOptions, {
+      offset,
+      count
+    });
     mergedProps = sanitizeObject(mergedProps);
-    const companies = await createRequest(constants.api.company.byId, { method, companyId: 'recent/created' },
-      mergedProps);
+    const companies = await createRequest(
+      constants.api.company.byId,
+      { method, companyId: 'recent/created' },
+      mergedProps
+    );
     return Promise.resolve(companies);
   } catch (e) {
     return Promise.reject(e.message);
@@ -134,14 +167,10 @@ const byDomain = async (domain, props) => {
   try {
     const method = 'POST';
     const passedProps = props || {};
-    let { limit, properties, offset } = passedProps;
+    const { limit } = passedProps;
+    let { properties, offset } = passedProps;
     if (!properties) {
-      properties = [
-        'domain',
-        'createdate',
-        'name',
-        'hs_lastmodifieddate'
-      ];
+      properties = ['domain', 'createdate', 'name', 'hs_lastmodifieddate'];
     }
     if (!offset) {
       offset = 0;
@@ -159,7 +188,11 @@ const byDomain = async (domain, props) => {
     let mergedProps = Object.assign({}, defaults, _baseOptions);
     mergedProps = sanitizeObject(mergedProps);
     // return Promise.resolve(JSON.stringify(body));
-    const companies = await createRequest(constants.api.company.byDomain, { method, domain, body }, mergedProps);
+    const companies = await createRequest(
+      constants.api.company.byDomain,
+      { method, domain, body },
+      mergedProps
+    );
     return Promise.resolve(companies);
   } catch (e) {
     return Promise.reject(e.message);

@@ -7,7 +7,11 @@ let _baseOptions;
 const getRecentlyCreated = async (opts = {}) => {
   try {
     const mergedProps = Object.assign({}, defaults, _baseOptions, opts);
-    const recentlyCreatedDeals = await createRequest(constants.api.deals.recentlyCreated, { }, mergedProps);
+    const recentlyCreatedDeals = await createRequest(
+      constants.api.deals.recentlyCreated,
+      {},
+      mergedProps
+    );
     return Promise.resolve(recentlyCreatedDeals);
   } catch (e) {
     return Promise.reject(e.message);

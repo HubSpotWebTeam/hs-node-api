@@ -10,20 +10,28 @@ const createWorkflow = async (opts = {}) => {
     const body = Object.assign({}, opts);
     const method = 'POST';
 
-    const workflowInfo = await createRequest(constants.api.workflows.create, { method, body }, mergedProps);
+    const workflowInfo = await createRequest(
+      constants.api.workflows.create,
+      { method, body },
+      mergedProps
+    );
     return Promise.resolve(workflowInfo);
   } catch (e) {
     return Promise.reject(e.message);
   }
 };
 
-const getWorkflow = async (id) => {
+const getWorkflow = async id => {
   try {
     const mergedProps = Object.assign({}, defaults, _baseOptions);
     if (!id) {
       throw new Error('getWorkflow requires an `id` argument');
     }
-    const workflowInfo = await createRequest(constants.api.workflows.get, { id }, mergedProps);
+    const workflowInfo = await createRequest(
+      constants.api.workflows.get,
+      { id },
+      mergedProps
+    );
     return Promise.resolve(workflowInfo);
   } catch (e) {
     return Promise.reject(e.message);
@@ -37,10 +45,16 @@ const updateWorkflow = async (opts = {}) => {
     const method = 'PUT';
     const { id, portalId } = opts;
     if (!id || !portalId) {
-      throw new Error('Workflow payload requires an `id` and `portalId` property');
+      throw new Error(
+        'Workflow payload requires an `id` and `portalId` property'
+      );
     }
 
-    const workflowInfo = await createRequest(constants.api.workflows.get, { method, body, id }, mergedProps);
+    const workflowInfo = await createRequest(
+      constants.api.workflows.get,
+      { method, body, id },
+      mergedProps
+    );
     return Promise.resolve(workflowInfo);
   } catch (e) {
     return Promise.reject(e.message);
