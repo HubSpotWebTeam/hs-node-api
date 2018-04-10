@@ -82,10 +82,10 @@ export default function contacts(baseOptions) {
     }
   };
 
-  const batchUpdateContacts = async options => {
+  const batchUpdateContacts = async contactsToUpdate => {
     try {
       const method = 'POST';
-      const body = options.map(contact => {
+      const body = contactsToUpdate.map(contact => {
         const contactType = /@/i.test(contact.id) ? 'email' : 'vid';
         const properties = Object.keys(contact.updates).map(i => ({
           property: i,
@@ -109,7 +109,7 @@ export default function contacts(baseOptions) {
     }
   };
 
-  const deleteContact = async ({ vid }) => {
+  const deleteContact = async vid => {
     try {
       const method = 'DELETE';
       await createRequest(
@@ -175,6 +175,18 @@ export default function contacts(baseOptions) {
      * @returns {Promise}
      */
     getByEmail,
+    /**
+     * Get contact by UTK (user token)
+     * @async
+     * @memberof hs/contacts
+     * @method getByUtk
+     * @param {string} utk The utk (User token) of the contact
+     * @param {object} properties Optional extra properties to add to the request - see https://developers.hubspot.com/docs/methods/contacts/get_contact
+     * @example
+     * const hs = new HubspotClient(props);
+     * const response = hs.contacts.getByUtk('jdalksjd82739jaskdksadjhkds')
+     * @returns {Promise}
+     */
     getByUtk,
     /**
      * Create or update a contact
@@ -192,7 +204,58 @@ export default function contacts(baseOptions) {
      * @returns {Promise}
      */
     createOrUpdateContact,
+    /**
+     * Batch update a set of contacts
+     * @async
+     * @memberof hs/contacts
+     * @method batchUpdateContacts
+     * @param {array} contactsToUpdate Array of contact updates, see example below
+     * @example
+     * const hs = new HubspotClient(props);
+     * const response = hs.contacts.batchUpdateContacts([{
+         id: 129838129313,
+         updates: {
+           email: 'sdjfhksdjf@boo.com',
+           phone_no: '9128301982312'
+         }
+       },
+       {
+         id: 2319082301823,
+         updates: {
+           email: 'skdjflkjsfdsfs@boo.com',
+           phone_no: '1293801293801923'
+         }
+       },
+       {
+         id: 271263871623,
+         updates: {
+           email: 'mxcxmncvmxc@boo.com',
+           phone_no: '01823981023'
+         }
+       },
+       {
+         id: 127361287312,
+         updates: {
+           email: 'yqeuyiqwuyeiquwey@boo.com',
+           phone_no: '127398172398123'
+         }
+       }
+       // .....
+     ]);
+     * @returns {Promise}
+     */
     batchUpdateContacts,
+    /**
+     * Remove a contact
+     * @async
+     * @memberof hs/contacts
+     * @method deleteContact
+     * @param {number} id Id of contact to remove
+     * @example
+     * const hs = new HubspotClient(props);
+     * const response = hs.contacts.deleteContact(82739182731);
+     * @returns {Promise}
+     */
     deleteContact,
     getContacts,
     search
