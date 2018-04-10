@@ -257,7 +257,19 @@ export default function contacts(baseOptions) {
      * @returns {Promise}
      */
     deleteContact,
+    /**
+     * Get all contacts
+     * @async
+     * @memberof hs/contacts
+     * @method getContacts
+     * @param {object} options Additional options & filters to apply
+     * @example
+     * const hs = new HubspotClient(props);
+     * const response = hs.contacts.getContacts({ limit: 25 });
+     * @returns {Promise}
+     */
     getContacts,
-    search
+    search, // Unimplemented
+    mergeContacts // Unimplemented
   };
 }

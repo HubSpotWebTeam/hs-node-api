@@ -15,7 +15,6 @@ describe('Blog Post List', async () => {
     expect(objects)
       .to.be.an('array')
       .and.has.lengthOf.above(1);
-    return Promise.resolve();
   });
 
   it('returns a valid blog post list response with a limit set', async () => {
@@ -26,7 +25,6 @@ describe('Blog Post List', async () => {
     expect(objects)
       .to.be.an('array')
       .and.has.lengthOf(limit);
-    return Promise.resolve();
   });
 
   it('returns a valid blog post list response with only archived posts', async () => {
@@ -36,10 +34,7 @@ describe('Blog Post List', async () => {
     expect(objects)
       .to.be.an('array')
       .and.has.lengthOf(2);
-    return Promise.resolve();
   });
-
-  return Promise.resolve();
 });
 
 describe('Blog authors', async () => {
@@ -51,23 +46,5 @@ describe('Blog authors', async () => {
     expect(objects)
       .to.be.an('array')
       .and.has.lengthOf.above(0);
-    return Promise.resolve();
   });
-
-  return Promise.resolve();
-});
-
-describe('Contacts', async () => {
-  it('returns a valid contact response', async () => {
-    const responses = await hs.contacts.getContacts();
-    const { contacts, 'has-more': hasMore, 'vid-offset': offset } = responses;
-    expect(hasMore).to.be.a('boolean');
-    expect(offset).to.be.a('number');
-    expect(contacts)
-      .to.be.an('array')
-      .and.has.lengthOf.above(0);
-    return Promise.resolve();
-  });
-
-  return Promise.resolve();
 });
