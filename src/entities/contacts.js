@@ -69,7 +69,7 @@ export default function contacts(baseOptions) {
           value: obj[key]
         }))
       };
-      const contact = await createRequest(
+      await createRequest(
         constants.api.contacts.createContact,
         { method, body, email },
         baseOptions
@@ -109,8 +109,20 @@ export default function contacts(baseOptions) {
     }
   };
 
-  const deleteContact = async options => {
-    // FIXME: Implement this
+  const deleteContact = async ({ vid }) => {
+    try {
+      const method = 'DELETE';
+      await createRequest(
+        constants.api.contacts.deleteById,
+        { method, vid },
+        baseOptions
+      );
+      return Promise.resolve({
+        msg: `Successfully delete contact details for ${vid}`
+      });
+    } catch (e) {
+      return Promise.reject(e);
+    }
   };
 
   const getContacts = async options => {

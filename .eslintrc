@@ -20,7 +20,8 @@
     "complexity": "off",
     "comma-spacing": "off",
     "array-bracket-spacing": "off",
-    "max-len": 0
+    "max-len": 0,
+    "no-unused-vars": "warn"
   },
   "globals": {
     "$": true,

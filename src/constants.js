@@ -63,6 +63,7 @@ export default {
     },
     contacts: {
       getAll: `${defaultApiHost}/contacts/v1/lists/all/contacts/all`,
+      deleteById: `${defaultApiHost}/contacts/v1/contact/vid/{vid}`,
       byId: `${defaultApiHost}/contacts/v1/contact/vid/{vid}/profile`,
       byEmail: `${defaultApiHost}/contacts/v1/contact/email/{email}/profile`,
       byUtk: `${defaultApiHost}/contacts/v1/contact/utk/{utk}/profile`,

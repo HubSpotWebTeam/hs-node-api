@@ -1,8 +1,46 @@
-import interpolate from 'interpolate';
 import qs from 'querystring';
 import request from 'request-promise';
 
-const debug = require('debug')('hs-api:utilities');
+const debugApp = require('debug')('hs-api:utilities');
+
+const interpolate = (template, data, opts = {}) => {
+  // For escaping strings to go in regex
+  const regexEscape = /([$^\\/()|?+*[\]{}.-])/g;
+  const delimiter = opts.delimiter || '{}';
+  const delLen = delimiter.length;
+  const lDelLen = Math.ceil(delLen / 2);
+  // escape delimiters for regex
+  const lDel = delimiter.substr(0, lDelLen).replace(regexEscape, '\\$1');
+  const rDel =
+    delimiter.substr(lDelLen, delLen).replace(regexEscape, '\\$1') || lDel;
+
+  // construct the new regex
+  const regex = new RegExp(`${lDel}[^${lDel}${rDel}]+${rDel}`, 'g');
+
+  return template.replace(regex, placeholder => {
+    const key = placeholder.slice(lDelLen, -lDelLen);
+    const keyParts = key.split('.');
+    let val;
+    let i = 0;
+    const len = keyParts.length;
+
+    if (key in data) {
+      // need to be backwards compatible with "flattened" data.
+      val = data[key];
+    } else {
+      // look up the chain
+      val = data;
+      for (; i < len; i++) {
+        if (keyParts[i] in val) {
+          val = val[keyParts[i]];
+        } else {
+          return placeholder;
+        }
+      }
+    }
+    return val;
+  });
+};
 
 export default async function createRequest(uri, options, props) {
   try {
@@ -17,7 +55,7 @@ export default async function createRequest(uri, options, props) {
 
     const url = `${interpolate(uri, options)}?${qs.stringify(properties)}`;
     const method = options.method || 'GET';
-    debug(`${method}: ${url}`);
+    debugApp(`${method}: ${url}`);
     const headers = {};
     const timeout = 30000;
     const json = options.body || true;
