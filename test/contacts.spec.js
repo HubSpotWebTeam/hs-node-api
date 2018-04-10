@@ -10,7 +10,7 @@ describe('Contacts', async () => {
   it('returns a valid contact response', async () => {
     const responses = await hs.contacts.getContacts();
     const { contacts, 'has-more': hasMore, 'vid-offset': offset } = responses;
-    expect(hasMore).to.be.a('string');
+    expect(hasMore).to.be.a('boolean');
     expect(offset).to.be.a('number');
     expect(contacts)
       .to.be.an('array')
