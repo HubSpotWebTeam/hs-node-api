@@ -69,7 +69,36 @@ export default function domainsApi(baseOptions) {
   _baseOptions = baseOptions;
 
   return {
+    /**
+     * Get all domains for a portal
+     * @async
+     * @memberof hs/domains
+     * @method getDomains
+     * @param {object} opts
+     * @example
+     * const hs = new HubspotClient(props);
+     * const response = hs.domains.getDomains(opts);
+     * @property {int} opts.limit
+     * @property {int} opts.offset
+     * @property {int} opts.id
+     * @property {string} opts.domain
+     * @property {boolean} opts.is_resolving
+     * @property {int} opts.created
+     * @property {string} opts.primary_site_page
+     * @returns {Promise}
+     */
     getDomains,
+    /**
+     * Get domain by ID
+     * @async
+     * @memberof hs/domains
+     * @method getDomain
+     * @param {int} domainId
+     * @example
+     * const hs = new HubspotClient(props);
+     * const response = hs.domains.getDomain(domainId);
+     * @returns {Promise}
+     */
     getDomain
   };
 }
