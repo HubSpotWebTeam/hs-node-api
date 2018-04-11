@@ -152,6 +152,189 @@ const getPageById = async id => {
   }
 };
 
+const updateAutosaveBuffer = async (opts = {}) => {
+  try {
+    const {
+      id,
+      campaign,
+      campaign_name,
+      footer_html,
+      head_html,
+      is_draft,
+      meta_description,
+      meta_keywords,
+      name,
+      password,
+      publish_date,
+      publish_immediately,
+      slug,
+      subcategory,
+      widget_containers,
+      widgets
+    } = opts;
+
+    if (!id) {
+      throw new Error('No page ID specified');
+    }
+    const mergedProps = Object.assign({}, defaults, _baseOptions);
+    const body = {
+      campaign,
+      campaign_name,
+      footer_html,
+      head_html,
+      is_draft,
+      meta_description,
+      meta_keywords,
+      name,
+      password,
+      publish_date,
+      publish_immediately,
+      slug,
+      subcategory,
+      widget_containers,
+      widgets
+    };
+    const method = 'PUT';
+    const buffer = await createRequest(
+      constants.api.pages.buffer,
+      { id, method, body },
+      mergedProps
+    );
+    return Promise.resolve(buffer);
+  } catch (e) {
+    return Promise.reject(e.message);
+  }
+};
+
+const getPageAutosaveBuffer = async id => {
+  try {
+    const mergedProps = Object.assign({}, defaults, _baseOptions);
+    const buffer = await createRequest(
+      constants.api.pages.buffer,
+      { id },
+      mergedProps
+    );
+    return Promise.resolve(buffer);
+  } catch (e) {
+    return Promise.reject(e.message);
+  }
+};
+
+const clonePage = async id => {
+  try {
+    const mergedProps = Object.assign({}, defaults, _baseOptions);
+    const method = 'POST';
+    await createRequest(constants.api.pages.clone, { id, method }, mergedProps);
+    return Promise.resolve({ cloned: true });
+  } catch (e) {
+    return Promise.reject(e.message);
+  }
+};
+
+const hasBufferedChanges = async id => {
+  try {
+    const mergedProps = Object.assign({}, defaults, _baseOptions);
+    const bufferedChanges = await createRequest(
+      constants.api.pages.bufferedChanges,
+      { id },
+      mergedProps
+    );
+    return Promise.resolve(bufferedChanges);
+  } catch (e) {
+    return Promise.reject(e.message);
+  }
+};
+
+const doPublishAction = async (id, action) => {
+  try {
+    const mergedProps = Object.assign({}, defaults, _baseOptions);
+    const body = { action };
+    const method = 'POST';
+
+    await createRequest(
+      constants.api.pages.publishAction,
+      { id, method, body },
+      mergedProps
+    );
+    return Promise.resolve({ success: true, action });
+  } catch (e) {
+    return Promise.reject(e.message);
+  }
+};
+
+const pushBufferLive = async id => {
+  try {
+    const mergedProps = Object.assign({}, defaults, _baseOptions);
+    await createRequest(
+      constants.api.pages.pushBufferLive,
+      { id, method: 'POST' },
+      mergedProps
+    );
+    return Promise.resolve({ success: true });
+  } catch (e) {
+    return Promise.reject(e.message);
+  }
+};
+
+const restoreDeleted = async id => {
+  try {
+    const mergedProps = Object.assign({}, defaults, _baseOptions);
+    await createRequest(
+      constants.api.pages.restoreDeleted,
+      { id, method: 'POST' },
+      mergedProps
+    );
+    return Promise.resolve({ success: true });
+  } catch (e) {
+    return Promise.reject(e.message);
+  }
+};
+
+const validatePageAutoSaveBuffer = async id => {
+  try {
+    const mergedProps = Object.assign({}, defaults, _baseOptions);
+    await createRequest(
+      constants.api.pages.validateBuffer,
+      { id, method: 'POST' },
+      mergedProps
+    );
+    return Promise.resolve({ success: true });
+  } catch (e) {
+    return Promise.reject(e.message);
+  }
+};
+
+const getPageVersions = async id => {
+  try {
+    const mergedProps = Object.assign({}, defaults, _baseOptions);
+    const versions = await createRequest(
+      constants.api.pages.versions,
+      { id },
+      mergedProps
+    );
+    return Promise.resolve(versions);
+  } catch (e) {
+    return Promise.reject(e.message);
+  }
+};
+
+const restorePageVersion = async (id, version_id) => {
+  try {
+    const mergedProps = Object.assign({}, defaults, _baseOptions);
+    const body = { version_id };
+    const method = 'POST';
+
+    const versions = await createRequest(
+      constants.api.pages.restoreVersion,
+      { id, body, method },
+      mergedProps
+    );
+    return Promise.resolve(versions);
+  } catch (e) {
+    return Promise.reject(e.message);
+  }
+};
+
 export default function pagesApi(baseOptions) {
   _baseOptions = baseOptions;
 
@@ -213,11 +396,11 @@ export default function pagesApi(baseOptions) {
      * Remove a page
      * @async
      * @memberof hs/pages
-     * @method deletPage
+     * @method deletePage
      * @param {int} id
      * @example
      * const hs = new HubspotClient(props);
-     * const events = hs.pages.deletPage(id)
+     * const events = hs.pages.deletePage(id)
      * @returns {Promise}
      */
     deletePage,
@@ -232,6 +415,143 @@ export default function pagesApi(baseOptions) {
      * const events = hs.pages.getPageById(id)
      * @returns {Promise}
      */
-    getPageById
+    getPageById,
+    /**
+     * Update the autosave buffer for a page
+     * @async
+     * @memberof hs/pages
+     * @method updateAutosaveBuffer
+     * @param {object} opts
+     * @example
+     * const hs = new HubspotClient(props);
+     * const events = hs.pages.updateAutosaveBuffer(opts)
+     * @property {string} opts.campaign
+     * @property {string} opts.campaign_name
+     * @property {string} opts.footer_html
+     * @property {string} opts.head_html
+     * @property {boolean} opts.is_draft
+     * @property {string} opts.meta_description
+     * @property {string} opts.meta_keywords
+     * @property {string} opts.name
+     * @property {string} opts.password
+     * @property {long} opts.publish_date
+     * @property {boolean} opts.publish_immediately
+     * @property {string} opts.slug
+     * @property {string} opts.subcategory
+     * @property {string} opts.widget_containers
+     * @property {string} opts.widgets
+     * @returns {Promise}
+     */
+    updateAutosaveBuffer,
+    /**
+     * Retrieve page autosave buffer contents
+     * @async
+     * @memberof hs/pages
+     * @method getPageAutosaveBuffer
+     * @param {int} pageId
+     * @example
+     * const hs = new HubspotClient(props);
+     * const events = hs.pages.getPageAutosaveBuffer(pageId)
+     * @returns {Promise}
+     */
+    getPageAutosaveBuffer,
+    /**
+     * Clones a page
+     * @async
+     * @memberof hs/pages
+     * @method clonePage
+     * @param {int} id
+     * @example
+     * const hs = new HubspotClient(props);
+     * const events = hs.pages.clonePage(id)
+     * @returns {Promise}
+     */
+    clonePage,
+    /**
+     * Determine if the auto-save buffer differs from the live page
+     * @async
+     * @memberof hs/pages
+     * @method hasBufferedChanges
+     * @param {int} pageId
+     * @example
+     * const hs = new HubspotClient(props);
+     * const events = hs.pages.hasBufferedChanges(pageId)
+     * @returns {Promise}
+     */
+    hasBufferedChanges,
+    /**
+     * Carries out a publish action with the current page. Check out {@link https://developers.hubspot.com/docs/methods/pages/post_pages_page_id_publish_action|the developer docs} for further info.
+     * @async
+     * @memberof hs/pages
+     * @method doPublishAction
+     * @param {int} pageId
+     * @param {string} publishAction One of `push-buffer-live`, `schedule-publish` or `cancel-publish`
+     * @example
+     * const hs = new HubspotClient(props);
+     * const events = hs.pages.doPublishAction(pageId, publishAction)
+     * @returns {Promise}
+     */
+    doPublishAction,
+    /**
+     * Copies the contents of the auto-save buffer into the live Page
+     * @async
+     * @memberof hs/pages
+     * @method pushBufferLive
+     * @param {int} id
+     * @example
+     * const hs = new HubspotClient(props);
+     * const events = hs.pages.pushBufferLive(id)
+     * @returns {Promise}
+     */
+    pushBufferLive,
+    /**
+     * Restores a previously deleted Page
+     * @async
+     * @memberof hs/pages
+     * @method restoreDeleted
+     * @param {int} id
+     * @example
+     * const hs = new HubspotClient(props);
+     * const events = hs.pages.restoreDeleted(id)
+     * @returns {Promise}
+     */
+    restoreDeleted,
+    /**
+     * Validates the auto-save buffer version of the Page
+     * @async
+     * @memberof hs/pages
+     * @method validatePageAutoSaveBuffer
+     * @param {int} id
+     * @example
+     * const hs = new HubspotClient(props);
+     * const events = hs.pages.validatePageAutoSaveBuffer(id)
+     * @returns {Promise}
+     */
+    validatePageAutoSaveBuffer,
+    /**
+     * List previous versions of a Page
+     * @async
+     * @memberof hs/pages
+     * @method getPageVersions
+     * @param {int} id
+     * @example
+     * const hs = new HubspotClient(props);
+     * const events = hs.pages.getPageVersions(id)
+     * @returns {Promise}
+     */
+    getPageVersions,
+    /**
+     * Restore a previous version of a Page
+     * @async
+     * @memberof hs/pages
+     * @method restorePageVersion
+     * @param {int} pageId
+     * @param {int} versionId
+     * @example
+     * const hs = new HubspotClient(props);
+     * const events = hs.pages.restorePageVersion(pageId, versionId)
+     * @returns {Promise}
+     */
+    restorePageVersion
   };
 }

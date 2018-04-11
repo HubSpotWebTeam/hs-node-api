@@ -5,7 +5,16 @@ export default {
     pages: {
       create: `${defaultApiHost}/content/api/v2/pages`,
       byId: `${defaultApiHost}/content/api/v2/pages/{id}`,
-      list: `${defaultApiHost}/content/api/v2/pages`
+      clone: `${defaultApiHost}/content/api/v2/pages/{id}/clone`,
+      list: `${defaultApiHost}/content/api/v2/pages`,
+      buffer: `${defaultApiHost}/content/api/v2/pages/{id}/buffer`,
+      bufferedChanges: `${defaultApiHost}/content/api/v2/pages/{id}/has-buffered-changes`,
+      publishAction: `${defaultApiHost}/content/api/v2/pages/{id}/publish-action`,
+      pushBufferLive: `${defaultApiHost}/content/api/v2/pages/{id}/push-buffer-live`,
+      restoreDeleted: `${defaultApiHost}/content/api/v2/pages/{id}/restore-deleted`,
+      validateBuffer: `${defaultApiHost}/content/api/v2/pages/{id}/validate-buffer`,
+      versions: `${defaultApiHost}/content/api/v2/pages/{id}/versions`,
+      restoreVersion: `${defaultApiHost}/content/api/v2/pages/{id}/versions/restore`
     },
     deals: {
       recentlyCreated: `${defaultApiHost}/deals/v1/deal/recent/created`
