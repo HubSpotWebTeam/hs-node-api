@@ -95,7 +95,7 @@ export default function layoutsApi(baseOptions) {
      * @property {int} opts.created
      * @property {int} opts.deleted_at
      * @property {int} opts.id
-     * @property {string} opts.label
+     * @property {string} opts.label Find layouts matching this label.
      * @property {string} opts.path
      * @property {string} opts.custom_head
      * @property {boolean} opts.include_default_custom_css

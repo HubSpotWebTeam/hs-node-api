@@ -10,6 +10,7 @@ import formsApi from './entities/forms';
 import socialApi from './entities/social';
 import emailEventsApi from './entities/email-events';
 import dealsApi from './entities/deals';
+import pagesApi from './entities/pages';
 
 /** HubSpotClient class */
 class HubSpotClient {
@@ -43,10 +44,10 @@ class HubSpotClient {
     Object.assign(this, { props });
   }
   /**
-  * Get an object representing calendar API
-  * @namespace hs/calendar
-  * @type {object}
-  */
+   * Get an object representing calendar API
+   * @namespace hs/calendar
+   * @type {object}
+   */
   get calendar() {
     return calendarApi(this.props);
   }
@@ -93,6 +94,10 @@ class HubSpotClient {
   /** @namespace hs/emailEvents */
   get deals() {
     return dealsApi(this.props);
+  }
+  /** @namespace hs/pages */
+  get pages() {
+    return pagesApi(this.props);
   }
 }
 

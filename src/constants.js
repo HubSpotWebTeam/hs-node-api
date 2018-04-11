@@ -2,6 +2,11 @@ const defaultApiHost = process.env.COS_API_HOST || 'https://api.hubapi.com';
 
 export default {
   api: {
+    pages: {
+      create: `${defaultApiHost}/content/api/v2/pages`,
+      byId: `${defaultApiHost}/content/api/v2/pages/{id}`,
+      list: `${defaultApiHost}/content/api/v2/pages`
+    },
     deals: {
       recentlyCreated: `${defaultApiHost}/deals/v1/deal/recent/created`
     },
