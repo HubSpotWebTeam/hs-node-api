@@ -6,7 +6,13 @@ let _baseOptions;
 
 const getRecentlyCreated = async (opts = {}) => {
   try {
-    const mergedProps = Object.assign({}, defaults, _baseOptions, opts);
+    const { count, offset, since, includePropertyVersions } = opts;
+    const mergedProps = Object.assign({}, defaults, _baseOptions, {
+      count,
+      offset,
+      since,
+      includePropertyVersions
+    });
     const recentlyCreatedDeals = await createRequest(
       constants.api.deals.recentlyCreated,
       {},
@@ -22,6 +28,21 @@ export default function workflows(baseOptions) {
   _baseOptions = baseOptions;
 
   return {
+    /**
+     * Get recently created deals
+     * @async
+     * @memberof hs/deals
+     * @method getRecentlyCreated
+     * @param {object} opts
+     * @example
+     * const hs = new HubspotClient(props);
+     * const response = hs.deals.getRecentlyCreated(opts);
+     * @property {int} opts.count
+     * @property {int} opts.offset
+     * @property {int} opts.since
+     * @property {boolean} opts.includePropertyVersions
+     * @returns {Promise}
+     */
     getRecentlyCreated
   };
 }
