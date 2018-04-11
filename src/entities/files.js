@@ -39,7 +39,7 @@ const uploadFile = async (opts = {}) => {
   }
 };
 
-export default function files(baseOptions) {
+export default function filesApi(baseOptions) {
   _baseOptions = baseOptions;
 
   return {
