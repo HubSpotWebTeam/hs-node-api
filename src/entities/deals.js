@@ -36,7 +36,7 @@ export default function workflows(baseOptions) {
      * @param {object} opts
      * @example
      * const hs = new HubspotClient(props);
-     * const response = hs.deals.getRecentlyCreated(opts);
+     * hs.deals.getRecentlyCreated(opts).then(response => console.log(response));
      * @property {int} opts.count
      * @property {int} opts.offset
      * @property {int} opts.since

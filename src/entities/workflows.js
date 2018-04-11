@@ -73,7 +73,7 @@ export default function workflows(baseOptions) {
      * @param {int} workflowId
      * @example
      * const hs = new HubspotClient(props);
-     * const response = hs.workflows.getWorkflow(workflowId);
+     * hs.workflows.getWorkflow(workflowId).then(response => console.log(response));
      * @returns {Promise}
      */
     getWorkflow,
@@ -85,7 +85,7 @@ export default function workflows(baseOptions) {
      * @param {object} workflowBody See https://developers.hubspot.com/docs/methods/workflows/v3/create_workflow for examples of workflow JSON
      * @example
      * const hs = new HubspotClient(props);
-     * const response = hs.workflows.createWorkflow(workflowBody);
+     * hs.workflows.createWorkflow(workflowBody).then(response => console.log(response));
      * @returns {Promise}
      */
     createWorkflow,
@@ -97,7 +97,7 @@ export default function workflows(baseOptions) {
      * @param {object} workflowBody See https://developers.hubspot.com/docs/methods/workflows/v3/create_workflow for examples of workflow JSON
      * @example
      * const hs = new HubspotClient(props);
-     * const response = hs.workflows.updateWorkflow(workflowBody);
+     * hs.workflows.updateWorkflow(workflowBody).then(response => console.log(response));
      * @property {int} opts.id The ID of the workflow you want to update.
      * @property {int} opts.portalId The ID of the portal that the workflow resides on
      * @returns {Promise}

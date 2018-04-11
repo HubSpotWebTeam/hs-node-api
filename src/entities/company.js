@@ -204,19 +204,19 @@ export default function calendar(baseOptions) {
 
   return {
     /**
-     * Create a company with properties
+     * Create a company with properties - see {@link https://developers.hubspot.com/docs/methods/companies/create_company|developer docs} for an example of the properties object.
      * @async
      * @memberof hs/company
      * @method create
      * @param {object} companyProperties An object containing company properties in key/value format. At least 1 property is required
      * @example
      * const hs = new HubspotClient(props);
-     * const response = hs.company.create({ name: 'Foobar' })
+     * hs.company.create({ name: 'Foobar' }).then(response => console.log(response))
      * @returns {Promise}
      */
     create,
     /**
-     * Update a company with properties
+     * Update a company with properties - see {@link https://developers.hubspot.com/docs/methods/companies/create_company|developer docs} for an example of the properties object.
      * @async
      * @memberof hs/company
      * @method update
@@ -224,12 +224,12 @@ export default function calendar(baseOptions) {
      * @param {object} companyProperties An object containing company properties in key/value format. At least 1 property is required
      * @example
      * const hs = new HubspotClient(props);
-     * const response = hs.company.update(companyId, companyProperties)
+     * hs.company.update(companyId, companyProperties).then(response => console.log(response))
      * @returns {Promise}
      */
     update,
     /**
-     * Update multiple companies with properties
+     * Update multiple companies with properties - see {@link https://developers.hubspot.com/docs/methods/companies/create_company|developer docs} for an example of the properties object.
      * @async
      * @memberof hs/company
      * @method batchUpdate
@@ -244,7 +244,7 @@ export default function calendar(baseOptions) {
      *    id: 5678,
      *    updates: { name: 'Blah blah', ownerId: 12341231 }
      * }];
-     * const response = hs.company.batchUpdate(updates)
+     * hs.company.batchUpdate(updates).then(response => console.log(response))
      * @returns {Promise}
      */
     batchUpdate,
@@ -256,7 +256,7 @@ export default function calendar(baseOptions) {
      * @param {number} companyId Id of company to delete
      * @example
      * const hs = new HubspotClient(props);
-     * const response = hs.company.delete(companyId);
+     * hs.company.delete(companyId).then(response => console.log(response));
      * @returns {Promise}
      */
     delete: deleteCompany,
@@ -268,7 +268,7 @@ export default function calendar(baseOptions) {
      * @param {object} pagingProperties Paging criteria for the current request
      * @example
      * const hs = new HubspotClient(props);
-     * const response = hs.company.getAll(pagingProperties)
+     * hs.company.getAll(pagingProperties).then(response => console.log(response))
      * @property {number} [pagingProperties.limit] - The number of records to return. Defaults to 100, has a maximum value of 250.
      * @property {number} [pagingProperties.offset] - Used to page through the results. If there are more records in your portal than the limit= parameter, you will need to use the offset returned in the first request to get the next set of results.
      * @property {array} [pagingProperties.properties] - Used to include specific company properties in the results.  By default, the results will only include the company ID, and will not include the values for any properties for your companies. Including this parameter will include the data for the specified property in the results.
@@ -284,7 +284,7 @@ export default function calendar(baseOptions) {
      * @param {object} pagingProperties Paging criteria for the current request
      * @example
      * const hs = new HubspotClient(props);
-     * const response = hs.company.getRecentlyModified({count: 5})
+     * hs.company.getRecentlyModified({count: 5}).then(response => console.log(response))
      * @property {number} [pagingProperties.count] - Specifies the number of companies to be returned.
      * @property {number} [pagingProperties.offset] - This is used to get the next page of results. Each request will return an offset in the response, and you'd use that offset in the URL of your next request to get the next page of results.
      * @returns {Promise}
@@ -298,7 +298,7 @@ export default function calendar(baseOptions) {
      * @param {object} pagingProperties Paging criteria for the current request
      * @example
      * const hs = new HubspotClient(props);
-     * const response = hs.company.getRecentlyCreated({count: 5})
+     * hs.company.getRecentlyCreated({count: 5}).then(response => console.log(response))
      * @property {number} [pagingProperties.count] - Specifies the number of companies to be returned.
      * @property {number} [pagingProperties.offset] - This is used to get the next page of results. Each request will return an offset in the response, and you'd use that offset in the URL of your next request to get the next page of results.
      * @returns {Promise}
@@ -313,7 +313,7 @@ export default function calendar(baseOptions) {
      * @param {object} pagingProperties Paging & property criteria for the current request
      * @example
      * const hs = new HubspotClient(props);
-     * const response = hs.company.byDomain('www.hubspot.com', {limit: 5, properties: ['name', 'createdate']})
+     * hs.company.byDomain('www.hubspot.com', {limit: 5, properties: ['name', 'createdate']}).then(response => console.log(response))
      * @property {number} [pagingProperties.limit] - The number of records to return in a single request. Supports values up to 100.
      * @property {number} [pagingProperties.offset=0] - Each response will include a hasMore value and an offset object. If hasMore is true, then you would use the offset object in the next request to get the next set of results.
      * @property {array} [pagingProperties.properties=["domain", "createdate", "name", "hs_lastmodifieddate"]] - An array of properties that will be included for the returned companies. By default, no properties will be included in the response, so you must specify any properties that you want.

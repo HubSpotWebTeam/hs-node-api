@@ -77,7 +77,7 @@ export default function domainsApi(baseOptions) {
      * @param {object} opts
      * @example
      * const hs = new HubspotClient(props);
-     * const response = hs.domains.getDomains(opts);
+     * hs.domains.getDomains(opts).then(response => console.log(response));
      * @property {int} opts.limit
      * @property {int} opts.offset
      * @property {int} opts.id
@@ -96,7 +96,7 @@ export default function domainsApi(baseOptions) {
      * @param {int} domainId
      * @example
      * const hs = new HubspotClient(props);
-     * const response = hs.domains.getDomain(domainId);
+     * hs.domains.getDomain(domainId).then(response => console.log(response));
      * @returns {Promise}
      */
     getDomain

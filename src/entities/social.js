@@ -59,7 +59,7 @@ export default function socialApi(baseOptions) {
      * @method getPublishingChannels
      * @example
      * const hs = new HubspotClient(props);
-     * const response = hs.social.getPublishingChannels();
+     * hs.social.getPublishingChannels().then(response => console.log(response));
      * @returns {Promise}
      */
     getPublishingChannels,
@@ -71,7 +71,7 @@ export default function socialApi(baseOptions) {
      * @param {object} opts
      * @example
      * const hs = new HubspotClient(props);
-     * const response = hs.social.createBroadcastMessage(opts);
+     * hs.social.createBroadcastMessage(opts).then(response => console.log(response));
      * @property {string} opts.channelGuid
      * @property {string} opts.status
      * @property {int} opts.triggerAt

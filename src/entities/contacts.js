@@ -159,7 +159,7 @@ export default function contacts(baseOptions) {
      * @param {object} properties Optional extra properties to add to the request - see https://developers.hubspot.com/docs/methods/contacts/get_contact
      * @example
      * const hs = new HubspotClient(props);
-     * const response = hs.contacts.getById(123412313)
+     * hs.contacts.getById(123412313).then(response => console.log(response))
      * @returns {Promise}
      */
     getById,
@@ -172,7 +172,7 @@ export default function contacts(baseOptions) {
      * @param {object} properties Optional extra properties to add to the request - see https://developers.hubspot.com/docs/methods/contacts/get_contact
      * @example
      * const hs = new HubspotClient(props);
-     * const response = hs.contacts.getByEmail('foo@bar.com')
+     * hs.contacts.getByEmail('foo@bar.com').then(response => console.log(response))
      * @returns {Promise}
      */
     getByEmail,
@@ -185,7 +185,7 @@ export default function contacts(baseOptions) {
      * @param {object} properties Optional extra properties to add to the request - see https://developers.hubspot.com/docs/methods/contacts/get_contact
      * @example
      * const hs = new HubspotClient(props);
-     * const response = hs.contacts.getByUtk('jdalksjd82739jaskdksadjhkds')
+     * hs.contacts.getByUtk('jdalksjd82739jaskdksadjhkds').then(response => console.log(response))
      * @returns {Promise}
      */
     getByUtk,
@@ -197,11 +197,11 @@ export default function contacts(baseOptions) {
      * @param {object} properties Key/value pair of properties to update. Note: `email` is a required key.
      * @example
      * const hs = new HubspotClient(props);
-     * const response = hs.contacts.createOrUpdateContact({
+     * hs.contacts.createOrUpdateContact({
      *  email: 'foo@bar.com',
      *  first_name: 'Foo',
      *  last_name: 'Bar'
-     * });
+     * }).then(response => console.log(response));
      * @returns {Promise}
      */
     createOrUpdateContact,
@@ -213,7 +213,7 @@ export default function contacts(baseOptions) {
      * @param {array} contactsToUpdate Array of contact updates, see example below
      * @example
      * const hs = new HubspotClient(props);
-     * const response = hs.contacts.batchUpdateContacts([{
+     * hs.contacts.batchUpdateContacts([{
          id: 129838129313,
          updates: {
            email: 'sdjfhksdjf@boo.com',
@@ -242,7 +242,7 @@ export default function contacts(baseOptions) {
          }
        }
        // .....
-     ]);
+     ]).then(response => console.log(response))
      * @returns {Promise}
      */
     batchUpdateContacts,
@@ -254,7 +254,7 @@ export default function contacts(baseOptions) {
      * @param {number} id Id of contact to remove
      * @example
      * const hs = new HubspotClient(props);
-     * const response = hs.contacts.deleteContact(82739182731);
+     * hs.contacts.deleteContact(82739182731).then(response => console.log(response));
      * @returns {Promise}
      */
     deleteContact,
@@ -266,7 +266,7 @@ export default function contacts(baseOptions) {
      * @param {object} options Additional options & filters to apply
      * @example
      * const hs = new HubspotClient(props);
-     * const response = hs.contacts.getContacts({ limit: 25 });
+     * hs.contacts.getContacts({ limit: 25 }).then(response => console.log(response));
      * @returns {Promise}
      */
     getContacts

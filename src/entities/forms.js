@@ -59,7 +59,7 @@ export default function domainsApi(baseOptions) {
      * @param {object} formFields Key/value pairs of form fields.
      * @example
      * const hs = new HubspotClient(props);
-     * const response = hs.forms.submitForm(portalId, formId, formFields);
+     * hs.forms.submitForm(portalId, formId, formFields).then(response => console.log(response));
      * @returns {Promise}
      */
     submitForm

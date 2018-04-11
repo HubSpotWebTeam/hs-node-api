@@ -229,7 +229,7 @@ export default function calendar(baseOptions) {
      * @param {object} eventProperties An object containing event properties to search for
      * @example
      * const hs = new HubspotClient(props);
-     * const events = hs.calendar.events(eventProperties)
+     * hs.calendar.events(eventProperties).then(response => console.log(response))
      * @property {number} eventProperties.startDate
      * @property {number} eventProperties.endDate
      * @property {number} [eventProperties.limit]
@@ -244,7 +244,7 @@ export default function calendar(baseOptions) {
      * @param {object} eventProperties An object containing event properties to search for
      * @example
      * const hs = new HubspotClient(props);
-     * const events = hs.calendar.contentEvents(eventProperties)
+     * hs.calendar.contentEvents(eventProperties).then(response => console.log(response))
      * @property {number} eventProperties.startDate
      * @property {number} eventProperties.endDate
      * @property {number} [eventProperties.limit]
@@ -259,7 +259,7 @@ export default function calendar(baseOptions) {
      * @param {object} eventProperties An object containing event properties to search for
      * @example
      * const hs = new HubspotClient(props);
-     * const events = hs.calendar.socialEvents(eventProperties)
+     * hs.calendar.socialEvents(eventProperties).then(response => console.log(response))
      * @property {number} eventProperties.startDate
      * @property {number} eventProperties.endDate
      * @property {number} [eventProperties.limit]
@@ -274,7 +274,7 @@ export default function calendar(baseOptions) {
      * @param {object} eventProperties An object containing event properties to search for
      * @example
      * const hs = new HubspotClient(props);
-     * const events = hs.calendar.taskEvents(eventProperties)
+     * hs.calendar.taskEvents(eventProperties).then(response => console.log(response))
      * @property {number} eventProperties.startDate
      * @property {number} eventProperties.endDate
      * @property {number} [eventProperties.limit]
@@ -289,7 +289,7 @@ export default function calendar(baseOptions) {
      * @param {object} taskProperties An object containing task properties to create
      * @example
      * const hs = new HubspotClient(props);
-     * const events = hs.calendar.createTask(taskProperties)
+     * hs.calendar.createTask(taskProperties).then(response => console.log(response))
      * @property {number} taskProperties.eventDate
      * @property {number} [taskProperties.eventType=PUBLISHING_TASK]
      * @property {number} taskProperties.category
@@ -312,7 +312,7 @@ export default function calendar(baseOptions) {
      * @param {number} taskId ID of task to retrieve
      * @example
      * const hs = new HubspotClient(props);
-     * const events = hs.calendar.getTask(taskId)
+     * hs.calendar.getTask(taskId).then(response => console.log(response))
      * @returns {Promise}
      */
     getTask,
@@ -325,7 +325,7 @@ export default function calendar(baseOptions) {
      * @param {object} taskProperties An object containing task properties to update
      * @example
      * const hs = new HubspotClient(props);
-     * const events = hs.calendar.updateTask(taskProperties)
+     * hs.calendar.updateTask(taskProperties).then(response => console.log(response))
      * @property {number} [taskProperties.eventDate]
      * @property {number} [taskProperties.eventType]
      * @property {number} [taskProperties.category]
@@ -346,7 +346,7 @@ export default function calendar(baseOptions) {
      * @param {number} taskId ID of task to delete
      * @example
      * const hs = new HubspotClient(props);
-     * const events = hs.calendar.deleteTask(taskId)
+     * hs.calendar.deleteTask(taskId).then(response => console.log(response))
      * @returns {Promise}
      */
     deleteTask

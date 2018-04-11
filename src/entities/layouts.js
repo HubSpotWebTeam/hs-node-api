@@ -88,7 +88,7 @@ export default function layoutsApi(baseOptions) {
      * @param {object} opts
      * @example
      * const hs = new HubspotClient(props);
-     * const response = hs.layouts.getLayouts(opts);
+     * hs.layouts.getLayouts(opts).then(response => console.log(response));
      * @property {int} opts.limit
      * @property {int} opts.offset
      * @property {int} opts.category_id
@@ -112,7 +112,7 @@ export default function layoutsApi(baseOptions) {
      * @param {int} layoutId
      * @example
      * const hs = new HubspotClient(props);
-     * const response = hs.layouts.getLayout(layoutId);
+     * hs.layouts.getLayout(layoutId).then(response => console.log(response));
      * @returns {Promise}
      */
     getLayout

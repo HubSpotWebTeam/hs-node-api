@@ -54,7 +54,7 @@ export default function emailEvents(baseOptions) {
      * @param {object} opts
      * @example
      * const hs = new HubspotClient(props);
-     * const response = hs.emailEvents.getCampaignsWithRecentActivity(opts);
+     * hs.emailEvents.getCampaignsWithRecentActivity(opts).then(response => console.log(response));
      * @property {int} opts.limit
      * @property {int} opts.offset
      * @returns {Promise}
@@ -69,7 +69,7 @@ export default function emailEvents(baseOptions) {
      * @param {int} appId The Application Id for the given email. Found in the get_campaigns endpoint.
      * @example
      * const hs = new HubspotClient(props);
-     * const response = hs.emailEvents.getCampaign(campaignId, appId);
+     * hs.emailEvents.getCampaign(campaignId, appId).then(response => console.log(response));
      * @returns {Promise}
      */
     getCampaign

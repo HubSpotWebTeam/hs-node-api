@@ -810,7 +810,7 @@ export default function blog(baseOptions) {
      * @param {object} opts
      * @example
      * const hs = new HubspotClient(props);
-     * const events = hs.blog.groupTopics(opts)
+     * hs.blog.groupTopics(opts).then(response => console.log(response))
      * @property {string} opts.groupedTopicName
      * @property {array<int>} opts.topicIds
      * @returns {Promise}
@@ -824,7 +824,7 @@ export default function blog(baseOptions) {
      * @param {object} opts
      * @example
      * const hs = new HubspotClient(props);
-     * const events = hs.blog.createComment(opts)
+     * hs.blog.createComment(opts).then(response => console.log(response))
      * @property {string} opts.comment
      * @property {int} opts.contentId
      * @property {int} opts.collectionId
@@ -846,7 +846,7 @@ export default function blog(baseOptions) {
      * @param {object} opts
      * @example
      * const hs = new HubspotClient(props);
-     * const events = hs.blog.createOrUpdatePost(opts)
+     * hs.blog.createOrUpdatePost(opts).then(response => console.log(response))
      * @property {int} opts.id
      * @property {int} opts.blog_author_id
      * @property {string} opts.campaign
@@ -877,7 +877,7 @@ export default function blog(baseOptions) {
      * @param {int} id
      * @example
      * const hs = new HubspotClient(props);
-     * const events = hs.blog.restoreDeletedComment(opts)
+     * hs.blog.restoreDeletedComment(opts).then(response => console.log(response))
      * @returns {Promise}
      */
     restoreDeletedComment,
@@ -889,7 +889,7 @@ export default function blog(baseOptions) {
      * @param {object} opts
      * @example
      * const hs = new HubspotClient(props);
-     * const events = hs.blog.createOrUpdateAuthor(opts)
+     * hs.blog.createOrUpdateAuthor(opts).then(response => console.log(response))
      * @property {int} opts.id
      * @property {string} opts.email
      * @property {string} opts.fullName
@@ -913,7 +913,7 @@ export default function blog(baseOptions) {
      * @param {object} opts
      * @example
      * const hs = new HubspotClient(props);
-     * const events = hs.blog.createOrUpdateTopic(opts)
+     * hs.blog.createOrUpdateTopic(opts).then(response => console.log(response))
      * @property {int} opts.id
      * @property {string} opts.name
      * @property {string} opts.description
@@ -928,7 +928,7 @@ export default function blog(baseOptions) {
      * @param {object} opts
      * @example
      * const hs = new HubspotClient(props);
-     * const events = hs.blog.clonePost(opts)
+     * hs.blog.clonePost(opts).then(response => console.log(response))
      * @property {int} opts.id
      * @property {string} opts.name
      * @returns {Promise}
@@ -942,7 +942,7 @@ export default function blog(baseOptions) {
      * @param {int} id
      * @example
      * const hs = new HubspotClient(props);
-     * const events = hs.blog.deleteAuthor(id)
+     * hs.blog.deleteAuthor(id).then(response => console.log(response))
      * @returns {Promise}
      */
     deleteAuthor,
@@ -954,7 +954,7 @@ export default function blog(baseOptions) {
      * @param {int} id
      * @example
      * const hs = new HubspotClient(props);
-     * const events = hs.blog.deleteComment(id)
+     * hs.blog.deleteComment(id).then(response => console.log(response))
      * @returns {Promise}
      */
     deleteComment,
@@ -966,7 +966,7 @@ export default function blog(baseOptions) {
      * @param {int} id
      * @example
      * const hs = new HubspotClient(props);
-     * const events = hs.blog.deletePost(id)
+     * hs.blog.deletePost(id).then(response => console.log(response))
      * @returns {Promise}
      */
     deletePost,
@@ -978,7 +978,7 @@ export default function blog(baseOptions) {
      * @param {int} id
      * @example
      * const hs = new HubspotClient(props);
-     * const events = hs.blog.deleteTopic(id)
+     * hs.blog.deleteTopic(id).then(response => console.log(response))
      * @returns {Promise}
      */
     deleteTopic,
@@ -990,7 +990,7 @@ export default function blog(baseOptions) {
      * @param {int} id
      * @example
      * const hs = new HubspotClient(props);
-     * const events = hs.blog.getAuthor(id)
+     * hs.blog.getAuthor(id).then(response => console.log(response))
      * @returns {Promise}
      */
     getAuthor,
@@ -1002,7 +1002,7 @@ export default function blog(baseOptions) {
      * @param {object} opts
      * @example
      * const hs = new HubspotClient(props);
-     * const events = hs.blog.getAuthors(id)
+     * hs.blog.getAuthors(id).then(response => console.log(response))
      * @property {string} opts.email
      * @property {int} opts.limit
      * @property {int} opts.offset
@@ -1022,7 +1022,7 @@ export default function blog(baseOptions) {
      * @param {int} id
      * @example
      * const hs = new HubspotClient(props);
-     * const events = hs.blog.getBlogById(id)
+     * hs.blog.getBlogById(id).then(response => console.log(response))
      * @returns {Promise}
      */
     getBlogById,
@@ -1034,7 +1034,7 @@ export default function blog(baseOptions) {
      * @param {int} id
      * @example
      * const hs = new HubspotClient(props);
-     * const events = hs.blog.getTopic(id)
+     * hs.blog.getTopic(id).then(response => console.log(response))
      * @returns {Promise}
      */
     getTopic,
@@ -1046,7 +1046,7 @@ export default function blog(baseOptions) {
      * @param {object} opts
      * @example
      * const hs = new HubspotClient(props);
-     * const events = hs.blog.getTopics(opts)
+     * hs.blog.getTopics(opts).then(response => console.log(response))
      * @property {int} opts.id
      * @property {string} opts.name
      * @property {int} opts.created
@@ -1064,7 +1064,7 @@ export default function blog(baseOptions) {
      * @param {int} id
      * @example
      * const hs = new HubspotClient(props);
-     * const events = hs.blog.getPostById(id)
+     * hs.blog.getPostById(id).then(response => console.log(response))
      * @returns {Promise}
      */
     getPostById,
@@ -1076,7 +1076,7 @@ export default function blog(baseOptions) {
      * @param {int} postId
      * @example
      * const hs = new HubspotClient(props);
-     * const events = hs.blog.getPostVersions(postId)
+     * hs.blog.getPostVersions(postId).then(response => console.log(response))
      * @returns {Promise}
      */
     getPostVersions,
@@ -1088,7 +1088,7 @@ export default function blog(baseOptions) {
      * @param {int} versionId
      * @example
      * const hs = new HubspotClient(props);
-     * const events = hs.blog.getPostVersionById(versionId)
+     * hs.blog.getPostVersionById(versionId).then(response => console.log(response))
      * @returns {Promise}
      */
     getPostVersionById,
@@ -1100,7 +1100,7 @@ export default function blog(baseOptions) {
      * @param {int} postId
      * @example
      * const hs = new HubspotClient(props);
-     * const events = hs.blog.getPostAutosaveBuffer(postId)
+     * hs.blog.getPostAutosaveBuffer(postId).then(response => console.log(response))
      * @returns {Promise}
      */
     getPostAutosaveBuffer,
@@ -1112,7 +1112,7 @@ export default function blog(baseOptions) {
      * @param {int} postId
      * @example
      * const hs = new HubspotClient(props);
-     * const events = hs.blog.getPostAutosaveBufferStatus(postId)
+     * hs.blog.getPostAutosaveBufferStatus(postId).then(response => console.log(response))
      * @returns {Promise}
      */
     getPostAutosaveBufferStatus,
@@ -1124,7 +1124,7 @@ export default function blog(baseOptions) {
      * @param {object} opts
      * @example
      * const hs = new HubspotClient(props);
-     * const events = hs.blog.updateAutosaveBuffer(opts)
+     * hs.blog.updateAutosaveBuffer(opts).then(response => console.log(response))
      * @property {int} opts.id
      * @property {int} opts.blog_author_id
      * @property {string} opts.campaign
@@ -1155,7 +1155,7 @@ export default function blog(baseOptions) {
      * @param {int} postId
      * @example
      * const hs = new HubspotClient(props);
-     * const events = hs.blog.pushPostAutosaveBufferLive(postId)
+     * hs.blog.pushPostAutosaveBufferLive(postId).then(response => console.log(response))
      * @returns {Promise}
      */
     pushPostAutosaveBufferLive,
@@ -1167,7 +1167,7 @@ export default function blog(baseOptions) {
      * @param {object} opts
      * @example
      * const hs = new HubspotClient(props);
-     * const events = hs.blog.getAllBlogs(opts)
+     * hs.blog.getAllBlogs(opts).then(response => console.log(response))
      * @property {string} opts.name
      * @property {int} opts.limit
      * @property {int} opts.offset
@@ -1184,7 +1184,7 @@ export default function blog(baseOptions) {
      * @param {object} opts
      * @example
      * const hs = new HubspotClient(props);
-     * const events = hs.blog.getPosts(opts)
+     * hs.blog.getPosts(opts).then(response => console.log(response))
      * @property {int} opts.limit
      * @property {int} opts.offset
      * @property {boolean} opts.archived
@@ -1209,7 +1209,7 @@ export default function blog(baseOptions) {
      * @param {object} opts
      * @example
      * const hs = new HubspotClient(props);
-     * const events = hs.blog.getComments(opts)
+     * hs.blog.getComments(opts).then(response => console.log(response))
      * @property {int} opts.limit
      * @property {int} opts.offset
      * @property {int} opts.portalId
@@ -1228,7 +1228,7 @@ export default function blog(baseOptions) {
      * @param {int} commentId
      * @example
      * const hs = new HubspotClient(props);
-     * const events = hs.blog.getComment(commentId)
+     * hs.blog.getComment(commentId).then(response => console.log(response))
      * @returns {Promise}
      */
     getComment,
@@ -1241,7 +1241,7 @@ export default function blog(baseOptions) {
      * @param {string} publishAction One of `schedule-publish` or `cancel-publish`
      * @example
      * const hs = new HubspotClient(props);
-     * const events = hs.blog.publishOrSchedulePost(postId, publishAction)
+     * hs.blog.publishOrSchedulePost(postId, publishAction).then(response => console.log(response))
      * @returns {Promise}
      */
     publishOrSchedulePost,
@@ -1253,7 +1253,7 @@ export default function blog(baseOptions) {
      * @param {int} postId
      * @example
      * const hs = new HubspotClient(props);
-     * const events = hs.blog.restoredDeletedPost(postId)
+     * hs.blog.restoredDeletedPost(postId).then(response => console.log(response))
      * @returns {Promise}
      */
     restoredDeletedPost,
@@ -1266,7 +1266,7 @@ export default function blog(baseOptions) {
      * @param {int} versionId
      * @example
      * const hs = new HubspotClient(props);
-     * const events = hs.blog.restorePostVersionById(postId, versionId)
+     * hs.blog.restorePostVersionById(postId, versionId).then(response => console.log(response))
      * @returns {Promise}
      */
     restorePostVersionById,
@@ -1278,7 +1278,7 @@ export default function blog(baseOptions) {
      * @param {object} opts
      * @example
      * const hs = new HubspotClient(props);
-     * const events = hs.blog.searchAuthors(opts)
+     * hs.blog.searchAuthors(opts).then(response => console.log(response))
      * @property {int} opts.order
      * @property {int} opts.limit
      * @property {int} opts.offset
@@ -1296,7 +1296,7 @@ export default function blog(baseOptions) {
      * @param {object} opts
      * @example
      * const hs = new HubspotClient(props);
-     * const events = hs.blog.searchTopics(opts)
+     * hs.blog.searchTopics(opts).then(response => console.log(response))
      * @property {int} opts.id
      * @property {string} opts.name
      * @property {int} opts.created
@@ -1317,7 +1317,7 @@ export default function blog(baseOptions) {
      * @param {int} postId
      * @example
      * const hs = new HubspotClient(props);
-     * const events = hs.blog.validatePostAutosaveBufferStatus(postId)
+     * hs.blog.validatePostAutosaveBufferStatus(postId).then(response => console.log(response))
      * @returns {Promise}
      */
     validatePostAutosaveBufferStatus

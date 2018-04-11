@@ -347,7 +347,7 @@ export default function pagesApi(baseOptions) {
      * @param {object} opts
      * @example
      * const hs = new HubspotClient(props);
-     * const response = hs.pages.createOrUpdatePage(opts);
+     * hs.pages.createOrUpdatePage(opts).then(response => console.log(response));
      * @property {string} opts.campaign
      * @property {string} opts.campaign_name
      * @property {string} opts.footer_html
@@ -374,7 +374,7 @@ export default function pagesApi(baseOptions) {
      * @param {object} opts
      * @example
      * const hs = new HubspotClient(props);
-     * const response = hs.pages.getPages(opts);
+     * hs.pages.getPages(opts).then(response => console.log(response));
      * @property {string} opts.limit
      * @property {string} opts.offset
      * @property {string} opts.ab_test_id
@@ -400,7 +400,7 @@ export default function pagesApi(baseOptions) {
      * @param {int} id
      * @example
      * const hs = new HubspotClient(props);
-     * const events = hs.pages.deletePage(id)
+     * hs.pages.deletePage(id).then(response => console.log(response))
      * @returns {Promise}
      */
     deletePage,
@@ -412,7 +412,7 @@ export default function pagesApi(baseOptions) {
      * @param {int} id
      * @example
      * const hs = new HubspotClient(props);
-     * const events = hs.pages.getPageById(id)
+     * hs.pages.getPageById(id).then(response => console.log(response))
      * @returns {Promise}
      */
     getPageById,
@@ -424,7 +424,7 @@ export default function pagesApi(baseOptions) {
      * @param {object} opts
      * @example
      * const hs = new HubspotClient(props);
-     * const events = hs.pages.updateAutosaveBuffer(opts)
+     * hs.pages.updateAutosaveBuffer(opts).then(response => console.log(response))
      * @property {string} opts.campaign
      * @property {string} opts.campaign_name
      * @property {string} opts.footer_html
@@ -451,7 +451,7 @@ export default function pagesApi(baseOptions) {
      * @param {int} pageId
      * @example
      * const hs = new HubspotClient(props);
-     * const events = hs.pages.getPageAutosaveBuffer(pageId)
+     * hs.pages.getPageAutosaveBuffer(pageId).then(response => console.log(response))
      * @returns {Promise}
      */
     getPageAutosaveBuffer,
@@ -463,7 +463,7 @@ export default function pagesApi(baseOptions) {
      * @param {int} id
      * @example
      * const hs = new HubspotClient(props);
-     * const events = hs.pages.clonePage(id)
+     * hs.pages.clonePage(id).then(response => console.log(response))
      * @returns {Promise}
      */
     clonePage,
@@ -475,7 +475,7 @@ export default function pagesApi(baseOptions) {
      * @param {int} pageId
      * @example
      * const hs = new HubspotClient(props);
-     * const events = hs.pages.hasBufferedChanges(pageId)
+     * hs.pages.hasBufferedChanges(pageId).then(response => console.log(response))
      * @returns {Promise}
      */
     hasBufferedChanges,
@@ -488,7 +488,7 @@ export default function pagesApi(baseOptions) {
      * @param {string} publishAction One of `push-buffer-live`, `schedule-publish` or `cancel-publish`
      * @example
      * const hs = new HubspotClient(props);
-     * const events = hs.pages.doPublishAction(pageId, publishAction)
+     * hs.pages.doPublishAction(pageId, publishAction).then(response => console.log(response))
      * @returns {Promise}
      */
     doPublishAction,
@@ -500,7 +500,7 @@ export default function pagesApi(baseOptions) {
      * @param {int} id
      * @example
      * const hs = new HubspotClient(props);
-     * const events = hs.pages.pushBufferLive(id)
+     * hs.pages.pushBufferLive(id).then(response => console.log(response))
      * @returns {Promise}
      */
     pushBufferLive,
@@ -512,7 +512,7 @@ export default function pagesApi(baseOptions) {
      * @param {int} id
      * @example
      * const hs = new HubspotClient(props);
-     * const events = hs.pages.restoreDeleted(id)
+     * hs.pages.restoreDeleted(id).then(response => console.log(response))
      * @returns {Promise}
      */
     restoreDeleted,
@@ -524,7 +524,7 @@ export default function pagesApi(baseOptions) {
      * @param {int} id
      * @example
      * const hs = new HubspotClient(props);
-     * const events = hs.pages.validatePageAutoSaveBuffer(id)
+     * hs.pages.validatePageAutoSaveBuffer(id).then(response => console.log(response))
      * @returns {Promise}
      */
     validatePageAutoSaveBuffer,
@@ -536,7 +536,7 @@ export default function pagesApi(baseOptions) {
      * @param {int} id
      * @example
      * const hs = new HubspotClient(props);
-     * const events = hs.pages.getPageVersions(id)
+     * hs.pages.getPageVersions(id).then(response => console.log(response))
      * @returns {Promise}
      */
     getPageVersions,
@@ -549,7 +549,7 @@ export default function pagesApi(baseOptions) {
      * @param {int} versionId
      * @example
      * const hs = new HubspotClient(props);
-     * const events = hs.pages.restorePageVersion(pageId, versionId)
+     * hs.pages.restorePageVersion(pageId, versionId).then(response => console.log(response))
      * @returns {Promise}
      */
     restorePageVersion
