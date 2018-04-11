@@ -39,7 +39,7 @@ const uploadFile = async (opts = {}) => {
   }
 };
 
-export default function workflows(baseOptions) {
+export default function files(baseOptions) {
   _baseOptions = baseOptions;
 
   return {

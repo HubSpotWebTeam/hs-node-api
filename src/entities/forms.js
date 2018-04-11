@@ -1,5 +1,5 @@
 import omit from 'lodash.omit';
-import createRequest, { queryStringParamInterpolator } from '../utilities';
+import createRequest from '../utilities';
 import constants from '../constants';
 
 const defaults = {};
@@ -48,5 +48,20 @@ const submitForm = async (portalId, formId, opts = {}) => {
 export default function domainsApi(baseOptions) {
   _baseOptions = baseOptions;
 
-  return { submitForm };
+  return {
+    /**
+     * Submit a form with data (See https://developers.hubspot.com/docs/methods/forms/submit_form for full spec)
+     * @async
+     * @memberof hs/forms
+     * @method submitForm
+     * @param {int} portalId Portal ID the form resides on
+     * @param {string} formId ID of form to submit.
+     * @param {object} formFields Key/value pairs of form fields.
+     * @example
+     * const hs = new HubspotClient(props);
+     * const response = hs.forms.submitForm(portalId, formId, formFields);
+     * @returns {Promise}
+     */
+    submitForm
+  };
 }
