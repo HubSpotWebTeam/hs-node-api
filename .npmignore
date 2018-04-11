@@ -2,3 +2,9 @@ src/
 test/
 tools/
 package-lock.json
+yarn.lock
+jsconf.json
+.eslintrc
+.env
+.babelrc
+.gitignore
