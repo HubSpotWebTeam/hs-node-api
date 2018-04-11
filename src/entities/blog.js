@@ -5,7 +5,7 @@ const allowablePublishActions = ['schedule-publish', 'cancel-publish'];
 const defaults = {};
 let _baseOptions;
 
-const getAll = async (opts = {}) => {
+const getAllBlogs = async (opts = {}) => {
   try {
     const { name, limit, offset, created, deleted_at } = opts;
     const additionalOpts = {
@@ -390,30 +390,14 @@ const restoreDeletedComment = async id => {
   }
 };
 
-const getById = async blog_id => {
+const getBlogById = async id => {
   try {
     const mergedProps = Object.assign({}, defaults, _baseOptions);
     const blogInfo = await createRequest(
       constants.api.blog.byId,
-      { blog_id },
+      { id },
       mergedProps
     );
-    return Promise.resolve(blogInfo);
-  } catch (e) {
-    return Promise.reject(e.message);
-  }
-};
-
-const getVersion = async (blog_id, revision_id) => {
-  try {
-    const mergedProps = Object.assign({}, defaults, _baseOptions);
-    let url = constants.api.blog.getVersions;
-    const options = { blog_id };
-    if (revision_id) {
-      url = constants.api.blog.getVersion;
-      Object.assign(options, { revision_id });
-    }
-    const blogInfo = await createRequest(url, options, mergedProps);
     return Promise.resolve(blogInfo);
   } catch (e) {
     return Promise.reject(e.message);
@@ -818,39 +802,524 @@ export default function blog(baseOptions) {
   _baseOptions = baseOptions;
 
   return {
+    /**
+     * Merge multiple topics by ID into a single topic group.
+     * @async
+     * @memberof hs/blog
+     * @method groupTopics
+     * @param {object} opts
+     * @example
+     * const hs = new HubspotClient(props);
+     * const events = hs.blog.groupTopics(opts)
+     * @property {string} opts.groupedTopicName
+     * @property {array<int>} opts.topicIds
+     * @returns {Promise}
+     */
     groupTopics,
+    /**
+     * Create a new comment.
+     * @async
+     * @memberof hs/blog
+     * @method createComment
+     * @param {object} opts
+     * @example
+     * const hs = new HubspotClient(props);
+     * const events = hs.blog.createComment(opts)
+     * @property {string} opts.comment
+     * @property {int} opts.contentId
+     * @property {int} opts.collectionId
+     * @property {string} opts.contentAuthorEmail
+     * @property {string} opts.contentAuthorName
+     * @property {string} opts.contentPermalink
+     * @property {string} opts.contentTitle
+     * @property {string} opts.userEmail
+     * @property {string} opts.userName
+     * @property {string} opts.userUrl
+     * @returns {Promise}
+     */
     createComment,
+    /**
+     * Create or update a blog post.
+     * @async
+     * @memberof hs/blog
+     * @method createOrUpdatePost
+     * @param {object} opts
+     * @example
+     * const hs = new HubspotClient(props);
+     * const events = hs.blog.createOrUpdatePost(opts)
+     * @property {int} opts.id
+     * @property {int} opts.blog_author_id
+     * @property {string} opts.campaign
+     * @property {string} opts.campaign_name
+     * @property {int} opts.content_group_id
+     * @property {string} opts.featured_image
+     * @property {string} opts.footer_html
+     * @property {string} opts.head_html
+     * @property {string} opts.keywords
+     * @property {string} opts.meta_description
+     * @property {string} opts.name
+     * @property {string} opts.post_body
+     * @property {string} opts.post_summary
+     * @property {int} opts.publish_date
+     * @property {boolean} opts.publish_immediately
+     * @property {string} opts.slug
+     * @property {array} opts.topic_ids
+     * @property {boolean} opts.use_featured_image
+     * @property {string} opts.widgets
+     * @returns {Promise}
+     */
     createOrUpdatePost,
+    /**
+     * Restore a deleted comment
+     * @async
+     * @memberof hs/blog
+     * @method restoreDeletedComment
+     * @param {int} id
+     * @example
+     * const hs = new HubspotClient(props);
+     * const events = hs.blog.restoreDeletedComment(opts)
+     * @returns {Promise}
+     */
     restoreDeletedComment,
+    /**
+     * Create or update a blog author info.
+     * @async
+     * @memberof hs/blog
+     * @method createOrUpdateAuthor
+     * @param {object} opts
+     * @example
+     * const hs = new HubspotClient(props);
+     * const events = hs.blog.createOrUpdateAuthor(opts)
+     * @property {int} opts.id
+     * @property {string} opts.email
+     * @property {string} opts.fullName
+     * @property {string} opts.userId
+     * @property {string} opts.username
+     * @property {string} opts.bio
+     * @property {string} opts.website
+     * @property {string} opts.twitter
+     * @property {string} opts.linkedin
+     * @property {string} opts.facebook
+     * @property {string} opts.googlePlus
+     * @property {string} opts.avatar
+     * @returns {Promise}
+     */
     createOrUpdateAuthor,
+    /**
+     * Create or update a blog topic.
+     * @async
+     * @memberof hs/blog
+     * @method createOrUpdateTopic
+     * @param {object} opts
+     * @example
+     * const hs = new HubspotClient(props);
+     * const events = hs.blog.createOrUpdateTopic(opts)
+     * @property {int} opts.id
+     * @property {string} opts.name
+     * @property {string} opts.description
+     * @returns {Promise}
+     */
     createOrUpdateTopic,
+    /**
+     * Clones a blog post
+     * @async
+     * @memberof hs/blog
+     * @method clonePost
+     * @param {object} opts
+     * @example
+     * const hs = new HubspotClient(props);
+     * const events = hs.blog.clonePost(opts)
+     * @property {int} opts.id
+     * @property {string} opts.name
+     * @returns {Promise}
+     */
     clonePost,
+    /**
+     * Remove a blog author
+     * @async
+     * @memberof hs/blog
+     * @method deleteAuthor
+     * @param {int} id
+     * @example
+     * const hs = new HubspotClient(props);
+     * const events = hs.blog.deleteAuthor(id)
+     * @returns {Promise}
+     */
     deleteAuthor,
+    /**
+     * Remove a blog comment
+     * @async
+     * @memberof hs/blog
+     * @method deleteComment
+     * @param {int} id
+     * @example
+     * const hs = new HubspotClient(props);
+     * const events = hs.blog.deleteComment(id)
+     * @returns {Promise}
+     */
     deleteComment,
+    /**
+     * Remove a blog post
+     * @async
+     * @memberof hs/blog
+     * @method deletePost
+     * @param {int} id
+     * @example
+     * const hs = new HubspotClient(props);
+     * const events = hs.blog.deletePost(id)
+     * @returns {Promise}
+     */
     deletePost,
+    /**
+     * Remove a blog topic
+     * @async
+     * @memberof hs/blog
+     * @method deleteTopic
+     * @param {int} id
+     * @example
+     * const hs = new HubspotClient(props);
+     * const events = hs.blog.deleteTopic(id)
+     * @returns {Promise}
+     */
     deleteTopic,
+    /**
+     * Retrieve blog author details
+     * @async
+     * @memberof hs/blog
+     * @method getAuthor
+     * @param {int} id
+     * @example
+     * const hs = new HubspotClient(props);
+     * const events = hs.blog.getAuthor(id)
+     * @returns {Promise}
+     */
     getAuthor,
+    /**
+     * Retrieve all blog authors
+     * @async
+     * @memberof hs/blog
+     * @method getAuthors
+     * @param {object} opts
+     * @example
+     * const hs = new HubspotClient(props);
+     * const events = hs.blog.getAuthors(id)
+     * @property {string} opts.email
+     * @property {int} opts.limit
+     * @property {int} opts.offset
+     * @property {int} opts.id
+     * @property {string} opts.fullName
+     * @property {string} opts.slug
+     * @property {int} opts.created
+     * @property {int} opts.updated
+     * @returns {Promise}
+     */
     getAuthors,
-    getById,
+    /**
+     * Retrieve blog info for specific blog
+     * @async
+     * @memberof hs/blog
+     * @method getBlogById
+     * @param {int} id
+     * @example
+     * const hs = new HubspotClient(props);
+     * const events = hs.blog.getBlogById(id)
+     * @returns {Promise}
+     */
+    getBlogById,
+    /**
+     * Retrieve blog topic info
+     * @async
+     * @memberof hs/blog
+     * @method getTopic
+     * @param {int} id
+     * @example
+     * const hs = new HubspotClient(props);
+     * const events = hs.blog.getTopic(id)
+     * @returns {Promise}
+     */
     getTopic,
+    /**
+     * Retrieve blog topic info
+     * @async
+     * @memberof hs/blog
+     * @method getTopics
+     * @param {object} opts
+     * @example
+     * const hs = new HubspotClient(props);
+     * const events = hs.blog.getTopics(opts)
+     * @property {int} opts.id
+     * @property {string} opts.name
+     * @property {int} opts.created
+     * @property {string} opts.slug
+     * @property {int} opts.limit
+     * @property {int} opts.offset
+     * @returns {Promise}
+     */
     getTopics,
+    /**
+     * Retrieve blog post info by ID
+     * @async
+     * @memberof hs/blog
+     * @method getPostById
+     * @param {int} id
+     * @example
+     * const hs = new HubspotClient(props);
+     * const events = hs.blog.getPostById(id)
+     * @returns {Promise}
+     */
     getPostById,
+    /**
+     * Retrieve blog post versions by post ID
+     * @async
+     * @memberof hs/blog
+     * @method getPostVersions
+     * @param {int} postId
+     * @example
+     * const hs = new HubspotClient(props);
+     * const events = hs.blog.getPostVersions(postId)
+     * @returns {Promise}
+     */
     getPostVersions,
+    /**
+     * Retrieve blog post version
+     * @async
+     * @memberof hs/blog
+     * @method getPostVersionById
+     * @param {int} versionId
+     * @example
+     * const hs = new HubspotClient(props);
+     * const events = hs.blog.getPostVersionById(versionId)
+     * @returns {Promise}
+     */
     getPostVersionById,
+    /**
+     * Retrieve blog post autosave buffer contents
+     * @async
+     * @memberof hs/blog
+     * @method getPostAutosaveBuffer
+     * @param {int} postId
+     * @example
+     * const hs = new HubspotClient(props);
+     * const events = hs.blog.getPostAutosaveBuffer(postId)
+     * @returns {Promise}
+     */
     getPostAutosaveBuffer,
+    /**
+     * Retrieve blog post autosave buffer status
+     * @async
+     * @memberof hs/blog
+     * @method getPostAutosaveBufferStatus
+     * @param {int} postId
+     * @example
+     * const hs = new HubspotClient(props);
+     * const events = hs.blog.getPostAutosaveBufferStatus(postId)
+     * @returns {Promise}
+     */
     getPostAutosaveBufferStatus,
+    /**
+     * Update the autosave buffer for a post
+     * @async
+     * @memberof hs/blog
+     * @method updateAutosaveBuffer
+     * @param {object} opts
+     * @example
+     * const hs = new HubspotClient(props);
+     * const events = hs.blog.updateAutosaveBuffer(opts)
+     * @property {int} opts.id
+     * @property {int} opts.blog_author_id
+     * @property {string} opts.campaign
+     * @property {string} opts.campaign_name
+     * @property {int} opts.content_group_id
+     * @property {string} opts.featured_image
+     * @property {string} opts.footer_html
+     * @property {string} opts.head_html
+     * @property {string} opts.keywords
+     * @property {string} opts.meta_description
+     * @property {string} opts.name
+     * @property {string} opts.post_body
+     * @property {string} opts.post_summary
+     * @property {int} opts.publish_date
+     * @property {boolean} opts.publish_immediately
+     * @property {string} opts.slug
+     * @property {array} opts.topic_ids
+     * @property {boolean} opts.use_featured_image
+     * @property {string} opts.widgets
+     * @returns {Promise}
+     */
     updateAutosaveBuffer,
+    /**
+     * Push the autosave buffer for a post to live.
+     * @async
+     * @memberof hs/blog
+     * @method pushPostAutosaveBufferLive
+     * @param {int} postId
+     * @example
+     * const hs = new HubspotClient(props);
+     * const events = hs.blog.pushPostAutosaveBufferLive(postId)
+     * @returns {Promise}
+     */
     pushPostAutosaveBufferLive,
-    getAll,
-    getVersion,
+    /**
+     * Get info for all blogs on a particular portal
+     * @async
+     * @memberof hs/blog
+     * @method getAllBlogs
+     * @param {object} opts
+     * @example
+     * const hs = new HubspotClient(props);
+     * const events = hs.blog.getAllBlogs(opts)
+     * @property {string} opts.name
+     * @property {int} opts.limit
+     * @property {int} opts.offset
+     * @property {int} opts.created
+     * @property {int} opts.deleted_at
+     * @returns {Promise}
+     */
+    getAllBlogs,
+    /**
+     * Get all blog posts for specified blog
+     * @async
+     * @memberof hs/blog
+     * @method getPosts
+     * @param {object} opts
+     * @example
+     * const hs = new HubspotClient(props);
+     * const events = hs.blog.getPosts(opts)
+     * @property {int} opts.limit
+     * @property {int} opts.offset
+     * @property {boolean} opts.archived
+     * @property {int} opts.blog_author_id
+     * @property {string} opts.campaign
+     * @property {int} opts.content_group_id
+     * @property {string} opts.slug
+     * @property {string} opts.state
+     * @property {string} opts.order_by
+     * @property {int} opts.created
+     * @property {int} opts.deleted_at
+     * @property {string} opts.name
+     * @property {boolean} opts.updated
+     * @returns {Promise}
+     */
     getPosts,
+    /**
+     * Get all comments for specific content
+     * @async
+     * @memberof hs/blog
+     * @method getComments
+     * @param {object} opts
+     * @example
+     * const hs = new HubspotClient(props);
+     * const events = hs.blog.getComments(opts)
+     * @property {int} opts.limit
+     * @property {int} opts.offset
+     * @property {int} opts.portalId
+     * @property {string} opts.state
+     * @property {int} opts.contentId
+     * @property {boolean} opts.reverse
+     * @property {string} opts.query
+     * @returns {Promise}
+     */
     getComments,
+    /**
+     * Get specific comment
+     * @async
+     * @memberof hs/blog
+     * @method getComment
+     * @param {int} commentId
+     * @example
+     * const hs = new HubspotClient(props);
+     * const events = hs.blog.getComment(commentId)
+     * @returns {Promise}
+     */
     getComment,
+    /**
+     * Publish, unpublish, or schedule a post
+     * @async
+     * @memberof hs/blog
+     * @method publishOrSchedulePost
+     * @param {int} postId
+     * @param {string} publishAction One of `schedule-publish` or `cancel-publish`
+     * @example
+     * const hs = new HubspotClient(props);
+     * const events = hs.blog.publishOrSchedulePost(postId, publishAction)
+     * @returns {Promise}
+     */
     publishOrSchedulePost,
+    /**
+     * Restore a previously deleted post
+     * @async
+     * @memberof hs/blog
+     * @method restoredDeletedPost
+     * @param {int} postId
+     * @example
+     * const hs = new HubspotClient(props);
+     * const events = hs.blog.restoredDeletedPost(postId)
+     * @returns {Promise}
+     */
     restoredDeletedPost,
+    /**
+     * Restore a post version to a specific ID.
+     * @async
+     * @memberof hs/blog
+     * @method restorePostVersionById
+     * @param {int} postId
+     * @param {int} versionId
+     * @example
+     * const hs = new HubspotClient(props);
+     * const events = hs.blog.restorePostVersionById(postId, versionId)
+     * @returns {Promise}
+     */
     restorePostVersionById,
+    /**
+     * Search blog authors
+     * @async
+     * @memberof hs/blog
+     * @method searchAuthors
+     * @param {object} opts
+     * @example
+     * const hs = new HubspotClient(props);
+     * const events = hs.blog.searchAuthors(opts)
+     * @property {int} opts.order
+     * @property {int} opts.limit
+     * @property {int} opts.offset
+     * @property {string} opts.q Free text search parameter
+     * @property {boolean} opts.active
+     * @property {int} opts.blog
+     * @returns {Promise}
+     */
     searchAuthors,
+    /**
+     * Search blog topics
+     * @async
+     * @memberof hs/blog
+     * @method searchTopics
+     * @param {object} opts
+     * @example
+     * const hs = new HubspotClient(props);
+     * const events = hs.blog.searchTopics(opts)
+     * @property {int} opts.id
+     * @property {string} opts.name
+     * @property {int} opts.created
+     * @property {string} opts.slug
+     * @property {int} opts.limit
+     * @property {int} opts.offset
+     * @property {string} opts.q Free text search parameter
+     * @property {boolean} opts.active
+     * @property {int} opts.blog
+     * @returns {Promise}
+     */
     searchTopics,
+    /**
+     * Validate the autosave buffer on a post.
+     * @async
+     * @memberof hs/blog
+     * @method validatePostAutosaveBufferStatus
+     * @param {int} postId
+     * @example
+     * const hs = new HubspotClient(props);
+     * const events = hs.blog.validatePostAutosaveBufferStatus(postId)
+     * @returns {Promise}
+     */
     validatePostAutosaveBufferStatus
   };
 }

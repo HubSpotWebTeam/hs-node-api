@@ -36,7 +36,7 @@ export default {
       commentById: `${defaultApiHost}/comments/v3/comments/{id}`,
       restoreDeletedComment: `${defaultApiHost}/comments/v3/comments/{id}/restore`,
       getAll: `${defaultApiHost}/content/api/v2/blogs`,
-      byId: `${defaultApiHost}/content/api/v2/blogs/{blog_id}`,
+      byId: `${defaultApiHost}/content/api/v2/blogs/{id}`,
       getVersions: `${defaultApiHost}/content/api/v2/blogs/{blog_id}/versions`,
       getVersion: `${defaultApiHost}/content/api/v2/blogs/{blog_id}/versions/{revision_id}`,
       posts: `${defaultApiHost}/content/api/v2/blog-posts`,
