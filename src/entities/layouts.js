@@ -9,19 +9,30 @@ const getLayouts = async (opts = {}) => {
     const {
       limit,
       offset,
-      id,
-      domain,
-      is_resolving,
+      category_id,
       created,
-      primary_site_page
+      deleted_at,
+      id,
+      label,
+      path,
+      custom_head,
+      include_default_custom_css,
+      enable_domain_stylesheet,
+      attached_stylesheets
     } = opts;
     const additionalOpts = {
-      domain,
       limit,
       offset,
-      is_resolving,
-      primary_site_page,
-      id
+      category_id,
+      created,
+      deleted_at,
+      id,
+      label,
+      path,
+      custom_head,
+      include_default_custom_css,
+      enable_domain_stylesheet,
+      attached_stylesheets
     };
     // Extract additional dynamic querystring params and values.
     Object.assign(
@@ -37,12 +48,12 @@ const getLayouts = async (opts = {}) => {
       _baseOptions,
       additionalOpts
     );
-    const domains = await createRequest(
-      constants.api.domains.getAll,
+    const layouts = await createRequest(
+      constants.api.layouts.getAll,
       {},
       mergedProps
     );
-    return Promise.resolve(domains);
+    return Promise.resolve(layouts);
   } catch (e) {
     return Promise.reject(e.message);
   }
@@ -54,22 +65,56 @@ const getLayout = async id => {
       throw new Error('getLayout requires an `id` argument');
     }
     const mergedProps = Object.assign({}, defaults, _baseOptions);
-    const domainInfo = await createRequest(
-      constants.api.domains.byId,
+    const layoutInfo = await createRequest(
+      constants.api.layouts.byId,
       { id },
       mergedProps
     );
-    return Promise.resolve(domainInfo);
+    return Promise.resolve(layoutInfo);
   } catch (e) {
     return Promise.reject(e.message);
   }
 };
 
-export default function domainsApi(baseOptions) {
+export default function layoutsApi(baseOptions) {
   _baseOptions = baseOptions;
 
   return {
+    /**
+     * Get all layouts for a portal
+     * @async
+     * @memberof hs/layouts
+     * @method getLayouts
+     * @param {object} opts
+     * @example
+     * const hs = new HubspotClient(props);
+     * const response = hs.layouts.getLayouts(opts);
+     * @property {int} opts.limit
+     * @property {int} opts.offset
+     * @property {int} opts.category_id
+     * @property {int} opts.created
+     * @property {int} opts.deleted_at
+     * @property {int} opts.id
+     * @property {string} opts.label
+     * @property {string} opts.path
+     * @property {string} opts.custom_head
+     * @property {boolean} opts.include_default_custom_css
+     * @property {boolean} opts.enable_domain_stylesheet
+     * @property {string} opts.attached_stylesheets
+     * @returns {Promise}
+     */
     getLayouts,
+    /**
+     * Get layout info by ID
+     * @async
+     * @memberof hs/layouts
+     * @method getLayout
+     * @param {int} layoutId
+     * @example
+     * const hs = new HubspotClient(props);
+     * const response = hs.layouts.getLayout(layoutId);
+     * @returns {Promise}
+     */
     getLayout
   };
 }
