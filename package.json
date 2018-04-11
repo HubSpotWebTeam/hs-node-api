@@ -1,6 +1,6 @@
 {
   "name": "@hs-web-team/hs-api",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Hubspot API Wrapper",
   "main": "dist/main.js",
   "scripts": {
