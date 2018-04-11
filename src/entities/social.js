@@ -51,5 +51,34 @@ const createBroadcastMessage = async (opts = {}) => {
 export default function socialApi(baseOptions) {
   _baseOptions = baseOptions;
 
-  return { getPublishingChannels, createBroadcastMessage };
+  return {
+    /**
+     * Get publishing channels for selected portal
+     * @async
+     * @memberof hs/social
+     * @method getPublishingChannels
+     * @example
+     * const hs = new HubspotClient(props);
+     * const response = hs.social.getPublishingChannels();
+     * @returns {Promise}
+     */
+    getPublishingChannels,
+    /**
+     * Create a broadcast message
+     * @async
+     * @memberof hs/social
+     * @method createBroadcastMessage
+     * @param {object} opts
+     * @example
+     * const hs = new HubspotClient(props);
+     * const response = hs.social.createBroadcastMessage(opts);
+     * @property {string} opts.channelGuid
+     * @property {string} opts.status
+     * @property {int} opts.triggerAt
+     * @property {string} opts.body
+     * @property {string} opts.photoUrl
+     * @returns {Promise}
+     */
+    createBroadcastMessage
+  };
 }
