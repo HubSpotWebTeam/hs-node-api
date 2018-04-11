@@ -2,6 +2,24 @@
 
 A client wrapper for the HubSpot API at https://developers.hubspot.com/docs/overview.
 
+## Example
+
+```
+const HubSpotAPI = require('hs-api');
+const hs = new HubSpotAPI({ hapikey });
+// or const hs = new HubSpotAPI({ accessToken });
+
+async function getContact(id){
+  const contact = await hs.contacts.getById(827398123);
+  return contact
+}
+
+// Or using traditional thenable Promises.
+hs.contacts.getById(827398123).then(contact => {
+  console.log(contact);
+});
+```
+
 Entities available
 
 * Blogs
