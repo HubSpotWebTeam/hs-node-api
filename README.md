@@ -29,13 +29,13 @@ Entities available
 * Contacts
 * Companies
 * Calendar
-* Deals (partial)
+* Deals (partial implementation)
 * Domains
-* Email Events (partial)
-* Forms (partial)
+* Email Events (partial implementation)
+* Forms (partial implementation)
 * Layouts
-* Social (partial)
-* Workflows (partial)
+* Social (partial implementation)
+* Workflows (partial implementation)
 
 Please check out the `docs` folder in the node_modules directory, which has a JSDoc for all currently implemented modules/methods.
 
