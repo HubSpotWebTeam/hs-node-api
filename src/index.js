@@ -12,7 +12,15 @@ import emailEventsApi from './entities/email-events';
 import dealsApi from './entities/deals';
 import pagesApi from './entities/pages';
 
-/** HubSpotClient class */
+/**
+* HubSpotClient class
+* @example
+const HubSpotClient = require('hs-api');
+const hs = new HubSpotClient({ accessToken: 'i82739813ksjksf' });
+// or
+const hs = new HubSpotClient({ hapikey: '76128312asa7s8761823761' });
+*/
+
 class HubSpotClient {
   /**
    * @param {object} props Constructor props. 1 of hapikey / accessToken is required
@@ -43,59 +51,103 @@ class HubSpotClient {
     }
     Object.assign(this, { props });
   }
+
   /**
-   * Get an object representing calendar API
+   * A collection of methods related to the Calendar API
    * @namespace hs/calendar
-   * @type {object}
    */
   get calendar() {
     return calendarApi(this.props);
   }
-  /** @namespace hs/contacts */
+
+  /**
+   * A collection of methods related to the Contacts API
+   * @namespace hs/contacts
+   */
   get contacts() {
     return contactsApi(this.props);
   }
-  /** @namespace hs/company */
+
+  /**
+   * A collection of methods related to the Comapny API
+   * @namespace hs/company
+   */
   get company() {
     return companyApi(this.props);
   }
-  /** @namespace hs/blog */
+
+  /**
+   * A collection of methods related to the Blog API / Blog Posts API / Blog Authors API
+   * @namespace hs/blog
+   */
   get blog() {
     return blogPostsApi(this.props);
   }
-  /** @namespace hs/workflows */
+
+  /**
+   * A collection of methods related to the Workflows API
+   * @namespace hs/workflows
+   */
   get workflows() {
     return workflowsApi(this.props);
   }
-  /** @namespace hs/files */
+
   // get files() {
   //   return filesApi(this.props);
   // }
-  /** @namespace hs/domains */
+
+  /**
+   * A collection of methods related to the Domains API
+   * @namespace hs/domains
+   */
   get domains() {
     return domainsApi(this.props);
   }
-  /** @namespace hs/layouts */
+
+  /**
+   * A collection of methods related to the Layouts API
+   * @namespace hs/layouts
+   */
   get layouts() {
     return layoutsApi(this.props);
   }
-  /** @namespace hs/forms */
+
+  /**
+   * A collection of methods related to the Forms API
+   * @namespace hs/forms
+   */
   get forms() {
     return formsApi(this.props);
   }
-  /** @namespace hs/social */
+
+  /**
+   * A collection of methods related to the Social API
+   * @namespace hs/social
+   */
   get social() {
     return socialApi(this.props);
   }
-  /** @namespace hs/emailEvents */
+
+  /**
+   * A collection of methods related to the Email Events API
+   * @namespace hs/emailEvents
+   */
   get emailEvents() {
     return emailEventsApi(this.props);
   }
-  /** @namespace hs/emailEvents */
+
+  /**
+   * A collection of methods related to the Deals API
+   * @namespace hs/deals
+   */
   get deals() {
     return dealsApi(this.props);
   }
-  /** @namespace hs/pages */
+
+  /**
+   * A collection of methods related to the Page Publishing API
+   * @namespace hs/pages
+   */
   get pages() {
     return pagesApi(this.props);
   }
