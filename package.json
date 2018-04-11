@@ -1,6 +1,6 @@
 {
   "name": "@hs-web-team/hs-api",
-  "version": "1.2.7",
+  "version": "1.2.8",
   "description": "Hubspot API Wrapper",
   "keywords": [
     "hubspot",
