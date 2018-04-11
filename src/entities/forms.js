@@ -50,7 +50,7 @@ export default function domainsApi(baseOptions) {
 
   return {
     /**
-     * Submit a form with data (See https://developers.hubspot.com/docs/methods/forms/submit_form for full spec)
+     * Submit a form with data See the {@link https://developers.hubspot.com/docs/methods/forms/submit_form|developer docs} for full spec.
      * @async
      * @memberof hs/forms
      * @method submitForm
