@@ -2,6 +2,12 @@
 
 A client wrapper for the HubSpot API at https://developers.hubspot.com/docs/overview.
 
+## Installation
+
+```
+npm install --save hs-api
+```
+
 ## Example
 
 ```
