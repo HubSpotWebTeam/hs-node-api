@@ -34,6 +34,8 @@
     "Headers": true,
     "fetch": true,
     "describe": true,
+    "xdescribe": true,
+    "xit": true,
     "it": true
   }
 }

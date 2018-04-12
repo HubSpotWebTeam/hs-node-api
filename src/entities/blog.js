@@ -8,14 +8,14 @@ let _baseOptions;
 const getAllBlogs = async (opts = {}) => {
   try {
     const { name, limit, offset, created, deleted_at } = opts;
-    const additionalOpts = {
+    let additionalOpts = {
       limit,
       offset
     };
     // Extract additional dynamic querystring params and values.
-    Object.assign(
-      additionalOpts,
-      queryStringParamInterpolator({ name, created, deleted_at })
+    additionalOpts = queryStringParamInterpolator(
+      { name, created, deleted_at },
+      additionalOpts
     );
 
     const mergedProps = Object.assign(
@@ -85,21 +85,22 @@ const createOrUpdateAuthor = async (opts = {}) => {
 const getAuthors = async (opts = {}) => {
   try {
     const { email, limit, offset, id, fullName, slug, created, updated } = opts;
-    const additionalOpts = {
+    let additionalOpts = {
       email,
       limit,
       offset
     };
     // Extract additional dynamic querystring params and values.
-    Object.assign(
-      additionalOpts,
-      queryStringParamInterpolator({
+
+    additionalOpts = queryStringParamInterpolator(
+      {
         id,
         fullName,
         slug,
         created,
         updated
-      })
+      },
+      additionalOpts
     );
 
     const mergedProps = Object.assign(
@@ -235,15 +236,16 @@ const getTopics = async (opts = {}) => {
   try {
     const { id, name, created, slug, limit, offset } = opts;
 
-    const additionalOpts = {
+    let additionalOpts = {
       limit,
       offset,
       slug
     };
     // Extract additional dynamic querystring params and values.
-    Object.assign(
-      additionalOpts,
-      queryStringParamInterpolator({ id, name, created })
+
+    additionalOpts = queryStringParamInterpolator(
+      { id, name, created },
+      additionalOpts
     );
 
     const mergedProps = Object.assign(
@@ -291,7 +293,7 @@ const searchTopics = async (opts = {}) => {
       blog //eslint-disable-line
     } = opts;
 
-    const additionalOpts = {
+    let additionalOpts = {
       limit,
       offset,
       slug,
@@ -300,9 +302,10 @@ const searchTopics = async (opts = {}) => {
       blog
     };
     // Extract additional dynamic querystring params and values.
-    Object.assign(
-      additionalOpts,
-      queryStringParamInterpolator({ id, name, created })
+
+    additionalOpts = queryStringParamInterpolator(
+      { id, name, created },
+      additionalOpts
     );
 
     const mergedProps = Object.assign(
@@ -422,7 +425,7 @@ const getPosts = async (opts = {}) => {
       updated
     } = opts;
 
-    const additionalOpts = {
+    let additionalOpts = {
       limit,
       offset,
       archived,
@@ -435,14 +438,15 @@ const getPosts = async (opts = {}) => {
     };
 
     // Extract additional dynamic querystring params and values.
-    Object.assign(
-      additionalOpts,
-      queryStringParamInterpolator({
+
+    additionalOpts = queryStringParamInterpolator(
+      {
         created,
         deleted_at,
         name,
         updated
-      })
+      },
+      additionalOpts
     );
 
     const mergedProps = Object.assign(

@@ -79,7 +79,7 @@ const getPages = async (opts = {}) => {
       subcategory,
       updated
     } = opts;
-    const additionalOpts = {
+    let additionalOpts = {
       limit,
       offset,
       ab_test_id,
@@ -95,16 +95,17 @@ const getPages = async (opts = {}) => {
       subcategory,
       updated
     };
+
     // Extract additional dynamic querystring params and values.
-    Object.assign(
-      additionalOpts,
-      queryStringParamInterpolator({
+    additionalOpts = queryStringParamInterpolator(
+      {
         created,
         deleted_at,
         name,
         publish_date,
         updated
-      })
+      },
+      additionalOpts
     );
 
     const mergedProps = Object.assign(
@@ -113,6 +114,7 @@ const getPages = async (opts = {}) => {
       _baseOptions,
       additionalOpts
     );
+
     const pages = await createRequest(
       constants.api.pages.list,
       {},

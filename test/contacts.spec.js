@@ -1,19 +1,15 @@
+require('dotenv').config();
 const HubSpotAPI = require('../dist/hs-api');
 const expect = require('chai').expect;
-const debug = require('debug')('hs-api:tests');
-// Setup the nock mocks.
-require('./mocks')();
+const debug = require('debug')('hs-api:tests'); //eslint-disable-line
+const { schemaContacts, validate } = require('./schemas/contacts');
 
-const hs = new HubSpotAPI({ hapikey: 'testuser' });
+const { E2E_TESTS_HAPI_KEY: hapikey } = process.env;
+const hs = new HubSpotAPI({ hapikey });
 
-describe('Contacts', async () => {
+describe('Get Contact List', async () => {
   it('returns a valid contact response', async () => {
-    const responses = await hs.contacts.getContacts();
-    const { contacts, 'has-more': hasMore, 'vid-offset': offset } = responses;
-    expect(hasMore).to.be.a('boolean');
-    expect(offset).to.be.a('number');
-    expect(contacts)
-      .to.be.an('array')
-      .and.has.lengthOf.above(0);
+    const contacts = await hs.contacts.getContacts();
+    expect(validate(contacts, schemaContacts).error).to.be.a('null');
   });
 });

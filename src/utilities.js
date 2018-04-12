@@ -69,10 +69,12 @@ export default async function createRequest(uri, options, props) {
   }
 }
 
-export const queryStringParamInterpolator = objs => {
+export const queryStringParamInterpolator = (objs, original) => {
   const response = Object.keys(objs)
     .map(key => {
       if (key && objs[key]) {
+        // Remove from the original object
+        delete original[key];
         const innerResp = Object.keys(objs[key]).reduce((acc, curr) => {
           acc[`${key}__${curr}`] = objs[key][curr];
           return acc;
@@ -85,7 +87,8 @@ export const queryStringParamInterpolator = objs => {
       Object.assign(acc, curr);
       return acc;
     }, {});
-  return response;
+
+  return Object.assign(original, response);
 };
 
 export const sanitizeObject = obj => JSON.parse(JSON.stringify(obj));

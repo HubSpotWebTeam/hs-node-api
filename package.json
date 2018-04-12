@@ -55,6 +55,7 @@
   },
   "dependencies": {
     "interpolate": "^0.1.0",
+    "joi": "^13.1.2",
     "lodash.omit": "^4.5.0",
     "moment": "^2.18.1",
     "net": "^1.0.2",

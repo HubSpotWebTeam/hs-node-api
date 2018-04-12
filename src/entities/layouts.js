@@ -20,7 +20,7 @@ const getLayouts = async (opts = {}) => {
       enable_domain_stylesheet,
       attached_stylesheets
     } = opts;
-    const additionalOpts = {
+    let additionalOpts = {
       limit,
       offset,
       category_id,
@@ -35,11 +35,11 @@ const getLayouts = async (opts = {}) => {
       attached_stylesheets
     };
     // Extract additional dynamic querystring params and values.
-    Object.assign(
-      additionalOpts,
-      queryStringParamInterpolator({
+    additionalOpts = queryStringParamInterpolator(
+      {
         created
-      })
+      },
+      additionalOpts
     );
 
     const mergedProps = Object.assign(

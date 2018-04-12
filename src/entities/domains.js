@@ -15,7 +15,7 @@ const getDomains = async (opts = {}) => {
       created,
       primary_site_page
     } = opts;
-    const additionalOpts = {
+    let additionalOpts = {
       domain,
       limit,
       offset,
@@ -24,11 +24,12 @@ const getDomains = async (opts = {}) => {
       id
     };
     // Extract additional dynamic querystring params and values.
-    Object.assign(
-      additionalOpts,
-      queryStringParamInterpolator({
+
+    additionalOpts = queryStringParamInterpolator(
+      {
         created
-      })
+      },
+      additionalOpts
     );
 
     const mergedProps = Object.assign(
