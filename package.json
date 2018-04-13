@@ -2,17 +2,16 @@
   "name": "hs-api",
   "version": "1.4.2",
   "description": "Hubspot API Wrapper",
-  "keywords": [
-    "hubspot",
-    "hubspot-api"
-  ],
+  "keywords": ["hubspot", "hubspot-api"],
   "repository": "github:HubSpotWebTeam/hs-node-api",
   "main": "dist/main.js",
   "scripts": {
     "api-tests": "DEBUG=utilities babel-node --presets node6 test/",
-    "build": "rimraf dist/ docs/ && DEBUG=rollup:compile node tools/build.js && npm run compile-docs",
+    "build":
+      "rimraf dist/ docs/ && DEBUG=rollup:compile node tools/build.js && npm run compile-docs",
     "prepare": "cat README.md > README && npm run build && npm test",
-    "compile-docs": "jsdoc -R README.md -c ./jsconf.json -t ./node_modules/ink-docstrap/template -r ./src -d docs/",
+    "compile-docs":
+      "jsdoc -R README.md -c ./jsconf.json -t ./node_modules/ink-docstrap/template -r ./src -d docs/",
     "test": "echo \"Reinstate tests\"",
     "test:watch": "mocha --watch",
     "postpublish": "rimraf README"
@@ -53,6 +52,7 @@
     "rollup-plugin-babel": "^3.0.2",
     "rollup-plugin-uglify": "^2.0.1",
     "supertest": "^3.0.0",
+    "rollup-plugin-node-builtins": "^2.1.2",
     "tls": "0.0.1",
     "webpack": "^3.6.0"
   },
@@ -62,7 +62,6 @@
     "moment": "^2.18.1",
     "querystring": "^0.2.0",
     "request": "^2.82.0",
-    "request-promise": "^4.2.1",
-    "rollup-plugin-node-builtins": "^2.1.2"
+    "request-promise": "^4.2.1"
   }
 }
