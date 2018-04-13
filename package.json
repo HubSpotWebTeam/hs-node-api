@@ -2,18 +2,17 @@
   "name": "hs-api",
   "version": "1.4.3",
   "description": "Hubspot API Wrapper",
-  "keywords": [
-    "hubspot",
-    "hubspot-api"
-  ],
+  "keywords": ["hubspot", "hubspot-api"],
   "repository": "github:HubSpotWebTeam/hs-node-api",
   "main": "dist/main.js",
   "scripts": {
     "api-tests": "DEBUG=utilities babel-node --presets node6 test/",
-    "build": "rimraf dist/ docs/ && DEBUG=rollup:compile node tools/build.js && npm run compile-docs",
+    "build":
+      "rimraf dist/ docs/ && DEBUG=rollup:compile node tools/build.js && npm run compile-docs",
     "prepare": "cat README.md > README && npm run build && npm test",
-    "compile-docs": "jsdoc -R README.md -c ./jsconf.json -t ./node_modules/ink-docstrap/template -r ./src -d docs/",
-    "test": "echo \"Reinstate tests\"",
+    "compile-docs":
+      "jsdoc -R README.md -c ./jsconf.json -t ./node_modules/ink-docstrap/template -r ./src -d docs/",
+    "test": "mocha",
     "test:watch": "mocha --watch",
     "postpublish": "rimraf README"
   },
