@@ -47,7 +47,7 @@ Entities available
 * Social (partial implementation)
 * Workflows (partial implementation)
 
-Please check out the `docs` folder in the node_modules directory, which has a JSDoc for all currently implemented modules/methods.
+Please check out the full documentation available at https://hubspotwebteam.github.io/hs-node-api/
 
 ## Authors and Contributors
 
