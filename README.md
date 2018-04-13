@@ -8,6 +8,10 @@ A client wrapper for the HubSpot API at https://developers.hubspot.com/docs/over
 npm install --save hs-api
 ```
 
+## Docs
+
+Full documentation available at https://hubspotwebteam.github.io/hs-node-api/
+
 ## Example
 
 ```
