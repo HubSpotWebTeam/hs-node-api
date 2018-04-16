@@ -61,6 +61,7 @@ const schemaPost = joi.object().keys({
   is_social_publishing_enabled: joi.boolean(),
   keywords: joi.array(),
   label: joi.string().allow(''),
+  layout_sections: joi.object().allow(null),
   link_rel_canonical_url: joi.string().allow(''),
   list_template: joi.string().allow(''),
   live_domain: joi.string().allow(''),
