@@ -1,5 +1,5 @@
 {
-  "name": "hs-api",
+  "name": "hubspot-api",
   "version": "1.4.6",
   "description": "Hubspot API Wrapper",
   "keywords": ["hubspot", "hubspot-api"],
@@ -11,7 +11,7 @@
       "rimraf dist/ docs/ && DEBUG=rollup:compile node tools/build.js && npm run compile-docs",
     "prepare": "npm run build && npm test",
     "compile-docs":
-      "jsdoc -R README -c ./jsconf.json -t ./node_modules/ink-docstrap/template -r ./src -d docs/",
+      "jsdoc -R README.md -c ./jsconf.json -t ./node_modules/ink-docstrap/template -r ./src -d docs/",
     "test": "mocha",
     "test:watch": "mocha --watch"
   },

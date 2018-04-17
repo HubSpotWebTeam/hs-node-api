@@ -9,7 +9,7 @@ const nodeBuiltins = require('rollup-plugin-node-builtins');
 const debug = require('debug')('rollup:compile');
 
 debug('Compilation started');
-const moduleName = 'hs-api';
+const moduleName = 'hubspot-api';
 const bundles = [
   {
     format: 'cjs',

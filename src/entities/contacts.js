@@ -1,7 +1,7 @@
 import createRequest from '../utilities';
 import constants from '../constants';
 
-const debug = require('debug')('hs-api:tests'); // eslint-disable-line
+const debug = require('debug')('hubspot-api:tests'); // eslint-disable-line
 
 const defaults = {
   propertyMode: 'value_only',

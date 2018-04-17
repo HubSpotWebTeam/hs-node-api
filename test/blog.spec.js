@@ -1,7 +1,7 @@
 require('dotenv').config();
-const HubSpotAPI = require('../dist/hs-api');
+const HubSpotAPI = require('../dist/hubspot-api');
 const expect = require('chai').expect;
-const debug = require('debug')('hs-api:tests'); //eslint-disable-line
+const debug = require('debug')('hubspot-api:tests'); //eslint-disable-line
 const {
   schemaPosts,
   schemaPost,
@@ -48,7 +48,7 @@ describe('Creating Blog Posts', async () => {
     const createdPostResponse = await hs.blog.createOrUpdatePost({
       name: `A test post created by testing at ${new Date().getTime()}`,
       post_body:
-        'This blog post was created by an E2E test as part of the hs-api library, you can safely delete it.',
+        'This blog post was created by an E2E test as part of the hubspot-api library, you can safely delete it.',
       content_group_id
     });
     expect(validate(createdPostResponse, schemaPost).error).to.be.a('null');

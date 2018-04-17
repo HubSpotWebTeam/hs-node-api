@@ -1,7 +1,7 @@
 import qs from 'querystring';
 import request from 'request-promise';
 
-const debugApp = require('debug')('hs-api:utilities');
+const debugApp = require('debug')('hubspot-api:utilities');
 
 const interpolate = (template, data, opts = {}) => {
   // For escaping strings to go in regex

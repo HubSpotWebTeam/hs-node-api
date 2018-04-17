@@ -5,7 +5,7 @@ A client wrapper for the HubSpot API at https://developers.hubspot.com/docs/over
 ## Installation
 
 ```
-npm install --save hs-api
+npm install --save hubspot-api
 ```
 
 ## Docs
@@ -15,7 +15,7 @@ Full documentation available at https://hubspotwebteam.github.io/hs-node-api/
 ## Example
 
 ```
-const HubSpotAPI = require('hs-api');
+const HubSpotAPI = require('hubspot-api');
 const hs = new HubSpotAPI({ hapikey });
 // or const hs = new HubSpotAPI({ accessToken });
 
