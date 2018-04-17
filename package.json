@@ -1,6 +1,6 @@
 {
   "name": "hubspot-api",
-  "version": "1.4.6",
+  "version": "1.0.0",
   "description": "Hubspot API Wrapper",
   "keywords": ["hubspot", "hubspot-api"],
   "repository": "github:HubSpotWebTeam/hs-node-api",
