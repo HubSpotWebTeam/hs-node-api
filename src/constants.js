@@ -91,8 +91,12 @@ export default {
       byDomain: `${defaultApiHost}/companies/v2/domains/{domain}/companies`
     },
     workflows: {
+      eventLogs: `${defaultApiHost}/automation/v3/logevents/workflows/{workflowId}/filter`,
+      enrollments: `${defaultApiHost}/automation/v2/workflows/enrollments/contacts/{id}`,
+      enrollContact: `${defaultApiHost}/automation/v2/workflows/{workflowId}/enrollments/contacts/{email}`,
       create: `${defaultApiHost}/automation/v3/workflows`,
-      get: `${defaultApiHost}/automation/v3/workflows/{id}`
+      getAll: `${defaultApiHost}/automation/v3/workflows`,
+      byId: `${defaultApiHost}/automation/v3/workflows/{id}`
     }
   }
 };
