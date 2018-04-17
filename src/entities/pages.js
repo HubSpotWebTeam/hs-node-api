@@ -103,7 +103,8 @@ const getPages = async (opts = {}) => {
         deleted_at,
         name,
         publish_date,
-        updated
+        updated,
+        slug
       },
       additionalOpts
     );
