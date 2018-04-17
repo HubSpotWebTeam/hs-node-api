@@ -1,7 +1,7 @@
 import createRequest from '../utilities';
 import constants from '../constants';
 
-const debug = require('debug')('hs-api:tests'); // eslint-disable-line
+const debug = require('debug')('hubspot-api:tests'); // eslint-disable-line
 
 const defaults = {
   propertyMode: 'value_only',
@@ -156,7 +156,7 @@ export default function contacts(baseOptions) {
      * @memberof hs/contacts
      * @method getById
      * @param {int} vid The vid of the contact to retrieve
-     * @param {object} properties Optional extra properties to add to the request - see https://developers.hubspot.com/docs/methods/contacts/get_contact
+     * @param {object} properties Optional extra properties to add to the request - see {@link https://developers.hubspot.com/docs/methods/contacts/get_contact|developer docs}
      * @example
      * const hs = new HubspotClient(props);
      * hs.contacts.getById(123412313).then(response => console.log(response))
@@ -169,7 +169,7 @@ export default function contacts(baseOptions) {
      * @memberof hs/contacts
      * @method getByEmail
      * @param {string} email The email address of the contact
-     * @param {object} properties Optional extra properties to add to the request - see https://developers.hubspot.com/docs/methods/contacts/get_contact
+     * @param {object} properties Optional extra properties to add to the request - see {@link https://developers.hubspot.com/docs/methods/contacts/get_contact|developer docs}
      * @example
      * const hs = new HubspotClient(props);
      * hs.contacts.getByEmail('foo@bar.com').then(response => console.log(response))
@@ -182,7 +182,7 @@ export default function contacts(baseOptions) {
      * @memberof hs/contacts
      * @method getByUtk
      * @param {string} utk The utk (User token) of the contact
-     * @param {object} properties Optional extra properties to add to the request - see https://developers.hubspot.com/docs/methods/contacts/get_contact
+     * @param {object} properties Optional extra properties to add to the request - see {@link https://developers.hubspot.com/docs/methods/contacts/get_contact|developer docs}
      * @example
      * const hs = new HubspotClient(props);
      * hs.contacts.getByUtk('jdalksjd82739jaskdksadjhkds').then(response => console.log(response))

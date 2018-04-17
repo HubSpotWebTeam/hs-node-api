@@ -1,7 +1,7 @@
 require('dotenv').config();
-const HubSpotAPI = require('../dist/hs-api');
+const HubSpotAPI = require('../dist/hubspot-api');
 const expect = require('chai').expect;
-const debug = require('debug')('hs-api:tests'); //eslint-disable-line
+const debug = require('debug')('hubspot-api:tests'); //eslint-disable-line
 const { schemaEvent, schemaEvents, validate } = require('./schemas/calendar');
 const { tomorrow } = require('./utilities');
 

@@ -15,7 +15,7 @@ import pagesApi from './entities/pages';
 /**
 * HubSpotClient class
 * @example
-const HubSpotClient = require('hs-api');
+const HubSpotClient = require('hubspot-api');
 const hs = new HubSpotClient({ accessToken: 'i82739813ksjksf' });
 // or
 const hs = new HubSpotClient({ hapikey: '76128312asa7s8761823761' });
