@@ -44,8 +44,9 @@ Entities available
 * Email Events (partial implementation)
 * Forms (partial implementation)
 * Layouts
+* Page Publishing
 * Social (partial implementation)
-* Workflows (partial implementation)
+* Workflows
 
 Please check out the full documentation available at https://hubspotwebteam.github.io/hs-node-api/
 
