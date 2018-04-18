@@ -45,7 +45,7 @@ const interpolate = (template, data, opts = {}) => {
 export default async function createRequest(uri, options, props) {
   try {
     const properties = Object.keys(props).reduce((acc, curr) => {
-      if (props[curr]) {
+      if (typeof props[curr] !== 'undefined') {
         acc[curr] = props[curr];
       }
       return acc;
