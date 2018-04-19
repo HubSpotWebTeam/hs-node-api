@@ -444,7 +444,8 @@ const getPosts = async (opts = {}) => {
         created,
         deleted_at,
         name,
-        updated
+        updated,
+        slug
       },
       additionalOpts
     );
