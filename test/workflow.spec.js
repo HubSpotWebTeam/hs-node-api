@@ -50,7 +50,7 @@ const workflowPayload = {
 // For global storage
 const createdWorkflow = {};
 
-describe.only('Workflows', async () => {
+describe('Workflows', async () => {
   describe('Retrieving Workflows', async () => {
     it('returns a valid workflow list', async () => {
       const workflows = await hs.workflows.getAll();
