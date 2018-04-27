@@ -4,6 +4,35 @@ import constants from '../constants';
 const defaults = {};
 let _baseOptions;
 
+
+const getAllDeals = async (opts = {}) => {
+  try {
+    const { limit, offset, properties, propertiesWithHistory, associations } = opts;
+
+    let additionalOpts = {
+      limit,
+      offset
+    };
+
+    const mergedProps = Object.assign(
+      {},
+      defaults,
+      _baseOptions,
+      additionalOpts
+    );
+
+    const allDeals = await createRequest(
+      constants.api.deals.getAll,
+      {},
+      mergedProps
+    );
+
+    return Promise.resolve(allDeals);
+  } catch (e) {
+    return Promise.reject(e.message);
+  }
+};
+
 const getRecentlyCreated = async (opts = {}) => {
   try {
     const { count, offset, since, includePropertyVersions } = opts;
@@ -43,6 +72,6 @@ export default function workflows(baseOptions) {
      * @property {boolean} opts.includePropertyVersions
      * @returns {Promise}
      */
-    getRecentlyCreated
+    getRecentlyCreated, getAllDeals
   };
 }
