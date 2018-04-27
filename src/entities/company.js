@@ -107,8 +107,6 @@ const getAll = async props => {
       propertiesWithHistory
     });
     mergedProps = sanitizeObject(mergedProps);
-    // console.log(mergedProps);
-    // return Promise.resolve();
 
     const companies = await createRequest(
       constants.api.company.byId,

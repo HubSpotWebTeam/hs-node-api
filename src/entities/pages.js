@@ -103,7 +103,8 @@ const getPages = async (opts = {}) => {
         deleted_at,
         name,
         publish_date,
-        updated
+        updated,
+        slug
       },
       additionalOpts
     );
@@ -350,6 +351,7 @@ export default function pagesApi(baseOptions) {
      * @example
      * const hs = new HubspotClient(props);
      * hs.pages.createOrUpdatePage(opts).then(response => console.log(response));
+     * @property {int} opts.id If set, this will update the page with the corresponding ID.
      * @property {string} opts.campaign
      * @property {string} opts.campaign_name
      * @property {string} opts.footer_html
