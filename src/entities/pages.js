@@ -8,6 +8,7 @@ const createOrUpdatePage = async (opts = {}) => {
   try {
     const {
       id,
+      archived,
       campaign,
       campaign_name,
       footer_html,
@@ -26,6 +27,7 @@ const createOrUpdatePage = async (opts = {}) => {
     } = opts;
 
     const body = {
+      archived,
       campaign,
       campaign_name,
       footer_html,
