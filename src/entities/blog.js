@@ -432,7 +432,6 @@ const getPosts = async (opts = {}) => {
       blog_author_id,
       campaign,
       content_group_id,
-      slug,
       state,
       order_by
     };
@@ -444,7 +443,8 @@ const getPosts = async (opts = {}) => {
         created,
         deleted_at,
         name,
-        updated
+        updated,
+        slug
       },
       additionalOpts
     );
