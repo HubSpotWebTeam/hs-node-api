@@ -17,7 +17,11 @@ export default {
       restoreVersion: `${defaultApiHost}/content/api/v2/pages/{id}/versions/restore`
     },
     deals: {
-      recentlyCreated: `${defaultApiHost}/deals/v1/deal/recent/created`
+      recentlyCreated: `${defaultApiHost}/deals/v1/deal/recent/created`,
+      getAll: `${defaultApiHost}/deals/v1/deal/paged`,
+      create: `${defaultApiHost}/deals/v1/deal`,
+      update: `${defaultApiHost}/deals/v1/deal/{id}`,
+      batchUpdate: `${defaultApiHost}/deals/v1/batch-async/update`,
     },
     emailEvents: {
       campaignsWithRecentActivity: `${defaultApiHost}/email/public/v1/campaigns`,
