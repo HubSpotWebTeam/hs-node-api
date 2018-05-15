@@ -1,5 +1,5 @@
 require('dotenv').config();
-const HubSpotAPI = require('../dist/hubspot-api');
+const HubSpotClient = require('../dist/hubspot-api');
 const expect = require('chai').expect;
 const debug = require('debug')('hubspot-api:tests'); //eslint-disable-line
 const { schemaEvent, schemaEvents, validate } = require('./schemas/calendar');
@@ -9,7 +9,7 @@ const {
   E2E_TESTS_HAPI_KEY: hapikey,
   E2E_TESTS_BLOG_ID: contentGroupId
 } = process.env;
-const hs = new HubSpotAPI({ hapikey });
+const hs = new HubSpotClient({ hapikey });
 
 describe('Get Calendar Event List', async () => {
   it('returns a valid calendar event list response with no query', async () => {

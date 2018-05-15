@@ -15,9 +15,9 @@ Full documentation available at https://hubspotwebteam.github.io/hs-node-api/
 ## Example
 
 ```
-const HubSpotAPI = require('hubspot-api');
-const hs = new HubSpotAPI({ hapikey });
-// or const hs = new HubSpotAPI({ accessToken });
+const HubSpotClient = require('hubspot-api');
+const hs = new HubSpotClient({ hapikey });
+// or const hs = new HubSpotClient({ accessToken });
 
 async function getContact(id){
   const contact = await hs.contacts.getById(827398123);
