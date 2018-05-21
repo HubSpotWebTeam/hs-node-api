@@ -1,5 +1,5 @@
 require('dotenv').config();
-const HubSpotAPI = require('../dist/hubspot-api');
+const HubSpotClient = require('../dist/hubspot-api');
 const expect = require('chai').expect;
 const debug = require('debug')('hubspot-api:tests'); //eslint-disable-line
 const {
@@ -15,7 +15,7 @@ const {
   E2E_TESTS_CONTACT_ID: vid
 } = process.env;
 
-const hs = new HubSpotAPI({ hapikey });
+const hs = new HubSpotClient({ hapikey });
 
 // Set up some test data
 const name = `Workflow created by API integration testing scripts at ${new Date().getTime()}`;
