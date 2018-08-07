@@ -11,7 +11,7 @@
   "scripts": {
     "api-tests": "DEBUG=utilities babel-node --presets node6 test/",
     "build": "rimraf dist/ docs/ && DEBUG=rollup:compile node tools/build.js && npm run compile-docs",
-    "prepare": "npm run build",
+    "prepare": "npm run build && npm test",
     "compile-docs": "jsdoc -R README.md -c ./jsconf.json -t ./node_modules/ink-docstrap/template -r ./src -d docs/",
     "test": "mocha",
     "test:watch": "mocha --watch"
@@ -49,9 +49,9 @@
     "rimraf": "^2.6.2",
     "rollup": "^0.51.6",
     "rollup-plugin-babel": "^3.0.2",
+    "rollup-plugin-node-builtins": "^2.1.2",
     "rollup-plugin-uglify": "^2.0.1",
     "supertest": "^3.0.0",
-    "rollup-plugin-node-builtins": "^2.1.2",
     "tls": "0.0.1",
     "webpack": "^3.6.0"
   },
