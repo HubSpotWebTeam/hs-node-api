@@ -3,7 +3,7 @@ import companyApi from './entities/company';
 import calendarApi from './entities/calendar';
 import blogPostsApi from './entities/blog';
 import workflowsApi from './entities/workflows';
-// import filesApi from './entities/files';
+import filesApi from './entities/files';
 import domainsApi from './entities/domains';
 import layoutsApi from './entities/layouts';
 import formsApi from './entities/forms';
@@ -92,9 +92,13 @@ class HubSpotClient {
     return workflowsApi(this.props);
   }
 
-  // get files() {
-  //   return filesApi(this.props);
-  // }
+  /**
+   * A collection of methods related to the COS Files API
+   * @namespace hs/files
+   */
+  get files() {
+    return filesApi(this.props);
+  }
 
   /**
    * A collection of methods related to the Domains API

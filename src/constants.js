@@ -2,6 +2,9 @@ const defaultApiHost = process.env.COS_API_HOST || 'https://api.hubapi.com';
 
 export default {
   api: {
+    files: {
+      getFilesInFolder: `${defaultApiHost}/filemanager/api/v2/files`
+    },
     pages: {
       create: `${defaultApiHost}/content/api/v2/pages`,
       byId: `${defaultApiHost}/content/api/v2/pages/{id}`,
