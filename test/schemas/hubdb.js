@@ -83,6 +83,7 @@ const schemaRows = joi.object().keys({
 module.exports = {
   schemaTables,
   schemaTable,
+  schemaRow,
   schemaRows,
   validate: joi.validate
 };

@@ -5,6 +5,7 @@ const debug = require('debug')('hubspot-api:tests'); //eslint-disable-line
 const {
   schemaTable,
   schemaTables,
+  schemaRow,
   schemaRows,
   validate
 } = require('./schemas/hubdb');
@@ -47,6 +48,18 @@ describe('Get table rows', async () => {
   it('returns a valid table rows response', async () => {
     const getRowsResponse = await hs.hubdb.getTableRows(tableId, portalId);
     expect(validate(getRowsResponse, schemaRows).error).to.be.a('null');
+    return Promise.resolve();
+  });
+});
+
+describe('Add a table row', async () => {
+  it('returns a valid table row response', async () => {
+    const ms = new Date().getTime();
+    const addRowResponse = await hs.hubdb.addTableRow(tableId, {
+      name: `Test row ${ms}`,
+      path: `my-test-row-${ms}`
+    });
+    expect(validate(addRowResponse, schemaRow).error).to.be.a('null');
     return Promise.resolve();
   });
 });

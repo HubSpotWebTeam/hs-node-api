@@ -90,6 +90,21 @@ const getTableById = async (tableId, portalId, options = {}) => {
   }
 };
 
+const addTableRow = async (tableId, body = {}) => {
+  try {
+    const method = 'POST';
+    const url = constants.api.hubdb.rows;
+    const options = { tableId, method, body };
+
+    const mergedProps = Object.assign({}, defaults, _baseOptions);
+    const add = await createRequest(url, options, mergedProps);
+
+    return Promise.resolve(add);
+  } catch (e) {
+    return Promise.reject(e.message);
+  }
+};
+
 export default function hubdbApi(baseOptions) {
   _baseOptions = baseOptions;
 
@@ -148,6 +163,19 @@ export default function hubdbApi(baseOptions) {
      * hs.hubdb.getTableById(tableId, portalId, options).then(response => console.log(response))
      * @returns {Promise}
      */
-    getTableById
+    getTableById,
+    /**
+     * Add row to a HubDB table
+     * @async
+     * @memberof hs/hubdb
+     * @method addTableRow
+     * @param {int} tableId
+     * @param {object} options
+     * @example
+     * const hs = new HubSpotClient(props);
+     * hs.hubdb.addTableRow(tableId, options).then(response => console.log(response))
+     * @returns {Promise}
+     */
+    addTableRow
   };
 }
