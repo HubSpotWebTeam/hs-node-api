@@ -3,10 +3,10 @@ const joi = require('joi');
 const schemaRow = joi.object().keys({
   id: joi.number(),
   createdAt: joi.number(),
-  path: joi.string(),
+  name: joi.string().allow(null),
+  path: joi.string().allow(null),
   hs_path: joi.string().optional(),
   hs_name: joi.string().optional(),
-  name: joi.string(),
   values: joi.object(),
   isSoftEditable: joi.boolean()
 });
@@ -17,7 +17,7 @@ const schemaTable = joi.object().keys({
   portalId: joi.number(),
   createdAt: joi.number(),
   updated: joi.number(),
-  publishedAt: joi.number(),
+  publishedAt: joi.number().allow(null),
   updatedAt: joi.number(),
   columns: joi.array(),
   label: joi.string(),
