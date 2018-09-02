@@ -24,7 +24,7 @@ export default {
       getAll: `${defaultApiHost}/deals/v1/deal/paged`,
       create: `${defaultApiHost}/deals/v1/deal`,
       update: `${defaultApiHost}/deals/v1/deal/{id}`,
-      batchUpdate: `${defaultApiHost}/deals/v1/batch-async/update`,
+      batchUpdate: `${defaultApiHost}/deals/v1/batch-async/update`
     },
     emailEvents: {
       campaignsWithRecentActivity: `${defaultApiHost}/email/public/v1/campaigns`,
@@ -104,6 +104,16 @@ export default {
       create: `${defaultApiHost}/automation/v3/workflows`,
       getAll: `${defaultApiHost}/automation/v3/workflows`,
       byId: `${defaultApiHost}/automation/v3/workflows/{id}`
+    },
+    hubdb: {
+      tables: `${defaultApiHost}/hubdb/api/v2/tables`,
+      rows: `${defaultApiHost}/hubdb/api/v2/tables/{tableId}/rows`,
+      table: `${defaultApiHost}/hubdb/api/v2/tables/{tableId}`,
+      row: `${defaultApiHost}/hubdb/api/v2/tables/{tableId}/rows/{id}`,
+      cell: `${defaultApiHost}/hubdb/api/v2/tables/{tableId}/rows/{rowId}/cells/{cellId}`,
+      cloneTable: `${defaultApiHost}/hubdb/api/v2/tables/{tableId}/clone`,
+      cloneRow: `${defaultApiHost}/hubdb/api/v2/tables/{tableId}/rows/{rowId}/clone`,
+      importCsv: `${defaultApiHost}/hubdb/api/v2/tables/{tableId}/import`
     }
   }
 };
