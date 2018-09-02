@@ -1,5 +1,16 @@
 const joi = require('joi');
 
+const schemaRow = joi.object().keys({
+  id: joi.number(),
+  createdAt: joi.number(),
+  path: joi.string(),
+  hs_path: joi.string().optional(),
+  hs_name: joi.string().optional(),
+  name: joi.string(),
+  values: joi.object(),
+  isSoftEditable: joi.boolean()
+});
+
 const schemaTable = joi.object().keys({
   id: joi.number(),
   name: joi.string().allow(''),
@@ -57,8 +68,21 @@ const schemaTables = joi.object().keys({
     .min(1)
 });
 
+const schemaRows = joi.object().keys({
+  limit,
+  offset,
+  total,
+  totalCount,
+  message,
+  objects: joi
+    .array()
+    .items(schemaRow)
+    .min(1)
+});
+
 module.exports = {
   schemaTables,
   schemaTable,
+  schemaRows,
   validate: joi.validate
 };
