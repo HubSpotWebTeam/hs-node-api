@@ -11,6 +11,7 @@ import socialApi from './entities/social';
 import emailEventsApi from './entities/email-events';
 import dealsApi from './entities/deals';
 import pagesApi from './entities/pages';
+import hubdbApi from './entities/hubdb';
 
 /**
 * HubSpotClient class
@@ -154,6 +155,14 @@ class HubSpotClient {
    */
   get pages() {
     return pagesApi(this.props);
+  }
+
+  /**
+   * A collection of methods related to the HubDB Tables API
+   * @namespace hs/hubdb
+   */
+  get hubdb() {
+    return hubdbApi(this.props);
   }
 }
 
