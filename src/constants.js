@@ -114,6 +114,9 @@ export default {
       cloneTable: `${defaultApiHost}/hubdb/api/v2/tables/{tableId}/clone`,
       cloneRow: `${defaultApiHost}/hubdb/api/v2/tables/{tableId}/rows/{rowId}/clone`,
       importCsv: `${defaultApiHost}/hubdb/api/v2/tables/{tableId}/import`
+    },
+    engagements: {
+      create: `${defaultApiHost}/engagements/v1/engagements`
     }
   }
 };

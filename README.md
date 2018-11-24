@@ -42,6 +42,7 @@ Entities available
 - Deals (partial implementation)
 - Domains
 - Email Events (partial implementation)
+- Engagements (partial implementation)
 - Forms (partial implementation)
 - HubDB (partial implementation)
 - Layouts
