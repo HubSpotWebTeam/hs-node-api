@@ -105,6 +105,35 @@ const addTableRow = async (tableId, body = {}) => {
   }
 };
 
+const updateTableRow = async (tableId, rowId, body = {}) => {
+  try {
+    const method = 'POST';
+    const url = constants.api.hubdb.row;
+    const options = { tableId, id: rowId, method, body };
+    const mergedProps = Object.assign({}, defaults, _baseOptions);
+    const update = await createRequest(url, options, mergedProps);
+
+    return Promise.resolve(update);
+  } catch (e) {
+    return Promise.reject(e.message);
+  }
+};
+
+const deleteTableRow = async (tableId, rowId, body = {}) => {
+  try {
+    const method = 'DELETE';
+    const url = constants.api.hubdb.row;
+    const options = { tableId, id: rowId, method, body };
+    const mergedProps = Object.assign({}, defaults, _baseOptions);
+    const update = await createRequest(url, options, mergedProps);
+
+    return Promise.resolve(update);
+  } catch (e) {
+    return Promise.reject(e.message);
+  }
+};
+
+
 export default function hubdbApi(baseOptions) {
   _baseOptions = baseOptions;
 
@@ -176,6 +205,34 @@ export default function hubdbApi(baseOptions) {
      * hs.hubdb.addTableRow(tableId, options).then(response => console.log(response))
      * @returns {Promise}
      */
-    addTableRow
+    addTableRow,
+    /**
+     * Update row in a HubDB table
+     * @async
+     * @memberof hs/hubdb
+     * @method updateTableRow
+     * @param {int} tableId
+     * @param {int} rowId
+     * @param {object} options
+     * @example
+     * const hs = new HubSpotClient(props);
+     * hs.hubdb.updateTableRow(tableId, rowId, options).then(response => console.log(response))
+     * @returns {Promise}
+     */
+    updateTableRow,
+    /**
+     * Delete row from a HubDB table
+     * @async
+     * @memberof hs/hubdb
+     * @method deleteTableRow
+     * @param {int} tableId
+     * @param {int} rowId
+     * @param {object} options
+     * @example
+     * const hs = new HubSpotClient(props);
+     * hs.hubdb.deleteTableRow(tableId, rowId, options).then(response => console.log(response))
+     * @returns {Promise}
+     */
+    deleteTableRow
   };
 }
