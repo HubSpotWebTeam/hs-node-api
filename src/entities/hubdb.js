@@ -107,7 +107,7 @@ const addTableRow = async (tableId, body = {}) => {
 
 const updateTableRow = async (tableId, rowId, body = {}) => {
   try {
-    const method = 'POST';
+    const method = 'PUT';
     const url = constants.api.hubdb.row;
     const options = { tableId, id: rowId, method, body };
     const mergedProps = Object.assign({}, defaults, _baseOptions);
