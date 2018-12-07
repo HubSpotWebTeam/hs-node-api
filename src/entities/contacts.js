@@ -138,6 +138,20 @@ const getContacts = async options => {
   }
 };
 
+const getRecentlyModified = async options => {
+  try {
+    const mergedProps = Object.assign({}, defaults, _baseOptions, options);
+    const contacts = await createRequest(
+      constants.api.contacts.getRecentlyModified,
+      {},
+      mergedProps
+    );
+    return Promise.resolve(contacts);
+  } catch (e) {
+    return Promise.reject(e.message);
+  }
+};
+
 // const search = async options => {
 //   // FIXME: Implement this
 // };
@@ -269,7 +283,22 @@ export default function contacts(baseOptions) {
      * hs.contacts.getContacts({ limit: 25 }).then(response => console.log(response));
      * @returns {Promise}
      */
-    getContacts
+    getContacts,
+    /**
+     * Get recently modified contacts
+     * @async
+     * @memberof hs/contacts
+     * @method getRecentlyModified
+     * @param {object} options Additional options and paging criteria
+     * @example
+     * const hs = new HubspotClient(props);
+     * hs.contacts.getRecentlyModified({count: 5}).then(response => console.log(response))
+     * @property {number} [options.count] - Specifies the number of contacts to be returned.
+     * @property {number} [options.timeOffset] - This is used along with `vidOffset` to get the next page of results. Each request will return a `time-offset` and `vid-offset` in the response, and you'd use those offsets in the URL of your next request to get the next page of results.
+     * @property {number} [options.vidOffset] - This is used along with `timeOffset` to get the next page of results.
+     * @returns {Promise}
+     */
+    getRecentlyModified
     // search, // Unimplemented
     // mergeContacts // Unimplemented
   };
