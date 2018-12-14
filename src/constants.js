@@ -89,7 +89,8 @@ export default {
       byEmail: `${defaultApiHost}/contacts/v1/contact/email/{email}/profile`,
       byUtk: `${defaultApiHost}/contacts/v1/contact/utk/{utk}/profile`,
       createContact: `${defaultApiHost}/contacts/v1/contact/createOrUpdate/email/{email}/`,
-      batchUpdateContacts: `${defaultApiHost}/contacts/v1/contact/batch/`
+      batchUpdateContacts: `${defaultApiHost}/contacts/v1/contact/batch/`,
+      getRecentlyModified: `${defaultApiHost}/contacts/v1/lists/recently_updated/contacts/recent`
     },
     company: {
       create: `${defaultApiHost}/companies/v2/companies/`,
@@ -115,6 +116,9 @@ export default {
       cloneTable: `${defaultApiHost}/hubdb/api/v2/tables/{tableId}/clone`,
       cloneRow: `${defaultApiHost}/hubdb/api/v2/tables/{tableId}/rows/{rowId}/clone`,
       importCsv: `${defaultApiHost}/hubdb/api/v2/tables/{tableId}/import`
+    },
+    engagements: {
+      create: `${defaultApiHost}/engagements/v1/engagements`
     }
   }
 };
