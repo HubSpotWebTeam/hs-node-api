@@ -161,6 +161,42 @@ const getRecentlyCreated = async props => {
   }
 };
 
+const byId = async companyId => {
+  try {
+    const method = 'GET';
+    let mergedProps = Object.assign({}, defaults, _baseOptions, {});
+    mergedProps = sanitizeObject(mergedProps);
+    const companies = await createRequest(
+      constants.api.company.byId,
+      { method, companyId },
+      mergedProps
+    );
+    return Promise.resolve(companies);
+  } catch (e) {
+    return Promise.reject(e.message);
+  }
+};
+
+const getContacts = async (companyId, count = 100, vidOffset) => {
+  try {
+    const method = 'GET';
+    let mergedProps = Object.assign({}, defaults, _baseOptions, {
+      count,
+      vidOffset
+    });
+
+    mergedProps = sanitizeObject(mergedProps);
+    const companies = await createRequest(
+      constants.api.company.contacts,
+      { method, companyId },
+      mergedProps
+    );
+    return Promise.resolve(companies);
+  } catch (e) {
+    return Promise.reject(e.message);
+  }
+};
+
 const byDomain = async (domain, props) => {
   try {
     const method = 'POST';
@@ -197,7 +233,7 @@ const byDomain = async (domain, props) => {
   }
 };
 
-export default function calendar(baseOptions) {
+export default function company(baseOptions) {
   _baseOptions = baseOptions;
 
   return {
@@ -317,6 +353,30 @@ export default function calendar(baseOptions) {
      * @property {array} [pagingProperties.properties=["domain", "createdate", "name", "hs_lastmodifieddate"]] - An array of properties that will be included for the returned companies. By default, no properties will be included in the response, so you must specify any properties that you want.
      * @returns {Promise}
      */
-    byDomain
+    byDomain,
+    /**
+     * Search for companies by ID.
+     * @async
+     * @memberof hs/company
+     * @method byId
+     * @param {int} id VID of company to search for
+     * @example
+     * const hs = new HubspotClient(props);
+     * const companyInfo = await hs.company.byId(1234);
+     * @returns {Promise}
+     */
+    byId,
+    /**
+     * Get contacts at a company
+     * @async
+     * @memberof hs/company
+     * @method getContacts
+     * @param {int} id VID of company
+     * @example
+     * const hs = new HubspotClient(props);
+     * const companyInfo = await hs.company.getContacts(1234);
+     * @returns {Promise}
+     */
+    getContacts
   };
 }

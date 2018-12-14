@@ -95,6 +95,7 @@ export default {
       create: `${defaultApiHost}/companies/v2/companies/`,
       batchUpdate: `${defaultApiHost}/companies/v1/batch-async/update`,
       byId: `${defaultApiHost}/companies/v2/companies/{companyId}`,
+      contacts: `${defaultApiHost}/companies/v2/companies/{companyId}/contacts`,
       byDomain: `${defaultApiHost}/companies/v2/domains/{domain}/companies`
     },
     workflows: {
