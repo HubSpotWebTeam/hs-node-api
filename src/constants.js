@@ -115,7 +115,8 @@ export default {
       cell: `${defaultApiHost}/hubdb/api/v2/tables/{tableId}/rows/{rowId}/cells/{cellId}`,
       cloneTable: `${defaultApiHost}/hubdb/api/v2/tables/{tableId}/clone`,
       cloneRow: `${defaultApiHost}/hubdb/api/v2/tables/{tableId}/rows/{rowId}/clone`,
-      importCsv: `${defaultApiHost}/hubdb/api/v2/tables/{tableId}/import`
+      importCsv: `${defaultApiHost}/hubdb/api/v2/tables/{tableId}/import`,
+      publishTable: `${defaultApiHost}/hubdb/api/v2/tables/{tableId}/publish`
     },
     engagements: {
       create: `${defaultApiHost}/engagements/v1/engagements`

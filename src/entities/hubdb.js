@@ -54,9 +54,26 @@ const getTableRows = async (tableId, portalId, opts = {}) => {
       opts,
       additionalOpts
     );
+    const method = 'PUT';
+
+    await createRequest(
+      constants.api.hubdb.rows,
+      { tableId, method },
+      mergedProps
+    );
+
+    return Promise.resolve({ published: true });
+  } catch (e) {
+    return Promise.reject(e.message);
+  }
+};
+
+const publishTable = async tableId => {
+  try {
+    const mergedProps = Object.assign({}, defaults, _baseOptions);
 
     const table = await createRequest(
-      constants.api.hubdb.rows,
+      constants.api.hubdb.publishTable,
       { tableId },
       mergedProps
     );
@@ -132,7 +149,6 @@ const deleteTableRow = async (tableId, rowId, body = {}) => {
     return Promise.reject(e.message);
   }
 };
-
 
 export default function hubdbApi(baseOptions) {
   _baseOptions = baseOptions;
@@ -233,6 +249,18 @@ export default function hubdbApi(baseOptions) {
      * hs.hubdb.deleteTableRow(tableId, rowId, options).then(response => console.log(response))
      * @returns {Promise}
      */
-    deleteTableRow
+    deleteTableRow,
+    /**
+     * Publish a draft table
+     * @async
+     * @memberof hs/hubdb
+     * @method publishTable
+     * @param {int} tableId
+     * @example
+     * const hs = new HubSpotClient(props);
+     * hs.hubdb.publishTable(tableId).then(response => console.log(response))
+     * @returns {Promise}
+     */
+    publishTable
   };
 }
