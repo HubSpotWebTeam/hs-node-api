@@ -54,11 +54,10 @@ const getTableRows = async (tableId, portalId, opts = {}) => {
       opts,
       additionalOpts
     );
-    const method = 'PUT';
 
     await createRequest(
       constants.api.hubdb.rows,
-      { tableId, method },
+      { tableId },
       mergedProps
     );
 
@@ -71,10 +70,10 @@ const getTableRows = async (tableId, portalId, opts = {}) => {
 const publishTable = async tableId => {
   try {
     const mergedProps = Object.assign({}, defaults, _baseOptions);
-
+    const method = 'PUT';
     const table = await createRequest(
       constants.api.hubdb.publishTable,
-      { tableId },
+      { tableId, method },
       mergedProps
     );
 
