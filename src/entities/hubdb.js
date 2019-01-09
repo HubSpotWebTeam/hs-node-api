@@ -55,13 +55,13 @@ const getTableRows = async (tableId, portalId, opts = {}) => {
       additionalOpts
     );
 
-    await createRequest(
+    const rows = await createRequest(
       constants.api.hubdb.rows,
       { tableId },
       mergedProps
     );
 
-    return Promise.resolve({ published: true });
+    return Promise.resolve({ published: true, rows });
   } catch (e) {
     return Promise.reject(e.message);
   }
