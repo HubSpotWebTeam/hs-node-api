@@ -13,6 +13,7 @@ import dealsApi from './entities/deals';
 import pagesApi from './entities/pages';
 import hubdbApi from './entities/hubdb';
 import engagementsApi from './entities/engagements';
+import accountApi from './entities/account';
 
 /**
 * HubSpotClient class
@@ -60,6 +61,14 @@ class HubSpotClient {
    */
   get calendar() {
     return calendarApi(this.props);
+  }
+
+  /**
+   * A collection of methods related to the Contacts API
+   * @namespace hs/account
+   */
+  get account() {
+    return accountApi(this.props);
   }
 
   /**

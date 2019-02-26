@@ -46,6 +46,9 @@ export default {
       getAll: `${defaultApiHost}/content/api/v2/layouts`,
       byId: `${defaultApiHost}/content/api/v2/layouts/{id}`
     },
+    account: {
+      getAccountDetails: `${defaultApiHost}/integrations/v1/me/{accessToken}`
+    },
     email: {
       getSubscriptions: `${defaultApiHost}/email/public/v1/subscriptions`
     },
