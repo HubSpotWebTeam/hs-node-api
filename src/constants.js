@@ -47,7 +47,7 @@ export default {
       byId: `${defaultApiHost}/content/api/v2/layouts/{id}`
     },
     account: {
-      getAccountDetails: `${defaultApiHost}/integrations/v1/me/{accessToken}`
+      getAccountDetails: `${defaultApiHost}/integrations/v1/me?hapikey={accessToken}`
     },
     email: {
       getSubscriptions: `${defaultApiHost}/email/public/v1/subscriptions`
