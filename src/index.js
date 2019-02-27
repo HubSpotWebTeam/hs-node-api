@@ -1,3 +1,4 @@
+import accountApi from './entities/account';
 import contactsApi from './entities/contacts';
 import companyApi from './entities/company';
 import calendarApi from './entities/calendar';
@@ -52,6 +53,13 @@ class HubSpotClient {
       throw new Error('One of accessToken/hapikey required in constructor');
     }
     Object.assign(this, { props });
+  }
+  /**
+   * A collection of methods related to the Account API
+   * @namespace hs/account
+   */
+  get account() {
+    return accountApi(this.props);
   }
 
   /**
