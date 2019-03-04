@@ -26,32 +26,12 @@ const hs = new HubSpotClient({ hapikey: '76128312asa7s8761823761' });
 
 class HubSpotClient {
   /**
-   * @param {object} props Constructor props. 1 of hapikey / accessToken is required
+   * @param {object} props Constructor props. 1 of hapikey / accessToken is required for authenticated requests. No properties required for public methods
    * @param {string} props.hapikey          - hapikey
    * @param {string} props.accessToken      - accessToken
    * @returns {object}
    */
   constructor(props) {
-    let hapikey;
-    let accessToken;
-    let validProps = true;
-
-    if (!props) {
-      validProps = false;
-    }
-    if (typeof props === 'string') {
-      hapikey = props;
-    } else if (typeof props === 'object') {
-      ({ hapikey, accessToken } = props);
-    }
-
-    if (!hapikey && !accessToken) {
-      validProps = false;
-    }
-
-    if (!validProps) {
-      throw new Error('One of accessToken/hapikey required in constructor');
-    }
     Object.assign(this, { props });
   }
   /**

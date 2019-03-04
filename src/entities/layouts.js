@@ -1,4 +1,7 @@
-import createRequest, { queryStringParamInterpolator } from '../utilities';
+import createRequest, {
+  queryStringParamInterpolator,
+  requiresAuthentication
+} from '../utilities';
 import constants from '../constants';
 
 const defaults = {};
@@ -6,6 +9,7 @@ let _baseOptions;
 
 const getLayouts = async (opts = {}) => {
   try {
+    requiresAuthentication(_baseOptions);
     const {
       limit,
       offset,
@@ -61,6 +65,7 @@ const getLayouts = async (opts = {}) => {
 
 const getLayout = async id => {
   try {
+    requiresAuthentication(_baseOptions);
     if (!id) {
       throw new Error('getLayout requires an `id` argument');
     }

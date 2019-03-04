@@ -1,4 +1,4 @@
-import createRequest from '../utilities';
+import createRequest, { requiresAuthentication } from '../utilities';
 import constants from '../constants';
 
 const defaults = {};
@@ -6,15 +6,11 @@ let _baseOptions;
 
 const getAll = async (opts = {}) => {
   try {
+    requiresAuthentication(_baseOptions);
     const { limit, offset, properties, propertiesWithHistory } = opts;
 
     const allowedProps = { limit, offset, properties, propertiesWithHistory };
-    const mergedProps = Object.assign(
-      {},
-      defaults,
-      _baseOptions,
-      allowedProps
-    );
+    const mergedProps = Object.assign({}, defaults, _baseOptions, allowedProps);
 
     const allDeals = await createRequest(
       constants.api.deals.getAll,
@@ -30,6 +26,7 @@ const getAll = async (opts = {}) => {
 
 const getRecentlyCreated = async (opts = {}) => {
   try {
+    requiresAuthentication(_baseOptions);
     const { count, offset, since, includePropertyVersions } = opts;
 
     const allowedProps = { count, offset, since, includePropertyVersions };
@@ -47,6 +44,7 @@ const getRecentlyCreated = async (opts = {}) => {
 
 const createOrUpdate = async (opts = {}) => {
   try {
+    requiresAuthentication(_baseOptions);
     const mergedProps = Object.assign({}, defaults, _baseOptions);
     const { id, properties, associations } = opts;
 
@@ -59,27 +57,20 @@ const createOrUpdate = async (opts = {}) => {
       url = constants.api.deals.update;
       Object.assign(options, { method, id });
     }
-    const deal = await createRequest(
-      url,
-      options,
-      mergedProps
-    );
+    const deal = await createRequest(url, options, mergedProps);
     return Promise.resolve(deal);
   } catch (e) {
     return Promise.reject(e.message);
   }
 };
 
-const batchUpdate = async (updates) => {
+const batchUpdate = async updates => {
   try {
+    requiresAuthentication(_baseOptions);
     const mergedProps = Object.assign({}, defaults, _baseOptions);
     const method = 'POST';
     const url = constants.api.deals.batchUpdate;
-    await createRequest(
-      url,
-      { method, body: updates },
-      mergedProps
-    );
+    await createRequest(url, { method, body: updates }, mergedProps);
     return Promise.resolve({ updated: true });
   } catch (e) {
     return Promise.reject(e.message);
@@ -225,6 +216,6 @@ export default function deals(baseOptions) {
      * @property {boolean} opts.includePropertyVersions
      * @returns {Promise}
      */
-    createOrUpdate,
+    createOrUpdate
   };
 }

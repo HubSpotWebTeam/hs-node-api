@@ -18,6 +18,7 @@ Full documentation available at https://hubspotwebteam.github.io/hs-node-api/
 const HubSpotClient = require('hubspot-api');
 const hs = new HubSpotClient({ hapikey });
 // or const hs = new HubSpotClient({ accessToken });
+// or const hs = new HubSpotClient(); # for public methods, eg. Forms, HubDB
 
 async function getContact(id){
   const contact = await hs.contacts.getById(827398123);

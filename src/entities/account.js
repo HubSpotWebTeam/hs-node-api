@@ -1,4 +1,4 @@
-import createRequest from '../utilities';
+import createRequest, { requiresAuthentication } from '../utilities';
 import constants from '../constants';
 
 const debug = require('debug')('hubspot-api:tests'); // eslint-disable-line
@@ -8,6 +8,7 @@ let _baseOptions;
 
 const getAccountDetails = async () => {
   try {
+    requiresAuthentication(_baseOptions);
     const mergedProps = Object.assign({}, defaults, _baseOptions);
     const accountDetails = await createRequest(
       constants.api.account.details,

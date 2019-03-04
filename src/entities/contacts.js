@@ -1,4 +1,4 @@
-import createRequest from '../utilities';
+import createRequest, { requiresAuthentication } from '../utilities';
 import constants from '../constants';
 
 const debug = require('debug')('hubspot-api:tests'); // eslint-disable-line
@@ -11,6 +11,7 @@ let _baseOptions;
 
 const getById = async (vid, options = {}) => {
   try {
+    requiresAuthentication(_baseOptions);
     const mergedProps = Object.assign({}, defaults, _baseOptions, options);
     const contact = await createRequest(
       constants.api.contacts.byId,
@@ -25,6 +26,7 @@ const getById = async (vid, options = {}) => {
 
 const getByEmail = async (email, options) => {
   try {
+    requiresAuthentication(_baseOptions);
     const mergedProps = Object.assign({}, defaults, _baseOptions, options);
     const contact = await createRequest(
       constants.api.contacts.byEmail,
@@ -39,6 +41,7 @@ const getByEmail = async (email, options) => {
 
 const getByUtk = async (utk, options) => {
   try {
+    requiresAuthentication(_baseOptions);
     const mergedProps = Object.assign({}, defaults, _baseOptions, options);
     const contact = await createRequest(
       constants.api.contacts.byUtk,
@@ -54,6 +57,7 @@ const getByUtk = async (utk, options) => {
 // NOTE: Not recommended to use this, only for offline contacts.
 const createOrUpdateContact = async obj => {
   try {
+    requiresAuthentication(_baseOptions);
     const method = 'POST';
     const { email } = obj;
     if (!email) {
@@ -83,6 +87,7 @@ const createOrUpdateContact = async obj => {
 
 const batchUpdateContacts = async contactsToUpdate => {
   try {
+    requiresAuthentication(_baseOptions);
     const method = 'POST';
     const body = contactsToUpdate.map(contact => {
       const contactType = /@/i.test(contact.id) ? 'email' : 'vid';
@@ -110,6 +115,7 @@ const batchUpdateContacts = async contactsToUpdate => {
 
 const deleteContact = async vid => {
   try {
+    requiresAuthentication(_baseOptions);
     const method = 'DELETE';
     await createRequest(
       constants.api.contacts.deleteById,
@@ -126,6 +132,7 @@ const deleteContact = async vid => {
 
 const getContacts = async options => {
   try {
+    requiresAuthentication(_baseOptions);
     const mergedProps = Object.assign({}, defaults, _baseOptions, options);
     const allContacts = await createRequest(
       constants.api.contacts.getAll,
@@ -140,13 +147,14 @@ const getContacts = async options => {
 
 const getRecentlyModified = async options => {
   try {
+    requiresAuthentication(_baseOptions);
     const mergedProps = Object.assign({}, defaults, _baseOptions, options);
-    const contacts = await createRequest(
+    const recentlyModifiedContacts = await createRequest(
       constants.api.contacts.getRecentlyModified,
       {},
       mergedProps
     );
-    return Promise.resolve(contacts);
+    return Promise.resolve(recentlyModifiedContacts);
   } catch (e) {
     return Promise.reject(e.message);
   }

@@ -1,4 +1,7 @@
-import createRequest, { queryStringParamInterpolator } from '../utilities';
+import createRequest, {
+  queryStringParamInterpolator,
+  requiresAuthentication
+} from '../utilities';
 import constants from '../constants';
 
 const defaults = {};
@@ -6,6 +9,7 @@ let _baseOptions;
 
 const getDomains = async (opts = {}) => {
   try {
+    requiresAuthentication(_baseOptions);
     const {
       limit,
       offset,
@@ -51,6 +55,7 @@ const getDomains = async (opts = {}) => {
 
 const getDomain = async id => {
   try {
+    requiresAuthentication(_baseOptions);
     if (!id) {
       throw new Error('getDomain requires an `id` argument');
     }
