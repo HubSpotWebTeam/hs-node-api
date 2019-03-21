@@ -85,6 +85,37 @@ const createOrUpdateContact = async obj => {
   }
 };
 
+const updateContactByVid = async (vid, properties) => {
+  try {
+    requiresAuthentication(_baseOptions);
+    const method = 'POST';
+
+    if (!vid) {
+      throw new Error('`vid` is a required field');
+    }
+
+    const body = {
+      properties: Object.keys(properties).map(key => ({
+        property: key,
+        value: properties[key]
+      }))
+    };
+    debug(`updateContactByVid`, JSON.stringify(body));
+
+    await createRequest(
+      constants.api.contacts.byId,
+      { method, body, vid },
+      _baseOptions
+    );
+
+    return {
+      msg: `Successfully updated contact details for ${vid}`
+    };
+  } catch (err) {
+    return Promise.reject(err);
+  }
+};
+
 const batchUpdateContacts = async contactsToUpdate => {
   try {
     requiresAuthentication(_baseOptions);
@@ -160,9 +191,21 @@ const getRecentlyModified = async options => {
   }
 };
 
-// const search = async options => {
-//   // FIXME: Implement this
-// };
+const search = async (q, options) => {
+  try {
+    requiresAuthentication(_baseOptions);
+    const mergedProps = Object.assign({ q }, defaults, _baseOptions, options);
+    const searchResults = await createRequest(
+      constants.api.contacts.search,
+      {},
+      mergedProps
+    );
+    return searchResults;
+  } catch (e) {
+    return null;
+  }
+};
+
 //
 // const mergeContacts = async (primary, secondary) => {
 //   // FIXME: Implement this
@@ -227,6 +270,22 @@ export default function contacts(baseOptions) {
      * @returns {Promise}
      */
     createOrUpdateContact,
+    /**
+     * Update contact properties, by VID
+     * @async
+     * @memberof hs/contacts
+     * @method updateContactByVid
+     * @param {number} vid VID of contact to update
+     * @param {object} properties Key/value pair of properties to update.
+     * @example
+     * const hs = new HubspotClient(props);
+     * hs.contacts.updateContactByVid(123456, {
+     *  first_name: 'Foo',
+     *  last_name: 'Bar'
+     * }).then(response => console.log(response));
+     * @returns {Promise}
+     */
+    updateContactByVid,
     /**
      * Batch update a set of contacts
      * @async
@@ -306,8 +365,23 @@ export default function contacts(baseOptions) {
      * @property {number} [options.vidOffset] - This is used along with `timeOffset` to get the next page of results.
      * @returns {Promise}
      */
-    getRecentlyModified
-    // search, // Unimplemented
+    getRecentlyModified,
+    /**
+     * Search contacts
+     * @async
+     * @memberof hs/contacts
+     * @method search
+     * @param {string} q The search term (see https://developers.hubspot.com/docs/methods/contacts/search_contacts)
+     * @param {object} options Additional options and paging criteria
+     * @example
+     * const hs = new HubspotClient(props);
+     * const contacts = await hs.contacts.search('john', { count: 5 })
+     * @property {number} [options.count] - Specifies the number of contacts to be returned.
+     * @property {number} [options.offset] - This parameter is used to page through the results. Every call to this endpoint will return an offset value. This value is used in the offset= parameter of the next call to get the next page of contacts.
+     * @property {array} [options.property] - The properties in the "contact" object in the returned data will only include the property or properties that you request.
+     * @returns {Promise}
+     */
+    search
     // mergeContacts // Unimplemented
   };
 }

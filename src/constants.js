@@ -93,7 +93,8 @@ export default {
       byUtk: `${defaultApiHost}/contacts/v1/contact/utk/{utk}/profile`,
       createContact: `${defaultApiHost}/contacts/v1/contact/createOrUpdate/email/{email}/`,
       batchUpdateContacts: `${defaultApiHost}/contacts/v1/contact/batch/`,
-      getRecentlyModified: `${defaultApiHost}/contacts/v1/lists/recently_updated/contacts/recent`
+      getRecentlyModified: `${defaultApiHost}/contacts/v1/lists/recently_updated/contacts/recent`,
+      search: `${defaultApiHost}/contacts/v1/search/query`
     },
     company: {
       create: `${defaultApiHost}/companies/v2/companies/`,
