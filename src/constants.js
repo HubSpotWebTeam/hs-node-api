@@ -47,7 +47,11 @@ export default {
     },
     layouts: {
       getAll: `${defaultApiHost}/content/api/v2/layouts`,
-      byId: `${defaultApiHost}/content/api/v2/layouts/{id}`
+      byId: `${defaultApiHost}/content/api/v2/layouts/{id}`,
+      getBuffer: `${defaultApiHost}/content/api/v2/layouts/{id}/buffer`,
+      hasBufferedChanges: `${defaultApiHost}/content/api/v2/layouts/{id}/has-buffered-changes`,
+      getPreviousVersions: `${defaultApiHost}/content/api/v2/layouts/{id}/versions`,
+      getPreviousVersion: `${defaultApiHost}/content/api/v2/layouts/{id}/versions/{versionId}`,
     },
     email: {
       getSubscriptions: `${defaultApiHost}/email/public/v1/subscriptions`
