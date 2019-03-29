@@ -30,7 +30,7 @@ declare namespace HubSpotClient {
 
 interface IAccountApi {
   getAccountDetails: () => Promise<IAccountApi.IAccountDetails>;
-  getDailyLimit: () => Promise<IAccountApi.IDailyLimit>;
+  getDailyLimit: () => Promise<IAccountApi.IDailyLimit[]>;
 }
 
 declare namespace IAccountApi {
