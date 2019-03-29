@@ -21,6 +21,21 @@ const getAccountDetails = async () => {
   }
 };
 
+const getDailyLimit = async () => {
+  try {
+    requiresAuthentication(_baseOptions);
+    const mergedProps = Object.assign({}, defaults, _baseOptions);
+    const dailyLimit = await createRequest(
+      constants.api.account.dailyLimit,
+      {},
+      mergedProps
+    );
+    return Promise.resolve(dailyLimit);
+  } catch (e) {
+    return Promise.reject(e);
+  }
+};
+
 export default function accounts(baseOptions) {
   _baseOptions = baseOptions;
   // API
@@ -35,6 +50,17 @@ export default function accounts(baseOptions) {
      * const accountDetails = await hs.account.getAccountDetails();
      * @returns {Promise}
      */
-    getAccountDetails
+    getAccountDetails,
+    /**
+     * Check to see how many API calls have been made for a portal for the current day as well as the time that the limit will reset
+     * @async
+     * @memberof hs/account
+     * @method getDailyLimit
+     * @example
+     * const hs = new HubspotClient(props);
+     * const dailyLimit = await hs.account.getDailyLimit();
+     * @returns {Promise}
+     */
+    getDailyLimit
   };
 }
