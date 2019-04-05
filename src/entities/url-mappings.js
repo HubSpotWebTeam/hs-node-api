@@ -156,6 +156,7 @@ export default function urlMappingApi(baseOptions) {
     * @property {int} opts.id,
     * @property {int} opts.routePrefix,
     * @property {int} opts.destination
+    *  @returns {Promise}
     */ 
     getUrlMappings,
     /**
