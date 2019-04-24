@@ -128,6 +128,9 @@ export default {
     },
     engagements: {
       create: `${defaultApiHost}/engagements/v1/engagements`
+    },
+    oauth: {
+      tokenInfo: `${defaultApiHost}/oauth/v1/access-tokens/{token}`
     }
   }
 };
