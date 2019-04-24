@@ -14,6 +14,7 @@ deploy:
   provider: npm
   email: smcelhinney@hubspot.com
   api_key: $NPM_TOKEN
+  skip_cleanup: true
   on:
     branch: release
     repo: HubSpotWebTeam/hs-node-api
