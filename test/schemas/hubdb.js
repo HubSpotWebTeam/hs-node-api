@@ -8,10 +8,20 @@ const schemaRow = joi.object().keys({
   hs_path: joi.string().optional(),
   hs_name: joi.string().optional(),
   values: joi.object(),
-  isSoftEditable: joi.boolean()
+  isSoftEditable: joi.boolean(),
+  childTableId: joi.number().optional()
 });
 
+const allowChildTables = joi.boolean();
+const allowPublicApiAccess = joi.boolean();
+const enableChildTablePages = joi.boolean();
+const dynamicMetaTags = joi.object().optional().allow(null);
+
 const schemaTable = joi.object().keys({
+  allowChildTables,
+  enableChildTablePages,
+  allowPublicApiAccess,
+  dynamicMetaTags,
   id: joi.number(),
   name: joi.string().allow(''),
   portalId: joi.number(),
@@ -30,6 +40,8 @@ const schemaTable = joi.object().keys({
   useForPages: joi.boolean(),
   columnCount: joi.number()
 });
+
+
 
 const limit = joi
   .number()

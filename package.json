@@ -14,7 +14,7 @@
     "build": "rimraf dist/ && DEBUG=rollup:compile node tools/build.js",
     "prepare": "npm run build",
     "compile-docs": "jsdoc -R README.md -c ./jsconf.json -t ./node_modules/ink-docstrap/template -r ./src -d docs/",
-    "test": "echo 'Tests are failing;'",
+    "test": "mocha",
     "test:watch": "mocha --watch"
   },
   "author": "Stephen McElhinney",
