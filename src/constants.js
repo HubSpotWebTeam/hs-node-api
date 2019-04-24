@@ -128,6 +128,13 @@ export default {
     },
     engagements: {
       create: `${defaultApiHost}/engagements/v1/engagements`
+    },
+    urlMappings: {
+      getAll: `${defaultApiHost}/url-mappings/v3/url-mappings`,
+      byId: `${defaultApiHost}/url-mappings/v3/url-mappings/{id}`,
+      create: `${defaultApiHost}/url-mappings/v3/url-mappings`,
+      update: `${defaultApiHost}/url-mappings/v3/url-mappings/{id}`,
+      delete: `${defaultApiHost}/url-mappings/v3/url-mappings/{id}`,
     }
   }
 };
