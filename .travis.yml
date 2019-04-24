@@ -2,7 +2,7 @@ language: node_js
 node_js:
   - "8.11.0"
 after_success: |
-  if [ -n "$GITHUB_API_KEY" ]; then
+  if [ -n "$GITHUB_API_TOKEN" ]; then
     cd "$TRAVIS_BUILD_DIR"
     # This generates a `web` directory containing the website.
     make web
@@ -13,10 +13,17 @@ after_success: |
     git -c user.name='travis' -c user.email='travis' commit -m init
     # Make sure to make the output quiet, or else the API token will leak!
     # This works because the API key can replace your password.
-    git push -f -q https://smcelhinney:$GITHUB_API_KEY@github.com/HubSpotWebTeam/hs-node-api gh-pages:gh-pages &>/dev/null
+    git push -f -q https://smcelhinney:$GITHUB_API_TOKEN@github.com/HubSpotWebTeam/hs-node-api gh-pages:gh-pages &>/dev/null
     cd "$TRAVIS_BUILD_DIR"
   fi
 before_deploy: "echo 'Deploying new npm package'"
+before_deploy:
+  - echo 'Tagging TRAVIS build'
+  # Set up git user name and tag this commit, fix this for other users
+  - git config --local user.name "smcelhinney"
+  - git config --local user.email "stephen@appstruct.io"
+  - export TRAVIS_TAG=${TRAVIS_TAG:-$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)}
+  - git tag $TRAVIS_TAG
 deploy:
   provider: npm
   email: smcelhinney@hubspot.com
