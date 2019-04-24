@@ -1,7 +1,10 @@
 // NOTE: FULLY_IMPLEMENTED
 // NOTE: REQUIRES_TESTS
 
-import createRequest, { sanitizeObject } from '../utilities';
+import createRequest, {
+  sanitizeObject,
+  requiresAuthentication
+} from '../utilities';
 import constants from '../constants';
 
 const defaults = {};
@@ -11,6 +14,7 @@ let _baseOptions;
 
 const create = async properties => {
   try {
+    requiresAuthentication(_baseOptions);
     const method = 'POST';
     const body = {
       properties: Object.keys(properties).map(key => ({
@@ -31,6 +35,7 @@ const create = async properties => {
 
 const update = async (companyId, properties) => {
   try {
+    requiresAuthentication(_baseOptions);
     if (!companyId) {
       throw new Error('Field "companyId" is required.');
     }
@@ -58,14 +63,15 @@ const update = async (companyId, properties) => {
 const batchUpdate = async options => {
   // FIXME: Implement this
   try {
+    requiresAuthentication(_baseOptions);
     const method = 'POST';
-    const body = options.map(company => {
-      const properties = Object.keys(company.updates).map(i => ({
+    const body = options.map(option => {
+      const properties = Object.keys(option.updates).map(i => ({
         name: i,
-        value: company.updates[i]
+        value: option.updates[i]
       }));
       return {
-        objectId: company.id,
+        objectId: option.id,
         properties
       };
     });
@@ -83,6 +89,7 @@ const batchUpdate = async options => {
 
 const deleteCompany = async companyId => {
   try {
+    requiresAuthentication(_baseOptions);
     const method = 'DELETE';
     const response = await createRequest(
       constants.api.company.byId,
@@ -97,6 +104,7 @@ const deleteCompany = async companyId => {
 
 const getAll = async props => {
   try {
+    requiresAuthentication(_baseOptions);
     const method = 'GET';
     const passedProps = props || {};
     const { limit, offset, properties, propertiesWithHistory } = passedProps;
@@ -121,6 +129,7 @@ const getAll = async props => {
 
 const getRecentlyModified = async props => {
   try {
+    requiresAuthentication(_baseOptions);
     const method = 'GET';
     const passedProps = props || {};
     const { offset, count } = passedProps;
@@ -142,6 +151,7 @@ const getRecentlyModified = async props => {
 
 const getRecentlyCreated = async props => {
   try {
+    requiresAuthentication(_baseOptions);
     const method = 'GET';
     const passedProps = props || {};
     const { offset, count } = passedProps;
@@ -163,6 +173,7 @@ const getRecentlyCreated = async props => {
 
 const byId = async companyId => {
   try {
+    requiresAuthentication(_baseOptions);
     const method = 'GET';
     let mergedProps = Object.assign({}, defaults, _baseOptions, {});
     mergedProps = sanitizeObject(mergedProps);
@@ -179,6 +190,7 @@ const byId = async companyId => {
 
 const getContacts = async (companyId, count = 100, vidOffset) => {
   try {
+    requiresAuthentication(_baseOptions);
     const method = 'GET';
     let mergedProps = Object.assign({}, defaults, _baseOptions, {
       count,
@@ -199,6 +211,7 @@ const getContacts = async (companyId, count = 100, vidOffset) => {
 
 const byDomain = async (domain, props) => {
   try {
+    requiresAuthentication(_baseOptions);
     const method = 'POST';
     const passedProps = props || {};
     const { limit } = passedProps;

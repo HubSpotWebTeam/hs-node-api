@@ -3,6 +3,12 @@ import request from 'request-promise';
 
 const debugApp = require('debug')('hubspot-api:utilities');
 
+export const requiresAuthentication = ({ hapikey, accessToken }) => {
+  if (!hapikey && !accessToken) {
+    throw new Error('This method requires hapikey/accessToken authentication');
+  }
+};
+
 const interpolate = (template, data, opts = {}) => {
   // For escaping strings to go in regex
   const regexEscape = /([$^\\/()|?+*[\]{}.-])/g;

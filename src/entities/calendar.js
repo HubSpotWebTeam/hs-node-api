@@ -1,7 +1,10 @@
 // NOTE: FULLY_IMPLEMENTED
 // NOTE: REQUIRES_TESTS
 
-import createRequest, { sanitizeObject } from '../utilities';
+import createRequest, {
+  sanitizeObject,
+  requiresAuthentication
+} from '../utilities';
 import constants from '../constants';
 
 const defaults = {};
@@ -17,6 +20,7 @@ const events = async ({
   type
 }) => {
   try {
+    requiresAuthentication(_baseOptions);
     if (!startDate || !endDate) {
       throw new Error(
         'Both "startDate" and "endDate" in ms are required fields'
@@ -46,6 +50,7 @@ const events = async ({
 
 const getTask = async taskId => {
   try {
+    requiresAuthentication(_baseOptions);
     const mergedProps = Object.assign({}, defaults, _baseOptions);
     const task = await createRequest(
       constants.api.calendar.taskById,
@@ -60,6 +65,7 @@ const getTask = async taskId => {
 
 const deleteTask = async taskId => {
   try {
+    requiresAuthentication(_baseOptions);
     const mergedProps = Object.assign({}, defaults, _baseOptions);
     const method = 'DELETE';
     await createRequest(
@@ -88,6 +94,7 @@ const updateTask = async (
   }
 ) => {
   try {
+    requiresAuthentication(_baseOptions);
     const mergedProps = Object.assign({}, defaults, _baseOptions);
     const method = 'PUT';
     let body = {
@@ -127,6 +134,7 @@ const createTask = async ({
   ownerId
 }) => {
   try {
+    requiresAuthentication(_baseOptions);
     const mergedProps = Object.assign({}, defaults, _baseOptions);
     const method = 'POST';
     let body = {

@@ -1,4 +1,4 @@
-import createRequest from '../utilities';
+import createRequest, { requiresAuthentication } from '../utilities';
 import constants from '../constants';
 
 const defaults = {};
@@ -6,6 +6,7 @@ let _baseOptions;
 
 const createWorkflow = async (opts = {}) => {
   try {
+    requiresAuthentication(_baseOptions);
     const {
       type,
       name,
@@ -66,10 +67,14 @@ const createWorkflow = async (opts = {}) => {
     const mergedProps = Object.assign({}, defaults, _baseOptions);
     const method = 'POST';
 
-    const workflowInfo = await createRequest(constants.api.workflows.create, {
-      method,
-      body
-    }, mergedProps);
+    const workflowInfo = await createRequest(
+      constants.api.workflows.create,
+      {
+        method,
+        body
+      },
+      mergedProps
+    );
     return Promise.resolve(workflowInfo);
   } catch (e) {
     return Promise.reject(e.message);
@@ -78,13 +83,18 @@ const createWorkflow = async (opts = {}) => {
 
 const getWorkflow = async id => {
   try {
+    requiresAuthentication(_baseOptions);
     const mergedProps = Object.assign({}, defaults, _baseOptions);
     if (!id) {
       throw new Error('getWorkflow requires an `id` argument');
     }
-    const workflowInfo = await createRequest(constants.api.workflows.byId, {
-      id
-    }, mergedProps);
+    const workflowInfo = await createRequest(
+      constants.api.workflows.byId,
+      {
+        id
+      },
+      mergedProps
+    );
     return Promise.resolve(workflowInfo);
   } catch (e) {
     return Promise.reject(e.message);
@@ -93,14 +103,19 @@ const getWorkflow = async id => {
 
 const deleteWorkflow = async id => {
   try {
+    requiresAuthentication(_baseOptions);
     const mergedProps = Object.assign({}, defaults, _baseOptions);
     if (!id) {
       throw new Error('deleteWorkflow requires an `id` argument');
     }
-    await createRequest(constants.api.workflows.byId, {
-      method: 'DELETE',
-      id
-    }, mergedProps);
+    await createRequest(
+      constants.api.workflows.byId,
+      {
+        method: 'DELETE',
+        id
+      },
+      mergedProps
+    );
     return Promise.resolve({ deleted: true });
   } catch (e) {
     return Promise.reject(e.message);
@@ -109,19 +124,26 @@ const deleteWorkflow = async id => {
 
 const updateWorkflow = async (opts = {}) => {
   try {
+    requiresAuthentication(_baseOptions);
     const mergedProps = Object.assign({}, defaults, _baseOptions);
     const body = Object.assign({}, opts);
     const method = 'PUT';
     const { id, portalId } = opts;
     if (!id || !portalId) {
-      throw new Error('Workflow payload requires an `id` and `portalId` property');
+      throw new Error(
+        'Workflow payload requires an `id` and `portalId` property'
+      );
     }
 
-    const workflowInfo = await createRequest(constants.api.workflows.byId, {
-      method,
-      body,
-      id
-    }, mergedProps);
+    const workflowInfo = await createRequest(
+      constants.api.workflows.byId,
+      {
+        method,
+        body,
+        id
+      },
+      mergedProps
+    );
     return Promise.resolve(workflowInfo);
   } catch (e) {
     return Promise.reject(e.message);
@@ -130,8 +152,13 @@ const updateWorkflow = async (opts = {}) => {
 
 const getAll = async () => {
   try {
+    requiresAuthentication(_baseOptions);
     const mergedProps = Object.assign({}, defaults, _baseOptions);
-    const allWorkflows = await createRequest(constants.api.workflows.getAll, {}, mergedProps);
+    const allWorkflows = await createRequest(
+      constants.api.workflows.getAll,
+      {},
+      mergedProps
+    );
     return Promise.resolve(allWorkflows);
   } catch (e) {
     return Promise.reject(e.message);
@@ -140,14 +167,19 @@ const getAll = async () => {
 
 const enrollContact = async (opts = {}) => {
   try {
+    requiresAuthentication(_baseOptions);
     const { workflowId, email } = opts;
     const method = 'POST';
     const mergedProps = Object.assign({}, defaults, _baseOptions);
-    await createRequest(constants.api.workflows.enrollContact, {
-      method,
-      workflowId,
-      email
-    }, mergedProps);
+    await createRequest(
+      constants.api.workflows.enrollContact,
+      {
+        method,
+        workflowId,
+        email
+      },
+      mergedProps
+    );
     return Promise.resolve({ enrolled: true });
   } catch (e) {
     return Promise.reject(e.message);
@@ -156,26 +188,36 @@ const enrollContact = async (opts = {}) => {
 
 const unenrollContact = async (opts = {}) => {
   try {
+    requiresAuthentication(_baseOptions);
     const { workflowId, email } = opts;
     const method = 'DELETE';
     const mergedProps = Object.assign({}, defaults, _baseOptions);
-    await createRequest(constants.api.workflows.enrollContact, {
-      method,
-      workflowId,
-      email
-    }, mergedProps);
+    await createRequest(
+      constants.api.workflows.enrollContact,
+      {
+        method,
+        workflowId,
+        email
+      },
+      mergedProps
+    );
     return Promise.resolve({ unenrolled: true });
   } catch (e) {
     return Promise.reject(e.message);
   }
 };
 
-const getEnrollments = async (id) => {
+const getEnrollments = async id => {
   try {
+    requiresAuthentication(_baseOptions);
     const mergedProps = Object.assign({}, defaults, _baseOptions);
-    const enrollments = await createRequest(constants.api.workflows.enrollments, {
-      id
-    }, mergedProps);
+    const enrollments = await createRequest(
+      constants.api.workflows.enrollments,
+      {
+        id
+      },
+      mergedProps
+    );
     return Promise.resolve(enrollments);
   } catch (e) {
     return Promise.reject(e.message);
@@ -184,6 +226,7 @@ const getEnrollments = async (id) => {
 
 const getWorkflowEventLog = async (opts = {}) => {
   try {
+    requiresAuthentication(_baseOptions);
     const { vid, types, workflowId } = opts;
     const body = {
       vid,
@@ -191,11 +234,15 @@ const getWorkflowEventLog = async (opts = {}) => {
     };
     const method = 'PUT';
     const mergedProps = Object.assign({}, defaults, _baseOptions);
-    const eventLogs = await createRequest(constants.api.workflows.eventLogs, {
-      method,
-      body,
-      workflowId
-    }, mergedProps);
+    const eventLogs = await createRequest(
+      constants.api.workflows.eventLogs,
+      {
+        method,
+        body,
+        workflowId
+      },
+      mergedProps
+    );
     return Promise.resolve(eventLogs);
   } catch (e) {
     return Promise.reject(e.message);

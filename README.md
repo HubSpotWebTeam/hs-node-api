@@ -18,6 +18,7 @@ Full documentation available at https://hubspotwebteam.github.io/hs-node-api/
 const HubSpotClient = require('hubspot-api');
 const hs = new HubSpotClient({ hapikey });
 // or const hs = new HubSpotClient({ accessToken });
+// or const hs = new HubSpotClient(); # for public methods, eg. Forms, HubDB
 
 async function getContact(id){
   const contact = await hs.contacts.getById(827398123);
@@ -68,6 +69,8 @@ E2E_TESTS_CONTACT_EMAIL="coolrobot@hubspot.com"
 E2E_TESTS_CONTACT_ID="1234"
 E2E_TESTS_HUBDB_TABLE_ID="999999"
 E2E_TESTS_HUBDB_PORTAL_ID="111111"
+E2E_TESTS_LAYOUT_ID="1234567785"
+E2E_TESTS_LAYOUT_VERSION_ID="1234567894"
 ```
 
 Test with `npm run prepare`.

@@ -1,4 +1,4 @@
-import createRequest from '../utilities';
+import createRequest, { requiresAuthentication } from '../utilities';
 import constants from '../constants';
 
 const defaults = {
@@ -8,6 +8,7 @@ let _baseOptions;
 
 const getCampaignsWithRecentActivity = async (opts = {}) => {
   try {
+    requiresAuthentication(_baseOptions);
     const { offset, limit } = opts;
     const mergedProps = Object.assign({}, defaults, _baseOptions, {
       offset,
@@ -26,6 +27,7 @@ const getCampaignsWithRecentActivity = async (opts = {}) => {
 
 const getCampaign = async (campaignId, appId) => {
   try {
+    requiresAuthentication(_baseOptions);
     const mergedProps = Object.assign({}, defaults, _baseOptions, { appId });
     const campaignInfo = await createRequest(
       constants.api.emailEvents.campaign,
@@ -39,8 +41,6 @@ const getCampaign = async (campaignId, appId) => {
     return Promise.reject(e.message);
   }
 };
-
-// const get
 
 export default function emailEvents(baseOptions) {
   _baseOptions = baseOptions;

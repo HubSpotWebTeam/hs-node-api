@@ -1,4 +1,7 @@
-import createRequest, { queryStringParamInterpolator } from '../utilities';
+import createRequest, {
+  queryStringParamInterpolator,
+  requiresAuthentication
+} from '../utilities';
 import constants from '../constants';
 
 const allowablePublishActions = ['schedule-publish', 'cancel-publish'];
@@ -7,6 +10,7 @@ let _baseOptions;
 
 const getAllBlogs = async (opts = {}) => {
   try {
+    requiresAuthentication(_baseOptions);
     const { name, limit, offset, created, deleted_at } = opts;
     let additionalOpts = {
       limit,
@@ -37,6 +41,7 @@ const getAllBlogs = async (opts = {}) => {
 
 const createOrUpdateAuthor = async (opts = {}) => {
   try {
+    requiresAuthentication(_baseOptions);
     const {
       id,
       email,
@@ -84,6 +89,7 @@ const createOrUpdateAuthor = async (opts = {}) => {
 
 const getAuthors = async (opts = {}) => {
   try {
+    requiresAuthentication(_baseOptions);
     const { email, limit, offset, id, fullName, slug, created, updated } = opts;
     let additionalOpts = {
       email,
@@ -122,6 +128,7 @@ const getAuthors = async (opts = {}) => {
 
 const getAuthor = async id => {
   try {
+    requiresAuthentication(_baseOptions);
     const mergedProps = Object.assign({}, defaults, _baseOptions);
     const author = await createRequest(
       constants.api.blog.authorById,
@@ -136,6 +143,7 @@ const getAuthor = async id => {
 
 const deleteAuthor = async id => {
   try {
+    requiresAuthentication(_baseOptions);
     const mergedProps = Object.assign({}, defaults, _baseOptions);
     await createRequest(
       constants.api.blog.authorById,
@@ -150,6 +158,7 @@ const deleteAuthor = async id => {
 
 const searchAuthors = async (opts = {}) => {
   try {
+    requiresAuthentication(_baseOptions);
     const { order, limit, offset, q, active, blog } = opts; //eslint-disable-line
     const mergedProps = Object.assign({}, defaults, _baseOptions, {
       order,
@@ -172,6 +181,7 @@ const searchAuthors = async (opts = {}) => {
 
 const getComments = async (opts = {}) => {
   try {
+    requiresAuthentication(_baseOptions);
     const { limit, offset, portalId, state, contentId, reverse, query } = opts;
     const mergedProps = Object.assign({}, defaults, _baseOptions, {
       limit,
@@ -195,6 +205,7 @@ const getComments = async (opts = {}) => {
 
 const createComment = async (opts = {}) => {
   try {
+    requiresAuthentication(_baseOptions);
     const {
       comment,
       contentId,
@@ -234,6 +245,7 @@ const createComment = async (opts = {}) => {
 
 const getTopics = async (opts = {}) => {
   try {
+    requiresAuthentication(_baseOptions);
     const { id, name, created, slug, limit, offset } = opts;
 
     let additionalOpts = {
@@ -267,6 +279,7 @@ const getTopics = async (opts = {}) => {
 
 const getTopic = async id => {
   try {
+    requiresAuthentication(_baseOptions);
     const mergedProps = Object.assign({}, defaults, _baseOptions);
     const topic = await createRequest(
       constants.api.blog.topic,
@@ -281,6 +294,7 @@ const getTopic = async id => {
 
 const searchTopics = async (opts = {}) => {
   try {
+    requiresAuthentication(_baseOptions);
     const {
       id,
       name,
@@ -327,6 +341,7 @@ const searchTopics = async (opts = {}) => {
 
 const createOrUpdateTopic = async (opts = {}) => {
   try {
+    requiresAuthentication(_baseOptions);
     const mergedProps = Object.assign({}, defaults, _baseOptions);
     const { id, name, description } = opts;
 
@@ -353,6 +368,7 @@ const createOrUpdateTopic = async (opts = {}) => {
 
 const getComment = async id => {
   try {
+    requiresAuthentication(_baseOptions);
     const mergedProps = Object.assign({}, defaults, _baseOptions);
     const comment = await createRequest(
       constants.api.blog.commentById,
@@ -367,6 +383,7 @@ const getComment = async id => {
 
 const deleteComment = async id => {
   try {
+    requiresAuthentication(_baseOptions);
     const mergedProps = Object.assign({}, defaults, _baseOptions);
     await createRequest(
       constants.api.blog.commentById,
@@ -381,6 +398,7 @@ const deleteComment = async id => {
 
 const restoreDeletedComment = async id => {
   try {
+    requiresAuthentication(_baseOptions);
     const mergedProps = Object.assign({}, defaults, _baseOptions);
     await createRequest(
       constants.api.blog.restoreDeletedComment,
@@ -395,6 +413,7 @@ const restoreDeletedComment = async id => {
 
 const getBlogById = async id => {
   try {
+    requiresAuthentication(_baseOptions);
     const mergedProps = Object.assign({}, defaults, _baseOptions);
     const blogInfo = await createRequest(
       constants.api.blog.byId,
@@ -409,6 +428,7 @@ const getBlogById = async id => {
 
 const getPosts = async (opts = {}) => {
   try {
+    requiresAuthentication(_baseOptions);
     const {
       limit,
       offset,
@@ -468,6 +488,7 @@ const getPosts = async (opts = {}) => {
 
 const getPostById = async id => {
   try {
+    requiresAuthentication(_baseOptions);
     const mergedProps = Object.assign({}, defaults, _baseOptions);
     const blogPosts = await createRequest(
       constants.api.blog.postById,
@@ -482,6 +503,7 @@ const getPostById = async id => {
 
 const deletePost = async id => {
   try {
+    requiresAuthentication(_baseOptions);
     const mergedProps = Object.assign({}, defaults, _baseOptions);
     await createRequest(
       constants.api.blog.postById,
@@ -496,6 +518,7 @@ const deletePost = async id => {
 
 const clonePost = async (opts = {}) => {
   try {
+    requiresAuthentication(_baseOptions);
     const mergedProps = Object.assign({}, defaults, _baseOptions);
     const { id, name } = opts;
     const body = { name };
@@ -513,6 +536,7 @@ const clonePost = async (opts = {}) => {
 
 const publishOrSchedulePost = async (id, action) => {
   try {
+    requiresAuthentication(_baseOptions);
     const mergedProps = Object.assign({}, defaults, _baseOptions);
     if (!~allowablePublishActions.indexOf(action)) {
       throw new Error(`Unrecognized publish action: ${action}`);
@@ -533,6 +557,7 @@ const publishOrSchedulePost = async (id, action) => {
 
 const deleteTopic = async id => {
   try {
+    requiresAuthentication(_baseOptions);
     const mergedProps = Object.assign({}, defaults, _baseOptions);
     await createRequest(
       constants.api.blog.topic,
@@ -547,6 +572,7 @@ const deleteTopic = async id => {
 
 const getPostAutosaveBuffer = async id => {
   try {
+    requiresAuthentication(_baseOptions);
     const mergedProps = Object.assign({}, defaults, _baseOptions);
     const buffer = await createRequest(
       constants.api.blog.postAutoSaveBuffer,
@@ -561,6 +587,7 @@ const getPostAutosaveBuffer = async id => {
 
 const getPostAutosaveBufferStatus = async id => {
   try {
+    requiresAuthentication(_baseOptions);
     const mergedProps = Object.assign({}, defaults, _baseOptions);
     const bufferStatus = await createRequest(
       constants.api.blog.postAutoSaveBufferStatus,
@@ -575,6 +602,7 @@ const getPostAutosaveBufferStatus = async id => {
 
 const getPostVersions = async id => {
   try {
+    requiresAuthentication(_baseOptions);
     const mergedProps = Object.assign({}, defaults, _baseOptions);
     const versions = await createRequest(
       constants.api.blog.postVersions,
@@ -589,6 +617,7 @@ const getPostVersions = async id => {
 
 const getPostVersionById = async (id, version_id) => {
   try {
+    requiresAuthentication(_baseOptions);
     const mergedProps = Object.assign({}, defaults, _baseOptions);
     const version = await createRequest(
       constants.api.blog.postVersions,
@@ -603,6 +632,7 @@ const getPostVersionById = async (id, version_id) => {
 
 const restorePostVersionById = async (id, version_id) => {
   try {
+    requiresAuthentication(_baseOptions);
     const mergedProps = Object.assign({}, defaults, _baseOptions);
     const body = { version_id };
     const method = 'POST';
@@ -619,6 +649,7 @@ const restorePostVersionById = async (id, version_id) => {
 
 const validatePostAutosaveBufferStatus = async id => {
   try {
+    requiresAuthentication(_baseOptions);
     const mergedProps = Object.assign({}, defaults, _baseOptions);
     const bufferStatus = await createRequest(
       constants.api.blog.validatePostAutoSaveBuffer,
@@ -633,6 +664,7 @@ const validatePostAutosaveBufferStatus = async id => {
 
 const restoredDeletedPost = async id => {
   try {
+    requiresAuthentication(_baseOptions);
     const mergedProps = Object.assign({}, defaults, _baseOptions);
     const postStatus = await createRequest(
       constants.api.blog.restorePostById,
@@ -647,6 +679,7 @@ const restoredDeletedPost = async id => {
 
 const pushPostAutosaveBufferLive = async id => {
   try {
+    requiresAuthentication(_baseOptions);
     const mergedProps = Object.assign({}, defaults, _baseOptions);
     const bufferStatus = await createRequest(
       constants.api.blog.pushPostAutosaveBufferToLive,
@@ -661,6 +694,7 @@ const pushPostAutosaveBufferLive = async id => {
 
 const updateAutosaveBuffer = async (opts = {}) => {
   try {
+    requiresAuthentication(_baseOptions);
     const {
       id,
       blog_author_id,
@@ -720,6 +754,7 @@ const updateAutosaveBuffer = async (opts = {}) => {
 
 const createOrUpdatePost = async (opts = {}) => {
   try {
+    requiresAuthentication(_baseOptions);
     const mergedProps = Object.assign({}, defaults, _baseOptions);
     const {
       id,
@@ -782,6 +817,7 @@ const createOrUpdatePost = async (opts = {}) => {
 
 const groupTopics = async (opts = {}) => {
   try {
+    requiresAuthentication(_baseOptions);
     const mergedProps = Object.assign({}, defaults, _baseOptions);
     const { groupedTopicName, topicIds } = opts;
 

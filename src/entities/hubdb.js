@@ -1,4 +1,4 @@
-import createRequest from '../utilities';
+import createRequest, { requiresAuthentication } from '../utilities';
 import constants from '../constants';
 
 const defaults = {};
@@ -6,6 +6,7 @@ let _baseOptions;
 
 const createTable = async (opts = {}) => {
   try {
+    requiresAuthentication(_baseOptions);
     const { name, useForPages, columns, publishedAt } = opts;
 
     const body = {
@@ -30,8 +31,8 @@ const createTable = async (opts = {}) => {
 
 const getTables = async () => {
   try {
+    requiresAuthentication(_baseOptions);
     const mergedProps = Object.assign({}, defaults, _baseOptions);
-
     const tables = await createRequest(
       constants.api.hubdb.tables,
       {},
@@ -69,6 +70,7 @@ const getTableRows = async (tableId, portalId, opts = {}) => {
 
 const publishTable = async tableId => {
   try {
+    requiresAuthentication(_baseOptions);
     const mergedProps = Object.assign({}, defaults, _baseOptions);
     const method = 'PUT';
     const table = await createRequest(
@@ -108,6 +110,7 @@ const getTableById = async (tableId, portalId, options = {}) => {
 
 const addTableRow = async (tableId, body = {}) => {
   try {
+    requiresAuthentication(_baseOptions);
     const method = 'POST';
     const url = constants.api.hubdb.rows;
     const options = { tableId, method, body };
@@ -123,6 +126,7 @@ const addTableRow = async (tableId, body = {}) => {
 
 const updateTableRow = async (tableId, rowId, body = {}) => {
   try {
+    requiresAuthentication(_baseOptions);
     const method = 'PUT';
     const url = constants.api.hubdb.row;
     const options = { tableId, id: rowId, method, body };
@@ -137,6 +141,7 @@ const updateTableRow = async (tableId, rowId, body = {}) => {
 
 const deleteTableRow = async (tableId, rowId, body = {}) => {
   try {
+    requiresAuthentication(_baseOptions);
     const method = 'DELETE';
     const url = constants.api.hubdb.row;
     const options = { tableId, id: rowId, method, body };

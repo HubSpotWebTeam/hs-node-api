@@ -1,4 +1,4 @@
-import createRequest from '../utilities';
+import createRequest, { requiresAuthentication } from '../utilities';
 import constants from '../constants';
 
 const defaults = {};
@@ -6,10 +6,8 @@ let _baseOptions;
 
 const getFilesInFolder = async (folder_id, opts = {}) => {
   try {
-    let {
-      limit,
-      offset
-    } = opts;
+    requiresAuthentication(_baseOptions);
+    let { limit, offset } = opts;
     limit = limit || 100;
     offset = offset || 0;
 
@@ -19,7 +17,11 @@ const getFilesInFolder = async (folder_id, opts = {}) => {
       offset
     });
 
-    const files = await createRequest(constants.api.files.getFilesInFolder, {}, mergedProps);
+    const files = await createRequest(
+      constants.api.files.getFilesInFolder,
+      {},
+      mergedProps
+    );
     return Promise.resolve(files);
   } catch (e) {
     return Promise.reject(e.message);

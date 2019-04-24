@@ -1,4 +1,4 @@
-import createRequest from '../utilities';
+import createRequest, { requiresAuthentication } from '../utilities';
 import constants from '../constants';
 
 const defaults = {};
@@ -6,6 +6,7 @@ let _baseOptions;
 
 const create = async (opts = {}) => {
   try {
+    requiresAuthentication(_baseOptions);
     const mergedProps = Object.assign({}, defaults, _baseOptions);
     const { engagement, associations, metadata } = opts;
 
@@ -13,11 +14,7 @@ const create = async (opts = {}) => {
     const url = constants.api.engagements.create;
     const body = { engagement, associations, metadata };
     const options = { method, body };
-    const result = await createRequest(
-      url,
-      options,
-      mergedProps
-    );
+    const result = await createRequest(url, options, mergedProps);
     return Promise.resolve(result);
   } catch (e) {
     return Promise.reject(e.message);

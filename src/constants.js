@@ -2,6 +2,10 @@ const defaultApiHost = process.env.COS_API_HOST || 'https://api.hubapi.com';
 
 export default {
   api: {
+    account: {
+      details: `${defaultApiHost}/integrations/v1/me`,
+      dailyLimit: `${defaultApiHost}/integrations/v1/limit/daily`
+    },
     files: {
       getFilesInFolder: `${defaultApiHost}/filemanager/api/v2/files`
     },
@@ -44,7 +48,11 @@ export default {
     },
     layouts: {
       getAll: `${defaultApiHost}/content/api/v2/layouts`,
-      byId: `${defaultApiHost}/content/api/v2/layouts/{id}`
+      byId: `${defaultApiHost}/content/api/v2/layouts/{id}`,
+      getBuffer: `${defaultApiHost}/content/api/v2/layouts/{id}/buffer`,
+      hasBufferedChanges: `${defaultApiHost}/content/api/v2/layouts/{id}/has-buffered-changes`,
+      getPreviousVersions: `${defaultApiHost}/content/api/v2/layouts/{id}/versions`,
+      getPreviousVersion: `${defaultApiHost}/content/api/v2/layouts/{id}/versions/{versionId}`,
     },
     email: {
       getSubscriptions: `${defaultApiHost}/email/public/v1/subscriptions`
@@ -90,7 +98,8 @@ export default {
       byUtk: `${defaultApiHost}/contacts/v1/contact/utk/{utk}/profile`,
       createContact: `${defaultApiHost}/contacts/v1/contact/createOrUpdate/email/{email}/`,
       batchUpdateContacts: `${defaultApiHost}/contacts/v1/contact/batch/`,
-      getRecentlyModified: `${defaultApiHost}/contacts/v1/lists/recently_updated/contacts/recent`
+      getRecentlyModified: `${defaultApiHost}/contacts/v1/lists/recently_updated/contacts/recent`,
+      search: `${defaultApiHost}/contacts/v1/search/query`
     },
     company: {
       create: `${defaultApiHost}/companies/v2/companies/`,
@@ -120,6 +129,13 @@ export default {
     },
     engagements: {
       create: `${defaultApiHost}/engagements/v1/engagements`
+    },
+    urlMappings: {
+      getAll: `${defaultApiHost}/url-mappings/v3/url-mappings`,
+      byId: `${defaultApiHost}/url-mappings/v3/url-mappings/{id}`,
+      create: `${defaultApiHost}/url-mappings/v3/url-mappings`,
+      update: `${defaultApiHost}/url-mappings/v3/url-mappings/{id}`,
+      delete: `${defaultApiHost}/url-mappings/v3/url-mappings/{id}`,
     }
   }
 };

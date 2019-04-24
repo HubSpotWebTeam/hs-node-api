@@ -1,6 +1,6 @@
 {
   "name": "hubspot-api",
-  "version": "2.1.1",
+  "version": "2.2.1",
   "description": "HubSpot API Wrapper",
   "keywords": [
     "hubspot",
@@ -8,11 +8,14 @@
   ],
   "repository": "github:HubSpotWebTeam/hs-node-api",
   "main": "dist/main.js",
+  "types": "./types/main.d.ts",
   "scripts": {
     "api-tests": "DEBUG=utilities babel-node --presets node6 test/",
-    "build": "DEBUG=rollup:compile node tools/build.js",
+    "build": "rimraf dist/ && DEBUG=rollup:compile node tools/build.js",
     "prepare": "npm run build",
-    "compile-docs": "jsdoc -R README.md -c ./jsconf.json -t ./node_modules/ink-docstrap/template -r ./src -d docs/"
+    "compile-docs": "jsdoc -R README.md -c ./jsconf.json -t ./node_modules/ink-docstrap/template -r ./src -d docs/",
+    "test": "echo 'Tests are failing;'",
+    "test:watch": "mocha --watch"
   },
   "author": "Stephen McElhinney",
   "license": "ISC",

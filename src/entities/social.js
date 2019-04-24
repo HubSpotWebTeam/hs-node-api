@@ -1,4 +1,4 @@
-import createRequest from '../utilities';
+import createRequest, { requiresAuthentication } from '../utilities';
 import constants from '../constants';
 
 const defaults = {};
@@ -6,6 +6,7 @@ let _baseOptions;
 
 const getPublishingChannels = async () => {
   try {
+    requiresAuthentication(_baseOptions);
     const mergedProps = Object.assign({}, defaults, _baseOptions);
     const publishingChannels = await createRequest(
       constants.api.social.channels,
@@ -20,6 +21,7 @@ const getPublishingChannels = async () => {
 
 const createBroadcastMessage = async (opts = {}) => {
   try {
+    requiresAuthentication(_baseOptions);
     const { channelGuid, status, triggerAt, body, photoUrl } = opts;
 
     const method = 'POST';
