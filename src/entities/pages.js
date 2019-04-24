@@ -1,4 +1,7 @@
-import createRequest, { queryStringParamInterpolator } from '../utilities';
+import createRequest, {
+  queryStringParamInterpolator,
+  requiresAuthentication
+} from '../utilities';
 import constants from '../constants';
 
 const defaults = {};
@@ -6,8 +9,10 @@ let _baseOptions;
 
 const createOrUpdatePage = async (opts = {}) => {
   try {
+    requiresAuthentication(_baseOptions);
     const {
       id,
+      archived,
       campaign,
       campaign_name,
       footer_html,
@@ -26,6 +31,7 @@ const createOrUpdatePage = async (opts = {}) => {
     } = opts;
 
     const body = {
+      archived,
       campaign,
       campaign_name,
       footer_html,
@@ -63,6 +69,7 @@ const createOrUpdatePage = async (opts = {}) => {
 
 const getPages = async (opts = {}) => {
   try {
+    requiresAuthentication(_baseOptions);
     const {
       limit,
       offset,
@@ -129,6 +136,7 @@ const getPages = async (opts = {}) => {
 
 const deletePage = async id => {
   try {
+    requiresAuthentication(_baseOptions);
     const mergedProps = Object.assign({}, defaults, _baseOptions);
     await createRequest(
       constants.api.pages.byId,
@@ -143,6 +151,7 @@ const deletePage = async id => {
 
 const getPageById = async id => {
   try {
+    requiresAuthentication(_baseOptions);
     const mergedProps = Object.assign({}, defaults, _baseOptions);
     const page = await createRequest(
       constants.api.pages.byId,
@@ -157,6 +166,7 @@ const getPageById = async id => {
 
 const updateAutosaveBuffer = async (opts = {}) => {
   try {
+    requiresAuthentication(_baseOptions);
     const {
       id,
       campaign,
@@ -211,6 +221,7 @@ const updateAutosaveBuffer = async (opts = {}) => {
 
 const getPageAutosaveBuffer = async id => {
   try {
+    requiresAuthentication(_baseOptions);
     const mergedProps = Object.assign({}, defaults, _baseOptions);
     const buffer = await createRequest(
       constants.api.pages.buffer,
@@ -225,6 +236,7 @@ const getPageAutosaveBuffer = async id => {
 
 const clonePage = async id => {
   try {
+    requiresAuthentication(_baseOptions);
     const mergedProps = Object.assign({}, defaults, _baseOptions);
     const method = 'POST';
     await createRequest(constants.api.pages.clone, { id, method }, mergedProps);
@@ -236,6 +248,7 @@ const clonePage = async id => {
 
 const hasBufferedChanges = async id => {
   try {
+    requiresAuthentication(_baseOptions);
     const mergedProps = Object.assign({}, defaults, _baseOptions);
     const bufferedChanges = await createRequest(
       constants.api.pages.bufferedChanges,
@@ -250,6 +263,7 @@ const hasBufferedChanges = async id => {
 
 const doPublishAction = async (id, action) => {
   try {
+    requiresAuthentication(_baseOptions);
     const mergedProps = Object.assign({}, defaults, _baseOptions);
     const body = { action };
     const method = 'POST';
@@ -267,6 +281,7 @@ const doPublishAction = async (id, action) => {
 
 const pushBufferLive = async id => {
   try {
+    requiresAuthentication(_baseOptions);
     const mergedProps = Object.assign({}, defaults, _baseOptions);
     await createRequest(
       constants.api.pages.pushBufferLive,
@@ -281,6 +296,7 @@ const pushBufferLive = async id => {
 
 const restoreDeleted = async id => {
   try {
+    requiresAuthentication(_baseOptions);
     const mergedProps = Object.assign({}, defaults, _baseOptions);
     await createRequest(
       constants.api.pages.restoreDeleted,
@@ -295,6 +311,7 @@ const restoreDeleted = async id => {
 
 const validatePageAutoSaveBuffer = async id => {
   try {
+    requiresAuthentication(_baseOptions);
     const mergedProps = Object.assign({}, defaults, _baseOptions);
     await createRequest(
       constants.api.pages.validateBuffer,
@@ -309,6 +326,7 @@ const validatePageAutoSaveBuffer = async id => {
 
 const getPageVersions = async id => {
   try {
+    requiresAuthentication(_baseOptions);
     const mergedProps = Object.assign({}, defaults, _baseOptions);
     const versions = await createRequest(
       constants.api.pages.versions,
@@ -323,6 +341,7 @@ const getPageVersions = async id => {
 
 const restorePageVersion = async (id, version_id) => {
   try {
+    requiresAuthentication(_baseOptions);
     const mergedProps = Object.assign({}, defaults, _baseOptions);
     const body = { version_id };
     const method = 'POST';
@@ -429,6 +448,7 @@ export default function pagesApi(baseOptions) {
      * @example
      * const hs = new HubspotClient(props);
      * hs.pages.updateAutosaveBuffer(opts).then(response => console.log(response))
+     * @property {int} opts.id If set, this will update the page with the corresponding ID.
      * @property {string} opts.campaign
      * @property {string} opts.campaign_name
      * @property {string} opts.footer_html

@@ -33,7 +33,7 @@
 			<li class="dropdown">
 				<a href="namespaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Namespaces<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="hs_blog.html">hs/blog</a></li><li><a href="hs_calendar.html">hs/calendar</a></li><li><a href="hs_company.html">hs/company</a></li><li><a href="hs_contacts.html">hs/contacts</a></li><li><a href="hs_deals.html">hs/deals</a></li><li><a href="hs_domains.html">hs/domains</a></li><li><a href="hs_emailEvents.html">hs/emailEvents</a></li><li><a href="hs_forms.html">hs/forms</a></li><li><a href="hs_layouts.html">hs/layouts</a></li><li><a href="hs_pages.html">hs/pages</a></li><li><a href="hs_social.html">hs/social</a></li><li><a href="hs_workflows.html">hs/workflows</a></li>
+					<li><a href="hs_account.html">hs/account</a></li><li><a href="hs_blog.html">hs/blog</a></li><li><a href="hs_calendar.html">hs/calendar</a></li><li><a href="hs_company.html">hs/company</a></li><li><a href="hs_contacts.html">hs/contacts</a></li><li><a href="hs_deals.html">hs/deals</a></li><li><a href="hs_domains.html">hs/domains</a></li><li><a href="hs_emailEvents.html">hs/emailEvents</a></li><li><a href="hs_engagements.html">hs/engagements</a></li><li><a href="hs_files.html">hs/files</a></li><li><a href="hs_forms.html">hs/forms</a></li><li><a href="hs_hubdb.html">hs/hubdb</a></li><li><a href="hs_layouts.html">hs/layouts</a></li><li><a href="hs_pages.html">hs/pages</a></li><li><a href="hs_social.html">hs/social</a></li><li><a href="hs_workflows.html">hs/workflows</a></li>
 				</ul>
 			</li>
 			
@@ -152,6 +152,795 @@
         <h3 class="subsection-title">Methods</h3>
 
         <dl>
+            
+<hr>
+<dt>
+    <h4 class="name" id=".batchUpdate"><span class="type-signature">&lt;async, static> </span>batchUpdate(updates)</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Update a group of deals</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>updates</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">array</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Array of objects. objectId corresponds with a dealId. See Example below.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>If successful the promise will resolve with { updated: true }. Otherwise the promise will resolve with an error message.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise</span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+        <h5>Example</h5>
+        
+    <pre class="sunlight-highlight-javascript">const hs = new HubspotClient(props);
+const updates = [{
+ &quot;objectId&quot;: 93630457,
+ &quot;properties&quot;: [
+   {
+     &quot;name&quot;: &quot;dealname&quot;,
+     &quot;value&quot;: &quot;Updated Deal Name&quot;
+   },
+   {
+     &quot;name&quot;: &quot;dealname&quot;,
+     &quot;value&quot;: &quot;Updated Deal Name&quot;
+   }
+ ]},
+ {
+ &quot;objectId&quot;: 26448234,
+ &quot;properties&quot;: [
+   {
+     &quot;name&quot;: &quot;amount&quot;,
+     &quot;value&quot;: &quot;2000&quot;
+   }
+ ]
+}]);
+hs.deals.batchUpdate(updates).then(response =&gt; console.log(response));</pre>
+
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id=".createOrUpdate"><span class="type-signature">&lt;async, static> </span>createOrUpdate(opts)</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Create or update a deal</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>opts</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    <dl>
+
+<table class="props table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>opts.id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>opts.properties</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">array</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>opts.associations</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">array</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>opts.includePropertyVersions</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+</dl>
+
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise</span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+        <h5>Example</h5>
+        
+    <pre class="sunlight-highlight-javascript">const hs = new HubspotClient(props);
+const updatedDealOpts = {
+  id:93630457,
+  properties: [
+  {
+    value: &#x27;Update Deal Name&#x27;,
+    name: &#x27;dealname&#x27;
+  },
+  {
+    value: &#x27;200000&#x27;,
+    name: &#x27;amount&#x27;
+  }
+]};
+hs.deals.createOrUpdate(updatedDealOpts).then(response =&gt; console.log(response));
+const newDealOpts = {
+associations: {
+  associatedCompanyIds: 53333385
+},
+properties: [
+  {
+    value: &#x27;Big Deal&#x27;,
+    name: &#x27;dealname&#x27;
+  },
+  {
+    value: &#x27;appointmentscheduled&#x27;,
+    name: &#x27;dealstage&#x27;
+  },
+  {
+    value: &#x27;default&#x27;,
+    name: &#x27;pipeline&#x27;
+  },
+  {
+    value: 1409443200000,
+    name: &#x27;closedate&#x27;
+  },
+  {
+    value: &#x27;60000&#x27;,
+    name: &#x27;amount&#x27;
+  },
+  {
+    value: &#x27;newbusiness&#x27;,
+    name: &#x27;dealtype&#x27;
+  }
+]
+};
+hs.deals.createOrUpdate(newDealOpts).then(response =&gt; console.log(response));</pre>
+
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id=".getAll"><span class="type-signature">&lt;async, static> </span>getAll(opts)</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Get all deals</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>opts</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    <dl>
+
+<table class="props table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>opts.limit</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>opts.offset</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>opts.properties</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">array</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>opts.propertiesWithHistory</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">array</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+</dl>
+
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise</span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+        <h5>Example</h5>
+        
+    <pre class="sunlight-highlight-javascript">const hs = new HubspotClient(props);
+hs.deals.getRecentlyCreated({
+  limit: 2,
+  offset: 12356,
+  properties: [&#x27;dealname&#x27;, &#x27;pipeline&#x27;],
+  propertiesWithHistory: [&#x27;dealstage&#x27;]
+}).then(response =&gt; console.log(response));</pre>
+
+
+    
+</dd>
+
+        
             
 <hr>
 <dt>
@@ -425,7 +1214,12 @@
         <h5>Example</h5>
         
     <pre class="sunlight-highlight-javascript">const hs = new HubspotClient(props);
-hs.deals.getRecentlyCreated(opts).then(response =&gt; console.log(response));</pre>
+hs.deals.getRecentlyCreated({
+  count: 50,
+  offset: 5,
+  includePropertyVersions: true,
+  since: 1463680280365
+}).then(response =&gt; console.log(response));</pre>
 
 
     
@@ -485,7 +1279,7 @@ hs.deals.getRecentlyCreated(opts).then(response =&gt; console.log(response));</p
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a>
 	
-		on Fri Apr 27th 2018
+		on Fri Mar 29th 2019
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>

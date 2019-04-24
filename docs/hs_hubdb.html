@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>DocStrap Namespace: hs/contacts</title>
+	<title>DocStrap Namespace: hs/hubdb</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -72,13 +72,13 @@
 		<div id="main">
 			
 
-	<h1 class="page-title">Namespace: hs/contacts</h1>
+	<h1 class="page-title">Namespace: hs/hubdb</h1>
 <section>
 
 <header>
     
         <h2>
-        hs/contacts
+        hs/hubdb
         </h2>
         
     
@@ -89,7 +89,7 @@
     <div class="container-overview">
     
         
-            <div class="description"><p>A collection of methods related to the Contacts API</p></div>
+            <div class="description"><p>A collection of methods related to the HubDB Tables API</p></div>
         
 
         
@@ -155,7 +155,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id=".batchUpdateContacts"><span class="type-signature">&lt;async, static> </span>batchUpdateContacts(contactsToUpdate)</h4>
+    <h4 class="name" id=".addTableRow"><span class="type-signature">&lt;async, static> </span>addTableRow(tableId, options)</h4>
     
     
 </dt>
@@ -163,7 +163,7 @@
 
     
     <div class="description">
-        <p>Batch update a set of contacts</p>
+        <p>Add row to a HubDB table</p>
     </div>
     
 
@@ -198,684 +198,7 @@
 
         <tr>
             
-                <td class="name"><code>contactsToUpdate</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">array</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Array of contact updates, see example below</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <h5>Returns:</h5>
-    
-            
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Promise</span>
-
-
-
-    </dd>
-</dl>
-
-
-        
-
-    
-        <h5>Example</h5>
-        
-    <pre class="sunlight-highlight-javascript">const hs = new HubspotClient(props);
-hs.contacts.batchUpdateContacts([{
-         id: 129838129313,
-         updates: {
-           email: &#x27;sdjfhksdjf@boo.com&#x27;,
-           phone_no: &#x27;9128301982312&#x27;
-         }
-       },
-       {
-         id: 2319082301823,
-         updates: {
-           email: &#x27;skdjflkjsfdsfs@boo.com&#x27;,
-           phone_no: &#x27;1293801293801923&#x27;
-         }
-       },
-       {
-         id: 271263871623,
-         updates: {
-           email: &#x27;mxcxmncvmxc@boo.com&#x27;,
-           phone_no: &#x27;01823981023&#x27;
-         }
-       },
-       {
-         id: 127361287312,
-         updates: {
-           email: &#x27;yqeuyiqwuyeiquwey@boo.com&#x27;,
-           phone_no: &#x27;127398172398123&#x27;
-         }
-       }
-       // .....
-     ]).then(response =&gt; console.log(response))</pre>
-
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id=".createOrUpdateContact"><span class="type-signature">&lt;async, static> </span>createOrUpdateContact(properties)</h4>
-    
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        <p>Create or update a contact</p>
-    </div>
-    
-
-    
-
-    
-
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>properties</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Key/value pair of properties to update. Note: <code>email</code> is a required key.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <h5>Returns:</h5>
-    
-            
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Promise</span>
-
-
-
-    </dd>
-</dl>
-
-
-        
-
-    
-        <h5>Example</h5>
-        
-    <pre class="sunlight-highlight-javascript">const hs = new HubspotClient(props);
-hs.contacts.createOrUpdateContact({
- email: &#x27;foo@bar.com&#x27;,
- first_name: &#x27;Foo&#x27;,
- last_name: &#x27;Bar&#x27;
-}).then(response =&gt; console.log(response));</pre>
-
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id=".deleteContact"><span class="type-signature">&lt;async, static> </span>deleteContact(id)</h4>
-    
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        <p>Remove a contact</p>
-    </div>
-    
-
-    
-
-    
-
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>id</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Id of contact to remove</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <h5>Returns:</h5>
-    
-            
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Promise</span>
-
-
-
-    </dd>
-</dl>
-
-
-        
-
-    
-        <h5>Example</h5>
-        
-    <pre class="sunlight-highlight-javascript">const hs = new HubspotClient(props);
-hs.contacts.deleteContact(82739182731).then(response =&gt; console.log(response));</pre>
-
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id=".getByEmail"><span class="type-signature">&lt;async, static> </span>getByEmail(email, properties)</h4>
-    
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        <p>Get contact by email</p>
-    </div>
-    
-
-    
-
-    
-
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>email</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The email address of the contact</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>properties</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Optional extra properties to add to the request - see <a href="https://developers.hubspot.com/docs/methods/contacts/get_contact">developer docs</a></p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <h5>Returns:</h5>
-    
-            
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Promise</span>
-
-
-
-    </dd>
-</dl>
-
-
-        
-
-    
-        <h5>Example</h5>
-        
-    <pre class="sunlight-highlight-javascript">const hs = new HubspotClient(props);
-hs.contacts.getByEmail(&#x27;foo@bar.com&#x27;).then(response =&gt; console.log(response))</pre>
-
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id=".getById"><span class="type-signature">&lt;async, static> </span>getById(vid, properties)</h4>
-    
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        <p>Get contact by ID</p>
-    </div>
-    
-
-    
-
-    
-
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>vid</code></td>
+                <td class="name"><code>tableId</code></td>
             
 
             <td class="type">
@@ -892,343 +215,9 @@ hs.contacts.getByEmail(&#x27;foo@bar.com&#x27;).then(response =&gt; console.log(
 
             
 
-            <td class="description last"><p>The vid of the contact to retrieve</p></td>
+            <td class="description last"></td>
         </tr>
 
-    
-
-        <tr>
-            
-                <td class="name"><code>properties</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Optional extra properties to add to the request - see <a href="https://developers.hubspot.com/docs/methods/contacts/get_contact">developer docs</a></p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <h5>Returns:</h5>
-    
-            
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Promise</span>
-
-
-
-    </dd>
-</dl>
-
-
-        
-
-    
-        <h5>Example</h5>
-        
-    <pre class="sunlight-highlight-javascript">const hs = new HubspotClient(props);
-hs.contacts.getById(123412313).then(response =&gt; console.log(response))</pre>
-
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id=".getByUtk"><span class="type-signature">&lt;async, static> </span>getByUtk(utk, properties)</h4>
-    
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        <p>Get contact by UTK (user token)</p>
-    </div>
-    
-
-    
-
-    
-
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>utk</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The utk (User token) of the contact</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>properties</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Optional extra properties to add to the request - see <a href="https://developers.hubspot.com/docs/methods/contacts/get_contact">developer docs</a></p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <h5>Returns:</h5>
-    
-            
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Promise</span>
-
-
-
-    </dd>
-</dl>
-
-
-        
-
-    
-        <h5>Example</h5>
-        
-    <pre class="sunlight-highlight-javascript">const hs = new HubspotClient(props);
-hs.contacts.getByUtk(&#x27;jdalksjd82739jaskdksadjhkds&#x27;).then(response =&gt; console.log(response))</pre>
-
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id=".getContacts"><span class="type-signature">&lt;async, static> </span>getContacts(options)</h4>
-    
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        <p>Get all contacts</p>
-    </div>
-    
-
-    
-
-    
-
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
     
 
         <tr>
@@ -1250,7 +239,7 @@ hs.contacts.getByUtk(&#x27;jdalksjd82739jaskdksadjhkds&#x27;).then(response =&gt
 
             
 
-            <td class="description last"><p>Additional options &amp; filters to apply</p></td>
+            <td class="description last"></td>
         </tr>
 
     
@@ -1334,8 +323,8 @@ hs.contacts.getByUtk(&#x27;jdalksjd82739jaskdksadjhkds&#x27;).then(response =&gt
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">const hs = new HubspotClient(props);
-hs.contacts.getContacts({ limit: 25 }).then(response =&gt; console.log(response));</pre>
+    <pre class="sunlight-highlight-javascript">const hs = new HubSpotClient(props);
+hs.hubdb.addTableRow(tableId, options).then(response =&gt; console.log(response))</pre>
 
 
     
@@ -1345,7 +334,7 @@ hs.contacts.getContacts({ limit: 25 }).then(response =&gt; console.log(response)
             
 <hr>
 <dt>
-    <h4 class="name" id=".getRecentlyModified"><span class="type-signature">&lt;async, static> </span>getRecentlyModified(options)</h4>
+    <h4 class="name" id=".createTable"><span class="type-signature">&lt;async, static> </span>createTable(opts)</h4>
     
     
 </dt>
@@ -1353,7 +342,7 @@ hs.contacts.getContacts({ limit: 25 }).then(response =&gt; console.log(response)
 
     
     <div class="description">
-        <p>Get recently modified contacts</p>
+        <p>Create a new HubDB table</p>
     </div>
     
 
@@ -1388,7 +377,7 @@ hs.contacts.getContacts({ limit: 25 }).then(response =&gt; console.log(response)
 
         <tr>
             
-                <td class="name"><code>options</code></td>
+                <td class="name"><code>opts</code></td>
             
 
             <td class="type">
@@ -1405,7 +394,7 @@ hs.contacts.getContacts({ limit: 25 }).then(response =&gt; console.log(response)
 
             
 
-            <td class="description last"><p>Additional options and paging criteria</p></td>
+            <td class="description last"></td>
         </tr>
 
     
@@ -1432,8 +421,6 @@ hs.contacts.getContacts({ limit: 25 }).then(response =&gt; console.log(response)
         <th>Type</th>
 
         
-        <th>Argument</th>
-        
 
         
 
@@ -1446,231 +433,7 @@ hs.contacts.getContacts({ limit: 25 }).then(response =&gt; console.log(response)
 
         <tr>
             
-                <td class="name"><code>options.count</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>Specifies the number of contacts to be returned.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>options.timeOffset</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>This is used along with <code>vidOffset</code> to get the next page of results. Each request will return a <code>time-offset</code> and <code>vid-offset</code> in the response, and you'd use those offsets in the URL of your next request to get the next page of results.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>options.vidOffset</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>This is used along with <code>timeOffset</code> to get the next page of results.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-</dl>
-
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <h5>Returns:</h5>
-    
-            
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Promise</span>
-
-
-
-    </dd>
-</dl>
-
-
-        
-
-    
-        <h5>Example</h5>
-        
-    <pre class="sunlight-highlight-javascript">const hs = new HubspotClient(props);
-hs.contacts.getRecentlyModified({count: 5}).then(response =&gt; console.log(response))</pre>
-
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id=".search"><span class="type-signature">&lt;async, static> </span>search(q, options)</h4>
-    
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        <p>Search contacts</p>
-    </div>
-    
-
-    
-
-    
-
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>q</code></td>
+                <td class="name"><code>opts.name</code></td>
             
 
             <td class="type">
@@ -1687,20 +450,20 @@ hs.contacts.getRecentlyModified({count: 5}).then(response =&gt; console.log(resp
 
             
 
-            <td class="description last"><p>The search term (see https://developers.hubspot.com/docs/methods/contacts/search_contacts)</p></td>
+            <td class="description last"></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>options</code></td>
+                <td class="name"><code>opts.useForPages</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">object</span>
+<span class="param-type">boolean</span>
 
 
 
@@ -1711,112 +474,14 @@ hs.contacts.getRecentlyModified({count: 5}).then(response =&gt; console.log(resp
 
             
 
-            <td class="description last"><p>Additional options and paging criteria</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-    
-
-    
-<dl class="details">
-    
-
-    <h5 class="subsection-title">Properties:</h5>
-
-    <dl>
-
-<table class="props table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Argument</th>
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>options.count</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>Specifies the number of contacts to be returned.</p></td>
+            <td class="description last"></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>options.offset</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>This parameter is used to page through the results. Every call to this endpoint will return an offset value. This value is used in the offset= parameter of the next call to get the next page of contacts.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>options.property</code></td>
+                <td class="name"><code>opts.columns</code></td>
             
 
             <td class="type">
@@ -1830,18 +495,34 @@ hs.contacts.getRecentlyModified({count: 5}).then(response =&gt; console.log(resp
             </td>
 
             
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
 
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>opts.publishedAt</code></td>
+            
+
+            <td class="type">
+            
                 
-                </td>
+<span class="param-type">int</span>
+
+
+
+            
+            </td>
+
             
 
             
 
-            <td class="description last"><p>The properties in the &quot;contact&quot; object in the returned data will only include the property or properties that you request.</p></td>
+            <td class="description last"></td>
         </tr>
 
     
@@ -1922,8 +603,8 @@ hs.contacts.getRecentlyModified({count: 5}).then(response =&gt; console.log(resp
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">const hs = new HubspotClient(props);
-const contacts = await hs.contacts.search(&#x27;john&#x27;, { count: 5 })</pre>
+    <pre class="sunlight-highlight-javascript">const hs = new HubSpotClient(props);
+hs.pages.createTable(opts).then(response =&gt; console.log(response));</pre>
 
 
     
@@ -1933,7 +614,7 @@ const contacts = await hs.contacts.search(&#x27;john&#x27;, { count: 5 })</pre>
             
 <hr>
 <dt>
-    <h4 class="name" id=".updateContactByVid"><span class="type-signature">&lt;async, static> </span>updateContactByVid(vid, properties)</h4>
+    <h4 class="name" id=".deleteTableRow"><span class="type-signature">&lt;async, static> </span>deleteTableRow(tableId, rowId, options)</h4>
     
     
 </dt>
@@ -1941,7 +622,7 @@ const contacts = await hs.contacts.search(&#x27;john&#x27;, { count: 5 })</pre>
 
     
     <div class="description">
-        <p>Update contact properties, by VID</p>
+        <p>Delete row from a HubDB table</p>
     </div>
     
 
@@ -1976,13 +657,13 @@ const contacts = await hs.contacts.search(&#x27;john&#x27;, { count: 5 })</pre>
 
         <tr>
             
-                <td class="name"><code>vid</code></td>
+                <td class="name"><code>tableId</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">number</span>
+<span class="param-type">int</span>
 
 
 
@@ -1993,14 +674,38 @@ const contacts = await hs.contacts.search(&#x27;john&#x27;, { count: 5 })</pre>
 
             
 
-            <td class="description last"><p>VID of contact to update</p></td>
+            <td class="description last"></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>properties</code></td>
+                <td class="name"><code>rowId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
             
 
             <td class="type">
@@ -2017,7 +722,7 @@ const contacts = await hs.contacts.search(&#x27;john&#x27;, { count: 5 })</pre>
 
             
 
-            <td class="description last"><p>Key/value pair of properties to update.</p></td>
+            <td class="description last"></td>
         </tr>
 
     
@@ -2101,11 +806,877 @@ const contacts = await hs.contacts.search(&#x27;john&#x27;, { count: 5 })</pre>
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">const hs = new HubspotClient(props);
-hs.contacts.updateContactByVid(123456, {
- first_name: &#x27;Foo&#x27;,
- last_name: &#x27;Bar&#x27;
-}).then(response =&gt; console.log(response));</pre>
+    <pre class="sunlight-highlight-javascript">const hs = new HubSpotClient(props);
+hs.hubdb.deleteTableRow(tableId, rowId, options).then(response =&gt; console.log(response))</pre>
+
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id=".getTableById"><span class="type-signature">&lt;async, static> </span>getTableById(tableId, portalId, options)</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Retrieve HubDB table by ID</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>tableId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>portalId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise</span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+        <h5>Example</h5>
+        
+    <pre class="sunlight-highlight-javascript">const hs = new HubSpotClient(props);
+hs.hubdb.getTableById(tableId, portalId, options).then(response =&gt; console.log(response))</pre>
+
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id=".getTableRows"><span class="type-signature">&lt;async, static> </span>getTableRows(tableId, portalId, options)</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Get rows in a HubDB table</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>tableId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>portalId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise</span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+        <h5>Example</h5>
+        
+    <pre class="sunlight-highlight-javascript">const hs = new HubSpotClient(props);
+hs.pages.getTableRows(tableId, portalId, options).then(response =&gt; console.log(response))</pre>
+
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id=".getTables"><span class="type-signature">&lt;async, static> </span>getTables()</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Get a collection of HubDB tables</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise</span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+        <h5>Example</h5>
+        
+    <pre class="sunlight-highlight-javascript">const hs = new HubSpotClient(props);
+hs.hubdb.getTables(opts).then(response =&gt; console.log(response));</pre>
+
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id=".publishTable"><span class="type-signature">&lt;async, static> </span>publishTable(tableId)</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Publish a draft table</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>tableId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise</span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+        <h5>Example</h5>
+        
+    <pre class="sunlight-highlight-javascript">const hs = new HubSpotClient(props);
+hs.hubdb.publishTable(tableId).then(response =&gt; console.log(response))</pre>
+
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id=".updateTableRow"><span class="type-signature">&lt;async, static> </span>updateTableRow(tableId, rowId, options)</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Update row in a HubDB table</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>tableId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>rowId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise</span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+        <h5>Example</h5>
+        
+    <pre class="sunlight-highlight-javascript">const hs = new HubSpotClient(props);
+hs.hubdb.updateTableRow(tableId, rowId, options).then(response =&gt; console.log(response))</pre>
 
 
     

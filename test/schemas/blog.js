@@ -88,6 +88,8 @@ const schemaPost = joi.object().keys({
   post_template: joi.string().allow(''),
   preview_key: joi.string().allow(''),
   processing_status: joi.string().allow(''),
+  public_access_rules: joi.array(),
+  public_access_rules_enabled: joi.boolean(),
   publish_date: joi.number(),
   publish_date_local_time: joi.number(),
   publish_date_localized: joi.object(),

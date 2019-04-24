@@ -1,5 +1,5 @@
 require('dotenv').config();
-const HubSpotAPI = require('../dist/hubspot-api');
+const HubSpotClient = require('../dist/hubspot-api');
 const expect = require('chai').expect;
 const debug = require('debug')('hubspot-api:tests'); //eslint-disable-line
 const {
@@ -13,7 +13,7 @@ const {
   E2E_TESTS_HAPI_KEY: hapikey,
   E2E_TESTS_BLOG_ID: content_group_id
 } = process.env;
-const hs = new HubSpotAPI({ hapikey });
+const hs = new HubSpotClient({ hapikey });
 
 describe('Get Blog Post List', async () => {
   it('returns a valid blog post list response with no query', async () => {

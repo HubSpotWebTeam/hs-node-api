@@ -1,7 +1,10 @@
 // NOTE: FULLY_IMPLEMENTED
 // NOTE: REQUIRES_TESTS
 
-import createRequest, { sanitizeObject } from '../utilities';
+import createRequest, {
+  sanitizeObject,
+  requiresAuthentication
+} from '../utilities';
 import constants from '../constants';
 
 const defaults = {};
@@ -11,6 +14,7 @@ let _baseOptions;
 
 const create = async properties => {
   try {
+    requiresAuthentication(_baseOptions);
     const method = 'POST';
     const body = {
       properties: Object.keys(properties).map(key => ({
@@ -31,6 +35,7 @@ const create = async properties => {
 
 const update = async (companyId, properties) => {
   try {
+    requiresAuthentication(_baseOptions);
     if (!companyId) {
       throw new Error('Field "companyId" is required.');
     }
@@ -58,14 +63,15 @@ const update = async (companyId, properties) => {
 const batchUpdate = async options => {
   // FIXME: Implement this
   try {
+    requiresAuthentication(_baseOptions);
     const method = 'POST';
-    const body = options.map(company => {
-      const properties = Object.keys(company.updates).map(i => ({
+    const body = options.map(option => {
+      const properties = Object.keys(option.updates).map(i => ({
         name: i,
-        value: company.updates[i]
+        value: option.updates[i]
       }));
       return {
-        objectId: company.id,
+        objectId: option.id,
         properties
       };
     });
@@ -83,6 +89,7 @@ const batchUpdate = async options => {
 
 const deleteCompany = async companyId => {
   try {
+    requiresAuthentication(_baseOptions);
     const method = 'DELETE';
     const response = await createRequest(
       constants.api.company.byId,
@@ -97,6 +104,7 @@ const deleteCompany = async companyId => {
 
 const getAll = async props => {
   try {
+    requiresAuthentication(_baseOptions);
     const method = 'GET';
     const passedProps = props || {};
     const { limit, offset, properties, propertiesWithHistory } = passedProps;
@@ -121,6 +129,7 @@ const getAll = async props => {
 
 const getRecentlyModified = async props => {
   try {
+    requiresAuthentication(_baseOptions);
     const method = 'GET';
     const passedProps = props || {};
     const { offset, count } = passedProps;
@@ -142,6 +151,7 @@ const getRecentlyModified = async props => {
 
 const getRecentlyCreated = async props => {
   try {
+    requiresAuthentication(_baseOptions);
     const method = 'GET';
     const passedProps = props || {};
     const { offset, count } = passedProps;
@@ -161,8 +171,47 @@ const getRecentlyCreated = async props => {
   }
 };
 
+const byId = async companyId => {
+  try {
+    requiresAuthentication(_baseOptions);
+    const method = 'GET';
+    let mergedProps = Object.assign({}, defaults, _baseOptions, {});
+    mergedProps = sanitizeObject(mergedProps);
+    const companies = await createRequest(
+      constants.api.company.byId,
+      { method, companyId },
+      mergedProps
+    );
+    return Promise.resolve(companies);
+  } catch (e) {
+    return Promise.reject(e.message);
+  }
+};
+
+const getContacts = async (companyId, count = 100, vidOffset) => {
+  try {
+    requiresAuthentication(_baseOptions);
+    const method = 'GET';
+    let mergedProps = Object.assign({}, defaults, _baseOptions, {
+      count,
+      vidOffset
+    });
+
+    mergedProps = sanitizeObject(mergedProps);
+    const companies = await createRequest(
+      constants.api.company.contacts,
+      { method, companyId },
+      mergedProps
+    );
+    return Promise.resolve(companies);
+  } catch (e) {
+    return Promise.reject(e.message);
+  }
+};
+
 const byDomain = async (domain, props) => {
   try {
+    requiresAuthentication(_baseOptions);
     const method = 'POST';
     const passedProps = props || {};
     const { limit } = passedProps;
@@ -197,7 +246,7 @@ const byDomain = async (domain, props) => {
   }
 };
 
-export default function calendar(baseOptions) {
+export default function company(baseOptions) {
   _baseOptions = baseOptions;
 
   return {
@@ -317,6 +366,30 @@ export default function calendar(baseOptions) {
      * @property {array} [pagingProperties.properties=["domain", "createdate", "name", "hs_lastmodifieddate"]] - An array of properties that will be included for the returned companies. By default, no properties will be included in the response, so you must specify any properties that you want.
      * @returns {Promise}
      */
-    byDomain
+    byDomain,
+    /**
+     * Search for companies by ID.
+     * @async
+     * @memberof hs/company
+     * @method byId
+     * @param {int} id VID of company to search for
+     * @example
+     * const hs = new HubspotClient(props);
+     * const companyInfo = await hs.company.byId(1234);
+     * @returns {Promise}
+     */
+    byId,
+    /**
+     * Get contacts at a company
+     * @async
+     * @memberof hs/company
+     * @method getContacts
+     * @param {int} id VID of company
+     * @example
+     * const hs = new HubspotClient(props);
+     * const companyInfo = await hs.company.getContacts(1234);
+     * @returns {Promise}
+     */
+    getContacts
   };
 }

@@ -1,12 +1,12 @@
 require('dotenv').config();
-const HubSpotAPI = require('../dist/hubspot-api');
+const HubSpotClient = require('../dist/hubspot-api');
 const expect = require('chai').expect;
 const debug = require('debug')('hubspot-api:tests'); //eslint-disable-line
 const { schemaPages, schemaPage, validate } = require('./schemas/page');
 
 const { E2E_TESTS_HAPI_KEY: hapikey } = process.env;
 
-const hs = new HubSpotAPI({ hapikey });
+const hs = new HubSpotClient({ hapikey });
 
 describe('Get Pages List', async () => {
   it('returns a valid page list', async () => {

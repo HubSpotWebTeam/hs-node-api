@@ -2,6 +2,12 @@ const defaultApiHost = process.env.COS_API_HOST || 'https://api.hubapi.com';
 
 export default {
   api: {
+    account: {
+      details: `${defaultApiHost}/integrations/v1/me`
+    },
+    files: {
+      getFilesInFolder: `${defaultApiHost}/filemanager/api/v2/files`
+    },
     pages: {
       create: `${defaultApiHost}/content/api/v2/pages`,
       byId: `${defaultApiHost}/content/api/v2/pages/{id}`,
@@ -17,7 +23,11 @@ export default {
       restoreVersion: `${defaultApiHost}/content/api/v2/pages/{id}/versions/restore`
     },
     deals: {
-      recentlyCreated: `${defaultApiHost}/deals/v1/deal/recent/created`
+      recentlyCreated: `${defaultApiHost}/deals/v1/deal/recent/created`,
+      getAll: `${defaultApiHost}/deals/v1/deal/paged`,
+      create: `${defaultApiHost}/deals/v1/deal`,
+      update: `${defaultApiHost}/deals/v1/deal/{id}`,
+      batchUpdate: `${defaultApiHost}/deals/v1/batch-async/update`
     },
     emailEvents: {
       campaignsWithRecentActivity: `${defaultApiHost}/email/public/v1/campaigns`,
@@ -37,7 +47,11 @@ export default {
     },
     layouts: {
       getAll: `${defaultApiHost}/content/api/v2/layouts`,
-      byId: `${defaultApiHost}/content/api/v2/layouts/{id}`
+      byId: `${defaultApiHost}/content/api/v2/layouts/{id}`,
+      getBuffer: `${defaultApiHost}/content/api/v2/layouts/{id}/buffer`,
+      hasBufferedChanges: `${defaultApiHost}/content/api/v2/layouts/{id}/has-buffered-changes`,
+      getPreviousVersions: `${defaultApiHost}/content/api/v2/layouts/{id}/versions`,
+      getPreviousVersion: `${defaultApiHost}/content/api/v2/layouts/{id}/versions/{versionId}`,
     },
     email: {
       getSubscriptions: `${defaultApiHost}/email/public/v1/subscriptions`
@@ -82,12 +96,15 @@ export default {
       byEmail: `${defaultApiHost}/contacts/v1/contact/email/{email}/profile`,
       byUtk: `${defaultApiHost}/contacts/v1/contact/utk/{utk}/profile`,
       createContact: `${defaultApiHost}/contacts/v1/contact/createOrUpdate/email/{email}/`,
-      batchUpdateContacts: `${defaultApiHost}/contacts/v1/contact/batch/`
+      batchUpdateContacts: `${defaultApiHost}/contacts/v1/contact/batch/`,
+      getRecentlyModified: `${defaultApiHost}/contacts/v1/lists/recently_updated/contacts/recent`,
+      search: `${defaultApiHost}/contacts/v1/search/query`
     },
     company: {
       create: `${defaultApiHost}/companies/v2/companies/`,
       batchUpdate: `${defaultApiHost}/companies/v1/batch-async/update`,
       byId: `${defaultApiHost}/companies/v2/companies/{companyId}`,
+      contacts: `${defaultApiHost}/companies/v2/companies/{companyId}/contacts`,
       byDomain: `${defaultApiHost}/companies/v2/domains/{domain}/companies`
     },
     workflows: {
@@ -97,6 +114,20 @@ export default {
       create: `${defaultApiHost}/automation/v3/workflows`,
       getAll: `${defaultApiHost}/automation/v3/workflows`,
       byId: `${defaultApiHost}/automation/v3/workflows/{id}`
+    },
+    hubdb: {
+      tables: `${defaultApiHost}/hubdb/api/v2/tables`,
+      rows: `${defaultApiHost}/hubdb/api/v2/tables/{tableId}/rows`,
+      table: `${defaultApiHost}/hubdb/api/v2/tables/{tableId}`,
+      row: `${defaultApiHost}/hubdb/api/v2/tables/{tableId}/rows/{id}`,
+      cell: `${defaultApiHost}/hubdb/api/v2/tables/{tableId}/rows/{rowId}/cells/{cellId}`,
+      cloneTable: `${defaultApiHost}/hubdb/api/v2/tables/{tableId}/clone`,
+      cloneRow: `${defaultApiHost}/hubdb/api/v2/tables/{tableId}/rows/{rowId}/clone`,
+      importCsv: `${defaultApiHost}/hubdb/api/v2/tables/{tableId}/import`,
+      publishTable: `${defaultApiHost}/hubdb/api/v2/tables/{tableId}/publish`
+    },
+    engagements: {
+      create: `${defaultApiHost}/engagements/v1/engagements`
     }
   }
 };

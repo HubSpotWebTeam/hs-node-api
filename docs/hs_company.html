@@ -33,7 +33,7 @@
 			<li class="dropdown">
 				<a href="namespaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Namespaces<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="hs_blog.html">hs/blog</a></li><li><a href="hs_calendar.html">hs/calendar</a></li><li><a href="hs_company.html">hs/company</a></li><li><a href="hs_contacts.html">hs/contacts</a></li><li><a href="hs_deals.html">hs/deals</a></li><li><a href="hs_domains.html">hs/domains</a></li><li><a href="hs_emailEvents.html">hs/emailEvents</a></li><li><a href="hs_forms.html">hs/forms</a></li><li><a href="hs_layouts.html">hs/layouts</a></li><li><a href="hs_pages.html">hs/pages</a></li><li><a href="hs_social.html">hs/social</a></li><li><a href="hs_workflows.html">hs/workflows</a></li>
+					<li><a href="hs_account.html">hs/account</a></li><li><a href="hs_blog.html">hs/blog</a></li><li><a href="hs_calendar.html">hs/calendar</a></li><li><a href="hs_company.html">hs/company</a></li><li><a href="hs_contacts.html">hs/contacts</a></li><li><a href="hs_deals.html">hs/deals</a></li><li><a href="hs_domains.html">hs/domains</a></li><li><a href="hs_emailEvents.html">hs/emailEvents</a></li><li><a href="hs_engagements.html">hs/engagements</a></li><li><a href="hs_files.html">hs/files</a></li><li><a href="hs_forms.html">hs/forms</a></li><li><a href="hs_hubdb.html">hs/hubdb</a></li><li><a href="hs_layouts.html">hs/layouts</a></li><li><a href="hs_pages.html">hs/pages</a></li><li><a href="hs_social.html">hs/social</a></li><li><a href="hs_workflows.html">hs/workflows</a></li>
 				</ul>
 			</li>
 			
@@ -633,6 +633,161 @@ hs.company.batchUpdate(updates).then(response =&gt; console.log(response))</pre>
         
     <pre class="sunlight-highlight-javascript">const hs = new HubspotClient(props);
 hs.company.byDomain(&#x27;www.hubspot.com&#x27;, {limit: 5, properties: [&#x27;name&#x27;, &#x27;createdate&#x27;]}).then(response =&gt; console.log(response))</pre>
+
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id=".byId"><span class="type-signature">&lt;async, static> </span>byId(id)</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Search for companies by ID.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>VID of company to search for</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise</span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+        <h5>Example</h5>
+        
+    <pre class="sunlight-highlight-javascript">const hs = new HubspotClient(props);
+const companyInfo = await hs.company.byId(1234);</pre>
 
 
     
@@ -1257,6 +1412,161 @@ hs.company.delete(companyId).then(response =&gt; console.log(response));</pre>
         
     <pre class="sunlight-highlight-javascript">const hs = new HubspotClient(props);
 hs.company.getAll(pagingProperties).then(response =&gt; console.log(response))</pre>
+
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id=".getContacts"><span class="type-signature">&lt;async, static> </span>getContacts(id)</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Get contacts at a company</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>VID of company</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise</span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+        <h5>Example</h5>
+        
+    <pre class="sunlight-highlight-javascript">const hs = new HubspotClient(props);
+const companyInfo = await hs.company.getContacts(1234);</pre>
 
 
     
@@ -1995,7 +2305,7 @@ hs.company.update(companyId, companyProperties).then(response =&gt; console.log(
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a>
 	
-		on Fri Apr 27th 2018
+		on Fri Mar 29th 2019
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>
