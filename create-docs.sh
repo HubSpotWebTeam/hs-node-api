@@ -5,7 +5,7 @@ if [[ "$TRAVIS_BRANCH" == "release" && "$TRAVIS_PULL_REQUEST" == "false" ]]; the
     cd "$TRAVIS_BUILD_DIR"
     # This generates a `web` directory containing the website.
     echo "Starting docs compilation"
-    npm run compile-docs
+    node ./node_modules/.bin/jsdoc -R README.md -c ./jsconf.json -t ./node_modules/ink-docstrap/template -r ./src -d ./
     git init
     git checkout -b gh-pages
     git add .
