@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/HubSpotWebTeam/hs-node-api.svg?branch=master)](https://travis-ci.org/HubSpotWebTeam/hs-node-api)
+
 # Hubspot Client API
 
 A client wrapper for the HubSpot API at https://developers.hubspot.com/docs/overview.
