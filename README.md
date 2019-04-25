@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/HubSpotWebTeam/hs-node-api.svg?branch=master)](https://travis-ci.org/HubSpotWebTeam/hs-node-api)
+
 # Hubspot Client API
 
 A client wrapper for the HubSpot API at https://developers.hubspot.com/docs/overview.
@@ -73,6 +75,6 @@ E2E_TESTS_LAYOUT_ID="1234567785"
 E2E_TESTS_LAYOUT_VERSION_ID="1234567894"
 ```
 
-Test with `npm run prepare`.
+Test with `npm run build && npm test`.
 
 All set? Open a pull request!

@@ -3,7 +3,8 @@ const defaultApiHost = process.env.COS_API_HOST || 'https://api.hubapi.com';
 export default {
   api: {
     account: {
-      details: `${defaultApiHost}/integrations/v1/me`
+      details: `${defaultApiHost}/integrations/v1/me`,
+      dailyLimit: `${defaultApiHost}/integrations/v1/limit/daily`
     },
     files: {
       getFilesInFolder: `${defaultApiHost}/filemanager/api/v2/files`
@@ -131,6 +132,13 @@ export default {
     },
     oauth: {
       tokenInfo: `${defaultApiHost}/oauth/v1/access-tokens/{token}`
+    },
+    urlMappings: {
+      getAll: `${defaultApiHost}/url-mappings/v3/url-mappings`,
+      byId: `${defaultApiHost}/url-mappings/v3/url-mappings/{id}`,
+      create: `${defaultApiHost}/url-mappings/v3/url-mappings`,
+      update: `${defaultApiHost}/url-mappings/v3/url-mappings/{id}`,
+      delete: `${defaultApiHost}/url-mappings/v3/url-mappings/{id}`,
     }
   }
 };

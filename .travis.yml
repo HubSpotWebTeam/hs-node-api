@@ -1,0 +1,20 @@
+language: node_js
+node_js:
+  - "8.11.0"
+after_success:
+  - ./create-docs.sh
+before_deploy:
+  - echo 'Tagging TRAVIS build'
+  # Set up git user name and tag this commit, fix this for other users
+  - git config --local user.name "smcelhinney"
+  - git config --local user.email "stephen@appstruct.io"
+  - export TRAVIS_TAG=${TRAVIS_TAG:-$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)}
+  - git tag $TRAVIS_TAG
+deploy:
+  provider: npm
+  email: smcelhinney@hubspot.com
+  api_key: $NPM_TOKEN
+  skip_cleanup: true
+  on:
+    branch: release
+    repo: HubSpotWebTeam/hs-node-api
