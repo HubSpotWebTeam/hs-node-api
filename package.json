@@ -13,7 +13,6 @@
     "api-tests": "DEBUG=utilities babel-node --presets node6 test/",
     "build": "rimraf dist/ && DEBUG=rollup:compile node tools/build.js",
     "prepare": "npm run build",
-    "compile-docs": "jsdoc -R README.md -c ./jsconf.json -t ./node_modules/ink-docstrap/template -r ./src -d ./",
     "test": "mocha",
     "test:watch": "mocha --watch"
   },
