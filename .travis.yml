@@ -4,7 +4,7 @@ node_js:
 after_success:
   - ./travis/create-docs.sh
 script:
-  - ./travis/build.sh
+  - ./travis/postbuild.sh
 before_deploy:
   - echo 'Tagging TRAVIS build'
   # Set up git user name and tag this commit, fix this for other users
