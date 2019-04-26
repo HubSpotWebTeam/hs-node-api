@@ -2,7 +2,9 @@ language: node_js
 node_js:
   - "8.11.0"
 after_success:
-  - ./create-docs.sh
+  - ./travis/create-docs.sh
+script:
+  - ./travis/build.sh
 before_deploy:
   - echo 'Tagging TRAVIS build'
   # Set up git user name and tag this commit, fix this for other users
