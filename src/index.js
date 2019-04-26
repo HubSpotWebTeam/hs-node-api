@@ -14,6 +14,7 @@ import dealsApi from './entities/deals';
 import pagesApi from './entities/pages';
 import hubdbApi from './entities/hubdb';
 import engagementsApi from './entities/engagements';
+import oauthApi from './entities/oauth';
 
 /**
 * HubSpotClient class
@@ -160,6 +161,14 @@ class HubSpotClient {
    */
   get engagements() {
     return engagementsApi(this.props);
+  }
+
+   /**
+   * A collection of methods related to the OAuth API
+   * @namespace hs/oauth
+   */
+  get oauth() {
+    return oauthApi(this.props);
   }
 }
 
