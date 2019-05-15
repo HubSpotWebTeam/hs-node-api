@@ -1,5 +1,6 @@
 import accountApi from './entities/account';
 import contactsApi from './entities/contacts';
+import contactsPropertiesApi from './entities/contacts-properties';
 import companyApi from './entities/company';
 import calendarApi from './entities/calendar';
 import blogPostsApi from './entities/blog';
@@ -57,6 +58,14 @@ class HubSpotClient {
    */
   get contacts() {
     return contactsApi(this.props);
+  }
+
+    /**
+   * A collection of methods related to the Contacts Properties API
+   * @namespace hs/contactsProperties
+   */
+  get contactsProperties() {
+    return contactsPropertiesApi(this.props);
   }
 
   /**
