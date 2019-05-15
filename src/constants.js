@@ -36,7 +36,8 @@ export default {
     },
     forms: {
       submitForm:
-        'https://forms.hubspot.com/uploads/form/v2/{portalId}/{formId}'
+        'https://forms.hubspot.com/uploads/form/v2/{portalId}/{formId}',
+      formFields: `${defaultApiHost}/forms/v2/fields/{formId}`,
     },
     social: {
       channels: `${defaultApiHost}/broadcast/v1/channels/setting/publish/current`,
@@ -100,6 +101,9 @@ export default {
       batchUpdateContacts: `${defaultApiHost}/contacts/v1/contact/batch/`,
       getRecentlyModified: `${defaultApiHost}/contacts/v1/lists/recently_updated/contacts/recent`,
       search: `${defaultApiHost}/contacts/v1/search/query`
+    },
+    contactsProperties: {
+      getAllContactsProperties: `${defaultApiHost}/properties/v1/contacts/properties`
     },
     company: {
       create: `${defaultApiHost}/companies/v2/companies/`,
