@@ -40,6 +40,7 @@ Entities available
 - Blog authors
 - Blog topics
 - Contacts
+- Contacts Properties (partial implementation)
 - Companies
 - Calendar
 - Deals (partial implementation)

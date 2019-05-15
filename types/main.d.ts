@@ -5,6 +5,7 @@ declare class HubSpotClient {
   account: IAccountApi;
   calendar: any // ICalendarApi;
   contacts: any // IContactsApi;
+  contactsProperties: any // IContactsPropertiesApi
   company: any // ICompanyApi;
   blog: any // IBlogApi;
   workflows: any // IWorkflowsApi;

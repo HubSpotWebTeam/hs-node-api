@@ -102,6 +102,9 @@ export default {
       getRecentlyModified: `${defaultApiHost}/contacts/v1/lists/recently_updated/contacts/recent`,
       search: `${defaultApiHost}/contacts/v1/search/query`
     },
+    contactsProperties: {
+      getAllContactsProperties: `${defaultApiHost}/properties/v1/contacts/properties`
+    },
     company: {
       create: `${defaultApiHost}/companies/v2/companies/`,
       batchUpdate: `${defaultApiHost}/companies/v1/batch-async/update`,
