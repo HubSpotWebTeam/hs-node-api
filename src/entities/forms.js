@@ -1,5 +1,5 @@
 import omit from 'lodash.omit';
-import createRequest from '../utilities';
+import createRequest, { requiresAuthentication } from '../utilities';
 import constants from '../constants';
 
 const defaults = {};
@@ -45,6 +45,21 @@ const submitForm = async (portalId, formId, opts = {}) => {
   }
 };
 
+const getFormFields = async (formId) => {
+  try {
+    requiresAuthentication(_baseOptions);
+    const mergedProps = Object.assign({}, defaults, _baseOptions);
+    const formFields = await createRequest(
+      constants.api.forms.formFields,
+      { formId },
+      mergedProps,
+    );
+    return Promise.resolve(formFields);
+  } catch (e) {
+    return Promise.reject(e);
+  }
+};
+
 export default function domainsApi(baseOptions) {
   _baseOptions = baseOptions;
 
@@ -62,6 +77,17 @@ export default function domainsApi(baseOptions) {
      * hs.forms.submitForm(portalId, formId, formFields).then(response => console.log(response));
      * @returns {Promise}
      */
-    submitForm
+    submitForm,
+    /**
+     * Get Form Fields for Specified Form
+     * @async
+     * @memberof hs/forms
+     * @method getFormFields
+     * @param {string} formId
+     * @example
+     * const hs = new HubSpotClient(props);
+     * const formFields = await hs.forms.getFormFields(formId)
+     */
+    getFormFields,
   };
 }

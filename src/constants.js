@@ -36,7 +36,8 @@ export default {
     },
     forms: {
       submitForm:
-        'https://forms.hubspot.com/uploads/form/v2/{portalId}/{formId}'
+        'https://forms.hubspot.com/uploads/form/v2/{portalId}/{formId}',
+      formFields: `${defaultApiHost}/forms/v2/fields/{formId}`,
     },
     social: {
       channels: `${defaultApiHost}/broadcast/v1/channels/setting/publish/current`,
