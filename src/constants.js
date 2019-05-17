@@ -35,9 +35,10 @@ export default {
       campaign: `${defaultApiHost}/email/public/v1/campaigns/{campaignId}`
     },
     forms: {
+      submissions: `${defaultApiHost}/form-integrations/v1/submissions/forms/{formId}`,
       submitForm:
         'https://forms.hubspot.com/uploads/form/v2/{portalId}/{formId}',
-      formFields: `${defaultApiHost}/forms/v2/fields/{formId}`,
+      formFields: `${defaultApiHost}/forms/v2/fields/{formId}`
     },
     social: {
       channels: `${defaultApiHost}/broadcast/v1/channels/setting/publish/current`,
@@ -53,7 +54,7 @@ export default {
       getBuffer: `${defaultApiHost}/content/api/v2/layouts/{id}/buffer`,
       hasBufferedChanges: `${defaultApiHost}/content/api/v2/layouts/{id}/has-buffered-changes`,
       getPreviousVersions: `${defaultApiHost}/content/api/v2/layouts/{id}/versions`,
-      getPreviousVersion: `${defaultApiHost}/content/api/v2/layouts/{id}/versions/{versionId}`,
+      getPreviousVersion: `${defaultApiHost}/content/api/v2/layouts/{id}/versions/{versionId}`
     },
     email: {
       getSubscriptions: `${defaultApiHost}/email/public/v1/subscriptions`
@@ -102,6 +103,10 @@ export default {
       getRecentlyModified: `${defaultApiHost}/contacts/v1/lists/recently_updated/contacts/recent`,
       search: `${defaultApiHost}/contacts/v1/search/query`
     },
+    contactsList: {
+      byId: `${defaultApiHost}/contacts/v1/lists/{listId}`,
+      contactsByListId: `${defaultApiHost}/contacts/v1/lists/{listId}/contacts/all`
+    },
     contactsProperties: {
       getAllContactsProperties: `${defaultApiHost}/properties/v1/contacts/properties`
     },
@@ -142,7 +147,7 @@ export default {
       byId: `${defaultApiHost}/url-mappings/v3/url-mappings/{id}`,
       create: `${defaultApiHost}/url-mappings/v3/url-mappings`,
       update: `${defaultApiHost}/url-mappings/v3/url-mappings/{id}`,
-      delete: `${defaultApiHost}/url-mappings/v3/url-mappings/{id}`,
+      delete: `${defaultApiHost}/url-mappings/v3/url-mappings/{id}`
     }
   }
 };

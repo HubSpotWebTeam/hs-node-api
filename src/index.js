@@ -16,6 +16,7 @@ import pagesApi from './entities/pages';
 import hubdbApi from './entities/hubdb';
 import engagementsApi from './entities/engagements';
 import oauthApi from './entities/oauth';
+import contactsListsApi from './entities/contactsLists';
 
 /**
 * HubSpotClient class
@@ -60,7 +61,7 @@ class HubSpotClient {
     return contactsApi(this.props);
   }
 
-    /**
+  /**
    * A collection of methods related to the Contacts Properties API
    * @namespace hs/contactsProperties
    */
@@ -172,12 +173,20 @@ class HubSpotClient {
     return engagementsApi(this.props);
   }
 
-   /**
+  /**
    * A collection of methods related to the OAuth API
    * @namespace hs/oauth
    */
   get oauth() {
     return oauthApi(this.props);
+  }
+
+  /**
+   * A collection of methods related to the ContactsList API
+   * @namespace hs/contactsLists
+   */
+  get contactsLists() {
+    return contactsListsApi(this.props);
   }
 }
 
