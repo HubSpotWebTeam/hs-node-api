@@ -16,8 +16,8 @@ import pagesApi from './entities/pages';
 import hubdbApi from './entities/hubdb';
 import engagementsApi from './entities/engagements';
 import oauthApi from './entities/oauth';
-import contactsListsApi from './entities/contactsLists';
-
+import contactsListsApi from './entities/contacts-lists';
+import emailSubscriptionsApi from './entities/email-subscriptions';
 /**
 * HubSpotClient class
 * @example
@@ -188,6 +188,16 @@ class HubSpotClient {
   get contactsLists() {
     return contactsListsApi(this.props);
   }
+
+    /**
+   * A collection of methods related to the Email Subscriptions API
+   * @namespace hs/emailSubscriptions
+   */
+  get emailSubscriptions() {
+    return emailSubscriptionsApi(this.props);
+  }
+
+
 }
 
 export default HubSpotClient;
