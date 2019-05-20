@@ -45,14 +45,14 @@ const submitForm = async (portalId, formId, opts = {}) => {
   }
 };
 
-const getFormFields = async (formId) => {
+const getFormFields = async formId => {
   try {
     requiresAuthentication(_baseOptions);
     const mergedProps = Object.assign({}, defaults, _baseOptions);
     const formFields = await createRequest(
       constants.api.forms.formFields,
       { formId },
-      mergedProps,
+      mergedProps
     );
     return Promise.resolve(formFields);
   } catch (e) {
@@ -60,7 +60,22 @@ const getFormFields = async (formId) => {
   }
 };
 
-export default function domainsApi(baseOptions) {
+const getSubmissions = async (formId, opts = {}) => {
+  try {
+    requiresAuthentication(_baseOptions);
+    const mergedProps = Object.assign({}, defaults, _baseOptions, opts);
+    const submissions = await createRequest(
+      constants.api.forms.submissions,
+      { formId },
+      mergedProps
+    );
+    return Promise.resolve(submissions);
+  } catch (e) {
+    return Promise.reject(e);
+  }
+};
+
+export default function formsApi(baseOptions) {
   _baseOptions = baseOptions;
 
   return {
@@ -89,5 +104,16 @@ export default function domainsApi(baseOptions) {
      * const formFields = await hs.forms.getFormFields(formId)
      */
     getFormFields,
+    /**
+     * Get form submissions for specific form
+     * @async
+     * @memberof hs/forms
+     * @method getSubmissions
+     * @param {string} formId
+     * @example
+     * const hs = new HubSpotClient(props);
+     * const submissions = await hs.forms.getSubmissions(formId)
+     */
+    getSubmissions
   };
 }

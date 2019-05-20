@@ -60,6 +60,7 @@ export default async function createRequest(uri, options, props = {}) {
     delete properties.accessToken;
 
     const url = `${interpolate(uri, options)}?${qs.stringify(properties)}`;
+    debugApp(`url: ${url}`);
     const method = options.method || 'GET';
     debugApp(`${method}: ${url}`);
     const headers = {};
