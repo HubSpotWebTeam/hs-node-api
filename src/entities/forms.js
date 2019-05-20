@@ -29,6 +29,11 @@ const submitForm = async (portalId, formId, opts = {}) => {
       omit(opts, ['hutk', 'ipAddress', 'pageUrl', 'pageName', 'redirectUrl'])
     );
 
+    // Remove the hapikey from these requests
+    if (mergedProps.hapikey) {
+      delete mergedProps.hapikey;
+    }
+
     await createRequest(
       constants.api.forms.submitForm,
       {
