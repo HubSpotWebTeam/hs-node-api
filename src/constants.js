@@ -35,7 +35,8 @@ export default {
       campaign: `${defaultApiHost}/email/public/v1/campaigns/{campaignId}`
     },
     emailSubscriptions: {
-      updateStatus: `${defaultApiHost}/email/public/v1/subscriptions/{email}`
+      updateStatus: `${defaultApiHost}/email/public/v1/subscriptions/{email}`,
+      getStatus: `${defaultApiHost}/email/public/v1/subscriptions/{email}`
     },
     forms: {
       submissions: `${defaultApiHost}/form-integrations/v1/submissions/forms/{formId}`,
