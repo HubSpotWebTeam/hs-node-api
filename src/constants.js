@@ -1,4 +1,4 @@
-const defaultApiHost = process.env.COS_API_HOST || 'https://api.hubspot.com';
+const defaultApiHost = process.env.COS_API_HOST || 'https://api.hubapi.com';
 
 export default {
   api: {
