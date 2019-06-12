@@ -2,9 +2,8 @@ require('dotenv').config();
 const HubSpotClient = require('../dist/hubspot-api');
 const expect = require('chai').expect;
 const debug = require('debug')('hubspot-api:tests'); //eslint-disable-line
-const { schemaDailyLimit, validate } = require('./schemas/account');
 
-const { FORM_ID: formId, PORTAL_ID: portalId } = process.env;
+const { E2E_TESTS_FORM_ID: formId, E2E_TESTS_PORTAL_ID: portalId } = process.env;
 const hs = new HubSpotClient({});
 
 describe('Get Daily Limit', async () => {
