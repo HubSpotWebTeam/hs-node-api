@@ -69,7 +69,7 @@ export default async function createRequest(uri, options, props = {}) {
     if (props.accessToken) {
       headers.Authorization = `Bearer ${props.accessToken}`;
     }
-    return axios({ url, method, headers, timeout, data });
+    return axios({ url, method, headers, timeout, data }).then(response => response.data);
   } catch (e) {
     return Promise.reject(e);
   }
