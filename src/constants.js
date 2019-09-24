@@ -42,7 +42,7 @@ export default {
       submissions: `${defaultApiHost}/form-integrations/v1/submissions/forms/{formId}`,
       submitForm: 'https://forms.hubspot.com/uploads/form/v2/{portalId}/{formId}',
       formFields: `${defaultApiHost}/forms/v2/fields/{formId}`,
-      submitFormV3: `https://api.hsforms.com/submissions/v3/integration/submit/{portalId}/{formId}`
+      submitFormV3: 'https://api.hsforms.com/submissions/v3/integration/submit/{portalId}/{formId}'
     },
     social: {
       channels: `${defaultApiHost}/broadcast/v1/channels/setting/publish/current`,
