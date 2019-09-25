@@ -2,7 +2,7 @@
   "extends": "airbnb",
   "settings": {
     "import/resolver": "webpack"
-    },
+  },
   "rules": {
     "no-bitwise": 0,
     "comma-dangle": 0,

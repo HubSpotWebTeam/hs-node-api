@@ -56,6 +56,10 @@ Entities available
 
 Please check out the full documentation available at https://hubspotwebteam.github.io/hs-node-api/
 
+## CORS
+
+At the moment of writing the HubSpot APIs do not support CORS / AJAX requests due to [security reasons](https://developers.hubspot.com/docs/faq/do-hubspot-apis-support-ajax-request), so you must use this library only on a Node.js server.
+
 ## Authors and Contributors
 
 Currently maintained by the lovely folks on HubSpot's Web Team, but we need your help. Please feel free to submit pull requests to add new functionality.
