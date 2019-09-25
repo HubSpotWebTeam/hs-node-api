@@ -26,6 +26,7 @@ export default {
     deals: {
       recentlyCreated: `${defaultApiHost}/deals/v1/deal/recent/created`,
       getAll: `${defaultApiHost}/deals/v1/deal/paged`,
+      byId: `${defaultApiHost}/deals/v1/deal/{id}`,
       create: `${defaultApiHost}/deals/v1/deal`,
       update: `${defaultApiHost}/deals/v1/deal/{id}`,
       batchUpdate: `${defaultApiHost}/deals/v1/batch-async/update`
