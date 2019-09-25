@@ -9,3 +9,4 @@ dist/
 sandbox*
 test.js
 docs/
+.vscode/
