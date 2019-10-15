@@ -9,7 +9,7 @@ export const requiresAuthentication = ({ hapikey, accessToken }) => {
   }
 };
 
-const interpolate = (template, data, opts = {}) => {
+export const interpolate = (template, data, opts = {}) => {
   // For escaping strings to go in regex
   const regexEscape = /([$^\\/()|?+*[\]{}.-])/g;
   const delimiter = opts.delimiter || '{}';
@@ -63,7 +63,10 @@ export default async function createRequest(uri, options, props = {}) {
     debugApp(`url: ${url}`);
     const method = options.method || 'GET';
     debugApp(`${method}: ${url}`);
-    const headers = {};
+    const headers = {
+      'Content-Type': 'application/json',
+      Accept: 'application/json'
+    };
     const timeout = 30000;
     const data = options.body || {};
     if (props.accessToken) {
