@@ -63,10 +63,7 @@ export default async function createRequest(uri, options, props = {}) {
     debugApp(`url: ${url}`);
     const method = options.method || 'GET';
     debugApp(`${method}: ${url}`);
-    const headers = {
-      'Content-Type': 'application/json',
-      Accept: 'application/json'
-    };
+    const headers = {};
     const timeout = 30000;
     const data = options.body || {};
     if (props.accessToken) {
