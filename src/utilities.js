@@ -9,7 +9,7 @@ export const requiresAuthentication = ({ hapikey, accessToken }) => {
   }
 };
 
-const interpolate = (template, data, opts = {}) => {
+export const interpolate = (template, data, opts = {}) => {
   // For escaping strings to go in regex
   const regexEscape = /([$^\\/()|?+*[\]{}.-])/g;
   const delimiter = opts.delimiter || '{}';

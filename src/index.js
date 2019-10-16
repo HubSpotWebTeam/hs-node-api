@@ -8,6 +8,7 @@ import workflowsApi from './entities/workflows';
 import filesApi from './entities/files';
 import domainsApi from './entities/domains';
 import layoutsApi from './entities/layouts';
+import templatesApi from './entities/templates';
 import formsApi from './entities/forms';
 import socialApi from './entities/social';
 import emailEventsApi from './entities/email-events';
@@ -115,6 +116,14 @@ class HubSpotClient {
    */
   get layouts() {
     return layoutsApi(this.props);
+  }
+  
+  /**
+   * A collection of methods related to the Templates API
+   * @namespace hs/templates
+   */
+  get templates() {
+    return templatesApi(this.props);
   }
 
   /**

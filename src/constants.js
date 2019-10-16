@@ -61,6 +61,9 @@ export default {
       getPreviousVersions: `${defaultApiHost}/content/api/v2/layouts/{id}/versions`,
       getPreviousVersion: `${defaultApiHost}/content/api/v2/layouts/{id}/versions/{versionId}`
     },
+    templates: {
+      byId: `${defaultApiHost}/content/api/v2/templates/{templateId}`,
+    },
     email: {
       getSubscriptions: `${defaultApiHost}/email/public/v1/subscriptions`
     },
