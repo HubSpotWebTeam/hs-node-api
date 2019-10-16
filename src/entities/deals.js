@@ -24,6 +24,21 @@ const getAll = async (opts = {}) => {
   }
 };
 
+const getById = async (id, options = {}) => {
+  try {
+    requiresAuthentication(_baseOptions);
+    const mergedProps = Object.assign({}, defaults, _baseOptions, options);
+    const contact = await createRequest(
+      constants.api.deals.byId,
+      { id },
+      mergedProps
+    );
+    return Promise.resolve(contact);
+  } catch (e) {
+    return Promise.reject(e);
+  }
+};
+
 const getRecentlyCreated = async (opts = {}) => {
   try {
     requiresAuthentication(_baseOptions);
@@ -81,6 +96,19 @@ export default function deals(baseOptions) {
   _baseOptions = baseOptions;
 
   return {
+    /**
+     * Get deal by ID
+     * @async
+     * @memberof hs/deals
+     * @method getById
+     * @param {int} id The id of the deal to retrieve
+     * @param {object} properties Optional extra properties to add to the request - see {@link https://developers.hubspot.com/docs/methods/deals/get_deal|developer docs}
+     * @example
+     * const hs = new HubspotClient(props);
+     * hs.deals.getById(123412313).then(response => console.log(response))
+     * @returns {Promise}
+     */
+    getById,
     /**
      * Get recently created deals
      * @async
