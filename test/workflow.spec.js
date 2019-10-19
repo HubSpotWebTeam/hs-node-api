@@ -70,6 +70,7 @@ describe('Workflows', async () => {
   describe('Mutating Workflows', async () => {
     it('creates a new workflow', async () => {
       const newWorkflow = await hs.workflows.createWorkflow(workflowPayload);
+
       // Store this globally, so we can update/delete the same one.
       Object.assign(createdWorkflow, newWorkflow);
 
@@ -85,23 +86,8 @@ describe('Workflows', async () => {
       return Promise.resolve();
     });
 
-    it('updates a workflow with new actions', async () => {
-      // Add another action to the workflow
-      const updatedWorkflowProperties = Object.assign({}, createdWorkflow, {
-        actions: createdWorkflow.actions.concat({
-          type: 'DELAY',
-          delayMillis: 3600000
-        })
-      });
-
-      const updatedWorkflow = await hs.workflows.updateWorkflow(
-        updatedWorkflowProperties
-      );
-      expect(updatedWorkflow.actions)
-        .to.be.an('array')
-        .and.to.have.lengthOf(4);
-      return Promise.resolve();
-    });
+    // NOTE: This test was removed, as API support for updating workflows programmatically is not officially supported in v3
+    // https://developers.hubspot.com/docs/methods/workflows/v3/create_workflow
   });
 
   describe('Enrolling/unenrolling contacts in workflows', async () => {

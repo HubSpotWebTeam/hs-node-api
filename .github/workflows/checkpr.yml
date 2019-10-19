@@ -1,8 +1,9 @@
-name: Build and publish npm package
+name: Test PR
 
-on:
-  release:
-    types: [created]
+on: 
+  pull_request: 
+    branches: 
+      - master
 
 jobs:
   build:
@@ -28,17 +29,3 @@ jobs:
           E2E_TESTS_TEMPLATE_PATH: ${{secrets.E2E_TESTS_TEMPLATE_PATH}}
           E2E_TESTS_FORM_ID: ${{secrets.E2E_TESTS_FORM_ID}}
           E2E_TESTS_PAGE_ID: ${{secrets.E2E_TESTS_PAGE_ID}}
-
-  publish-npm:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 12
-          registry-url: https://registry.npmjs.org/
-      - run: npm ci
-      - run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
