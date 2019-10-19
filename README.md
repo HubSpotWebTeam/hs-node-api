@@ -1,4 +1,4 @@
-[![Build Status (Release)](https://travis-ci.org/HubSpotWebTeam/hs-node-api.svg?branch=release)](https://travis-ci.org/HubSpotWebTeam/hs-node-api)
+[![Build Status (Release)](https://github.com/hubspotwebteam/hs-node-api/workflows/Build%20and%20publish%20npm%20package/badge.svg)](https://github.com/HubSpotWebTeam/hs-node-api/actions?workflow=Build+and+publish+npm+package)
 
 # Hubspot Client API
 
