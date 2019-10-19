@@ -27,6 +27,7 @@ jobs:
           E2E_TESTS_PORTAL_ID=${{secrets.E2E_TESTS_PORTAL_ID}}
           E2E_TESTS_TEMPLATE_PATH=${{secrets.E2E_TESTS_TEMPLATE_PATH}}
           E2E_TESTS_FORM_ID=${{secrets.E2E_TESTS_FORM_ID}}
+          E2E_TESTS_PAGE_ID=${{secrets.E2E_TESTS_PAGE_ID}}
 
   publish-npm:
     needs: build
