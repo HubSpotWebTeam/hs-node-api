@@ -41,9 +41,11 @@ export default {
     },
     forms: {
       submissions: `${defaultApiHost}/form-integrations/v1/submissions/forms/{formId}`,
-      submitForm: 'https://forms.hubspot.com/uploads/form/v2/{portalId}/{formId}',
+      submitForm:
+        'https://forms.hubspot.com/uploads/form/v2/{portalId}/{formId}',
       formFields: `${defaultApiHost}/forms/v2/fields/{formId}`,
-      submitFormV3: 'https://api.hsforms.com/submissions/v3/integration/submit/{portalId}/{formId}'
+      submitFormV3:
+        'https://api.hsforms.com/submissions/v3/integration/submit/{portalId}/{formId}'
     },
     social: {
       channels: `${defaultApiHost}/broadcast/v1/channels/setting/publish/current`,
@@ -62,7 +64,14 @@ export default {
       getPreviousVersion: `${defaultApiHost}/content/api/v2/layouts/{id}/versions/{versionId}`
     },
     templates: {
+      base: `${defaultApiHost}/content/api/v2/templates`,
       byId: `${defaultApiHost}/content/api/v2/templates/{templateId}`,
+      buffer: `${defaultApiHost}/content/api/v2/templates/{templateId}/buffer`,
+      hasBufferedChanges: `${defaultApiHost}/content/api/v2/templates/{templateId}/has-buffered-changes`,
+      pushBufferLive: `${defaultApiHost}/content/api/v2/templates/{templateId}/push-buffer-live`,
+      versions: `${defaultApiHost}/content/api/v2/templates/{templateId}/versions`,
+      version: `${defaultApiHost}/content/api/v2/templates/{templateId}/versions/{versionId}`,
+      restore: `${defaultApiHost}/content/api/v2/templates/{templateId}/versions/restore`,
     },
     email: {
       getSubscriptions: `${defaultApiHost}/email/public/v1/subscriptions`
