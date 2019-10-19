@@ -13,7 +13,8 @@
     "build": "DEBUG=rollup:compile node tools/build.js",
     "prepare": "npm run build",
     "test": "mocha",
-    "test:watch": "npm run build && mocha --watch"
+    "test:watch": "npm run build && mocha --watch",
+    "generate-docs": "./node_modules/.bin/jsdoc -R README.md -c ./jsconf.json -t ./node_modules/ink-docstrap/template -r ./src -d ./docs/"
   },
   "author": "Stephen McElhinney",
   "license": "ISC",
@@ -30,6 +31,7 @@
     "babel-preset-es2015-rollup": "^3.0.0",
     "babel-preset-node6": "^11.0.0",
     "babel-preset-stage-1": "^6.24.1",
+    "braintree-jsdoc-template": "^3.3.0",
     "chai": "^4.1.2",
     "debug": "^3.0.1",
     "del": "^3.0.0",
