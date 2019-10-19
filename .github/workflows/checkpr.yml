@@ -1,7 +1,8 @@
 name: Test PR
 
 on: 
-  pull_request: 
+  pull_request:
+    types: [opened, edited, synchronize]
     branches: 
       - master
 
