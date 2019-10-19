@@ -39,8 +39,10 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12
-          registry-url: https://registry.npmjs.org/
-      - run: npm ci
-      - run: npm publish
+      - run: npm run generate-docs
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v2.5.0
         env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+          ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+          PUBLISH_BRANCH: gh-pages
+          PUBLISH_DIR: ./docs
