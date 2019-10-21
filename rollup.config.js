@@ -5,6 +5,7 @@ import json from 'rollup-plugin-json';
 import builtins from 'rollup-plugin-node-builtins';
 import globals from 'rollup-plugin-node-globals';
 import { version, author } from './package.json';
+import { uglify } from 'rollup-plugin-uglify';
 
 const banner =
   `${'/*!\n * Hubspot Client API v'}${version}\n` +
@@ -27,14 +28,14 @@ export default {
     globals: {
       axios: 'axios',
       '@babel/runtime/regenerator': '_regeneratorRuntime',
-      '@babel/runtime/helpers/asyncToGenerator': '_asyncToGenerator',
-    },
+      '@babel/runtime/helpers/asyncToGenerator': '_asyncToGenerator'
+    }
   },
   plugins: [
     babel({
       exclude: 'node_modules/**',
       externalHelpers: true,
-      runtimeHelpers: true,
+      runtimeHelpers: true
     }),
     resolve({
       jsnext: true,
@@ -45,6 +46,7 @@ export default {
     commonjs(),
     json(),
     globals(),
-    builtins()
+    builtins(),
+    uglify()
   ]
 };
