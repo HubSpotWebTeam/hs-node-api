@@ -1,5 +1,6 @@
 import qs from 'querystring';
-import axios from 'axios';
+
+const axios = require('axios');
 
 const debugApp = require('debug')('hubspot-api:utilities');
 
@@ -69,7 +70,9 @@ export default async function createRequest(uri, options, props = {}) {
     if (props.accessToken) {
       headers.Authorization = `Bearer ${props.accessToken}`;
     }
-    return axios({ url, method, headers, timeout, data }).then(response => response.data);
+    return axios({ url, method, headers, timeout, data }).then(
+      response => response.data
+    );
   } catch (e) {
     return Promise.reject(e);
   }
