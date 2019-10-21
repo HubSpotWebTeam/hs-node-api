@@ -1,6 +1,8 @@
-import omit from 'lodash.omit';
+
 import createRequest, { requiresAuthentication } from '../utilities';
 import constants from '../constants';
+
+const omit = require('lodash.omit');
 
 const defaults = {};
 let _baseOptions;
@@ -23,7 +25,7 @@ const submitFormV3 = async (portalId, formId, opts = {}) => {
   } catch (e) {
     return Promise.reject(e);
   }
-}
+};
 
 const submitForm = async (portalId, formId, opts = {}) => {
   try {

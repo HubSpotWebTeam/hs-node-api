@@ -1,5 +1,5 @@
 require('dotenv').config();
-const HubSpotClient = require('../dist/hubspot-api');
+const HubSpotClient = require('../dist/bundle.min');
 const expect = require('chai').expect;
 const uuid = require('node-uuid');
 const { schemaTemplate, validate } = require('./schemas/template');
