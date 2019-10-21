@@ -18,7 +18,7 @@
     E2E_TESTS_LAYOUT_ID=1234567785
     E2E_TESTS_LAYOUT_VERSION_ID=1234567894
     E2E_TESTS_PORTAL_ID=123123123
-    E2E_TESTS_TEMPLATE_PATH=generated_layouts/jsdhkajsdhas.html
+    E2E_TESTS_TEMPLATE_PATH=generated_layouts/jsdhkajsdha.html
     E2E_TESTS_TEMPLATE_ID=[not-set]
     E2E_TESTS_FORM_ID=[form-id]
     E2E_TESTS_PAGE_ID=[not-set]
