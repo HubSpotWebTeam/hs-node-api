@@ -142,8 +142,8 @@ promise = promise.then(() => {
     'utf-8'
   );
   fs.writeFileSync(
-    'dist/LICENSE.txt',
-    fs.readFileSync('LICENSE.txt', 'utf-8'),
+    'dist/LICENSE.md',
+    fs.readFileSync('LICENSE.md', 'utf-8'),
     'utf-8'
   );
 });

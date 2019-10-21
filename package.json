@@ -14,11 +14,12 @@
     "prepare": "npm run build",
     "test": "mocha",
     "test:watch": "npm run build && mocha --watch",
-    "generate-docs": "./node_modules/.bin/jsdoc -R ./README.md -c ./jsconf.json -t ./node_modules/ink-docstrap/template -r ./src -d ./docs/"
+    "generate-docs": "./node_modules/.bin/jsdoc -R ./README.md -c ./jsconf.json -r ./src -d ./docs/"
   },
   "author": "Stephen McElhinney",
   "license": "ISC",
   "devDependencies": {
+    "@pixi/jsdoc-template": "^2.4.3",
     "babel-cli": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-plugin-add-module-exports": "^0.2.1",
