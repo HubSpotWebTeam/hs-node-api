@@ -4,11 +4,7 @@ const expect = require('chai').expect;
 const debug = require('debug')('hubspot-api:tests'); //eslint-disable-line
 const { schemaPages, schemaPage, validate } = require('./schemas/page');
 
-const {
-  E2E_TESTS_HAPI_KEY: hapikey,
-  E2E_TESTS_PAGE_ID: id,
-  E2E_TESTS_TEMPLATE_PATH: template_path
-} = process.env;
+const { E2E_TESTS_HAPI_KEY: hapikey, E2E_TESTS_PAGE_ID: id, E2E_TESTS_TEMPLATE_PATH: template_path } = process.env;
 
 const hs = new HubSpotClient({ hapikey });
 
@@ -30,11 +26,11 @@ xdescribe('Get Pages List', async () => {
   });
 });
 
-describe('Create or Update Page', async () => {
+xdescribe('Create or Update Page', async () => {
   it('creates a new page or updates page and gets a valid response', async () => {
     const createPageResponse = await hs.pages.createOrUpdatePage({
       name: 'A test page',
-      subcategory: 'site_page'
+      subcategory: 'site_page',
     });
     expect(validate(createPageResponse, schemaPage).error).to.be.a('null');
     return Promise.resolve();
@@ -47,7 +43,7 @@ xdescribe('Update Page Template', async () => {
     const createPageResponse = await hs.pages.createOrUpdatePage({
       id,
       template_path,
-      template_path_for_render: template_path
+      template_path_for_render: template_path,
     });
     expect(validate(createPageResponse, schemaPage).error).to.be.a('null');
     return Promise.resolve();
