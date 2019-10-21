@@ -42,7 +42,7 @@ jobs:
       - run: npm ci
       - run: npm run generate-docs
       - name: Deploy
-        uses: maxheld/ghpages@master
+        uses: smcelhinney/ghpages@master
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
           BUILD_DIR: ./docs
