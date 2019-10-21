@@ -107,6 +107,7 @@ for (const config of bundles) {
             'babel-runtime/core-js/json/stringify'
           ]),
         plugins: [
+          nodeBuiltins(),
           babel({
             runtimeHelpers: true,
             babelrc: false,
@@ -114,8 +115,7 @@ for (const config of bundles) {
             presets: config.babelPresets,
             plugins: config.babelPlugins,
             externalHelpers: false
-          }),
-          nodeBuiltins()
+          })
         ].concat(config.plugins)
       })
       .then(bundle =>
