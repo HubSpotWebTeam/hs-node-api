@@ -14,7 +14,7 @@
     "prepare": "npm run build",
     "test": "mocha",
     "test:watch": "npm run build && mocha --watch",
-    "generate-docs": "./tools/docs.js"
+    "generate-docs": "./node_modules/.bin/jsdoc -R ./README.md -c ./jsconf.json -t ./node_modules/ink-docstrap/template -r ./src -d ./docs/"
   },
   "author": "Stephen McElhinney",
   "license": "ISC",
