@@ -42,3 +42,19 @@ jobs:
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+
+  generate-docs:
+    needs: publish-npm
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 10 # Needs to remain at 10 as requizzle doesn't currently support 12.
+      - run: npm ci
+      - run: npm run generate-docs
+      - name: Deploy
+        uses: smcelhinney/ghpages@master
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
+          BUILD_DIR: ./docs          
