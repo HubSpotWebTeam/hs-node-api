@@ -8,3 +8,7 @@ jsconf.json
 .env
 .babelrc
 .gitignore
+.github
+docs/
+test.js
+rollup.config.js
