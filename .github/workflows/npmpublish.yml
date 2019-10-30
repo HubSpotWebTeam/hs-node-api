@@ -1,8 +1,13 @@
 name: Build and publish npm package
 
 on:
-  release:
-    types: [created]
+  push:
+    branches: 
+      - master
+
+# on:
+#   release:
+#     types: [created]
 
 jobs:
   build:
@@ -51,9 +56,9 @@ jobs:
         with:
           name: built-assets
           path: $GITHUB_WORKSPACE/dist/
-      - run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+      # - run: npm publish
+      #   env:
+      #     NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
 
   generate-docs:
     needs: publish-npm
