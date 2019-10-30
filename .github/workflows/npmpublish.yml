@@ -49,6 +49,9 @@ jobs:
         with:
           name: built-assets
           path: ./dist/
+      - name: Configure git 
+        run: git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+        run: git config user.name "$GITHUB_ACTOR"
       - name: Publish to npm
         run: npm --no-git-tag-version version from-git
         env:
