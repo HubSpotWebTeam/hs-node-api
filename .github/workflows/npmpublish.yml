@@ -29,6 +29,11 @@ jobs:
           E2E_TESTS_TEMPLATE_PATH: ${{secrets.E2E_TESTS_TEMPLATE_PATH}}
           E2E_TESTS_FORM_ID: ${{secrets.E2E_TESTS_FORM_ID}}
           E2E_TESTS_PAGE_ID: ${{secrets.E2E_TESTS_PAGE_ID}}
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v1
+        with:
+          name: built-assets
+          path: dist/
 
   publish-npm:
     needs: build
@@ -39,7 +44,10 @@ jobs:
         with:
           node-version: 12
           registry-url: https://registry.npmjs.org/
-      - run: npm ci
+      - name: Download built assets
+        uses: actions/download-artifact@v1
+        with:
+          name: built-assets
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
