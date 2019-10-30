@@ -55,7 +55,7 @@ jobs:
         uses: actions/download-artifact@v1
         with:
           name: built-assets
-          path: $GITHUB_WORKSPACE/dist/
+          path: ${{GITHUB_WORKSPACE}}/dist/
       - run: npm pack
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
