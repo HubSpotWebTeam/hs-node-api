@@ -223,7 +223,7 @@ export default function templatesApi(baseOptions) {
      * Get a template by id (see https://developers.hubspot.com/docs/methods/templates/get_templates_template_id)
      * @async
      * @memberof hs/templates
-     * @method deleteTemplate
+     * @method getTemplate
      * @param {number} id
      * @example
      * const hs = new HubSpotClient(props);
