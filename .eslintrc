@@ -24,12 +24,12 @@
     "no-unused-vars": "warn"
   },
   "globals": {
-    "$": true,
-    "document": true,
-    "window": true,
-    "navigator": true,
-    "localStorage": true,
-    "jQuery": true,
+    "$": false,
+    "document": false,
+    "window": false,
+    "navigator": false,
+    "localStorage": false,
+    "jQuery": false,
     "Request": true,
     "Headers": true,
     "fetch": true,
