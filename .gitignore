@@ -9,3 +9,4 @@ test.js
 docs/
 .vscode/
 gh-pages*
+.DS_Store
