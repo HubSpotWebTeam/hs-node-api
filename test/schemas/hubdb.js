@@ -34,6 +34,7 @@ const schemaTable = joi.object().keys({
   cosObjectType: joi.string(),
   deleted: joi.boolean(),
   cdnPurgeEmbargoTime: joi.number().allow(null),
+  crmObjectTypeId: joi.number(),
   rowCount: joi.number(),
   createdBy: joi.object(),
   updatedBy: joi.object(),
