@@ -111,7 +111,8 @@ const getPages = async (opts = {}) => {
         name,
         publish_date,
         updated,
-        slug
+        slug,
+        id
       },
       additionalOpts
     );

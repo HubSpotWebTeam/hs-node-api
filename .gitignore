@@ -8,3 +8,4 @@ dist/
 .env
 sandbox*
 test.js
+settings.json
