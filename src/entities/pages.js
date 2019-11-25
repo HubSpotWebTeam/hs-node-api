@@ -186,6 +186,8 @@ const updateAutosaveBuffer = async (opts = {}) => {
       publish_immediately,
       slug,
       subcategory,
+      template_path,
+      template_path_for_render,
       widget_containers,
       widgets
     } = opts;
@@ -193,7 +195,7 @@ const updateAutosaveBuffer = async (opts = {}) => {
     if (!id) {
       throw new Error('No page ID specified');
     }
-    const mergedProps = Object.assign({}, defaults, _baseOptions);
+    const mergedProps = { ...defaults, ..._baseOptions };
     const body = {
       campaign,
       campaign_name,
@@ -208,6 +210,8 @@ const updateAutosaveBuffer = async (opts = {}) => {
       publish_immediately,
       slug,
       subcategory,
+      template_path,
+      template_path_for_render,
       widget_containers,
       widgets
     };
@@ -468,6 +472,8 @@ export default function pagesApi(baseOptions) {
      * @property {boolean} opts.publish_immediately
      * @property {string} opts.slug
      * @property {string} opts.subcategory
+     * @property {string} opts.template_path
+     * @property {string} opts.template_path_for_render
      * @property {string} opts.widget_containers
      * @property {string} opts.widgets
      * @returns {Promise}
