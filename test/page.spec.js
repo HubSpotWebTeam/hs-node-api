@@ -1,5 +1,5 @@
 require('dotenv').config();
-const HubSpotClient = require('../dist/hubspot-api');
+const HubSpotClient = require('../dist/bundle.min');
 const expect = require('chai').expect;
 const debug = require('debug')('hubspot-api:tests'); //eslint-disable-line
 const { schemaPages, schemaPage, validate } = require('./schemas/page');
@@ -30,13 +30,14 @@ xdescribe('Create or Update Page', async () => {
   it('creates a new page or updates page and gets a valid response', async () => {
     const createPageResponse = await hs.pages.createOrUpdatePage({
       name: 'A test page',
-      subcategory: 'site_page'
+      subcategory: 'site_page',
     });
     expect(validate(createPageResponse, schemaPage).error).to.be.a('null');
     return Promise.resolve();
   });
 });
 
+// FIXME: This test is failing
 xdescribe('Update Page Template', async () => {
   it('updates page template and gets a valid response', async () => {
     const createPageResponse = await hs.pages.createOrUpdatePage({

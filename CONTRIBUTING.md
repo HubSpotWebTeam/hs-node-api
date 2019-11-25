@@ -17,6 +17,8 @@
     E2E_TESTS_HUBDB_PORTAL_ID="111111"
     E2E_TESTS_LAYOUT_ID="1234567785"
     E2E_TESTS_LAYOUT_VERSION_ID="1234567894"
+    E2E_TESTS_PAGE_ID="1234567"
+    E2E_TESTS_TEMPLATE_PATH="generated_layouts/1234567.html"
     ```
 3. Create a new branch for each separate piece of work following the convention `contribution_type/some-detail` e.g. `improvement/update-contribution-docs`
 

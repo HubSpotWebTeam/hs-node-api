@@ -166,7 +166,7 @@ export default function hubdbApi(baseOptions) {
      * @param {object} opts
      * @example
      * const hs = new HubSpotClient(props);
-     * hs.pages.createTable(opts).then(response => console.log(response));
+     * hs.hubdb.createTable(opts).then(response => console.log(response));
      * @property {string} opts.name
      * @property {boolean} opts.useForPages
      * @property {array} opts.columns
@@ -195,7 +195,7 @@ export default function hubdbApi(baseOptions) {
      * @param {object} options
      * @example
      * const hs = new HubSpotClient(props);
-     * hs.pages.getTableRows(tableId, portalId, options).then(response => console.log(response))
+     * hs.hubdb.getTableRows(tableId, portalId, options).then(response => console.log(response))
      * @returns {Promise}
      */
     getTableRows,
