@@ -10,3 +10,4 @@ settings.json
 docs/
 .vscode/
 gh-pages*
+.DS_Store
