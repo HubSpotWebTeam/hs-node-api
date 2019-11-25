@@ -3,7 +3,8 @@ const defaultApiHost = process.env.COS_API_HOST || 'https://api.hubapi.com';
 export default {
   api: {
     account: {
-      details: `${defaultApiHost}/integrations/v1/me`
+      details: `${defaultApiHost}/integrations/v1/me`,
+      dailyLimit: `${defaultApiHost}/integrations/v1/limit/daily`
     },
     files: {
       getFilesInFolder: `${defaultApiHost}/filemanager/api/v2/files`
@@ -25,6 +26,7 @@ export default {
     deals: {
       recentlyCreated: `${defaultApiHost}/deals/v1/deal/recent/created`,
       getAll: `${defaultApiHost}/deals/v1/deal/paged`,
+      byId: `${defaultApiHost}/deals/v1/deal/{id}`,
       create: `${defaultApiHost}/deals/v1/deal`,
       update: `${defaultApiHost}/deals/v1/deal/{id}`,
       batchUpdate: `${defaultApiHost}/deals/v1/batch-async/update`
@@ -33,9 +35,17 @@ export default {
       campaignsWithRecentActivity: `${defaultApiHost}/email/public/v1/campaigns`,
       campaign: `${defaultApiHost}/email/public/v1/campaigns/{campaignId}`
     },
+    emailSubscriptions: {
+      updateStatus: `${defaultApiHost}/email/public/v1/subscriptions/{email}`,
+      getStatus: `${defaultApiHost}/email/public/v1/subscriptions/{email}`
+    },
     forms: {
+      submissions: `${defaultApiHost}/form-integrations/v1/submissions/forms/{formId}`,
       submitForm:
-        'https://forms.hubspot.com/uploads/form/v2/{portalId}/{formId}'
+        'https://forms.hubspot.com/uploads/form/v2/{portalId}/{formId}',
+      formFields: `${defaultApiHost}/forms/v2/fields/{formId}`,
+      submitFormV3:
+        'https://api.hsforms.com/submissions/v3/integration/submit/{portalId}/{formId}'
     },
     social: {
       channels: `${defaultApiHost}/broadcast/v1/channels/setting/publish/current`,
@@ -51,7 +61,17 @@ export default {
       getBuffer: `${defaultApiHost}/content/api/v2/layouts/{id}/buffer`,
       hasBufferedChanges: `${defaultApiHost}/content/api/v2/layouts/{id}/has-buffered-changes`,
       getPreviousVersions: `${defaultApiHost}/content/api/v2/layouts/{id}/versions`,
-      getPreviousVersion: `${defaultApiHost}/content/api/v2/layouts/{id}/versions/{versionId}`,
+      getPreviousVersion: `${defaultApiHost}/content/api/v2/layouts/{id}/versions/{versionId}`
+    },
+    templates: {
+      base: `${defaultApiHost}/content/api/v2/templates`,
+      byId: `${defaultApiHost}/content/api/v2/templates/{templateId}`,
+      buffer: `${defaultApiHost}/content/api/v2/templates/{templateId}/buffer`,
+      hasBufferedChanges: `${defaultApiHost}/content/api/v2/templates/{templateId}/has-buffered-changes`,
+      pushBufferLive: `${defaultApiHost}/content/api/v2/templates/{templateId}/push-buffer-live`,
+      versions: `${defaultApiHost}/content/api/v2/templates/{templateId}/versions`,
+      version: `${defaultApiHost}/content/api/v2/templates/{templateId}/versions/{versionId}`,
+      restore: `${defaultApiHost}/content/api/v2/templates/{templateId}/versions/restore`,
     },
     email: {
       getSubscriptions: `${defaultApiHost}/email/public/v1/subscriptions`
@@ -100,6 +120,13 @@ export default {
       getRecentlyModified: `${defaultApiHost}/contacts/v1/lists/recently_updated/contacts/recent`,
       search: `${defaultApiHost}/contacts/v1/search/query`
     },
+    contactsList: {
+      byId: `${defaultApiHost}/contacts/v1/lists/{listId}`,
+      contactsByListId: `${defaultApiHost}/contacts/v1/lists/{listId}/contacts/all`
+    },
+    contactsProperties: {
+      getAllContactsProperties: `${defaultApiHost}/properties/v1/contacts/properties`
+    },
     company: {
       create: `${defaultApiHost}/companies/v2/companies/`,
       batchUpdate: `${defaultApiHost}/companies/v1/batch-async/update`,
@@ -128,6 +155,16 @@ export default {
     },
     engagements: {
       create: `${defaultApiHost}/engagements/v1/engagements`
+    },
+    oauth: {
+      tokenInfo: `${defaultApiHost}/oauth/v1/access-tokens/{token}`
+    },
+    urlMappings: {
+      getAll: `${defaultApiHost}/url-mappings/v3/url-mappings`,
+      byId: `${defaultApiHost}/url-mappings/v3/url-mappings/{id}`,
+      create: `${defaultApiHost}/url-mappings/v3/url-mappings`,
+      update: `${defaultApiHost}/url-mappings/v3/url-mappings/{id}`,
+      delete: `${defaultApiHost}/url-mappings/v3/url-mappings/{id}`
     }
   }
 };

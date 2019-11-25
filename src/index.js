@@ -1,5 +1,6 @@
 import accountApi from './entities/account';
 import contactsApi from './entities/contacts';
+import contactsPropertiesApi from './entities/contacts-properties';
 import companyApi from './entities/company';
 import calendarApi from './entities/calendar';
 import blogPostsApi from './entities/blog';
@@ -7,6 +8,7 @@ import workflowsApi from './entities/workflows';
 import filesApi from './entities/files';
 import domainsApi from './entities/domains';
 import layoutsApi from './entities/layouts';
+import templatesApi from './entities/templates';
 import formsApi from './entities/forms';
 import socialApi from './entities/social';
 import emailEventsApi from './entities/email-events';
@@ -14,7 +16,9 @@ import dealsApi from './entities/deals';
 import pagesApi from './entities/pages';
 import hubdbApi from './entities/hubdb';
 import engagementsApi from './entities/engagements';
-
+import oauthApi from './entities/oauth';
+import contactsListsApi from './entities/contacts-lists';
+import emailSubscriptionsApi from './entities/email-subscriptions';
 /**
 * HubSpotClient class
 * @example
@@ -56,6 +60,14 @@ class HubSpotClient {
    */
   get contacts() {
     return contactsApi(this.props);
+  }
+
+  /**
+   * A collection of methods related to the Contacts Properties API
+   * @namespace hs/contactsProperties
+   */
+  get contactsProperties() {
+    return contactsPropertiesApi(this.props);
   }
 
   /**
@@ -104,6 +116,14 @@ class HubSpotClient {
    */
   get layouts() {
     return layoutsApi(this.props);
+  }
+  
+  /**
+   * A collection of methods related to the Templates API
+   * @namespace hs/templates
+   */
+  get templates() {
+    return templatesApi(this.props);
   }
 
   /**
@@ -161,6 +181,32 @@ class HubSpotClient {
   get engagements() {
     return engagementsApi(this.props);
   }
+
+  /**
+   * A collection of methods related to the OAuth API
+   * @namespace hs/oauth
+   */
+  get oauth() {
+    return oauthApi(this.props);
+  }
+
+  /**
+   * A collection of methods related to the ContactsList API
+   * @namespace hs/contactsLists
+   */
+  get contactsLists() {
+    return contactsListsApi(this.props);
+  }
+
+    /**
+   * A collection of methods related to the Email Subscriptions API
+   * @namespace hs/emailSubscriptions
+   */
+  get emailSubscriptions() {
+    return emailSubscriptionsApi(this.props);
+  }
+
+
 }
 
 export default HubSpotClient;

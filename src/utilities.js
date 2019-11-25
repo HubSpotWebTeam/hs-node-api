@@ -1,5 +1,6 @@
 import qs from 'querystring';
-import request from 'request-promise';
+
+const axios = require('axios');
 
 const debugApp = require('debug')('hubspot-api:utilities');
 
@@ -9,7 +10,7 @@ export const requiresAuthentication = ({ hapikey, accessToken }) => {
   }
 };
 
-const interpolate = (template, data, opts = {}) => {
+export const interpolate = (template, data, opts = {}) => {
   // For escaping strings to go in regex
   const regexEscape = /([$^\\/()|?+*[\]{}.-])/g;
   const delimiter = opts.delimiter || '{}';
@@ -48,7 +49,7 @@ const interpolate = (template, data, opts = {}) => {
   });
 };
 
-export default async function createRequest(uri, options, props) {
+export default async function createRequest(uri, options, props = {}) {
   try {
     const properties = Object.keys(props).reduce((acc, curr) => {
       if (typeof props[curr] !== 'undefined') {
@@ -60,16 +61,18 @@ export default async function createRequest(uri, options, props) {
     delete properties.accessToken;
 
     const url = `${interpolate(uri, options)}?${qs.stringify(properties)}`;
+    debugApp(`url: ${url}`);
     const method = options.method || 'GET';
     debugApp(`${method}: ${url}`);
     const headers = {};
     const timeout = 30000;
-    const json = options.body || true;
+    const data = options.body || {};
     if (props.accessToken) {
-      Object.assign(headers, { Authorization: `Bearer ${props.accessToken}` });
+      headers.Authorization = `Bearer ${props.accessToken}`;
     }
-    const response = await request({ url, method, headers, timeout, json });
-    return Promise.resolve(response);
+    return axios({ url, method, headers, timeout, data }).then(
+      response => response.data
+    );
   } catch (e) {
     return Promise.reject(e);
   }

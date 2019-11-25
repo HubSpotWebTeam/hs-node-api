@@ -26,6 +26,8 @@ const createOrUpdatePage = async (opts = {}) => {
       publish_immediately,
       slug,
       subcategory,
+      template_path,
+      template_path_for_render,
       widget_containers,
       widgets
     } = opts;
@@ -45,6 +47,8 @@ const createOrUpdatePage = async (opts = {}) => {
       publish_immediately,
       slug,
       subcategory,
+      template_path,
+      template_path_for_render,
       widget_containers,
       widgets
     };
@@ -412,6 +416,8 @@ export default function pagesApi(baseOptions) {
      * @property {long} opts.publish_date
      * @property {string} opts.slug
      * @property {string} opts.subcategory
+     * @property {string} opts.template_path
+     * @property {string} opts.template_path_for_render
      * @property {string} opts.updated
      * @returns {Promise}
      */

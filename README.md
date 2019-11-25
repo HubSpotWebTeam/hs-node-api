@@ -1,3 +1,5 @@
+[![Build Status (Release)](https://github.com/hubspotwebteam/hs-node-api/workflows/Build%20and%20publish%20npm%20package/badge.svg)](https://github.com/HubSpotWebTeam/hs-node-api/actions?workflow=Build+and+publish+npm+package)
+
 # Hubspot Client API
 
 A client wrapper for the HubSpot API at https://developers.hubspot.com/docs/overview.
@@ -38,6 +40,7 @@ Entities available
 - Blog authors
 - Blog topics
 - Contacts
+- Contacts Properties (partial implementation)
 - Companies
 - Calendar
 - Deals (partial implementation)
@@ -53,26 +56,14 @@ Entities available
 
 Please check out the full documentation available at https://hubspotwebteam.github.io/hs-node-api/
 
+## CORS
+
+At the moment of writing the HubSpot APIs do not support CORS / AJAX requests due to [security reasons](https://developers.hubspot.com/docs/faq/do-hubspot-apis-support-ajax-request), so you must use this library only on a Node.js server.
+
 ## Authors and Contributors
 
 Currently maintained by the lovely folks on HubSpot's Web Team, but we need your help. Please feel free to submit pull requests to add new functionality.
 
 ### How to Contribute
 
-Clone this repository and create a `.env` file in the root of your folder for all `process.env` tokens, such as the HAPIkey, for example:
-
-```
-E2E_TESTS_HAPI_KEY="your-hapi-key"
-E2E_TESTS_BLOG_ID="1234567"
-E2E_TESTS_WORKFLOW_ID="9876542"
-E2E_TESTS_CONTACT_EMAIL="coolrobot@hubspot.com"
-E2E_TESTS_CONTACT_ID="1234"
-E2E_TESTS_HUBDB_TABLE_ID="999999"
-E2E_TESTS_HUBDB_PORTAL_ID="111111"
-E2E_TESTS_LAYOUT_ID="1234567785"
-E2E_TESTS_LAYOUT_VERSION_ID="1234567894"
-```
-
-Test with `npm run prepare`.
-
-All set? Open a pull request!
+Contributions are welcome. Please refer to the [contributing guidelines](https://github.com/HubSpotWebTeam/hs-node-api/blob/master/CONTRIBUTING.md)
