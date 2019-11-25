@@ -69,6 +69,48 @@ const getTemplate = async templateId => {
   }
 };
 
+const getTemplates = async (opts = {}) => {
+  try {
+    requiresAuthentication(_baseOptions);
+    const {
+      limit,
+      offset,
+      deleted_at,
+      id,
+      is_available_for_new_content,
+      label,
+      path
+    } = opts;
+
+    const additionalOpts = {
+      limit,
+      offset,
+      deleted_at,
+      id,
+      is_available_for_new_content,
+      label,
+      path
+    };
+
+    const mergedProps = Object.assign(
+      {},
+      defaults,
+      _baseOptions,
+      additionalOpts
+    );
+    const method = 'GET';
+    const options = { method };
+    const templates = await createRequest(
+      constants.api.templates.base,
+      options,
+      mergedProps
+    );
+    return Promise.resolve(templates);
+  } catch (e) {
+    return Promise.reject(e);
+  }
+};
+
 const updateAutosaveBuffer = async (templateId, body) => {
   try {
     requiresAuthentication(_baseOptions);
@@ -223,13 +265,33 @@ export default function templatesApi(baseOptions) {
      * Get a template by id (see https://developers.hubspot.com/docs/methods/templates/get_templates_template_id)
      * @async
      * @memberof hs/templates
-     * @method deleteTemplate
+     * @method getTemplate
      * @param {number} id
      * @example
      * const hs = new HubSpotClient(props);
      * hs.templates.getTemplate(id).then(response => console.log(response));
      */
     getTemplate,
+    /**
+     * Get the list of templates
+     * @async
+     * @memberof hs/templates
+     * @method getTemplates
+     * @param {object} opts
+     * @example
+     * const hs = new HubSpotClient(props);
+     * const opts = { limit: 10 };
+     * // Get the first 10 templates
+     * hs.templates.getTemplates(opts).then(response => console.log(response));
+     * @property {string} opts.limit
+     * @property {string} opts.offset
+     * @property {string} opts.deleted_at
+     * @property {int} opts.id
+     * @property {boolean} opts.is_available_for_new_content
+     * @property {string} opts.label
+     * @property {string} opts.path
+     */
+    getTemplates,
     /**
      * Update the autosave buffer for a template (see https://developers.hubspot.com/docs/methods/templates/put_templates_template_id_buffer)
      * @async
