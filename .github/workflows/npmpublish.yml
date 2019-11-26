@@ -55,7 +55,7 @@ jobs:
           git config user.name "$GITHUB_ACTOR"          
       - name: Publish to npm
         run: | 
-          npm --no-git-tag-version version from-git
+          npm version from-git
           npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
