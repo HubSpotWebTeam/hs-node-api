@@ -375,7 +375,6 @@ export default function pagesApi(baseOptions) {
      * @property {int} opts.id If set, this will update the page with the corresponding ID.
      * @property {string} opts.campaign
      * @property {string} opts.campaign_name
-     * @property {string} opts.campaign_name
      * @property {string} opts.current_state
      * @property {string} opts.footer_html
      * @property {string} opts.head_html
