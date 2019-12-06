@@ -15,6 +15,7 @@ const createOrUpdatePage = async (opts = {}) => {
       archived,
       campaign,
       campaign_name,
+      current_state,
       footer_html,
       head_html,
       is_draft,
@@ -34,6 +35,7 @@ const createOrUpdatePage = async (opts = {}) => {
       archived,
       campaign,
       campaign_name,
+      current_state,
       footer_html,
       head_html,
       is_draft,
@@ -373,6 +375,8 @@ export default function pagesApi(baseOptions) {
      * @property {int} opts.id If set, this will update the page with the corresponding ID.
      * @property {string} opts.campaign
      * @property {string} opts.campaign_name
+     * @property {string} opts.campaign_name
+     * @property {string} opts.current_state
      * @property {string} opts.footer_html
      * @property {string} opts.head_html
      * @property {string} opts.is_draft
