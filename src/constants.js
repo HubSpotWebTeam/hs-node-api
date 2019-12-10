@@ -76,6 +76,9 @@ export default {
     email: {
       getSubscriptions: `${defaultApiHost}/email/public/v1/subscriptions`
     },
+    transactionalEmail: {
+      singleSend: `${defaultApiHost}/email/public/v1/singleEmail/send`
+    },
     blog: {
       authors: `${defaultApiHost}/blogs/v3/blog-authors`,
       authorById: `${defaultApiHost}/blogs/v3/blog-authors/{id}`,

@@ -19,6 +19,7 @@ import engagementsApi from './entities/engagements';
 import oauthApi from './entities/oauth';
 import contactsListsApi from './entities/contacts-lists';
 import emailSubscriptionsApi from './entities/email-subscriptions';
+import transactionalEmailsApi from './entities/transactional-emails';
 /**
 * HubSpotClient class
 * @example
@@ -38,6 +39,7 @@ class HubSpotClient {
   constructor(props) {
     Object.assign(this, { props });
   }
+
   /**
    * A collection of methods related to the Account API
    * @namespace hs/account
@@ -117,7 +119,7 @@ class HubSpotClient {
   get layouts() {
     return layoutsApi(this.props);
   }
-  
+
   /**
    * A collection of methods related to the Templates API
    * @namespace hs/templates
@@ -198,7 +200,7 @@ class HubSpotClient {
     return contactsListsApi(this.props);
   }
 
-    /**
+  /**
    * A collection of methods related to the Email Subscriptions API
    * @namespace hs/emailSubscriptions
    */
@@ -206,7 +208,13 @@ class HubSpotClient {
     return emailSubscriptionsApi(this.props);
   }
 
-
+  /**
+   * A collection of methods related to the Transactional Emails API
+   * @namespace hs/transactionalEmails
+   */
+  get transactionalEmails() {
+    return transactionalEmailsApi(this.props);
+  }
 }
 
 export default HubSpotClient;
