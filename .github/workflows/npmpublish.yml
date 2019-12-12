@@ -1,8 +1,9 @@
-name: Publish to npm after release created
+name: Release created
 
 on:
-  release:
-    types: [created]
+  push:
+    branches:    
+      - release
 
 jobs:
   build:
@@ -55,7 +56,6 @@ jobs:
           git config user.name "$GITHUB_ACTOR"          
       - name: Publish to npm
         run: | 
-          npm version from-git
           npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
