@@ -76,7 +76,7 @@ jobs:
           git config user.name "$GITHUB_ACTOR"          
       - name: Create tag and push
         run: | 
-          $VERSION=$(cat package.json | jq '.version' | sed -e 's/^"//' -e 's/"$//')
+          VERSION=$(cat package.json | jq '.version' | sed -e 's/^"//' -e 's/"$//')
           git tag -a $VERSION
           git push --tags
         env:
