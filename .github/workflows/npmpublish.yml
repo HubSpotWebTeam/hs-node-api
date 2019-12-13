@@ -54,9 +54,9 @@ jobs:
         run: |
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
           git config user.name "$GITHUB_ACTOR"          
-      - name: Publish to npm
-        run: | 
-          npm publish
+      # - name: Publish to npm
+      #   run: | 
+      #     npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
 
