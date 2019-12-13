@@ -77,7 +77,7 @@ jobs:
       - name: Create tag and push
         run: | 
           VERSION=$(cat package.json | jq '.version' | sed -e 's/^"//' -e 's/"$//')
-          git tag -a "v$VERSION"
+          git tag -a "v$VERSION" -m "Release $VERSION of hs-node-api"
           git push --tags
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
