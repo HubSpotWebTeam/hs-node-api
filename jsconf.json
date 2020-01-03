@@ -2,9 +2,15 @@
   "tags": {
     "allowUnknownTags": true
   },
-  "plugins": ["plugins/markdown"],
+  "opts": {
+    "template": "./node_modules/@pixi/jsdoc-template"
+  },
+  "plugins": [
+    "plugins/markdown"
+  ],
   "templates": {
-    "logoFile": "",
+    "applicationName": "HubSpot Client API",
+    "logoFile": "https://www.hubspot.com/hubfs/assets/hubspot.com/style-guide/brand-guidelines/guidelines_the-sprocket.svg",
     "cleverLinks": false,
     "monospaceLinks": false,
     "dateFormat": "ddd MMM Do YYYY",

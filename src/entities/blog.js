@@ -758,10 +758,12 @@ const createOrUpdatePost = async (opts = {}) => {
     const mergedProps = Object.assign({}, defaults, _baseOptions);
     const {
       id,
+      archived,
       blog_author_id,
       campaign,
       campaign_name,
       content_group_id,
+      state,
       featured_image,
       footer_html,
       head_html,
@@ -779,10 +781,12 @@ const createOrUpdatePost = async (opts = {}) => {
     } = opts;
 
     const body = {
+      archived,
       blog_author_id,
       campaign,
       campaign_name,
       content_group_id,
+      state,
       featured_image,
       footer_html,
       head_html,
@@ -888,10 +892,12 @@ export default function blog(baseOptions) {
      * const hs = new HubspotClient(props);
      * hs.blog.createOrUpdatePost(opts).then(response => console.log(response))
      * @property {int} opts.id
+     * @property {boolean} opts.archived
      * @property {int} opts.blog_author_id
      * @property {string} opts.campaign
      * @property {string} opts.campaign_name
      * @property {int} opts.content_group_id
+     * @property {string} opts.state
      * @property {string} opts.featured_image
      * @property {string} opts.footer_html
      * @property {string} opts.head_html

@@ -1,0 +1,77 @@
+name: Publish to npm after release created
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - run: npm ci
+      - run: npm run build      
+      # - run: npm test
+      #   env: 
+      #     E2E_TESTS_HAPI_KEY: ${{secrets.E2E_TESTS_HAPI_KEY}}
+      #     E2E_TESTS_BLOG_ID: ${{secrets.E2E_TESTS_BLOG_ID}}
+      #     E2E_TESTS_WORKFLOW_ID: ${{secrets.E2E_TESTS_WORKFLOW_ID}}
+      #     E2E_TESTS_CONTACT_EMAIL: ${{secrets.E2E_TESTS_CONTACT_EMAIL}}
+      #     E2E_TESTS_CONTACT_ID: ${{secrets.E2E_TESTS_CONTACT_ID}}
+      #     E2E_TESTS_HUBDB_TABLE_ID: ${{secrets.E2E_TESTS_HUBDB_TABLE_ID}}
+      #     E2E_TESTS_HUBDB_PORTAL_ID: ${{secrets.E2E_TESTS_HUBDB_PORTAL_ID}}
+      #     E2E_TESTS_LAYOUT_ID: ${{secrets.E2E_TESTS_LAYOUT_ID}}
+      #     E2E_TESTS_LAYOUT_VERSION_ID: ${{secrets.E2E_TESTS_LAYOUT_VERSION_ID}}
+      #     E2E_TESTS_PORTAL_ID: ${{secrets.E2E_TESTS_PORTAL_ID}}
+      #     E2E_TESTS_TEMPLATE_PATH: ${{secrets.E2E_TESTS_TEMPLATE_PATH}}
+      #     E2E_TESTS_FORM_ID: ${{secrets.E2E_TESTS_FORM_ID}}
+      #     E2E_TESTS_PAGE_ID: ${{secrets.E2E_TESTS_PAGE_ID}}
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v1
+        with:
+          name: built-assets
+          path: dist/
+
+  publish-npm:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+          registry-url: https://registry.npmjs.org/
+      - name: Download built assets
+        uses: actions/download-artifact@v1
+        with:
+          name: built-assets
+          path: ./dist/
+      - name: Setup git config
+        run: |
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+          git config user.name "$GITHUB_ACTOR"          
+      - name: Publish to npm
+        run: | 
+          npm version from-git
+          npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+
+  generate-docs:
+    needs: publish-npm
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 10 # Needs to remain at 10 as requizzle doesn't currently support 12.
+      - run: npm ci
+      - run: npm run generate-docs
+      - name: Deploy
+        uses: smcelhinney/ghpages@master
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
+          BUILD_DIR: ./docs          

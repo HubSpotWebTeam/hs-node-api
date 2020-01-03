@@ -28,7 +28,8 @@ const baseKeys = {
   triggerSets: joi.array(),
   suppressionListIds: joi.array(),
   lastUpdatedBy: joi.string().allow('').allow(null),
-  metaData: joi.object().allow('').allow(null)
+  metaData: joi.object().allow('').allow(null),
+  migrationStatus: joi.object().allow('').allow(null)
 };
 
 const keysRequiredInCollection = Object.assign({
@@ -47,7 +48,8 @@ const keysRequiredInCollection = Object.assign({
   'insertedAt',
   'updatedAt',
   'creationSource',
-  'updateSource'
+  'updateSource',
+  'migrationStatus'
 ]));
 
 

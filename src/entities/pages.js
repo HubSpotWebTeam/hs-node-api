@@ -15,6 +15,7 @@ const createOrUpdatePage = async (opts = {}) => {
       archived,
       campaign,
       campaign_name,
+      state,
       footer_html,
       head_html,
       is_draft,
@@ -26,6 +27,8 @@ const createOrUpdatePage = async (opts = {}) => {
       publish_immediately,
       slug,
       subcategory,
+      template_path,
+      template_path_for_render,
       widget_containers,
       widgets
     } = opts;
@@ -34,6 +37,7 @@ const createOrUpdatePage = async (opts = {}) => {
       archived,
       campaign,
       campaign_name,
+      state,
       footer_html,
       head_html,
       is_draft,
@@ -45,6 +49,8 @@ const createOrUpdatePage = async (opts = {}) => {
       publish_immediately,
       slug,
       subcategory,
+      template_path,
+      template_path_for_render,
       widget_containers,
       widgets
     };
@@ -111,7 +117,8 @@ const getPages = async (opts = {}) => {
         name,
         publish_date,
         updated,
-        slug
+        slug,
+        id
       },
       additionalOpts
     );
@@ -182,6 +189,8 @@ const updateAutosaveBuffer = async (opts = {}) => {
       publish_immediately,
       slug,
       subcategory,
+      template_path,
+      template_path_for_render,
       widget_containers,
       widgets
     } = opts;
@@ -189,7 +198,7 @@ const updateAutosaveBuffer = async (opts = {}) => {
     if (!id) {
       throw new Error('No page ID specified');
     }
-    const mergedProps = Object.assign({}, defaults, _baseOptions);
+    const mergedProps = { ...defaults, ..._baseOptions };
     const body = {
       campaign,
       campaign_name,
@@ -204,6 +213,8 @@ const updateAutosaveBuffer = async (opts = {}) => {
       publish_immediately,
       slug,
       subcategory,
+      template_path,
+      template_path_for_render,
       widget_containers,
       widgets
     };
@@ -373,6 +384,7 @@ export default function pagesApi(baseOptions) {
      * @property {int} opts.id If set, this will update the page with the corresponding ID.
      * @property {string} opts.campaign
      * @property {string} opts.campaign_name
+     * @property {string} opts.state
      * @property {string} opts.footer_html
      * @property {string} opts.head_html
      * @property {string} opts.is_draft
@@ -411,6 +423,8 @@ export default function pagesApi(baseOptions) {
      * @property {long} opts.publish_date
      * @property {string} opts.slug
      * @property {string} opts.subcategory
+     * @property {string} opts.template_path
+     * @property {string} opts.template_path_for_render
      * @property {string} opts.updated
      * @returns {Promise}
      */
@@ -462,6 +476,8 @@ export default function pagesApi(baseOptions) {
      * @property {boolean} opts.publish_immediately
      * @property {string} opts.slug
      * @property {string} opts.subcategory
+     * @property {string} opts.template_path
+     * @property {string} opts.template_path_for_render
      * @property {string} opts.widget_containers
      * @property {string} opts.widgets
      * @returns {Promise}

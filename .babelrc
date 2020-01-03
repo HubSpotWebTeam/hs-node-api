@@ -1,8 +1,14 @@
 {
-  "comments": false,
-  "compact": true,
+  "presets": ["@babel/env"],
   "plugins": [
-    "babel-plugin-transform-class-properties",
-    "babel-plugin-add-module-exports"
+    "@babel/plugin-transform-async-to-generator",
+    "@babel/plugin-transform-regenerator",
+    [
+      "@babel/plugin-transform-runtime",
+      {
+        "helpers": true,
+        "regenerator": true
+      }
+    ]
   ]
 }

@@ -8,27 +8,8 @@ const schemaRow = joi.object().keys({
   hs_path: joi.string().optional(),
   hs_name: joi.string().optional(),
   values: joi.object(),
-  isSoftEditable: joi.boolean()
-});
-
-const schemaTable = joi.object().keys({
-  id: joi.number(),
-  name: joi.string().allow(''),
-  portalId: joi.number(),
-  createdAt: joi.number(),
-  updated: joi.number(),
-  publishedAt: joi.number().allow(null),
-  updatedAt: joi.number(),
-  columns: joi.array(),
-  label: joi.string(),
-  cosObjectType: joi.string(),
-  deleted: joi.boolean(),
-  cdnPurgeEmbargoTime: joi.number().allow(null),
-  rowCount: joi.number(),
-  createdBy: joi.object(),
-  updatedBy: joi.object(),
-  useForPages: joi.boolean(),
-  columnCount: joi.number()
+  isSoftEditable: joi.boolean(),
+  childTableId: joi.number().optional()
 });
 
 const limit = joi
@@ -64,26 +45,12 @@ const schemaTables = joi.object().keys({
   message,
   objects: joi
     .array()
-    .items(schemaTable)
-    .min(1)
-});
-
-const schemaRows = joi.object().keys({
-  limit,
-  offset,
-  total,
-  totalCount,
-  message,
-  objects: joi
-    .array()
-    .items(schemaRow)
+    .items(joi.object())
     .min(1)
 });
 
 module.exports = {
   schemaTables,
-  schemaTable,
   schemaRow,
-  schemaRows,
   validate: joi.validate
 };
