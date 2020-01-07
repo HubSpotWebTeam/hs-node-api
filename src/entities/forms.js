@@ -102,6 +102,21 @@ const getSubmissions = async (formId, opts = {}) => {
   }
 };
 
+const getForm = async (formId, opts = {}) => {
+  try {
+    requiresAuthentication(_baseOptions);
+    const mergedProps = Object.assign({}, defaults, _baseOptions, opts);
+    const form = await createRequest(
+      constants.api.forms.getForm,
+      { formId },
+      mergedProps,
+    );
+    return Promise.resolve(form);
+  } catch (e) {
+    return Promise.reject(e);
+  }
+}
+
 export default function formsApi(baseOptions) {
   _baseOptions = baseOptions;
 
@@ -120,6 +135,14 @@ export default function formsApi(baseOptions) {
      * @returns {Promise}
      */
     submitForm,
+    /**
+     * Get Form, including fields, options and validation
+     * @async 
+     * @memberof hs/forms
+     * @method getForm
+     * @param {string} formId
+     */
+    getForm,
     /**
      * Get Form Fields for Specified Form
      * @async

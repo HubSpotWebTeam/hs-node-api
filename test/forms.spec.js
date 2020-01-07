@@ -3,8 +3,16 @@ const HubSpotClient = require('../dist/bundle.min');
 const expect = require('chai').expect;
 const debug = require('debug')('hubspot-api:tests'); //eslint-disable-line
 
-const { E2E_TESTS_FORM_ID: formId, E2E_TESTS_PORTAL_ID: portalId } = process.env;
-const hs = new HubSpotClient({});
+const { E2E_TESTS_FORM_ID: formId, E2E_TESTS_PORTAL_ID: portalId, E2E_TESTS_HAPI_KEY: hapikey } = process.env;
+
+const hs = new HubSpotClient({ hapikey });
+
+describe('Get Form', async () => {
+  it('gets form given formId', async () => {
+    const form = await hs.forms.getForm(formId);
+    expect(form).to.exist;
+  });
+})
 
 describe('Form Submit', async () => {
   it('successfully submits a form', async () => {
