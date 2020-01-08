@@ -179,7 +179,7 @@ const getContacts = async options => {
 const getRecentlyModified = async options => {
   try {
     requiresAuthentication(_baseOptions);
-    const mergedProps = Object.assign({}, defaults, _baseOptions, options);
+    const mergedProps = Object.assign({}, _baseOptions, options);
     const recentlyModifiedContacts = await createRequest(
       constants.api.contacts.getRecentlyModified,
       {},
