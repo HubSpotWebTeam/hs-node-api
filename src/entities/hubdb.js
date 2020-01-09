@@ -296,7 +296,7 @@ export default function hubdbApi(baseOptions) {
       },
       ...more rows
       ]}
-     * hs.hubdb.updateTableRow(tableId, options).then(response => console.log(response))
+     * hs.hubdb.updateTableRows(tableId, options).then(response => console.log(response))
      * @returns {Promise}
      */
     updateTableRows,
