@@ -151,6 +151,7 @@ export default {
       rows: `${defaultApiHost}/hubdb/api/v2/tables/{tableId}/rows`,
       table: `${defaultApiHost}/hubdb/api/v2/tables/{tableId}`,
       row: `${defaultApiHost}/hubdb/api/v2/tables/{tableId}/rows/{id}`,
+      rowsBatchUpdate: `${defaultApiHost}/hubdb/api/v2/tables/{tableId}/rows/batch/update`,
       cell: `${defaultApiHost}/hubdb/api/v2/tables/{tableId}/rows/{rowId}/cells/{cellId}`,
       cloneTable: `${defaultApiHost}/hubdb/api/v2/tables/{tableId}/clone`,
       cloneRow: `${defaultApiHost}/hubdb/api/v2/tables/{tableId}/rows/{rowId}/clone`,

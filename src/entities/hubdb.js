@@ -7,7 +7,12 @@ let _baseOptions;
 const createTable = async (opts = {}) => {
   try {
     requiresAuthentication(_baseOptions);
-    const { name, useForPages, columns, publishedAt } = opts;
+    const {
+      name,
+      useForPages,
+      columns,
+      publishedAt
+    } = opts;
 
     const body = {
       name,
@@ -20,7 +25,7 @@ const createTable = async (opts = {}) => {
     const url = constants.api.hubdb.tables;
     const options = { method, body };
 
-    const mergedProps = Object.assign({}, defaults, _baseOptions);
+    const mergedProps = { ...defaults, ..._baseOptions };
     const create = await createRequest(url, options, mergedProps);
 
     return Promise.resolve(create);
@@ -32,7 +37,7 @@ const createTable = async (opts = {}) => {
 const getTables = async () => {
   try {
     requiresAuthentication(_baseOptions);
-    const mergedProps = Object.assign({}, defaults, _baseOptions);
+    const mergedProps = { ...defaults, ..._baseOptions };
     const tables = await createRequest(
       constants.api.hubdb.tables,
       {},
@@ -48,13 +53,12 @@ const getTables = async () => {
 const getTableRows = async (tableId, portalId, opts = {}) => {
   try {
     const additionalOpts = { portalId };
-    const mergedProps = Object.assign(
-      {},
-      defaults,
-      _baseOptions,
-      opts,
-      additionalOpts
-    );
+    const mergedProps = {
+      ...defaults,
+      ..._baseOptions,
+      ...opts,
+      ...additionalOpts
+    };
 
     const rows = await createRequest(
       constants.api.hubdb.rows,
@@ -71,7 +75,7 @@ const getTableRows = async (tableId, portalId, opts = {}) => {
 const publishTable = async tableId => {
   try {
     requiresAuthentication(_baseOptions);
-    const mergedProps = Object.assign({}, defaults, _baseOptions);
+    const mergedProps = { ...defaults, ..._baseOptions };
     const method = 'PUT';
     const table = await createRequest(
       constants.api.hubdb.publishTable,
@@ -88,13 +92,12 @@ const publishTable = async tableId => {
 const getTableById = async (tableId, portalId, options = {}) => {
   try {
     const additionalOpts = { portalId };
-    const mergedProps = Object.assign(
-      {},
-      defaults,
-      _baseOptions,
-      options,
-      additionalOpts
-    );
+    const mergedProps = {
+      ...defaults,
+      ..._baseOptions,
+      ...options,
+      ...additionalOpts
+    };
 
     const table = await createRequest(
       constants.api.hubdb.table,
@@ -115,7 +118,7 @@ const addTableRow = async (tableId, body = {}) => {
     const url = constants.api.hubdb.rows;
     const options = { tableId, method, body };
 
-    const mergedProps = Object.assign({}, defaults, _baseOptions);
+    const mergedProps = { ...defaults, ..._baseOptions };
     const add = await createRequest(url, options, mergedProps);
 
     return Promise.resolve(add);
@@ -129,8 +132,32 @@ const updateTableRow = async (tableId, rowId, body = {}) => {
     requiresAuthentication(_baseOptions);
     const method = 'PUT';
     const url = constants.api.hubdb.row;
-    const options = { tableId, id: rowId, method, body };
-    const mergedProps = Object.assign({}, defaults, _baseOptions);
+    const options = {
+      tableId,
+      id: rowId,
+      method,
+      body
+    };
+    const mergedProps = { ...defaults, ..._baseOptions };
+    const update = await createRequest(url, options, mergedProps);
+
+    return Promise.resolve(update);
+  } catch (e) {
+    return Promise.reject(e.message);
+  }
+};
+
+const updateTableRows = async (tableId, body = {}) => {
+  try {
+    requiresAuthentication(_baseOptions);
+    const method = 'POST';
+    const url = constants.api.hubdb.rowsBatchUpdate;
+    const options = {
+      tableId,
+      method,
+      body
+    };
+    const mergedProps = { ...defaults, ..._baseOptions };
     const update = await createRequest(url, options, mergedProps);
 
     return Promise.resolve(update);
@@ -144,8 +171,13 @@ const deleteTableRow = async (tableId, rowId, body = {}) => {
     requiresAuthentication(_baseOptions);
     const method = 'DELETE';
     const url = constants.api.hubdb.row;
-    const options = { tableId, id: rowId, method, body };
-    const mergedProps = Object.assign({}, defaults, _baseOptions);
+    const options = {
+      tableId,
+      id: rowId,
+      method,
+      body
+    };
+    const mergedProps = { ...defaults, ..._baseOptions };
     const update = await createRequest(url, options, mergedProps);
 
     return Promise.resolve(update);
@@ -240,6 +272,34 @@ export default function hubdbApi(baseOptions) {
      * @returns {Promise}
      */
     updateTableRow,
+    /**
+     * Batch update in a HubDB table
+     * @async
+     * @memberof hs/hubdb
+     * @method updateTableRow
+     * @param {int} tableId
+     * @param {object} options
+     * @param {array} rows The rows to update
+     * @example
+     * const hs = new HubSpotClient(props);
+     * const options = {
+     * rows: [
+     * {
+        id: 1234567,
+        createdAt: 1000000000,
+        path: 'test',
+        name: 'Test',
+        values: {
+          '2': 'Some data',
+          '3': 'None',
+        }
+      },
+      ...more rows
+      ]}
+     * hs.hubdb.updateTableRows(tableId, options).then(response => console.log(response))
+     * @returns {Promise}
+     */
+    updateTableRows,
     /**
      * Delete row from a HubDB table
      * @async
