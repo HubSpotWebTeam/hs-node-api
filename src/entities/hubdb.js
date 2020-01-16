@@ -276,7 +276,7 @@ export default function hubdbApi(baseOptions) {
      * Batch update in a HubDB table
      * @async
      * @memberof hs/hubdb
-     * @method updateTableRow
+     * @method updateTableRows
      * @param {int} tableId
      * @param {object} options
      * @param {array} rows The rows to update
