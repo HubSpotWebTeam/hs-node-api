@@ -55,6 +55,17 @@ describe('Get table rows', async () => {
   });
 });
 
+describe('Update table rows', async () => {
+  it('returns a valid table rows response', async () => {
+    const getRowsResponse = await hs.hubdb.getTableRows(tableId, portalId);
+    const rows = getRowsResponse.rows.objects;
+    const getUpdateResponse = await hs.hubdb.updateTableRows(tableId, rows);
+    // eslint-disable-next-line no-unused-expressions
+    expect(getUpdateResponse).to.be.an('array').that.is.not.empty;
+    return Promise.resolve();
+  });
+});
+
 describe('Add a table row', async () => {
   it('returns a valid table row response', async () => {
     const ms = new Date().getTime();
