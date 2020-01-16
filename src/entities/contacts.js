@@ -12,7 +12,7 @@ let _baseOptions;
 const getById = async (vid, options = {}) => {
   try {
     requiresAuthentication(_baseOptions);
-    const mergedProps = Object.assign({}, defaults, _baseOptions, options);
+    const mergedProps = { ...defaults, ..._baseOptions, ...options };
     const contact = await createRequest(
       constants.api.contacts.byId,
       { vid },
@@ -27,7 +27,7 @@ const getById = async (vid, options = {}) => {
 const getByEmail = async (email, options) => {
   try {
     requiresAuthentication(_baseOptions);
-    const mergedProps = Object.assign({}, defaults, _baseOptions, options);
+    const mergedProps = { ...defaults, ..._baseOptions, ...options };
     const contact = await createRequest(
       constants.api.contacts.byEmail,
       { email },
@@ -42,7 +42,7 @@ const getByEmail = async (email, options) => {
 const getByUtk = async (utk, options) => {
   try {
     requiresAuthentication(_baseOptions);
-    const mergedProps = Object.assign({}, defaults, _baseOptions, options);
+    const mergedProps = { ...defaults, ..._baseOptions, ...options };
     const contact = await createRequest(
       constants.api.contacts.byUtk,
       { utk },
@@ -77,9 +77,7 @@ const createOrUpdateContact = async obj => {
       { method, body, email },
       _baseOptions
     );
-    return Promise.resolve(
-      response.data;
-    );
+    return Promise.resolve(response.data);
   } catch (e) {
     return Promise.reject(e);
   }
@@ -100,7 +98,7 @@ const updateContactByVid = async (vid, properties) => {
         value: properties[key]
       }))
     };
-    debug(`updateContactByVid`, JSON.stringify(body));
+    debug('updateContactByVid', JSON.stringify(body));
 
     await createRequest(
       constants.api.contacts.byId,
@@ -164,7 +162,7 @@ const deleteContact = async vid => {
 const getContacts = async options => {
   try {
     requiresAuthentication(_baseOptions);
-    const mergedProps = Object.assign({}, defaults, _baseOptions, options);
+    const mergedProps = { ...defaults, ..._baseOptions, ...options };
     const allContacts = await createRequest(
       constants.api.contacts.getAll,
       {},
@@ -179,7 +177,7 @@ const getContacts = async options => {
 const getRecentlyModified = async options => {
   try {
     requiresAuthentication(_baseOptions);
-    const mergedProps = Object.assign({}, _baseOptions, options);
+    const mergedProps = { ..._baseOptions, ...options };
     const recentlyModifiedContacts = await createRequest(
       constants.api.contacts.getRecentlyModified,
       {},
@@ -194,7 +192,9 @@ const getRecentlyModified = async options => {
 const search = async (q, options) => {
   try {
     requiresAuthentication(_baseOptions);
-    const mergedProps = Object.assign({ q }, defaults, _baseOptions, options);
+    const mergedProps = {
+      q, ...defaults, ..._baseOptions, ...options
+    };
     const searchResults = await createRequest(
       constants.api.contacts.search,
       {},
