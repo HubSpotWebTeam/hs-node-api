@@ -72,14 +72,14 @@ const createOrUpdateContact = async obj => {
         value: obj[key]
       }))
     };
-    await createRequest(
+    const response = await createRequest(
       constants.api.contacts.createContact,
       { method, body, email },
       _baseOptions
     );
-    return Promise.resolve({
-      msg: `Successfully updated contact details for ${email}`
-    });
+    return Promise.resolve(
+      response.data;
+    );
   } catch (e) {
     return Promise.reject(e);
   }
@@ -179,7 +179,7 @@ const getContacts = async options => {
 const getRecentlyModified = async options => {
   try {
     requiresAuthentication(_baseOptions);
-    const mergedProps = Object.assign({}, defaults, _baseOptions, options);
+    const mergedProps = Object.assign({}, _baseOptions, options);
     const recentlyModifiedContacts = await createRequest(
       constants.api.contacts.getRecentlyModified,
       {},
