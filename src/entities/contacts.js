@@ -78,7 +78,7 @@ const createOrUpdateContact = async obj => {
       _baseOptions
     );
     return Promise.resolve(
-      response.data;
+      response.data
     );
   } catch (e) {
     return Promise.reject(e);
