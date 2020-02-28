@@ -43,10 +43,10 @@ const addContactsToList = async (listId, contacts = {}) => {
   try {
     requiresAuthentication(_baseOptions);
     const method = 'POST';
-
+    const body = contacts;
     const response = await createRequest(
         constants.api.contactsList.addContactsToList,
-        { method, body: contacts, listId },
+        { method, listId, body },
         _baseOptions
     );
     return Promise.resolve(response);
