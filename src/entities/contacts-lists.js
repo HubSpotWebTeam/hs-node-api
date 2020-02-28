@@ -46,7 +46,7 @@ const addContactsToList = async (listId, contacts = {}) => {
 
     const response = await createRequest(
         constants.api.contactsList.addContactsToList,
-        { method, body: contacts },
+        { method, body: contacts, listId },
         _baseOptions
     );
     return Promise.resolve(response);
