@@ -126,7 +126,8 @@ export default {
     },
     contactsList: {
       byId: `${defaultApiHost}/contacts/v1/lists/{listId}`,
-      contactsByListId: `${defaultApiHost}/contacts/v1/lists/{listId}/contacts/all`
+      contactsByListId: `${defaultApiHost}/contacts/v1/lists/{listId}/contacts/all`,
+      addContactsToList: `${defaultApiHost}/contacts/v1/lists/{listId}/add`
     },
     contactsProperties: {
       getAllContactsProperties: `${defaultApiHost}/properties/v1/contacts/properties`

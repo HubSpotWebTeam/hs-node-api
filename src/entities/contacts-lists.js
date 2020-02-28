@@ -39,6 +39,22 @@ const getContactsInList = async (listId, opts = {}) => {
   }
 };
 
+const addContactsToList = async (listId, contacts = {}) => {
+  try {
+    requiresAuthentication(_baseOptions);
+    const method = 'POST';
+
+    const response = await createRequest(
+        constants.api.contactsList.addContactsToList,
+        { method, body: contacts },
+        _baseOptions
+    );
+    return Promise.resolve(response);
+  } catch (e) {
+    return Promise.reject(e);
+  }
+};
+
 export default function contactsListsApi(baseOptions) {
   _baseOptions = baseOptions;
   // API
@@ -67,6 +83,21 @@ export default function contactsListsApi(baseOptions) {
      * hs.contactsList.getContactsInList(123412313).then(response => console.log(response))
      * @returns {Promise}
      */
-    getContactsInList
+    getContactsInList,
+    /**
+     * Add contacts to list
+     * @async
+     * @memberof hs/contactsLists
+     * @method addContactsToList
+     * @param {int} list The id of the list to retrieve
+     * @param {object} contacts the object where insert the email or id
+     * @param {array} contacts.emails array of emails to add
+     * @param {array} contacts.vids array of vids to add
+     * @example
+     * const hs = new HubspotClient(props);
+     * hs.contactsList.addContactsToList(123412313,{email:["testingapis@hubspot.com"],vids:[3057124,5524274]}).then(response => console.log(response))
+     * @returns {Promise}
+     */
+    addContactsToList
   };
 }
