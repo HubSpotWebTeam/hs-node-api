@@ -90,7 +90,8 @@ const getPages = async (opts = {}) => {
       publish_date,
       slug,
       subcategory,
-      updated
+      updated,
+      template_path,
     } = opts;
     let additionalOpts = {
       limit,
@@ -106,7 +107,8 @@ const getPages = async (opts = {}) => {
       publish_date,
       slug,
       subcategory,
-      updated
+      updated,
+      template_path,
     };
 
     // Extract additional dynamic querystring params and values.
