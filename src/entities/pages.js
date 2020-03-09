@@ -90,7 +90,6 @@ const getPages = async (opts = {}) => {
       publish_date,
       slug,
       subcategory,
-      updated,
       template_path,
     } = opts;
     let additionalOpts = {
@@ -107,7 +106,6 @@ const getPages = async (opts = {}) => {
       publish_date,
       slug,
       subcategory,
-      updated,
       template_path,
     };
 
