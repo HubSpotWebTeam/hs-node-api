@@ -7,7 +7,8 @@ export default {
       dailyLimit: `${defaultApiHost}/integrations/v1/limit/daily`
     },
     files: {
-      getFilesInFolder: `${defaultApiHost}/filemanager/api/v2/files`
+      getFilesInFolder: `${defaultApiHost}/filemanager/api/v2/files`,
+      getFolders: `${defaultApiHost}/filemanager/api/v2/folders`
     },
     pages: {
       create: `${defaultApiHost}/content/api/v2/pages`,

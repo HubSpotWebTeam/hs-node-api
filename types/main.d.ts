@@ -75,7 +75,8 @@ interface IWorkflowsApi {
 }
 
 interface IFilesApi { 
- 
+ getFilesInFolder: (folderId: number, opts?: any) => Promise<{ limit: number; objects: any[]; }>;
+ getFolders: (parentFolderId: number, opts?: any) => Promise<{ limit: number; objects: any[]; }>;
 }
 
 interface IDomainsApi { 
