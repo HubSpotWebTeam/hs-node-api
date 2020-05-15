@@ -30,3 +30,14 @@
     npm run build && npm test
     ```
 6. Create a new PR in GitHub and within the body notify one of the repo maintainers
+
+# PR Process
+
+The current process:
+
+1. Open PR: master <- feature/my_awesome_branch
+2. PR approved & merged into master
+3. Maintainers merge master into release
+4. Bump version number in release branch
+3. Build & Publish to npm
+5. Merge release back into master (with version bump)
