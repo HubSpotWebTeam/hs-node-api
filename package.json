@@ -1,6 +1,6 @@
 {
   "name": "hubspot-api",
-  "version": "2.15.0",
+  "version": "2.15.2",
   "description": "HubSpot API Wrapper",
   "keywords": [
     "hubspot",
