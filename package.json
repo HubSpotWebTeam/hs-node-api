@@ -7,11 +7,11 @@
     "hubspot-api"
   ],
   "repository": "github:HubSpotWebTeam/hs-node-api",
-  "main": "dist/bundle.min.js",
+  "main": "./dist/bundle.min.js",
   "types": "./types/main.d.ts",
   "scripts": {
     "build": "./node_modules/.bin/rollup -c",
-    "test": "mocha",
+    "test": "./node_modules/.bin/mocha",
     "test:watch": "npm run build && mocha --watch",
     "generate-docs": "./node_modules/.bin/jsdoc -R ./README.md -c ./jsconf.json -r ./src -d ./docs/"
   },
