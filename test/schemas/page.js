@@ -122,17 +122,11 @@ const total = joi
   .integer()
   .min(0)
   .required();
-const total_count = joi
-  .number()
-  .integer()
-  .min(0)
-  .required();
 
 const schemaPages = joi.object().keys({
   limit,
   offset,
   total,
-  total_count,
   objects: joi
     .array()
     .items(schemaPage)
