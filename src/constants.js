@@ -69,6 +69,7 @@ export default {
       base: `${defaultApiHost}/content/api/v2/templates`,
       byId: `${defaultApiHost}/content/api/v2/templates/{templateId}`,
       buffer: `${defaultApiHost}/content/api/v2/templates/{templateId}/buffer`,
+      pages: `${defaultApiHost}/cosindex/api/v1/connections/{templateId}/parents`,
       hasBufferedChanges: `${defaultApiHost}/content/api/v2/templates/{templateId}/has-buffered-changes`,
       pushBufferLive: `${defaultApiHost}/content/api/v2/templates/{templateId}/push-buffer-live`,
       versions: `${defaultApiHost}/content/api/v2/templates/{templateId}/versions`,
