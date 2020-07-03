@@ -9,7 +9,7 @@ const updateTemplate = async (templateId, body) => {
     requiresAuthentication(_baseOptions);
     const method = 'PUT';
     const options = { method, body, templateId };
-    const mergedProps = Object.assign({}, defaults, _baseOptions);
+    const mergedProps = { ...defaults, ..._baseOptions };
     const update = await createRequest(
       constants.api.templates.byId,
       options,
@@ -26,7 +26,7 @@ const createTemplate = async body => {
     requiresAuthentication(_baseOptions);
     const method = 'POST';
     const options = { method, body };
-    const mergedProps = Object.assign({}, defaults, _baseOptions);
+    const mergedProps = { ...defaults, _baseOptions };
     const update = await createRequest(
       constants.api.templates.base,
       options,
@@ -43,7 +43,7 @@ const deleteTemplate = async templateId => {
     requiresAuthentication(_baseOptions);
     const method = 'DELETE';
     const options = { method, templateId };
-    const mergedProps = Object.assign({}, defaults, _baseOptions);
+    const mergedProps = { ...defaults, _baseOptions };
     await createRequest(constants.api.templates.byId, options, mergedProps);
 
     return Promise.resolve({ deleted: true });
@@ -57,13 +57,30 @@ const getTemplate = async templateId => {
     requiresAuthentication(_baseOptions);
     const method = 'GET';
     const options = { method, templateId };
-    const mergedProps = Object.assign({}, defaults, _baseOptions);
+    const mergedProps = { ...defaults, _baseOptions };
     const template = await createRequest(
       constants.api.templates.byId,
       options,
       mergedProps
     );
     return Promise.resolve(template);
+  } catch (e) {
+    return Promise.reject(e.message);
+  }
+};
+
+const getTemplatePages = async templateId => {
+  try {
+    requiresAuthentication(_baseOptions);
+    const method = 'GET';
+    const options = { method, templateId };
+    const mergedProps = { ...defaults, ..._baseOptions };
+    const update = await createRequest(
+      constants.api.templates.pages,
+      options,
+      mergedProps
+    );
+    return Promise.resolve(update);
   } catch (e) {
     return Promise.reject(e.message);
   }
@@ -92,12 +109,11 @@ const getTemplates = async (opts = {}) => {
       path
     };
 
-    const mergedProps = Object.assign(
-      {},
-      defaults,
-      _baseOptions,
-      additionalOpts
-    );
+    const mergedProps = {
+      ...defaults,
+      ..._baseOptions,
+      ...additionalOpts
+    };
     const method = 'GET';
     const options = { method };
     const templates = await createRequest(
@@ -116,7 +132,7 @@ const updateAutosaveBuffer = async (templateId, body) => {
     requiresAuthentication(_baseOptions);
     const method = 'PUT';
     const options = { method, templateId, body };
-    const mergedProps = Object.assign({}, defaults, _baseOptions);
+    const mergedProps = { ...defaults, ..._baseOptions };
     const updatedBuffer = await createRequest(
       constants.api.templates.buffer,
       options,
@@ -132,7 +148,7 @@ const getUpdatedAutosaveBuffer = async templateId => {
   try {
     requiresAuthentication(_baseOptions);
     const options = { templateId };
-    const mergedProps = Object.assign({}, defaults, _baseOptions);
+    const mergedProps = { ...defaults, ..._baseOptions };
     const updatedBuffer = await createRequest(
       constants.api.templates.buffer,
       options,
@@ -148,7 +164,7 @@ const hasBufferedChanges = async templateId => {
   try {
     requiresAuthentication(_baseOptions);
     const options = { templateId };
-    const mergedProps = Object.assign({}, defaults, _baseOptions);
+    const mergedProps = { ...defaults, ..._baseOptions };
     const updatedBuffer = await createRequest(
       constants.api.templates.hasBufferedChanges,
       options,
@@ -165,7 +181,7 @@ const pushBufferedChangesLive = async templateId => {
   try {
     requiresAuthentication(_baseOptions);
     const options = { method: 'POST', templateId };
-    const mergedProps = Object.assign({}, defaults, _baseOptions);
+    const mergedProps = { ...defaults, ..._baseOptions };
     await createRequest(
       constants.api.templates.pushBufferLive,
       options,
@@ -181,7 +197,7 @@ const getVersions = async templateId => {
   try {
     requiresAuthentication(_baseOptions);
     const options = { templateId };
-    const mergedProps = Object.assign({}, defaults, _baseOptions);
+    const mergedProps = { ...defaults, ..._baseOptions };
     const versions = await createRequest(
       constants.api.templates.versions,
       options,
@@ -197,7 +213,7 @@ const getVersion = async (templateId, versionId) => {
   try {
     requiresAuthentication(_baseOptions);
     const options = { templateId, versionId };
-    const mergedProps = Object.assign({}, defaults, _baseOptions);
+    const mergedProps = { ...defaults, ..._baseOptions };
     await createRequest(constants.api.templates.version, options, mergedProps);
     return true;
   } catch (e) {
@@ -209,7 +225,7 @@ const restoreVersion = async (templateId, version_id) => {
   try {
     requiresAuthentication(_baseOptions);
     const options = { method: 'POST', templateId, body: { version_id } };
-    const mergedProps = Object.assign({}, defaults, _baseOptions);
+    const mergedProps = { ...defaults, ..._baseOptions };
     const response = await createRequest(constants.api.templates.restore, options, mergedProps);
     return response;
   } catch (e) {
@@ -272,6 +288,17 @@ export default function templatesApi(baseOptions) {
      * hs.templates.getTemplate(id).then(response => console.log(response));
      */
     getTemplate,
+    /**
+     * Get the list of pages from a template by id
+     * @async
+     * @memberof hs/templates
+     * @method getTemplatePages
+     * @param {number} id
+     * @example
+     * const hs = new HubSpotClient(props);
+     * hs.templates.getTemplatePages(id).then(response => console.log(response));
+     */
+    getTemplatePages,
     /**
      * Get the list of templates
      * @async

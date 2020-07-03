@@ -20,7 +20,7 @@ declare class HubSpotClient {
   pages: any // pagesApi;
   hubdb: any // hubdbApi;
   engagements: any // IEngagementsApi;
-
+  templates: any
 }
 
 declare namespace HubSpotClient {
