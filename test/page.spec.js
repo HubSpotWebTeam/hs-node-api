@@ -9,7 +9,7 @@ const { E2E_TESTS_HAPI_KEY: hapikey, E2E_TESTS_PAGE_ID: id, E2E_TESTS_TEMPLATE_P
 const hs = new HubSpotClient({ hapikey });
 
 // FIXME: Improve these tests.
-xdescribe('Get Pages List', async () => {
+describe('Get Pages List', async () => {
   it('returns a valid page list', async () => {
     const pages = await hs.pages.getPages();
     expect(validate(pages, schemaPages).error).to.be.a('null');
