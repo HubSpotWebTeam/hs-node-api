@@ -1,12 +1,41 @@
-name: Create release
+name: Create release & publish
 
 on:
   push:
+    branches:
+      - main  
     tags:
       - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
-      
+
 jobs:
-  build:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - run: npm ci
+      - run: npm test
+        env:
+          # Please keep these in alphabetical order.
+          E2E_TESTS_BLOG_ID: ${{secrets.E2E_TESTS_BLOG_ID}}
+          E2E_TESTS_CONTACT_EMAIL: ${{secrets.E2E_TESTS_CONTACT_EMAIL}}
+          E2E_TESTS_CONTACT_ID: ${{secrets.E2E_TESTS_CONTACT_ID}}
+          E2E_TESTS_EMAIL_ID: ${{secrets.E2E_TESTS_EMAIL_ID}}
+          E2E_TESTS_FORM_ID: ${{secrets.E2E_TESTS_FORM_ID}}
+          E2E_TESTS_HAPI_KEY: ${{secrets.E2E_TESTS_HAPI_KEY}}
+          E2E_TESTS_HUBDB_PORTAL_ID: ${{secrets.E2E_TESTS_HUBDB_PORTAL_ID}}
+          E2E_TESTS_HUBDB_TABLE_ID: ${{secrets.E2E_TESTS_HUBDB_TABLE_ID}}
+          E2E_TESTS_LAYOUT_ID: ${{secrets.E2E_TESTS_LAYOUT_ID}}
+          E2E_TESTS_LAYOUT_VERSION_ID: ${{secrets.E2E_TESTS_LAYOUT_VERSION_ID}}
+          E2E_TESTS_PAGE_ID: ${{secrets.E2E_TESTS_PAGE_ID}}
+          E2E_TESTS_PORTAL_ID: ${{secrets.E2E_TESTS_PORTAL_ID}}
+          E2E_TESTS_TEMPLATE_ID: ${{secrets.E2E_TESTS_TEMPLATE_ID}}
+          E2E_TESTS_TEMPLATE_PATH: ${{secrets.E2E_TESTS_TEMPLATE_PATH}}
+          E2E_TESTS_WORKFLOW_ID: ${{secrets.E2E_TESTS_WORKFLOW_ID}}
+
+  create-release:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
