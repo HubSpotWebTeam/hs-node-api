@@ -1,5 +1,5 @@
 require('dotenv').config();
-const HubSpotClient = require('../dist/bundle.min');
+const HubSpotClient = require('../src/index').default;
 const expect = require('chai').expect;
 const debug = require('debug')('hubspot-api:tests'); //eslint-disable-line
 const { schemaEvent, schemaEvents, validate } = require('./schemas/calendar');
@@ -7,8 +7,10 @@ const { tomorrow } = require('./utilities');
 
 const {
   E2E_TESTS_HAPI_KEY: hapikey,
-  E2E_TESTS_BLOG_ID: contentGroupId
+  E2E_TESTS_BLOG_ID: contentGroupId,
+  E2E_TEST_CREATED_BY_ID: createdBy
 } = process.env;
+
 const hs = new HubSpotClient({ hapikey });
 
 describe('Get Calendar Event List', async () => {
@@ -30,8 +32,10 @@ describe('Creating Calendar Event', async () => {
       state: 'TODO',
       name: 'Test Blog Task With topics 3',
       description: 'Cool Post with Topics',
-      contentGroupId
+      contentGroupId,
+      createdBy: createdBy + ""
     });
+    
     expect(validate(createdEventResponse, schemaEvent).error).to.be.a('null');
     return Promise.resolve();
   });

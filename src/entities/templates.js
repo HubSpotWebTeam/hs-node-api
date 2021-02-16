@@ -26,7 +26,7 @@ const createTemplate = async body => {
     requiresAuthentication(_baseOptions);
     const method = 'POST';
     const options = { method, body };
-    const mergedProps = { ...defaults, _baseOptions };
+    const mergedProps = { ...defaults, ..._baseOptions };
     const update = await createRequest(
       constants.api.templates.base,
       options,
@@ -43,7 +43,7 @@ const deleteTemplate = async templateId => {
     requiresAuthentication(_baseOptions);
     const method = 'DELETE';
     const options = { method, templateId };
-    const mergedProps = { ...defaults, _baseOptions };
+    const mergedProps = { ...defaults, ..._baseOptions };
     await createRequest(constants.api.templates.byId, options, mergedProps);
 
     return Promise.resolve({ deleted: true });
@@ -57,7 +57,7 @@ const getTemplate = async templateId => {
     requiresAuthentication(_baseOptions);
     const method = 'GET';
     const options = { method, templateId };
-    const mergedProps = { ...defaults, _baseOptions };
+    const mergedProps = { ...defaults, ..._baseOptions };
     const template = await createRequest(
       constants.api.templates.byId,
       options,
