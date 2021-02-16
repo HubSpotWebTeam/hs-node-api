@@ -36,11 +36,11 @@ jobs:
           E2E_TESTS_TEMPLATE_PATH: ${{secrets.E2E_TESTS_TEMPLATE_PATH}}
           E2E_TESTS_WORKFLOW_ID: ${{secrets.E2E_TESTS_WORKFLOW_ID}}
 
-  create-release:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v1
-    - uses: ncipollo/release-action@v1
-      with:
-        bodyFile: "RELEASE_NOTES.md"
-        token: ${{ secrets.GITHUB_TOKEN }}
+  # create-release:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - uses: actions/checkout@v1
+  #   - uses: ncipollo/release-action@v1
+  #     with:
+  #       bodyFile: "RELEASE_NOTES.md"
+  #       token: ${{ secrets.GITHUB_TOKEN }}
