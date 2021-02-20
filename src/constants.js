@@ -173,6 +173,13 @@ export default {
       create: `${defaultApiHost}/url-mappings/v3/url-mappings`,
       update: `${defaultApiHost}/url-mappings/v3/url-mappings/{id}`,
       delete: `${defaultApiHost}/url-mappings/v3/url-mappings/{id}`
+    },
+
+    webhooks: {
+      getAll: `${defaultApiHost}/webhooks/v1/{appId}/subscriptions`,
+      create: `${defaultApiHost}/webhooks/v1/{appId}/subscriptions`,
+      update: `${defaultApiHost}/webhooks/v1/{appId}/subscriptions/{id}`,
+      delete: `${defaultApiHost}/webhooks/v1/{appId}/subscriptions/{id}` 
     }
   }
 };
