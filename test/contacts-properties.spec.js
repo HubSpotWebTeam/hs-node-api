@@ -1,5 +1,5 @@
 require('dotenv').config();
-const HubSpotClient = require('../dist/bundle.min');
+const HubSpotClient = require('../src/index').default;
 const expect = require('chai').expect;
 const debug = require('debug')('hubspot-api:tests'); //eslint-disable-line
 const { schemaContactsProperties, validate } = require('./schemas/contactsProperties');

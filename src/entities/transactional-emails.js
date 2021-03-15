@@ -2,12 +2,15 @@
 import createRequest, { requiresAuthentication } from '../utilities';
 import constants from '../constants';
 
+const defaults = {};
 let _baseOptions;
 
 const singleSend = async (emailId, message, contactProperties, customProperties) => {
   try {
     requiresAuthentication(_baseOptions);
     const method = 'POST';
+    const mergedProps = {...defaults, ..._baseOptions};
+
     const response = await createRequest(
       constants.api.transactionalEmail.singleSend,
       {
@@ -18,7 +21,8 @@ const singleSend = async (emailId, message, contactProperties, customProperties)
           contactProperties,
           customProperties
         }
-      }
+      },
+      mergedProps
     );
     return Promise.resolve(response);
   } catch (e) {
