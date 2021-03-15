@@ -1,7 +1,5 @@
-import qs from 'querystring';
-
+const qs = require('querystring')
 const axios = require('axios');
-
 const debugApp = require('debug')('hubspot-api:utilities');
 
 export const requiresAuthentication = ({ hapikey, accessToken }) => {
@@ -70,6 +68,7 @@ export default async function createRequest(uri, options, props = {}) {
     if (props.accessToken) {
       headers.Authorization = `Bearer ${props.accessToken}`;
     }
+
     return axios({ url, method, headers, timeout, data }).then(
       response => response.data
     );

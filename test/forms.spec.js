@@ -1,5 +1,5 @@
 require('dotenv').config();
-const HubSpotClient = require('../dist/bundle.min');
+const HubSpotClient = require('../src/index').default;
 const expect = require('chai').expect;
 const debug = require('debug')('hubspot-api:tests'); //eslint-disable-line
 
@@ -20,7 +20,7 @@ describe('Form Submit', async () => {
       fields: [
         {
           name: 'email',
-          value: 'example@example.com'
+          value: `apitesting-${Date.now()}@gmail.com`
         },
         {
           name: 'firstname',

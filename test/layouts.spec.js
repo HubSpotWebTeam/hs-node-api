@@ -1,5 +1,5 @@
 require('dotenv').config();
-const HubSpotClient = require('../dist/bundle.min');
+const HubSpotClient = require('../src/index').default;
 const expect = require('chai').expect;
 
 const {
@@ -56,7 +56,7 @@ describe('Get previous versions of the layout', () => {
 describe('Get Previous Version of the layout', () => {
   it('returns the previous version specified in the id', async () => {
     const previousVersion = await hs.layouts.getPreviousLayoutVersion({ id: layoutId, versionId });
-    expect(previousVersion).to.be.an('array').with.lengthOf(2);
+    expect(previousVersion).to.be.an('array').with.lengthOf(3);
     return Promise.resolve();
   });
 });

@@ -131,7 +131,8 @@ const createTask = async ({
   templatePath,
   name,
   description,
-  ownerId
+  ownerId,
+  createdBy
 }) => {
   try {
     requiresAuthentication(_baseOptions);
@@ -148,7 +149,8 @@ const createTask = async ({
       templatePath,
       name,
       description,
-      ownerId
+      ownerId,
+      createdBy
     };
 
     // Set defaults if not set.

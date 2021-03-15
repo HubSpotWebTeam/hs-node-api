@@ -1,5 +1,5 @@
 require('dotenv').config();
-const HubSpotClient = require('../dist/bundle.min');
+const HubSpotClient = require('../src/index').default;
 const expect = require('chai').expect;
 const uuid = require('node-uuid');
 const { schemaTemplate, validate } = require('./schemas/template');
@@ -7,6 +7,8 @@ const { schemaTemplate, validate } = require('./schemas/template');
 const { E2E_TESTS_HAPI_KEY: hapikey } = process.env;
 
 const hs = new HubSpotClient({ hapikey });
+
+const embeddedTemplateDefaultContent = '<!--\n  templateType: "page"\n  isAvailableForNewContent: false\n-->\n';
 
 // FIXME: This test is failing.
 describe('Templates', () => {
@@ -44,7 +46,7 @@ describe('Templates', () => {
         const { source: newSource } = await hs.templates.updateTemplate(id, {
           source
         });
-        expect(newSource).to.equal(source);
+        expect(newSource).to.equal(embeddedTemplateDefaultContent + source);
         return Promise.resolve();
       } catch (err) {
         return Promise.reject(err);
@@ -65,7 +67,7 @@ describe('Templates', () => {
           source: updatedBufferSource
         } = await hs.templates.getUpdatedAutosaveBuffer(id);
 
-        expect(updatedBufferSource).to.equal(source);
+        expect(updatedBufferSource).to.equal(embeddedTemplateDefaultContent + source);
         return Promise.resolve();
       } catch (err) {
         return Promise.reject(err);
@@ -109,7 +111,7 @@ describe('Templates', () => {
         const { source: liveSource } = await hs.templates.getTemplate(id);
 
         // eslint-disable-next-line no-unused-expressions
-        expect(liveSource).to.equal(source);
+        expect(liveSource).to.equal(embeddedTemplateDefaultContent + source);
 
         return Promise.resolve();
       } catch (err) {
