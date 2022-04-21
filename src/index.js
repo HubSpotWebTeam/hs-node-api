@@ -20,6 +20,7 @@ import oauthApi from './entities/oauth';
 import contactsListsApi from './entities/contacts-lists';
 import emailSubscriptionsApi from './entities/email-subscriptions';
 import transactionalEmailsApi from './entities/transactional-emails';
+import webhooksApi from './entities/webhooks';
 
 /**
 * HubSpotClient class
@@ -215,6 +216,14 @@ class HubSpotClient {
    */
   get transactionalEmails() {
     return transactionalEmailsApi(this.props);
+  }
+
+  /**
+   * A collection of methods related to the Webhooks Subscription API
+   * @namespace hs/webhooks
+   */
+  get webhooks() {
+    return webhooksApi(this.props);
   }
 }
 

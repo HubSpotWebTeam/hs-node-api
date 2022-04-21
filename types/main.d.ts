@@ -21,6 +21,7 @@ declare class HubSpotClient {
   hubdb: any // hubdbApi;
   engagements: any // IEngagementsApi;
   templates: any
+  webhooks: any // IWebhooksApi 
 }
 
 declare namespace HubSpotClient {
@@ -144,6 +145,10 @@ interface pagesApi {
 }
 
 interface hubdbApi { 
+ 
+}
+
+interface IWebhooksApi { 
  
 }
 
