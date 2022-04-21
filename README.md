@@ -2,7 +2,7 @@
 # Hubspot Client API
 
 > ## IMPORTANT!
-> :warning: This package is now deprecated and no longer maintained, please use the `[@hubspot/api-client](https://www.npmjs.com/package/@hubspot/api-client)` instead.
+> :warning: This package is now deprecated and no longer maintained, please use the [@hubspot/api-client](https://www.npmjs.com/package/@hubspot/api-client) instead.
 
 A client wrapper for the HubSpot API at https://developers.hubspot.com/docs/overview.
 
