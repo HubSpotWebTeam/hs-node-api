@@ -1,6 +1,7 @@
 [![Build Status (Release)](https://github.com/hubspotwebteam/hs-node-api/workflows/Build%20and%20publish%20npm%20package/badge.svg)](https://github.com/HubSpotWebTeam/hs-node-api/actions?workflow=Build+and+publish+npm+package)
-
 # Hubspot Client API
+
+> :warning: This package is now deprecated and no longer maintained, please use the `@hubspot/api-client` instead.
 
 A client wrapper for the HubSpot API at https://developers.hubspot.com/docs/overview.
 
